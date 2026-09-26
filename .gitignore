@@ -1,1 +1,5 @@
 *.mp4
+
+# Extracted feature datasets
+/i3d-features/
+/vggish-features/
