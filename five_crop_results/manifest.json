@@ -1,0 +1,23 @@
+{
+  "source": "/mnt/d/tutor\u00e9s/XDVioDet/CarAccident_Fast.Furious.2009___00-42-10_00-42-41_label_B6-0-0.mp4",
+  "fps": 24,
+  "frames_per_snippet": 16,
+  "tail_policy": "discard final frame, then discard incomplete snippet",
+  "resize_short_side": 256,
+  "crop_size": 224,
+  "crop_order": [
+    "center",
+    "top_left",
+    "top_right",
+    "bottom_left",
+    "bottom_right"
+  ],
+  "rgb_feature_dim": 1024,
+  "audio_feature_dim": 128,
+  "model_input_shape": [
+    5,
+    46,
+    1152
+  ],
+  "checkpoint": "/mnt/d/tutor\u00e9s/XDVioDet/ckpt/wsanodet_mix2.pkl"
+}
