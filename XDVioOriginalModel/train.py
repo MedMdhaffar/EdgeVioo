@@ -30,6 +30,12 @@ def CENTROPY(logits, logits2, seq_len, device):
 
 
 def train(dataloader, model, optimizer, criterion, device, is_topk):
+    running_cls_loss = 0.0
+    running_aux_cls_loss = 0.0
+    running_cross_loss = 0.0
+    running_total_loss = 0.0
+    batches = 0
+
     with torch.set_grad_enabled(True):
         model.train()
         for i, (input, label) in enumerate(dataloader):
@@ -45,3 +51,19 @@ def train(dataloader, model, optimizer, criterion, device, is_topk):
             optimizer.zero_grad()
             total_loss.backward()
             optimizer.step()
+
+            running_cls_loss += clsloss.item()
+            running_aux_cls_loss += clsloss2.item()
+            running_cross_loss += croloss.item()
+            running_total_loss += total_loss.item()
+            batches += 1
+
+    if batches == 0:
+        raise RuntimeError('The training data loader produced no batches')
+
+    return {
+        'train/classification_loss': running_cls_loss / batches,
+        'train/aux_classification_loss': running_aux_cls_loss / batches,
+        'train/cross_entropy_loss': running_cross_loss / batches,
+        'train/total_loss': running_total_loss / batches,
+    }

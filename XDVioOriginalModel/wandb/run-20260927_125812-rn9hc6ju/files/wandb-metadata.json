@@ -1,0 +1,65 @@
+{
+  "os": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.43",
+  "python": "CPython 3.11.6",
+  "startedAt": "2026-09-27T11:58:12.845812Z",
+  "args": [
+    "--modality",
+    "MIX2",
+    "--feature-size",
+    "1152",
+    "--batch-size",
+    "256",
+    "--max-seqlen",
+    "200",
+    "--max-epoch",
+    "50",
+    "--lr",
+    "0.0001",
+    "--gpus",
+    "0",
+    "--model-name",
+    "wsanodet_mix2_new",
+    "--wandb-mode",
+    "online",
+    "--wandb-project",
+    "xdviodet",
+    "--wandb-run-name",
+    "mix2-training-01",
+    "--wandb-watch",
+    "--wandb-log-model"
+  ],
+  "program": "/mnt/d/tutorés/XDVioDet/XDVioOriginalModel/main.py",
+  "codePath": "XDVioOriginalModel/main.py",
+  "codePathLocal": "main.py",
+  "git": {
+    "remote": "https://github.com/MedMdhaffar/EdgeVioo.git",
+    "commit": "06db305c946d332b9f51374ac792cb08acde6f4f"
+  },
+  "email": "mohamed.medhaffar12345@gmail.com",
+  "root": "/mnt/d/tutorés/XDVioDet/XDVioOriginalModel",
+  "host": "SupMohamed",
+  "executable": "/home/mohamed/miniconda3/envs/video_features/bin/python",
+  "cpu_count": 10,
+  "cpu_count_logical": 20,
+  "gpu": "NVIDIA GeForce RTX 2050",
+  "gpu_count": 1,
+  "disk": {
+    "/": {
+      "total": "1081101176832",
+      "used": "69598846976"
+    }
+  },
+  "memory": {
+    "total": "16423497728"
+  },
+  "gpu_nvidia": [
+    {
+      "name": "NVIDIA GeForce RTX 2050",
+      "memoryTotal": "4294967296",
+      "architecture": "Ampere",
+      "uuid": "GPU-7c533c1a-8477-2d07-a984-bdc158347a6e"
+    }
+  ],
+  "cudaVersion": "13.3",
+  "writerId": "ea14nbw5yf3lml2mawaj98sa8t8u7s97"
+}

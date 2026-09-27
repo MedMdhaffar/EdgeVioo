@@ -1,0 +1,132 @@
+_wandb:
+    value:
+        cli_version: 0.30.0
+        e:
+            ea14nbw5yf3lml2mawaj98sa8t8u7s97:
+                args:
+                    - --modality
+                    - MIX2
+                    - --feature-size
+                    - "1152"
+                    - --batch-size
+                    - "256"
+                    - --max-seqlen
+                    - "200"
+                    - --max-epoch
+                    - "50"
+                    - --lr
+                    - "0.0001"
+                    - --gpus
+                    - "0"
+                    - --model-name
+                    - wsanodet_mix2_new
+                    - --wandb-mode
+                    - online
+                    - --wandb-project
+                    - xdviodet
+                    - --wandb-run-name
+                    - mix2-training-01
+                    - --wandb-watch
+                    - --wandb-log-model
+                codePath: XDVioOriginalModel/main.py
+                codePathLocal: main.py
+                cpu_count: 10
+                cpu_count_logical: 20
+                cudaVersion: "13.3"
+                disk:
+                    /:
+                        total: "1081101176832"
+                        used: "69598846976"
+                email: mohamed.medhaffar12345@gmail.com
+                executable: /home/mohamed/miniconda3/envs/video_features/bin/python
+                git:
+                    commit: 06db305c946d332b9f51374ac792cb08acde6f4f
+                    remote: https://github.com/MedMdhaffar/EdgeVioo.git
+                gpu: NVIDIA GeForce RTX 2050
+                gpu_count: 1
+                gpu_nvidia:
+                    - architecture: Ampere
+                      memoryTotal: "4294967296"
+                      name: NVIDIA GeForce RTX 2050
+                      uuid: GPU-7c533c1a-8477-2d07-a984-bdc158347a6e
+                host: SupMohamed
+                memory:
+                    total: "16423497728"
+                os: Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.43
+                program: /mnt/d/tutorés/XDVioDet/XDVioOriginalModel/main.py
+                python: CPython 3.11.6
+                root: /mnt/d/tutorés/XDVioDet/XDVioOriginalModel
+                startedAt: "2026-09-27T11:58:12.845812Z"
+                writerId: ea14nbw5yf3lml2mawaj98sa8t8u7s97
+        m: []
+        python_version: 3.11.6
+        t:
+            "1":
+                - 1
+                - 5
+                - 53
+            "2":
+                - 1
+                - 5
+                - 53
+            "3":
+                - 1
+                - 2
+                - 13
+                - 15
+                - 16
+                - 41
+            "4": 3.11.6
+            "5": 0.30.0
+            "12": 0.30.0
+            "13": linux-x86_64
+audio_list:
+    value: list/audio.list
+batch_size:
+    value: 256
+dataset_name:
+    value: XD-Violence
+feature_size:
+    value: 1152
+flow_list:
+    value: list/flow.list
+gpus:
+    value: 0
+gt:
+    value: list/gt.npy
+lr:
+    value: 0.0001
+max_epoch:
+    value: 50
+max_seqlen:
+    value: 200
+modality:
+    value: MIX2
+model_name:
+    value: wsanodet_mix2_new
+num_classes:
+    value: 1
+pretrained_ckpt:
+    value: null
+rgb_list:
+    value: list/rgb.list
+test_audio_list:
+    value: list/audio_test.list
+test_flow_list:
+    value: list/flow_test.list
+test_rgb_list:
+    value: list/rgb_test.list
+wandb_entity:
+    value: null
+wandb_log_model:
+    value: true
+wandb_mode:
+    value: online
+wandb_project:
+    value: xdviodet
+wandb_run_name:
+    value: mix2-training-01
+wandb_watch:
+    value: true
+workers:
+    value: 4

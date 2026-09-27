@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'random' is not defined
+Traceback (most recent call last):
+  File "<stdin>", line 2, in <module>
+NameError: name 'random' is not defined
+  File "<stdin>", line 1
+    run.log({"acc": acc, "loss": loss})
+IndentationError: unexpected indent
+
+KeyboardInterrupt
+
+KeyboardInterrupt

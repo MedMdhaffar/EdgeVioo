@@ -1,0 +1,142 @@
+_orig_mod.conv1d1.weight
+_orig_mod.conv1d1.bias
+_orig_mod.conv1d2.weight
+_orig_mod.conv1d2.bias
+_orig_mod.conv1d3.weight
+_orig_mod.conv1d3.bias
+_orig_mod.conv1d4.weight
+_orig_mod.conv1d4.bias
+_orig_mod.gc1.weight
+_orig_mod.gc1.residual.weight
+_orig_mod.gc1.residual.bias
+_orig_mod.gc2.weight
+_orig_mod.gc3.weight
+_orig_mod.gc3.residual.weight
+_orig_mod.gc3.residual.bias
+_orig_mod.gc4.weight
+_orig_mod.gc5.weight
+_orig_mod.gc5.residual.weight
+_orig_mod.gc5.residual.bias
+_orig_mod.gc6.weight
+_orig_mod.simAdj.weight0
+_orig_mod.simAdj.weight1
+_orig_mod.disAdj.sigma
+_orig_mod.classifier.weight
+_orig_mod.classifier.bias
+_orig_mod.approximator.0.weight
+_orig_mod.approximator.0.bias
+_orig_mod.approximator.2.weight
+_orig_mod.approximator.2.bias
+_orig_mod.conv1d_approximator.weight
+_orig_mod.conv1d_approximator.bias
+/home/mohamed/miniconda3/envs/video_features/lib/python3.11/site-packages/torch/_inductor/compile_fx.py:135: UserWarning: TensorFloat32 tensor cores for float32 matrix multiplication available but not enabled. Consider setting `torch.set_float32_matmul_precision('high')` for better performance.
+  warnings.warn(
+/home/mohamed/miniconda3/envs/video_features/lib/python3.11/site-packages/torch/overrides.py:110: UserWarning: 'has_cuda' is deprecated, please use 'torch.backends.cuda.is_built()'
+  torch.has_cuda,
+/home/mohamed/miniconda3/envs/video_features/lib/python3.11/site-packages/torch/overrides.py:111: UserWarning: 'has_cudnn' is deprecated, please use 'torch.backends.cudnn.is_available()'
+  torch.has_cudnn,
+/home/mohamed/miniconda3/envs/video_features/lib/python3.11/site-packages/torch/overrides.py:117: UserWarning: 'has_mps' is deprecated, please use 'torch.backends.mps.is_built()'
+  torch.has_mps,
+/home/mohamed/miniconda3/envs/video_features/lib/python3.11/site-packages/torch/overrides.py:118: UserWarning: 'has_mkldnn' is deprecated, please use 'torch.backends.mkldnn.is_available()'
+  torch.has_mkldnn,
+Exception ignored in: <function _MultiProcessingDataLoaderIter.__del__ at 0x7ff78ff8c2c0>
+Traceback (most recent call last):
+  File "/home/mohamed/miniconda3/envs/video_features/lib/python3.11/site-packages/torch/utils/data/dataloader.py", line 1478, in __del__
+    self._shutdown_workers()
+  File "/home/mohamed/miniconda3/envs/video_features/lib/python3.11/site-packages/torch/utils/data/dataloader.py", line 1442, in _shutdown_workers
+    w.join(timeout=_utils.MP_STATUS_CHECK_INTERVAL)
+  File "/home/mohamed/miniconda3/envs/video_features/lib/python3.11/multiprocessing/process.py", line 149, in join
+    res = self._popen.wait(timeout)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mohamed/miniconda3/envs/video_features/lib/python3.11/multiprocessing/popen_fork.py", line 40, in wait
+    if not wait([self.sentinel], timeout):
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mohamed/miniconda3/envs/video_features/lib/python3.11/multiprocessing/connection.py", line 947, in wait
+    ready = selector.select(timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mohamed/miniconda3/envs/video_features/lib/python3.11/selectors.py", line 415, in select
+    fd_event_list = self._selector.poll(timeout)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt:
+Traceback (most recent call last):
+  File "/home/mohamed/tutorés/XDVioDet/XDVioOriginalModel/main.py", line 85, in <module>
+    pr_auc, pr_auc_online = test(test_loader, model, device, gt)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mohamed/tutorés/XDVioDet/XDVioOriginalModel/test.py", line 12, in test
+    logits, logits2 = model(inputs=input, seq_len=None)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mohamed/miniconda3/envs/video_features/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mohamed/miniconda3/envs/video_features/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1568, in _call_impl
+    result = forward_call(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mohamed/miniconda3/envs/video_features/lib/python3.11/site-packages/torch/_dynamo/eval_frame.py", line 328, in _fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/mohamed/miniconda3/envs/video_features/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mohamed/miniconda3/envs/video_features/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mohamed/tutorés/XDVioDet/XDVioOriginalModel/model.py", line 48, in forward
+    def forward(self, inputs, seq_len):
+  File "/home/mohamed/miniconda3/envs/video_features/lib/python3.11/site-packages/torch/_dynamo/eval_frame.py", line 328, in _fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/mohamed/miniconda3/envs/video_features/lib/python3.11/site-packages/torch/_dynamo/external_utils.py", line 17, in inner
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/mohamed/miniconda3/envs/video_features/lib/python3.11/site-packages/torch/_functorch/aot_autograd.py", line 3905, in forward
+    return compiled_fn(full_args)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mohamed/miniconda3/envs/video_features/lib/python3.11/site-packages/torch/_functorch/aot_autograd.py", line 1482, in g
+    return f(*args)
+           ^^^^^^^^
+  File "/home/mohamed/miniconda3/envs/video_features/lib/python3.11/site-packages/torch/_functorch/aot_autograd.py", line 2533, in runtime_wrapper
+    all_outs = call_func_with_args(
+               ^^^^^^^^^^^^^^^^^^^^
+  File "/home/mohamed/miniconda3/envs/video_features/lib/python3.11/site-packages/torch/_functorch/aot_autograd.py", line 1506, in call_func_with_args
+    out = normalize_as_list(f(args))
+                            ^^^^^^^
+  File "/home/mohamed/miniconda3/envs/video_features/lib/python3.11/site-packages/torch/_functorch/aot_autograd.py", line 1594, in rng_functionalization_wrapper
+    return compiled_fw(args)
+           ^^^^^^^^^^^^^^^^^
+  File "/home/mohamed/miniconda3/envs/video_features/lib/python3.11/site-packages/torch/_inductor/codecache.py", line 374, in __call__
+    return self.get_current_callable()(inputs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mohamed/miniconda3/envs/video_features/lib/python3.11/site-packages/torch/_inductor/compile_fx.py", line 628, in run
+    return model(new_inputs)
+           ^^^^^^^^^^^^^^^^^
+  File "/home/mohamed/miniconda3/envs/video_features/lib/python3.11/site-packages/torch/_inductor/codecache.py", line 401, in _run_from_cache
+    return compiled_graph.compiled_artifact(inputs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/torchinductor_mohamed/sd/csdkkxxtd3w6f6ihqb5iinnjj4alpsovwdahaqw4nh2xw2ogcdzk.py", line 1225, in call
+    triton_per_fused__softmax_threshold_16.run(buf25, buf28, buf37, buf38, 45, 45, grid=grid(45), stream=stream0)
+  File "/home/mohamed/miniconda3/envs/video_features/lib/python3.11/site-packages/torch/_inductor/triton_heuristics.py", line 401, in run
+    self.autotune_to_one_config(*args, grid=grid)
+  File "/home/mohamed/miniconda3/envs/video_features/lib/python3.11/site-packages/torch/_inductor/triton_heuristics.py", line 326, in autotune_to_one_config
+    timings = self.benchmark_all_configs(*args, **kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mohamed/miniconda3/envs/video_features/lib/python3.11/site-packages/torch/_dynamo/utils.py", line 189, in time_wrapper
+    r = func(*args, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mohamed/miniconda3/envs/video_features/lib/python3.11/site-packages/torch/_inductor/triton_heuristics.py", line 302, in benchmark_all_configs
+    timings = {
+              ^
+  File "/home/mohamed/miniconda3/envs/video_features/lib/python3.11/site-packages/torch/_inductor/triton_heuristics.py", line 303, in <dictcomp>
+    launcher: self.bench(launcher, *args, **kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mohamed/miniconda3/envs/video_features/lib/python3.11/site-packages/torch/_inductor/triton_heuristics.py", line 282, in bench
+    return do_bench(kernel_call, rep=40, fast_flush=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mohamed/miniconda3/envs/video_features/lib/python3.11/site-packages/torch/_inductor/utils.py", line 75, in do_bench
+    return triton_do_bench(*args, **kwargs)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mohamed/miniconda3/envs/video_features/lib/python3.11/site-packages/triton/testing.py", line 123, in do_bench
+    torch.cuda.synchronize()
+  File "/home/mohamed/miniconda3/envs/video_features/lib/python3.11/site-packages/torch/cuda/__init__.py", line 783, in synchronize
+    return torch._C._cuda_synchronize()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt

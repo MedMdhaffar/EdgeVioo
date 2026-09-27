@@ -12,6 +12,32 @@ from test import test
 import option
 
 
+def init_wandb(args, model):
+    if args.wandb_mode == 'disabled':
+        return None, None
+
+    try:
+        import wandb
+    except ImportError as error:
+        raise RuntimeError(
+            'Weights & Biases logging was requested, but wandb is not installed. '
+            'Install it with: pip install wandb'
+        ) from error
+
+    run = wandb.init(
+        project=args.wandb_project,
+        entity=args.wandb_entity,
+        name=args.wandb_run_name or args.model_name,
+        mode=args.wandb_mode,
+        config=vars(args),
+        job_type='train',
+        tags=[args.dataset_name, args.modality],
+    )
+    if args.wandb_watch:
+        run.watch(model, log='all', log_freq=100)
+    return wandb, run
+
+
 def setup_seed(seed):
     torch.manual_seed(seed)
     torch.cuda.manual_seed_all(seed)
@@ -30,10 +56,13 @@ if __name__ == '__main__':
     test_loader = DataLoader(Dataset(args, test_mode=True),
                               batch_size=5, shuffle=False,
                               num_workers=args.workers, pin_memory=True)
-
+    torch.set_float32_matmul_precision("high")
 
     device = torch.device('cuda:{}'.format(args.gpus) if args.gpus != '-1' else 'cpu')
     model = Model(args).to(device)
+    model = torch.compile(model)
+
+    wandb, wandb_run = init_wandb(args, model)
 
     for name, value in model.named_parameters():
         print(name)
@@ -55,13 +84,63 @@ if __name__ == '__main__':
     gt = np.load(args.gt)
     pr_auc, pr_auc_online = test(test_loader, model, device, gt)
     print('Random initalization: offline pr_auc:{0:.4}; online pr_auc:{1:.4}\n'.format(pr_auc, pr_auc_online))
-    for epoch in range(args.max_epoch):
-        scheduler.step()
-        st = time.time()
-        train(train_loader, model, optimizer, criterion, device, is_topk)
-        if epoch % 2 == 0 and not epoch == 0:
-            torch.save(model.state_dict(), './ckpt/'+args.model_name+'{}.pkl'.format(epoch))
+    if wandb_run is not None:
+        wandb_run.log({
+            'epoch': -1,
+            'test/offline_pr_auc': pr_auc,
+            'test/online_pr_auc': pr_auc_online,
+        })
 
-        pr_auc, pr_auc_online = test(test_loader, model, device, gt)
-        print('Epoch {0}/{1}: offline pr_auc:{2:.4}; online pr_auc:{3:.4}\n'.format(epoch, args.max_epoch, pr_auc, pr_auc_online))
-    torch.save(model.state_dict(), './ckpt/' + args.model_name + '.pkl')
+    try:
+        for epoch in range(args.max_epoch):
+            scheduler.step()
+            st = time.time()
+            train_metrics = train(train_loader, model, optimizer, criterion, device, is_topk)
+            if epoch % 2 == 0 and not epoch == 0:
+                torch.save(model.state_dict(), './ckpt/'+args.model_name+'{}.pkl'.format(epoch))
+
+            pr_auc, pr_auc_online = test(test_loader, model, device, gt)
+            epoch_seconds = time.time() - st
+            print(
+                'Epoch {0}/{1}: loss:{2:.4}; offline pr_auc:{3:.4}; '
+                'online pr_auc:{4:.4}; time:{5:.1f}s\n'.format(
+                    epoch,
+                    args.max_epoch,
+                    train_metrics['train/total_loss'],
+                    pr_auc,
+                    pr_auc_online,
+                    epoch_seconds,
+                )
+            )
+
+            if wandb_run is not None:
+                wandb_run.log({
+                    'epoch': epoch,
+                    **train_metrics,
+                    'test/offline_pr_auc': pr_auc,
+                    'test/online_pr_auc': pr_auc_online,
+                    'train/learning_rate': optimizer.param_groups[0]['lr'],
+                    'system/epoch_seconds': epoch_seconds,
+                })
+
+        final_checkpoint = './ckpt/' + args.model_name + '.pkl'
+        torch.save(model.state_dict(), final_checkpoint)
+
+        if wandb_run is not None:
+            wandb_run.summary['final/offline_pr_auc'] = pr_auc
+            wandb_run.summary['final/online_pr_auc'] = pr_auc_online
+            if args.wandb_log_model:
+                artifact = wandb.Artifact(
+                    name=args.model_name,
+                    type='model',
+                    metadata={
+                        'modality': args.modality,
+                        'feature_size': args.feature_size,
+                        'dataset': args.dataset_name,
+                    },
+                )
+                artifact.add_file(final_checkpoint)
+                wandb_run.log_artifact(artifact, aliases=['final'])
+    finally:
+        if wandb_run is not None:
+            wandb_run.finish()
