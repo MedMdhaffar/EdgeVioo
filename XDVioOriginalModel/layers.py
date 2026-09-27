@@ -6,7 +6,6 @@ import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from scipy.spatial.distance import pdist, squareform
 
 class GraphAttentionLayer(nn.Module):
     """
@@ -130,7 +129,7 @@ class SimilarityAdj(Module):
 
     def forward(self, input, seq_len):
         # To support batch operations
-        soft = nn.Softmax(1)
+        soft = nn.Softmax(-1)
         theta = torch.matmul(input, self.weight0)
         phi = torch.matmul(input, self.weight0)
         phi2 = phi.permute(0, 2, 1)
@@ -141,23 +140,16 @@ class SimilarityAdj(Module):
         x_norm_x = theta_norm.matmul(phi_norm.permute(0, 2, 1))
         sim_graph = sim_graph / (x_norm_x + 1e-20)
 
-        output = torch.zeros_like(sim_graph)
+        sim_graph = F.threshold(sim_graph, 0.7, 0)
         if seq_len is None:
-            for i in range(sim_graph.shape[0]):
-                tmp = sim_graph[i]
-                adj2 = tmp
-                adj2 = F.threshold(adj2, 0.7, 0)
-                adj2 = soft(adj2)
-                output[i] = adj2
-        else:
-            for i in range(len(seq_len)):
-                tmp = sim_graph[i, :seq_len[i], :seq_len[i]]
-                adj2 = tmp
-                adj2 = F.threshold(adj2, 0.7, 0)
-                adj2 = soft(adj2)
-                output[i, :seq_len[i], :seq_len[i]] = adj2
+            return soft(sim_graph)
 
-        return output
+        seq_len = seq_len.to(sim_graph.device)
+        positions = torch.arange(sim_graph.shape[1], device=sim_graph.device)
+        valid = positions.unsqueeze(0) < seq_len.unsqueeze(1)
+        pair_valid = valid.unsqueeze(2) & valid.unsqueeze(1)
+        masked_graph = sim_graph.masked_fill(~pair_valid, torch.finfo(sim_graph.dtype).min)
+        return soft(masked_graph) * pair_valid
 
     def __repr__(self):
         return self.__class__.__name__ + ' (' \
@@ -166,18 +158,23 @@ class SimilarityAdj(Module):
 
 class DistanceAdj(Module):
 
-    def __init__(self):
+    def __init__(self, cached_length=0):
         super(DistanceAdj, self).__init__()
         self.sigma = Parameter(FloatTensor(1))
         self.sigma.data.fill_(0.1)
+        positions = torch.arange(cached_length, dtype=torch.float32)
+        distance = torch.abs(positions.unsqueeze(1) - positions.unsqueeze(0))
+        self.register_buffer('cached_distance', torch.exp(-distance / np.e), persistent=False)
 
     def forward(self, batch_size, max_seqlen):
-        # To support batch operations
-        self.arith = np.arange(max_seqlen).reshape(-1, 1)
-        dist = pdist(self.arith, metric='cityblock').astype(np.float32)
-        # Follow the module device instead of forcing CUDA. This keeps inference
-        # valid on CPU and on whichever GPU the model was moved to.
-        self.dist = torch.from_numpy(squareform(dist)).to(self.sigma.device)
-        self.dist = torch.exp(-self.dist / np.e)
-        self.dist = torch.unsqueeze(self.dist, 0).repeat(batch_size, 1, 1)
-        return self.dist
+        # The training matrix is transferred once with the model and broadcast
+        # without allocating one physical copy per batch element. Evaluation
+        # sequences longer than the cache are constructed directly on-device.
+        if max_seqlen <= self.cached_distance.shape[0]:
+            distance = self.cached_distance[:max_seqlen, :max_seqlen]
+        else:
+            positions = torch.arange(max_seqlen, device=self.sigma.device,
+                                     dtype=self.sigma.dtype)
+            distance = torch.abs(positions.unsqueeze(1) - positions.unsqueeze(0))
+            distance = torch.exp(-distance / np.e)
+        return distance.unsqueeze(0).expand(batch_size, -1, -1)

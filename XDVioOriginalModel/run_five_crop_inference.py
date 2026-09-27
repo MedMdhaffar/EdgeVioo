@@ -34,7 +34,7 @@ from model import Model
 
 
 DEFAULT_VIDEO = ROOT / (
-    "CarAccident_Fast.Furious.2009___00-42-10_00-42-41_label_B6-0-0.mp4"
+    "Abuse_City.of.God.2002___00-37-20_00-38-02_label_B5-0-0.mp4"
 )
 DEFAULT_OUTPUT_DIR = ROOT / "five_crop_results"
 I3D_WEIGHTS = VIDEO_FEATURES_ROOT / "models/i3d/checkpoints/i3d_rgb.pt"
@@ -243,7 +243,11 @@ def run_detector(
     output_dir: Path,
     device: torch.device,
 ) -> tuple[np.ndarray, np.ndarray]:
-    detector = Model(SimpleNamespace(feature_size=MIX2_DIM, num_classes=1))
+    detector = Model(SimpleNamespace(
+        feature_size=MIX2_DIM,
+        num_classes=1,
+        max_seqlen=model_input.shape[1],
+    ))
     state = torch.load(DETECTOR_WEIGHTS, map_location="cpu", weights_only=True)
     detector.load_state_dict(
         {name.removeprefix("module."): value for name, value in state.items()}

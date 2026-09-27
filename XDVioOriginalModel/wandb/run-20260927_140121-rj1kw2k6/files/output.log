@@ -54,3 +54,24 @@ Epoch 1/50: loss:1.34; offline pr_auc:0.5901; online pr_auc:0.5887; time:202.4s
 Epoch 2/50: loss:1.185; offline pr_auc:0.713; online pr_auc:0.6454; time:208.4s
 
 Epoch 3/50: loss:1.071; offline pr_auc:0.7698; online pr_auc:0.6827; time:204.7s
+
+Epoch 4/50: loss:0.9689; offline pr_auc:0.7615; online pr_auc:0.697; time:204.3s
+
+Epoch 5/50: loss:0.8697; offline pr_auc:0.7864; online pr_auc:0.7159; time:209.7s
+
+Epoch 6/50: loss:0.8146; offline pr_auc:0.7867; online pr_auc:0.7261; time:210.1s
+
+Epoch 7/50: loss:0.7582; offline pr_auc:0.7745; online pr_auc:0.7249; time:242.2s
+Exception ignored in: <function _MultiProcessingDataLoaderIter.__del__ at 0x75096ff882c0>
+Traceback (most recent call last):
+  File "/home/mohamed/miniconda3/envs/video_features/lib/python3.11/site-packages/torch/utils/data/dataloader.py", line 1478, in __del__
+    self._shutdown_workers()
+  File "/home/mohamed/miniconda3/envs/video_features/lib/python3.11/site-packages/torch/utils/data/dataloader.py", line 1423, in _shutdown_workers
+    self._worker_result_queue.put((None, None))
+  File "/home/mohamed/miniconda3/envs/video_features/lib/python3.11/multiprocessing/queues.py", line 94, in put
+    self._start_thread()
+  File "/home/mohamed/miniconda3/envs/video_features/lib/python3.11/multiprocessing/queues.py", line 177, in _start_thread
+    self._thread.start()
+  File "/home/mohamed/miniconda3/envs/video_features/lib/python3.11/threading.py", line 964, in start
+    _start_new_thread(self._bootstrap, ())
+KeyboardInterrupt:

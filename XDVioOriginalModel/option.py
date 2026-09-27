@@ -29,3 +29,9 @@ parser.add_argument('--wandb-watch', action='store_true',
                     help='log model parameters and gradients to Weights & Biases')
 parser.add_argument('--wandb-log-model', action='store_true',
                     help='upload the final checkpoint as a Weights & Biases artifact')
+parser.add_argument('--profile', action='store_true',
+                    help='profile the first training epoch and export a CPU/CUDA timeline')
+parser.add_argument('--profile-steps', type=int, default=5,
+                    help='number of active training steps captured by the profiler')
+parser.add_argument('--profile-dir', default='profiles',
+                    help='directory for Chrome/Perfetto-compatible profiler traces')

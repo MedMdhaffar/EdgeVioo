@@ -31,7 +31,10 @@ class Model(nn.Module):
         self.gc5 = GraphConvolution(128, 32, residual=True)  # nn.Linear(128, 32)
         self.gc6 = GraphConvolution(32, 32, residual=True)
         self.simAdj = SimilarityAdj(n_features, 32)
-        self.disAdj = DistanceAdj()
+        # Some inference utilities construct a minimal argument namespace.
+        # A zero-length cache remains valid because DistanceAdj can build an
+        # arbitrary evaluation length directly on the model device.
+        self.disAdj = DistanceAdj(getattr(args, 'max_seqlen', 0))
 
         self.classifier = nn.Linear(32*3, n_class)
         self.approximator = nn.Sequential(nn.Conv1d(128, 64, 1, padding=0), nn.ReLU(),
@@ -80,48 +83,35 @@ class Model(nn.Module):
 
     def sadj(self, logits, seq_len):
         lens = logits.shape[1]
-        soft = nn.Softmax(1)
+        soft = nn.Softmax(-1)
         logits2 = self.sigmoid(logits).repeat(1, 1, lens)
         tmp = logits2.permute(0, 2, 1)
         adj = 1. - torch.abs(logits2 - tmp)
-        self.sig = lambda x:1/(1+torch.exp(-((x-0.5))/0.1))
-        adj = self.sig(adj)
-        output = torch.zeros_like(adj)
+        adj = 1 / (1 + torch.exp(-((adj - 0.5) / 0.1)))
         if seq_len is None:
-            for i in range(logits.shape[0]):
-                tmp = adj[i]
-                adj2 = soft(tmp)
-                output[i] = adj2
-        else:
-            for i in range(len(seq_len)):
-                tmp = adj[i, :seq_len[i], :seq_len[i]]
-                adj2 = soft(tmp)
-                output[i, :seq_len[i], :seq_len[i]] = adj2
-        return output
+            return soft(adj)
+
+        seq_len = seq_len.to(adj.device)
+        positions = torch.arange(lens, device=adj.device)
+        valid = positions.unsqueeze(0) < seq_len.unsqueeze(1)
+        pair_valid = valid.unsqueeze(2) & valid.unsqueeze(1)
+        masked_adj = adj.masked_fill(~pair_valid, torch.finfo(adj.dtype).min)
+        return soft(masked_adj) * pair_valid
 
 
     def adj(self, x, seq_len):
-        soft = nn.Softmax(1)
+        soft = nn.Softmax(-1)
         x2 = x.matmul(x.permute(0,2,1)) # B*T*T
         x_norm = torch.norm(x, p=2, dim=2, keepdim=True)  # B*T*1
         x_norm_x = x_norm.matmul(x_norm.permute(0,2,1))
         x2 = x2/(x_norm_x+1e-20)
-        output = torch.zeros_like(x2)
+        x2 = F.threshold(x2, 0.7, 0)
         if seq_len is None:
-            for i in range(x.shape[0]):
-                tmp = x2[i]
-                adj2 = tmp
-                adj2 = F.threshold(adj2, 0.7, 0)
-                adj2 = soft(adj2)
-                output[i] = adj2
-        else:
-            for i in range(len(seq_len)):
-                tmp = x2[i, :seq_len[i], :seq_len[i]]
-                adj2 = tmp
-                adj2 = F.threshold(adj2, 0.7, 0)
-                adj2 = soft(adj2)
-                output[i, :seq_len[i], :seq_len[i]] = adj2
+            return soft(x2)
 
-        return output
-
-
+        seq_len = seq_len.to(x2.device)
+        positions = torch.arange(x2.shape[1], device=x2.device)
+        valid = positions.unsqueeze(0) < seq_len.unsqueeze(1)
+        pair_valid = valid.unsqueeze(2) & valid.unsqueeze(1)
+        masked_x2 = x2.masked_fill(~pair_valid, torch.finfo(x2.dtype).min)
+        return soft(masked_x2) * pair_valid

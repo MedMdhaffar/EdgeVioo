@@ -1,0 +1,50 @@
+_orig_mod.conv1d1.weight
+_orig_mod.conv1d1.bias
+_orig_mod.conv1d2.weight
+_orig_mod.conv1d2.bias
+_orig_mod.conv1d3.weight
+_orig_mod.conv1d3.bias
+_orig_mod.conv1d4.weight
+_orig_mod.conv1d4.bias
+_orig_mod.gc1.weight
+_orig_mod.gc1.residual.weight
+_orig_mod.gc1.residual.bias
+_orig_mod.gc2.weight
+_orig_mod.gc3.weight
+_orig_mod.gc3.residual.weight
+_orig_mod.gc3.residual.bias
+_orig_mod.gc4.weight
+_orig_mod.gc5.weight
+_orig_mod.gc5.residual.weight
+_orig_mod.gc5.residual.bias
+_orig_mod.gc6.weight
+_orig_mod.simAdj.weight0
+_orig_mod.simAdj.weight1
+_orig_mod.disAdj.sigma
+_orig_mod.classifier.weight
+_orig_mod.classifier.bias
+_orig_mod.approximator.0.weight
+_orig_mod.approximator.0.bias
+_orig_mod.approximator.2.weight
+_orig_mod.approximator.2.bias
+_orig_mod.conv1d_approximator.weight
+_orig_mod.conv1d_approximator.bias
+/home/mohamed/miniconda3/envs/video_features/lib/python3.11/site-packages/torch/overrides.py:110: UserWarning: 'has_cuda' is deprecated, please use 'torch.backends.cuda.is_built()'
+  torch.has_cuda,
+/home/mohamed/miniconda3/envs/video_features/lib/python3.11/site-packages/torch/overrides.py:111: UserWarning: 'has_cudnn' is deprecated, please use 'torch.backends.cudnn.is_available()'
+  torch.has_cudnn,
+/home/mohamed/miniconda3/envs/video_features/lib/python3.11/site-packages/torch/overrides.py:117: UserWarning: 'has_mps' is deprecated, please use 'torch.backends.mps.is_built()'
+  torch.has_mps,
+/home/mohamed/miniconda3/envs/video_features/lib/python3.11/site-packages/torch/overrides.py:118: UserWarning: 'has_mkldnn' is deprecated, please use 'torch.backends.mkldnn.is_available()'
+  torch.has_mkldnn,
+[2026-09-27 14:43:45,011] torch._dynamo.convert_frame: [WARNING] torch._dynamo hit config.cache_size_limit (64)
+[2026-09-27 14:43:45,011] torch._dynamo.convert_frame: [WARNING]    function: 'forward' (/home/mohamed/tutorés/XDVioDet/XDVioOriginalModel/model.py:48)
+[2026-09-27 14:43:45,011] torch._dynamo.convert_frame: [WARNING] to diagnose recompilation issues, set env variable TORCHDYNAMO_REPORT_GUARD_FAILURES=1 and also see https://pytorch.org/docs/master/compile/troubleshooting.html.
+[2026-09-27 14:43:47,001] torch._dynamo.convert_frame: [WARNING] torch._dynamo hit config.cache_size_limit (64)
+[2026-09-27 14:43:47,001] torch._dynamo.convert_frame: [WARNING]    function: 'forward' (/home/mohamed/tutorés/XDVioDet/XDVioOriginalModel/layers.py:174)
+[2026-09-27 14:43:47,001] torch._dynamo.convert_frame: [WARNING] to diagnose recompilation issues, set env variable TORCHDYNAMO_REPORT_GUARD_FAILURES=1 and also see https://pytorch.org/docs/master/compile/troubleshooting.html.
+Random initalization: offline pr_auc:0.296; online pr_auc:0.2235
+/home/mohamed/miniconda3/envs/video_features/lib/python3.11/site-packages/torch/optim/lr_scheduler.py:136: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  warnings.warn("Detected call of `lr_scheduler.step()` before `optimizer.step()`. "
+
+Epoch 0/5: loss:3.497; offline pr_auc:0.2203; online pr_auc:0.2469; time:293.4s
