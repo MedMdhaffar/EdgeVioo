@@ -1,0 +1,22 @@
+[project]
+name = "safewatch"
+version = "0.1.0"
+description = "SafeWatch Edge AI - multimodal, robust and explainable incident detection in audio-video streams"
+requires-python = ">=3.12"
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+addopts = "-q"
+filterwarnings = [
+    "ignore:You are using the legacy TorchScript-based ONNX export:DeprecationWarning",
+    "ignore:The feature will be removed:DeprecationWarning",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+exclude = [".venv", "data", "runs"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]

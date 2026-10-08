@@ -1,0 +1,104 @@
+{
+  "audio_dir": "data/features/vggish_snippet",
+  "audio_grid": "snippet",
+  "expected_dim": 128,
+  "stride_frames": 16.0,
+  "quality_dir": "data/features/audio_quality",
+  "counts": {
+    "clips": 4754,
+    "present": 4754,
+    "missing": 0,
+    "load_error": 0,
+    "empty": 0,
+    "wrong_ndim": 0,
+    "wrong_dim": 0,
+    "non_finite": 0,
+    "misaligned": 0,
+    "quality_missing": 4,
+    "quality_load_error": 0,
+    "quality_invalid": 0,
+    "silent_audio": 4,
+    "constant_features": 0
+  },
+  "examples": [
+    "v=87ss-JRZIs4__#1_label_G-0-0: silent_audio (all patches at or below -75 dB RMS)",
+    "Saving.Private.Ryan.1998__#02-29-31_02-30-55_label_B2-G-0: quality_missing (data/features/audio_quality/Saving.Private.Ryan.1998__#02-29-31_02-30-55_label_B2-G-0.npy)",
+    "v=8cTqh9tMz_I__#1_label_A: quality_missing (data/features/audio_quality/v=8cTqh9tMz_I__#1_label_A.npy)",
+    "v=9eME1y6V-T4__#01-12-00_01-18-00_label_A: quality_missing (data/features/audio_quality/v=9eME1y6V-T4__#01-12-00_01-18-00_label_A.npy)",
+    "NewAdd.NBA-2017.12.25_CLE@GSW__#01-08-34_01-40-09_label_A: quality_missing (data/features/audio_quality/NewAdd.NBA-2017.12.25_CLE@GSW__#01-08-34_01-40-09_label_A.npy)",
+    "v=pZttb6pJM8U__#1_label_B1-0-0: silent_audio (all patches at or below -75 dB RMS)",
+    "v=7G4IvR1vQ7M__#00-00-00_00-00-45_label_B1-0-0: silent_audio (all patches at or below -75 dB RMS)",
+    "v=9CWJd1SezkA__#1_label_G-0-0: silent_audio (all patches at or below -75 dB RMS)"
+  ],
+  "issues": [
+    {
+      "clip_id": "v=87ss-JRZIs4__#1_label_G-0-0",
+      "split": "train",
+      "csv": "data/lists_official/train.csv",
+      "issue": "silent_audio",
+      "detail": "all patches at or below -75 dB RMS"
+    },
+    {
+      "clip_id": "Saving.Private.Ryan.1998__#02-29-31_02-30-55_label_B2-G-0",
+      "split": "train",
+      "csv": "data/lists_official/train.csv",
+      "issue": "quality_missing",
+      "detail": "data/features/audio_quality/Saving.Private.Ryan.1998__#02-29-31_02-30-55_label_B2-G-0.npy"
+    },
+    {
+      "clip_id": "v=8cTqh9tMz_I__#1_label_A",
+      "split": "train",
+      "csv": "data/lists_official/train.csv",
+      "issue": "quality_missing",
+      "detail": "data/features/audio_quality/v=8cTqh9tMz_I__#1_label_A.npy"
+    },
+    {
+      "clip_id": "v=9eME1y6V-T4__#01-12-00_01-18-00_label_A",
+      "split": "train",
+      "csv": "data/lists_official/train.csv",
+      "issue": "quality_missing",
+      "detail": "data/features/audio_quality/v=9eME1y6V-T4__#01-12-00_01-18-00_label_A.npy"
+    },
+    {
+      "clip_id": "NewAdd.NBA-2017.12.25_CLE@GSW__#01-08-34_01-40-09_label_A",
+      "split": "train",
+      "csv": "data/lists_official/train.csv",
+      "issue": "quality_missing",
+      "detail": "data/features/audio_quality/NewAdd.NBA-2017.12.25_CLE@GSW__#01-08-34_01-40-09_label_A.npy"
+    },
+    {
+      "clip_id": "v=pZttb6pJM8U__#1_label_B1-0-0",
+      "split": "train",
+      "csv": "data/lists_official/val.csv",
+      "issue": "silent_audio",
+      "detail": "all patches at or below -75 dB RMS"
+    },
+    {
+      "clip_id": "v=7G4IvR1vQ7M__#00-00-00_00-00-45_label_B1-0-0",
+      "split": "train",
+      "csv": "data/lists_official/val.csv",
+      "issue": "silent_audio",
+      "detail": "all patches at or below -75 dB RMS"
+    },
+    {
+      "clip_id": "v=9CWJd1SezkA__#1_label_G-0-0",
+      "split": "test",
+      "csv": "data/lists_official/test.csv",
+      "issue": "silent_audio",
+      "detail": "all patches at or below -75 dB RMS"
+    }
+  ],
+  "issues_truncated": false,
+  "orphan_feature_files": 0,
+  "time_rows": {
+    "observed_min": 2,
+    "observed_median": 157.0,
+    "observed_max": 16224,
+    "expected_median": 157.0
+  },
+  "csv_files": [
+    "data/lists_official/train.csv",
+    "data/lists_official/val.csv",
+    "data/lists_official/test.csv"
+  ]
+}

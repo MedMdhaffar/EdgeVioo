@@ -1,0 +1,198 @@
+{
+  "clip_id": "Black.Hawk.Down.2001__#01-13-59_01-14-49_label_B2-0-0",
+  "video": "data/raw/xd-violence/data/video/test_videos/Black.Hawk.Down.2001__#01-13-59_01-14-49_label_B2-0-0.mp4",
+  "duration_s": null,
+  "grid": {
+    "stride_frames": 64.0,
+    "fps": 24.0,
+    "stride_s": 2.667,
+    "n_snippets": 19
+  },
+  "config": {
+    "threshold": 0.5,
+    "min_seconds": 5.0,
+    "max_gap_seconds": 2.5,
+    "language": "fr"
+  },
+  "category": {
+    "available": true,
+    "label": "shooting",
+    "probability": 0.6659,
+    "ranked": [
+      {
+        "category": "shooting",
+        "probability": 0.6659
+      },
+      {
+        "category": "fighting",
+        "probability": 0.4847
+      },
+      {
+        "category": "explosion",
+        "probability": 0.4522
+      }
+    ],
+    "all": {
+      "shooting": 0.6659,
+      "fighting": 0.4847,
+      "explosion": 0.4522,
+      "riot": 0.3111,
+      "car_accident": 0.0956,
+      "abuse": 0.0122
+    },
+    "note": "raw sigmoid outputs of the multi-label head (uncalibrated), trained on weak clip labels; 'abuse' has only 8 test clips so its probability is the least reliable"
+  },
+  "segments": [
+    {
+      "start_s": 0.0,
+      "end_s": 50.67,
+      "duration_s": 50.67,
+      "n_snippets": 19,
+      "mean_probability": 0.9793,
+      "peak_probability": 1.0,
+      "n_snippets_above_threshold": 19
+    }
+  ],
+  "visual_evidence": {
+    "criterion": "ranked by snippet score, ties broken by temporal attention",
+    "top_snippets": [
+      {
+        "snippet": 10,
+        "second": 26.67,
+        "probability": 1.0,
+        "attention": 0.17194
+      },
+      {
+        "snippet": 17,
+        "second": 45.33,
+        "probability": 1.0,
+        "attention": 0.14561
+      },
+      {
+        "snippet": 9,
+        "second": 24.0,
+        "probability": 1.0,
+        "attention": 0.09259
+      },
+      {
+        "snippet": 11,
+        "second": 29.33,
+        "probability": 1.0,
+        "attention": 0.16444
+      },
+      {
+        "snippet": 16,
+        "second": 42.67,
+        "probability": 1.0,
+        "attention": 0.09211
+      }
+    ],
+    "peak_attention": {
+      "snippet": 10,
+      "second": 26.67,
+      "attention": 0.17194
+    },
+    "attention_entropy": 2.4604,
+    "attention_entropy_normalised": 0.8356
+  },
+  "audio_evidence": {
+    "channels": [
+      "rms",
+      "rms_db",
+      "flatness",
+      "zcr",
+      "clip_ratio"
+    ],
+    "available": true,
+    "segment_vs_background_db": 0.55,
+    "rms_db": {
+      "segment_mean": -17.19,
+      "clip_median": -17.74,
+      "segment_peak": -11.21
+    },
+    "spectral_flatness": 0.0896,
+    "clipping_ratio_max": 0.0026,
+    "descriptions": [
+      "aucun indice sonore marquant / no distinctive audio cue"
+    ]
+  },
+  "modality_contribution": {
+    "available": true,
+    "type": "per-modality score curves (late fusion) + score without each modality",
+    "mean_probability": {
+      "visual": 0.9972,
+      "audio": 0.9102
+    },
+    "peak_probability": {
+      "visual": 1.0,
+      "audio": 0.9757
+    },
+    "drop_one": {
+      "audio": {
+        "mean_probability_intact": 0.9793,
+        "mean_probability_without": 0.971,
+        "delta": 0.0083
+      },
+      "visual": {
+        "mean_probability_intact": 0.9793,
+        "mean_probability_without": 0.622,
+        "delta": 0.3573
+      }
+    }
+  },
+  "confidence": {
+    "raw_clip_probability": 1.0,
+    "raw_alert_probability": 0.9793,
+    "top_k": 5,
+    "calibrated": true,
+    "temperature": 1.4047,
+    "clip_probability": 0.9996,
+    "alert_probability": 0.9396,
+    "evidence": {
+      "ece_before": 0.039,
+      "ece_after": 0.0368,
+      "fitted_on": "val",
+      "n_samples": 434,
+      "note": "temperature fitted on the validation split; applied to snippet scores as well (shared-scale assumption, see safewatch/eval/calibration.py)"
+    }
+  },
+  "media": {
+    "key_frames": [
+      {
+        "second": 28.0,
+        "path": "sheets/frames/Black.Hawk.Down.2001__#01-13-59_01-14-49_label_B2-0-0_00_0028.00s.jpg"
+      },
+      {
+        "second": 46.67,
+        "path": "sheets/frames/Black.Hawk.Down.2001__#01-13-59_01-14-49_label_B2-0-0_01_0046.67s.jpg"
+      },
+      {
+        "second": 25.33,
+        "path": "sheets/frames/Black.Hawk.Down.2001__#01-13-59_01-14-49_label_B2-0-0_02_0025.33s.jpg"
+      },
+      {
+        "second": 30.67,
+        "path": "sheets/frames/Black.Hawk.Down.2001__#01-13-59_01-14-49_label_B2-0-0_03_0030.67s.jpg"
+      },
+      {
+        "second": 44.0,
+        "path": "sheets/frames/Black.Hawk.Down.2001__#01-13-59_01-14-49_label_B2-0-0_04_0044.00s.jpg"
+      }
+    ],
+    "spectrogram": "sheets/Black.Hawk.Down.2001__#01-13-59_01-14-49_label_B2-0-0_spectrogram.png"
+  },
+  "requires_human_verification": true,
+  "caveats": [
+    "weak supervision: clip-level labels during training, frame-level only for evaluation",
+    "temporal resolution is the snippet grid (2.67 s here)",
+    "category probabilities come from an uncalibrated multi-label head",
+    "audio channels are signal statistics, not an acoustic-event classifier"
+  ],
+  "provenance": {
+    "checkpoint": "runs/2026-09-29_p3full_late/ckpt_best.pt",
+    "clip_id": "Black.Hawk.Down.2001__#01-13-59_01-14-49_label_B2-0-0",
+    "stride_frames": 64.0,
+    "fusion_mode": "late"
+  },
+  "text": "Incident detecte entre 00:00 et 00:51. Categorie probable : shooting (67%). Indices visuels : snippet le plus anormal a 00:27 (p=1.00). Indices audio : aucun indice sonore marquant / no distinctive audio cue. Contribution des modalites : per-modality score curves (late fusion) + score without each modality - visuel 1.00 vs audio 0.91. Confiance globale : 94% (calibree, temperature 1.4047). Verification humaine recommandee avant toute action. Modele faiblement supervise : il localise une zone suspecte, il ne confirme pas l'evenement."
+}

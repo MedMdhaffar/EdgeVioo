@@ -1,0 +1,24 @@
+P5 per-class calibration - official grid, 800 test clips (T fitted on 150 val clips)
+================================================================================================
+run    head               T  n_pos  ECE raw    ECE T    verdict
+------------------------------------------------------------------------------------------------
+cross  fighting       1.536    126   0.0866   0.1107      worse
+cross  shooting       1.196    104   0.1230   0.1269      worse
+cross  riot           1.328    101   0.0367   0.0493      worse
+cross  abuse          1.000     11   0.0176   0.0176   unfitted
+cross  car_accident   1.652    106   0.0503   0.0720      worse
+cross  explosion      0.412    103   0.0726   0.0464     better
+cross  MACRO (fitted)                 0.0738   0.0810 best: uncalibrated
+cross    (+ single global T)  1.704          0.0738   0.1100           
+
+late   fighting       1.246    126   0.0586   0.0753      worse
+late   shooting       1.090    104   0.0484   0.0544      worse
+late   riot           0.803    101   0.0274   0.0218     better
+late   abuse          1.000     11   0.0150   0.0150   unfitted
+late   car_accident   1.034    106   0.0309   0.0330      worse
+late   explosion      0.522    103   0.0476   0.0280     better
+late   MACRO (fitted)                 0.0426   0.0425 best: per-class
+late     (+ single global T)  1.360          0.0426   0.0676           
+
+Note: ECE is measured on test; temperatures come from val. 'worse' means the fitted
+temperature increased the calibration error of that head.

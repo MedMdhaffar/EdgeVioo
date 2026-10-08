@@ -1,0 +1,249 @@
+[rescore] .venv/bin/python -u -m safewatch.eval.runner --ckpt runs/2026-09-29_p2vggish_visual/ckpt_best.pt --threads 2
+[score] ckpt=runs/2026-09-29_p2vggish_visual/ckpt_best.pt kind=mil modality=visual test=data/lists_official/test.csv stride=16 frames/snippet rule=(2,1) snippets
+{
+  "n_clips": 800,
+  "n_snippets": 145649,
+  "stride_frames": 16.0,
+  "segment_rule": {
+    "threshold": 0.5,
+    "min_length": 2,
+    "max_gap": 1,
+    "min_seconds": 1.333,
+    "max_gap_seconds": 0.667
+  },
+  "ap": {
+    "global__pr_auc": 0.6714194918405719,
+    "global__average_precision": 0.671426985196534,
+    "per_video__pr_auc": 0.6938919946251433,
+    "per_video__average_precision": 0.703192095182192
+  },
+  "prevalence": 0.2379419058561325,
+  "localization": {
+    "n_pred_segments": 1723,
+    "n_gt_segments": 1238,
+    "mean_best_iou": 0.20816372613509362,
+    "mean_detection_delay_snippets": 47.219657483246465,
+    "mean_detection_delay_frames": 755.5145197319434,
+    "mean_detection_delay_seconds": 31.479771655497643,
+    "precision@iou0.1": 0.3784097504352873,
+    "recall@iou0.1": 0.5266558966074314,
+    "f1@iou0.1": 0.4403917595406957,
+    "precision@iou0.2": 0.3284968078932095,
+    "recall@iou0.2": 0.45718901453957994,
+    "f1@iou0.2": 0.3823032759202972,
+    "precision@iou0.3": 0.2629135229251306,
+    "recall@iou0.3": 0.36591276252019383,
+    "f1@iou0.3": 0.3059777102330294,
+    "precision@iou0.4": 0.2008125362739408,
+    "recall@iou0.4": 0.27948303715670436,
+    "f1@iou0.4": 0.23370482944951032,
+    "precision@iou0.5": 0.15322112594312245,
+    "recall@iou0.5": 0.21324717285945072,
+    "f1@iou0.5": 0.1783181357649443
+  },
+  "macro_per_class_ap": 0.29761493690595847,
+  "dropped_modality": "none"
+}
+per-class clip-level AP: {'fighting': 0.383, 'shooting': 0.1987, 'riot': 0.3618, 'abuse': 0.0446, 'car_accident': 0.3408, 'explosion': 0.4567}
+[ok] predictions + metrics -> runs/2026-09-29_p2vggish_visual
+[rescore] exit=0
+[rescore] .venv/bin/python -u -m safewatch.eval.runner --ckpt runs/2026-09-29_p2vggish_audio/ckpt_best.pt --threads 2
+[score] ckpt=runs/2026-09-29_p2vggish_audio/ckpt_best.pt kind=mil modality=audio test=data/lists_official/test.csv stride=16 frames/snippet rule=(2,1) snippets
+{
+  "n_clips": 800,
+  "n_snippets": 145649,
+  "stride_frames": 16.0,
+  "segment_rule": {
+    "threshold": 0.5,
+    "min_length": 2,
+    "max_gap": 1,
+    "min_seconds": 1.333,
+    "max_gap_seconds": 0.667
+  },
+  "ap": {
+    "global__pr_auc": 0.6186386202369961,
+    "global__average_precision": 0.6185483127415453,
+    "per_video__pr_auc": 0.6835450511786831,
+    "per_video__average_precision": 0.6914092749719339
+  },
+  "prevalence": 0.2379419058561325,
+  "localization": {
+    "n_pred_segments": 1929,
+    "n_gt_segments": 1238,
+    "mean_best_iou": 0.20541969224532547,
+    "mean_detection_delay_snippets": 52.57436260623229,
+    "mean_detection_delay_frames": 841.1898016997167,
+    "mean_detection_delay_seconds": 35.049575070821525,
+    "precision@iou0.1": 0.35303265940902023,
+    "recall@iou0.1": 0.5500807754442649,
+    "f1@iou0.1": 0.43005999368487524,
+    "precision@iou0.2": 0.2991187143597719,
+    "recall@iou0.2": 0.46607431340872374,
+    "f1@iou0.2": 0.364382696558257,
+    "precision@iou0.3": 0.2452047693105236,
+    "recall@iou0.3": 0.38206785137318255,
+    "f1@iou0.3": 0.2987053994316388,
+    "precision@iou0.4": 0.20010368066355624,
+    "recall@iou0.4": 0.31179321486268174,
+    "f1@iou0.4": 0.24376381433533312,
+    "precision@iou0.5": 0.1607050285121825,
+    "recall@iou0.5": 0.25040387722132473,
+    "f1@iou0.5": 0.1957688664351121
+  },
+  "macro_per_class_ap": 0.4087492885228006,
+  "dropped_modality": "none"
+}
+per-class clip-level AP: {'fighting': 0.3168, 'shooting': 0.612, 'riot': 0.6737, 'abuse': 0.0176, 'car_accident': 0.5938, 'explosion': 0.2385}
+[ok] predictions + metrics -> runs/2026-09-29_p2vggish_audio
+[rescore] exit=0
+[rescore] .venv/bin/python -u -m safewatch.eval.runner --ckpt runs/2026-09-29_p3vggish_late/ckpt_best.pt --threads 2
+[score] ckpt=runs/2026-09-29_p3vggish_late/ckpt_best.pt kind=fusion modality=both test=data/lists_official/test.csv stride=16 frames/snippet rule=(2,1) snippets
+[warn] missing audio quality stats for Before.Sunset.2004__#01-14-30_01-16-51_l -> zeros (run scripts/extract_audio_features.py)
+{
+  "n_clips": 800,
+  "n_snippets": 145649,
+  "stride_frames": 16.0,
+  "segment_rule": {
+    "threshold": 0.5,
+    "min_length": 2,
+    "max_gap": 1,
+    "min_seconds": 1.333,
+    "max_gap_seconds": 0.667
+  },
+  "ap": {
+    "global__pr_auc": 0.741707832699134,
+    "global__average_precision": 0.7417169299187569,
+    "per_video__pr_auc": 0.7631255823584521,
+    "per_video__average_precision": 0.7695038573119736
+  },
+  "prevalence": 0.2379419058561325,
+  "localization": {
+    "n_pred_segments": 2045,
+    "n_gt_segments": 1238,
+    "mean_best_iou": 0.24427150099326836,
+    "mean_detection_delay_snippets": 49.51938461538462,
+    "mean_detection_delay_frames": 792.3101538461539,
+    "mean_detection_delay_seconds": 33.01292307692308,
+    "precision@iou0.1": 0.42200488997555013,
+    "recall@iou0.1": 0.697092084006462,
+    "f1@iou0.1": 0.5257386536704234,
+    "precision@iou0.2": 0.3721271393643032,
+    "recall@iou0.2": 0.6147011308562197,
+    "f1@iou0.2": 0.4636003655193421,
+    "precision@iou0.3": 0.30709046454767724,
+    "recall@iou0.3": 0.5072697899838449,
+    "f1@iou0.3": 0.3825769113615595,
+    "precision@iou0.4": 0.25134474327628364,
+    "recall@iou0.4": 0.41518578352180935,
+    "f1@iou0.4": 0.31312823636917453,
+    "precision@iou0.5": 0.1980440097799511,
+    "recall@iou0.5": 0.327140549273021,
+    "f1@iou0.5": 0.2467255558939994
+  },
+  "macro_per_class_ap": 0.5208143717635819,
+  "dropped_modality": "none"
+}
+per-class clip-level AP: {'fighting': 0.5031, 'shooting': 0.5925, 'riot': 0.7634, 'abuse': 0.0615, 'car_accident': 0.8173, 'explosion': 0.387}
+[ok] predictions + metrics -> runs/2026-09-29_p3vggish_late
+[rescore] exit=0
+[rescore] .venv/bin/python -u -m safewatch.eval.runner --ckpt runs/2026-09-29_p3vggish_late/ckpt_best.pt --threads 2 --drop-modality audio
+[score] ckpt=runs/2026-09-29_p3vggish_late/ckpt_best.pt kind=fusion modality=both test=data/lists_official/test.csv stride=16 frames/snippet rule=(2,1) snippets drop=audio
+[warn] missing audio quality stats for Before.Sunset.2004__#01-14-30_01-16-51_l -> zeros (run scripts/extract_audio_features.py)
+{
+  "n_clips": 800,
+  "n_snippets": 145649,
+  "stride_frames": 16.0,
+  "segment_rule": {
+    "threshold": 0.5,
+    "min_length": 2,
+    "max_gap": 1,
+    "min_seconds": 1.333,
+    "max_gap_seconds": 0.667
+  },
+  "ap": {
+    "global__pr_auc": 0.6665493469749745,
+    "global__average_precision": 0.6665570665102554,
+    "per_video__pr_auc": 0.701626470820018,
+    "per_video__average_precision": 0.7106016493271264
+  },
+  "prevalence": 0.2379419058561325,
+  "localization": {
+    "n_pred_segments": 2240,
+    "n_gt_segments": 1238,
+    "mean_best_iou": 0.22906907086914624,
+    "mean_detection_delay_snippets": 44.22229639519359,
+    "mean_detection_delay_frames": 707.5567423230974,
+    "mean_detection_delay_seconds": 29.481530930129058,
+    "precision@iou0.1": 0.3638392857142857,
+    "recall@iou0.1": 0.6583198707592892,
+    "f1@iou0.1": 0.4686601495112134,
+    "precision@iou0.2": 0.31741071428571427,
+    "recall@iou0.2": 0.574313408723748,
+    "f1@iou0.2": 0.40885566417481306,
+    "precision@iou0.3": 0.2575892857142857,
+    "recall@iou0.3": 0.46607431340872374,
+    "f1@iou0.3": 0.33179988499137436,
+    "precision@iou0.4": 0.20223214285714286,
+    "recall@iou0.4": 0.36591276252019383,
+    "f1@iou0.4": 0.2604945370902818,
+    "precision@iou0.5": 0.16026785714285716,
+    "recall@iou0.5": 0.28998384491114704,
+    "f1@iou0.5": 0.20644048303622772
+  },
+  "macro_per_class_ap": 0.40835423945629595,
+  "dropped_modality": "audio"
+}
+per-class clip-level AP: {'fighting': 0.5483, 'shooting': 0.3392, 'riot': 0.3998, 'abuse': 0.0667, 'car_accident': 0.6581, 'explosion': 0.438}
+[ok] predictions + metrics -> runs/2026-09-29_p3vggish_late
+[rescore] exit=0
+[rescore] .venv/bin/python -u -m safewatch.eval.runner --ckpt runs/2026-09-29_p3vggish_late/ckpt_best.pt --threads 2 --drop-modality visual
+[score] ckpt=runs/2026-09-29_p3vggish_late/ckpt_best.pt kind=fusion modality=both test=data/lists_official/test.csv stride=16 frames/snippet rule=(2,1) snippets drop=visual
+[warn] missing audio quality stats for Before.Sunset.2004__#01-14-30_01-16-51_l -> zeros (run scripts/extract_audio_features.py)
+{
+  "n_clips": 800,
+  "n_snippets": 145649,
+  "stride_frames": 16.0,
+  "segment_rule": {
+    "threshold": 0.5,
+    "min_length": 2,
+    "max_gap": 1,
+    "min_seconds": 1.333,
+    "max_gap_seconds": 0.667
+  },
+  "ap": {
+    "global__pr_auc": 0.6310696413987951,
+    "global__average_precision": 0.6305035889040768,
+    "per_video__pr_auc": 0.687373633036526,
+    "per_video__average_precision": 0.6933744718870115
+  },
+  "prevalence": 0.2379419058561325,
+  "localization": {
+    "n_pred_segments": 2266,
+    "n_gt_segments": 1238,
+    "mean_best_iou": 0.2131592082590622,
+    "mean_detection_delay_snippets": 45.09010840108401,
+    "mean_detection_delay_frames": 721.4417344173442,
+    "mean_detection_delay_seconds": 30.06007226738934,
+    "precision@iou0.1": 0.33318623124448365,
+    "recall@iou0.1": 0.6098546042003231,
+    "f1@iou0.1": 0.4309360730593607,
+    "precision@iou0.2": 0.2890556045895852,
+    "recall@iou0.2": 0.5290791599353797,
+    "f1@iou0.2": 0.3738584474885845,
+    "precision@iou0.3": 0.2383053839364519,
+    "recall@iou0.3": 0.43618739903069464,
+    "f1@iou0.3": 0.3082191780821918,
+    "precision@iou0.4": 0.18976169461606354,
+    "recall@iou0.4": 0.3473344103392569,
+    "f1@iou0.4": 0.2454337899543379,
+    "precision@iou0.5": 0.1531332744924978,
+    "recall@iou0.5": 0.2802907915993538,
+    "f1@iou0.5": 0.19805936073059363
+  },
+  "macro_per_class_ap": 0.4380565904046107,
+  "dropped_modality": "visual"
+}
+per-class clip-level AP: {'fighting': 0.3438, 'shooting': 0.5686, 'riot': 0.7356, 'abuse': 0.0223, 'car_accident': 0.7643, 'explosion': 0.1938}
+[ok] predictions + metrics -> runs/2026-09-29_p3vggish_late
+[rescore] exit=0
+[rescore] ALL DONE

@@ -1,0 +1,293 @@
+[rest] 2026-09-30T10:47:45+01:00 train cross (auto)
+[cfg] multi pos_weight (auto): fighting=7.2, shooting=7.9, riot=9.4, abuse=75.1, car_accident=8.0, explosion=9.2
+[warn] val split (150 clips) has no abuse clip(s): model selection is blind to it
+[run] runs/2026-09-30_p3vggish30ep_pwcross
+[cfg] fusion=cross params=1052937 reliability=7d dropout=0.15 train=3804 val=150 device=cpu
+[warn] missing audio quality stats for NewAdd.NBA-2017.12.25_CLE@GSW__#01-08-34 -> zeros (run scripts/extract_audio_features.py)
+[epoch   1/30] loss=0.9270 val_ap=0.9847 val_abuse=n/a *best* [120.3s]
+[epoch   2/30] loss=0.5728 val_ap=0.9784 val_abuse=n/a [87.8s]
+[epoch   3/30] loss=0.5128 val_ap=0.9831 val_abuse=n/a [86.4s]
+[epoch   4/30] loss=0.4332 val_ap=0.9824 val_abuse=n/a [88.4s]
+[epoch   5/30] loss=0.4038 val_ap=0.9821 val_abuse=n/a [82.9s]
+[epoch   6/30] loss=0.3934 val_ap=0.9826 val_abuse=n/a [74.4s]
+[epoch   7/30] loss=0.3759 val_ap=0.9838 val_abuse=n/a [74.3s]
+[epoch   8/30] loss=0.3305 val_ap=0.9830 val_abuse=n/a [74.6s]
+[epoch   9/30] loss=0.3234 val_ap=0.9852 val_abuse=n/a *best* [89.3s]
+[epoch  10/30] loss=0.3184 val_ap=0.9771 val_abuse=n/a [83.5s]
+[epoch  11/30] loss=0.2708 val_ap=0.9830 val_abuse=n/a [86.3s]
+[epoch  12/30] loss=0.2400 val_ap=0.9824 val_abuse=n/a [101.2s]
+[epoch  13/30] loss=0.2659 val_ap=0.9832 val_abuse=n/a [75.1s]
+[epoch  14/30] loss=0.2410 val_ap=0.9835 val_abuse=n/a [75.3s]
+[epoch  15/30] loss=0.2468 val_ap=0.9827 val_abuse=n/a [82.0s]
+[epoch  16/30] loss=0.2461 val_ap=0.9831 val_abuse=n/a [75.1s]
+[epoch  17/30] loss=0.2461 val_ap=0.9841 val_abuse=n/a [75.2s]
+[epoch  18/30] loss=0.2318 val_ap=0.9855 val_abuse=n/a *best* [92.5s]
+[epoch  19/30] loss=0.2230 val_ap=0.9863 val_abuse=n/a *best* [98.7s]
+[epoch  20/30] loss=0.2164 val_ap=0.9881 val_abuse=n/a *best* [84.4s]
+[epoch  21/30] loss=0.2122 val_ap=0.9872 val_abuse=n/a [73.5s]
+[epoch  22/30] loss=0.2170 val_ap=0.9838 val_abuse=n/a [73.5s]
+[epoch  23/30] loss=0.2132 val_ap=0.9846 val_abuse=n/a [75.0s]
+[epoch  24/30] loss=0.2288 val_ap=0.9853 val_abuse=n/a [73.3s]
+[epoch  25/30] loss=0.2213 val_ap=0.9876 val_abuse=n/a [84.3s]
+[epoch  26/30] loss=0.2205 val_ap=0.9872 val_abuse=n/a [89.6s]
+[epoch  27/30] loss=0.2272 val_ap=0.9863 val_abuse=n/a [89.5s]
+[epoch  28/30] loss=0.2144 val_ap=0.9869 val_abuse=n/a [98.1s]
+[epoch  29/30] loss=0.2125 val_ap=0.9897 val_abuse=n/a *best* [92.7s]
+[epoch  30/30] loss=0.2217 val_ap=0.9878 val_abuse=n/a [77.6s]
+[done] best epoch 29 val_ap=0.9897 | last val_ap=0.9878 -> runs/2026-09-30_p3vggish30ep_pwcross
+[rest] 2026-09-30T11:30:08+01:00 score runs/2026-09-30_p3vggish30ep_pwcross (best + last)
+[score] ckpt=runs/2026-09-30_p3vggish30ep_pwcross/ckpt_best.pt kind=fusion modality=both test=data/lists_official/test.csv stride=16 frames/snippet rule=(8,4) snippets = (5.33,2.67) s
+{
+  "n_clips": 800,
+  "n_snippets": 145649,
+  "stride_frames": 16.0,
+  "segment_rule": {
+    "threshold": 0.5,
+    "min_length": 8,
+    "max_gap": 4,
+    "min_seconds": 5.333,
+    "max_gap_seconds": 2.667
+  },
+  "ap": {
+    "global__pr_auc": 0.766614334841766,
+    "global__average_precision": 0.7666232637338002,
+    "per_video__pr_auc": 0.7835837267497441,
+    "per_video__average_precision": 0.7902887610069179
+  },
+  "prevalence": 0.2379419058561325,
+  "localization": {
+    "n_pred_segments": 753,
+    "n_gt_segments": 1238,
+    "mean_best_iou": 0.3741367933003021,
+    "mean_detection_delay_snippets": 13.61794500723589,
+    "mean_detection_delay_frames": 217.88712011577425,
+    "mean_detection_delay_seconds": 9.078630004823927,
+    "precision@iou0.1": 0.6892430278884463,
+    "recall@iou0.1": 0.41922455573505657,
+    "f1@iou0.1": 0.5213460572576595,
+    "precision@iou0.2": 0.5830013280212484,
+    "recall@iou0.2": 0.3546042003231018,
+    "f1@iou0.2": 0.4409844299347062,
+    "precision@iou0.3": 0.4674634794156706,
+    "recall@iou0.3": 0.284329563812601,
+    "f1@iou0.3": 0.3535911602209945,
+    "precision@iou0.4": 0.3851261620185923,
+    "recall@iou0.4": 0.23424878836833601,
+    "f1@iou0.4": 0.2913108990457057,
+    "precision@iou0.5": 0.3280212483399734,
+    "recall@iou0.5": 0.19951534733441034,
+    "f1@iou0.5": 0.24811652435961826
+  },
+  "macro_per_class_ap": 0.7851057677818544,
+  "dropped_modality": "none"
+}
+per-class clip-level AP: {'fighting': 0.9081, 'shooting': 0.7041, 'riot': 0.9828, 'abuse': 0.2504, 'car_accident': 0.9553, 'explosion': 0.9099}
+[ok] predictions + metrics -> runs/2026-09-30_p3vggish30ep_pwcross
+[diag] runs/2026-09-30_p3vggish30ep_pwcross/ckpt_best.pt test=data/lists_official/test.csv device=cpu
+fighting       n=126 p(pos)=0.948 p(neg)=0.107 TP@.5=122 FP@.5=  57 tIoU=0.434
+   co-occur: {'fighting': 126, 'shooting': 18, 'car_accident': 2}
+shooting       n=104 p(pos)=0.950 p(neg)=0.203 TP@.5=101 FP@.5= 137 tIoU=0.347
+   co-occur: {'fighting': 18, 'shooting': 104, 'abuse': 2, 'car_accident': 10, 'explosion': 16}
+riot           n=101 p(pos)=0.978 p(neg)=0.073 TP@.5=100 FP@.5=  37 tIoU=0.394
+   co-occur: {'riot': 101, 'abuse': 1, 'explosion': 1}
+abuse          n= 11 p(pos)=0.633 p(neg)=0.183 TP@.5=  7 FP@.5= 144 tIoU=0.486
+   co-occur: {'shooting': 2, 'riot': 1, 'abuse': 11, 'car_accident': 1}
+car_accident   n=106 p(pos)=0.946 p(neg)=0.103 TP@.5=101 FP@.5=  48 tIoU=0.253
+   co-occur: {'fighting': 2, 'shooting': 10, 'abuse': 1, 'car_accident': 106, 'explosion': 4}
+explosion      n=103 p(pos)=0.920 p(neg)=0.114 TP@.5= 97 FP@.5=  71 tIoU=0.375
+   co-occur: {'shooting': 16, 'riot': 1, 'car_accident': 4, 'explosion': 103}
+[diag] written -> runs/2026-09-30_p3vggish30ep_pwcross/class_diagnostic.json
+[score] ckpt=runs/2026-09-30_p3vggish30ep_pwcross/ckpt_last.pt kind=fusion modality=both test=data/lists_official/test.csv stride=16 frames/snippet rule=(8,4) snippets = (5.33,2.67) s
+{
+  "n_clips": 800,
+  "n_snippets": 145649,
+  "stride_frames": 16.0,
+  "segment_rule": {
+    "threshold": 0.5,
+    "min_length": 8,
+    "max_gap": 4,
+    "min_seconds": 5.333,
+    "max_gap_seconds": 2.667
+  },
+  "ap": {
+    "global__pr_auc": 0.7523967883072463,
+    "global__average_precision": 0.7523963263336616,
+    "per_video__pr_auc": 0.7778903433940821,
+    "per_video__average_precision": 0.7852250810383765
+  },
+  "prevalence": 0.2379419058561325,
+  "localization": {
+    "n_pred_segments": 758,
+    "n_gt_segments": 1238,
+    "mean_best_iou": 0.3580600507222197,
+    "mean_detection_delay_snippets": 10.445588235294117,
+    "mean_detection_delay_frames": 167.12941176470588,
+    "mean_detection_delay_seconds": 6.963725490196079,
+    "precision@iou0.1": 0.6767810026385225,
+    "recall@iou0.1": 0.41437802907915994,
+    "f1@iou0.1": 0.5140280561122245,
+    "precision@iou0.2": 0.5606860158311345,
+    "recall@iou0.2": 0.3432956381260097,
+    "f1@iou0.2": 0.42585170340681366,
+    "precision@iou0.3": 0.44854881266490765,
+    "recall@iou0.3": 0.27463651050080773,
+    "f1@iou0.3": 0.34068136272545085,
+    "precision@iou0.4": 0.3562005277044855,
+    "recall@iou0.4": 0.21809369951534732,
+    "f1@iou0.4": 0.27054108216432865,
+    "precision@iou0.5": 0.2941952506596306,
+    "recall@iou0.5": 0.1801292407108239,
+    "f1@iou0.5": 0.22344689378757512
+  },
+  "macro_per_class_ap": 0.7901209670529928,
+  "dropped_modality": "none"
+}
+per-class clip-level AP: {'fighting': 0.9062, 'shooting': 0.7233, 'riot': 0.9816, 'abuse': 0.2591, 'car_accident': 0.957, 'explosion': 0.9135}
+[ok] predictions + metrics -> runs/2026-09-30_p3vggish30ep_pwcross/last
+[diag] runs/2026-09-30_p3vggish30ep_pwcross/ckpt_last.pt test=data/lists_official/test.csv device=cpu
+fighting       n=126 p(pos)=0.965 p(neg)=0.128 TP@.5=124 FP@.5=  73 tIoU=0.434
+   co-occur: {'fighting': 126, 'shooting': 18, 'car_accident': 2}
+shooting       n=104 p(pos)=0.956 p(neg)=0.209 TP@.5=101 FP@.5= 143 tIoU=0.347
+   co-occur: {'fighting': 18, 'shooting': 104, 'abuse': 2, 'car_accident': 10, 'explosion': 16}
+riot           n=101 p(pos)=0.977 p(neg)=0.075 TP@.5=100 FP@.5=  39 tIoU=0.394
+   co-occur: {'riot': 101, 'abuse': 1, 'explosion': 1}
+abuse          n= 11 p(pos)=0.658 p(neg)=0.197 TP@.5=  7 FP@.5= 152 tIoU=0.486
+   co-occur: {'shooting': 2, 'riot': 1, 'abuse': 11, 'car_accident': 1}
+car_accident   n=106 p(pos)=0.956 p(neg)=0.117 TP@.5=102 FP@.5=  57 tIoU=0.253
+   co-occur: {'fighting': 2, 'shooting': 10, 'abuse': 1, 'car_accident': 106, 'explosion': 4}
+explosion      n=103 p(pos)=0.931 p(neg)=0.121 TP@.5= 98 FP@.5=  71 tIoU=0.375
+   co-occur: {'shooting': 16, 'riot': 1, 'car_accident': 4, 'explosion': 103}
+[diag] written -> runs/2026-09-30_p3vggish30ep_pwcross/last/class_diagnostic.json
+[rest] 2026-09-30T11:31:07+01:00 occlusion sweeps (3 at a time)
+[sweep] runs/2026-09-29_p3vggish30ep_cross/ckpt_best.pt kind=occlusion stream=visual stride=16 rule=(8,4) snippets = (5.33,2.67) s flag_reliability=False
+   level applied  APglob  APclip macroAP   IoU  F1@.5
+-----------------------------------------------------
+[sweep] runs/2026-09-29_p3vggish30ep_late/ckpt_best.pt kind=occlusion stream=visual stride=16 rule=(8,4) snippets = (5.33,2.67) s flag_reliability=False
+   level applied  APglob  APclip macroAP   IoU  F1@.5
+-----------------------------------------------------
+   0.000   False  0.7719  0.7857  0.7200 0.354  0.265
+   0.000   False  0.7745  0.7961  0.6958 0.369  0.243
+  15.000    True  0.7601  0.7677  0.6794 0.341  0.246
+   5.000    True  0.7726  0.7894  0.6908 0.362  0.238
+  30.000    True  0.7480  0.7482  0.6475 0.342  0.236
+[sweep] written -> runs/2026-09-29_p3vggish30ep_late/robustness_occlusion_visual.json
+[sweep] figure -> runs/2026-09-29_p3vggish30ep_late/robustness_occlusion_visual.png
+[sweep] runs/2026-09-30_p3vggish30ep_adaptive/ckpt_best.pt kind=occlusion stream=visual stride=16 rule=(8,4) snippets = (5.33,2.67) s flag_reliability=False
+   level applied  APglob  APclip macroAP   IoU  F1@.5
+-----------------------------------------------------
+  15.000    True  0.7686  0.7645  0.6684 0.355  0.231
+   0.000   False  0.7281  0.7665  0.6930 0.329  0.198
+  30.000    True  0.7623  0.7429  0.6240 0.358  0.227
+[sweep] written -> runs/2026-09-29_p3vggish30ep_cross/robustness_occlusion_visual.json
+[sweep] figure -> runs/2026-09-29_p3vggish30ep_cross/robustness_occlusion_visual.png
+[sweep] runs/2026-09-30_p3vggish30ep_adaptive/ckpt_best.pt kind=occlusion stream=visual stride=16 rule=(8,4) snippets = (5.33,2.67) s flag_reliability=True
+   level applied  APglob  APclip macroAP   IoU  F1@.5
+-----------------------------------------------------
+  15.000    True  0.7227  0.7410  0.6624 0.317  0.183
+   0.000   False  0.7281  0.7665  0.6930 0.329  0.198
+  30.000    True  0.7192  0.7321  0.6192 0.319  0.173
+[sweep] written -> runs/2026-09-30_p3vggish30ep_adaptive/robustness_occlusion_visual_blind.json
+[sweep] figure -> runs/2026-09-30_p3vggish30ep_adaptive/robustness_occlusion_visual_blind.png
+  15.000    True  0.7391  0.7487  0.6625 0.322  0.185
+  30.000    True  0.7389  0.7412  0.6175 0.325  0.181
+[sweep] written -> runs/2026-09-30_p3vggish30ep_adaptive/robustness_occlusion_visual_flagged.json
+[sweep] figure -> runs/2026-09-30_p3vggish30ep_adaptive/robustness_occlusion_visual_flagged.png
+[rest] 2026-09-30T11:32:16+01:00 train late (sqrt)
+[cfg] multi pos_weight (sqrt): fighting=2.7, shooting=2.8, riot=3.1, abuse=8.7, car_accident=2.8, explosion=3.0
+[warn] val split (150 clips) has no abuse clip(s): model selection is blind to it
+[run] runs/2026-09-30_p3vggish30ep_pwlate_sqrt
+[cfg] fusion=late params=887691 reliability=7d dropout=0.15 train=3804 val=150 device=cpu
+[warn] missing audio quality stats for v=8cTqh9tMz_I__#1_label_A -> zeros (run scripts/extract_audio_features.py)
+[epoch   1/30] loss=0.9036 val_ap=0.9830 val_abuse=n/a *best* [54.4s]
+[epoch   2/30] loss=0.5003 val_ap=0.9864 val_abuse=n/a *best* [52.3s]
+[epoch   3/30] loss=0.4525 val_ap=0.9885 val_abuse=n/a *best* [52.2s]
+[epoch   4/30] loss=0.3877 val_ap=0.9891 val_abuse=n/a *best* [52.1s]
+[epoch   5/30] loss=0.3804 val_ap=0.9891 val_abuse=n/a [53.7s]
+[epoch   6/30] loss=0.3577 val_ap=0.9910 val_abuse=n/a *best* [52.7s]
+[epoch   7/30] loss=0.3533 val_ap=0.9918 val_abuse=n/a *best* [52.4s]
+[epoch   8/30] loss=0.3191 val_ap=0.9910 val_abuse=n/a [53.2s]
+[epoch   9/30] loss=0.3081 val_ap=0.9905 val_abuse=n/a [54.3s]
+[epoch  10/30] loss=0.3074 val_ap=0.9912 val_abuse=n/a [63.5s]
+[epoch  11/30] loss=0.2728 val_ap=0.9921 val_abuse=n/a *best* [56.8s]
+[epoch  12/30] loss=0.2585 val_ap=0.9922 val_abuse=n/a *best* [73.1s]
+[epoch  13/30] loss=0.2651 val_ap=0.9925 val_abuse=n/a *best* [58.0s]
+[epoch  14/30] loss=0.2608 val_ap=0.9926 val_abuse=n/a *best* [58.5s]
+[epoch  15/30] loss=0.2605 val_ap=0.9924 val_abuse=n/a [60.8s]
+[epoch  16/30] loss=0.2510 val_ap=0.9923 val_abuse=n/a [83.6s]
+[epoch  17/30] loss=0.2663 val_ap=0.9924 val_abuse=n/a [82.2s]
+[epoch  18/30] loss=0.2503 val_ap=0.9926 val_abuse=n/a *best* [54.7s]
+[epoch  19/30] loss=0.2537 val_ap=0.9927 val_abuse=n/a *best* [51.2s]
+[epoch  20/30] loss=0.2459 val_ap=0.9921 val_abuse=n/a [54.8s]
+[epoch  21/30] loss=0.2433 val_ap=0.9919 val_abuse=n/a [52.6s]
+[epoch  22/30] loss=0.2422 val_ap=0.9925 val_abuse=n/a [50.7s]
+[epoch  23/30] loss=0.2516 val_ap=0.9928 val_abuse=n/a *best* [52.3s]
+[epoch  24/30] loss=0.2285 val_ap=0.9923 val_abuse=n/a [50.6s]
+[epoch  25/30] loss=0.2337 val_ap=0.9922 val_abuse=n/a [52.5s]
+[epoch  26/30] loss=0.2355 val_ap=0.9924 val_abuse=n/a [52.5s]
+[epoch  27/30] loss=0.2474 val_ap=0.9926 val_abuse=n/a [50.6s]
+[epoch  28/30] loss=0.2294 val_ap=0.9925 val_abuse=n/a [50.5s]
+[epoch  29/30] loss=0.2351 val_ap=0.9931 val_abuse=n/a *best* [50.5s]
+[epoch  30/30] loss=0.2373 val_ap=0.9930 val_abuse=n/a [51.0s]
+[done] best epoch 29 val_ap=0.9931 | last val_ap=0.9930 -> runs/2026-09-30_p3vggish30ep_pwlate_sqrt
+[score] ckpt=runs/2026-09-30_p3vggish30ep_pwlate_sqrt/ckpt_best.pt kind=fusion modality=both test=data/lists_official/test.csv stride=16 frames/snippet rule=(8,4) snippets = (5.33,2.67) s
+{
+  "n_clips": 800,
+  "n_snippets": 145649,
+  "stride_frames": 16.0,
+  "segment_rule": {
+    "threshold": 0.5,
+    "min_length": 8,
+    "max_gap": 4,
+    "min_seconds": 5.333,
+    "max_gap_seconds": 2.667
+  },
+  "ap": {
+    "global__pr_auc": 0.7753213208476948,
+    "global__average_precision": 0.7753091769625283,
+    "per_video__pr_auc": 0.7811544865954207,
+    "per_video__average_precision": 0.7869435103738497
+  },
+  "prevalence": 0.2379419058561325,
+  "localization": {
+    "n_pred_segments": 931,
+    "n_gt_segments": 1238,
+    "mean_best_iou": 0.35954331478291535,
+    "mean_detection_delay_snippets": 37.70862470862471,
+    "mean_detection_delay_frames": 603.3379953379954,
+    "mean_detection_delay_seconds": 25.13908313908314,
+    "precision@iou0.1": 0.631578947368421,
+    "recall@iou0.1": 0.47495961227786754,
+    "f1@iou0.1": 0.5421853388658369,
+    "precision@iou0.2": 0.5531686358754028,
+    "recall@iou0.2": 0.4159935379644588,
+    "f1@iou0.2": 0.47487321346242506,
+    "precision@iou0.3": 0.45757250268528465,
+    "recall@iou0.3": 0.3441033925686591,
+    "f1@iou0.3": 0.39280774550484093,
+    "precision@iou0.4": 0.37808807733619765,
+    "recall@iou0.4": 0.284329563812601,
+    "f1@iou0.4": 0.32457353619179347,
+    "precision@iou0.5": 0.3157894736842105,
+    "recall@iou0.5": 0.23747980613893377,
+    "f1@iou0.5": 0.27109266943291843
+  },
+  "macro_per_class_ap": 0.7474361682461533,
+  "dropped_modality": "none"
+}
+per-class clip-level AP: {'fighting': 0.9195, 'shooting': 0.7087, 'riot': 0.9636, 'abuse': 0.0942, 'car_accident': 0.9417, 'explosion': 0.857}
+[ok] predictions + metrics -> runs/2026-09-30_p3vggish30ep_pwlate_sqrt
+[diag] runs/2026-09-30_p3vggish30ep_pwlate_sqrt/ckpt_best.pt test=data/lists_official/test.csv device=cpu
+fighting       n=126 p(pos)=0.888 p(neg)=0.126 TP@.5=119 FP@.5=  67 tIoU=0.451
+   co-occur: {'fighting': 126, 'shooting': 18, 'car_accident': 2}
+shooting       n=104 p(pos)=0.783 p(neg)=0.154 TP@.5= 93 FP@.5= 104 tIoU=0.554
+   co-occur: {'fighting': 18, 'shooting': 104, 'abuse': 2, 'car_accident': 10, 'explosion': 16}
+riot           n=101 p(pos)=0.910 p(neg)=0.060 TP@.5= 95 FP@.5=  24 tIoU=0.220
+   co-occur: {'riot': 101, 'abuse': 1, 'explosion': 1}
+abuse          n= 11 p(pos)=0.392 p(neg)=0.114 TP@.5=  4 FP@.5=  54 tIoU=0.462
+   co-occur: {'shooting': 2, 'riot': 1, 'abuse': 11, 'car_accident': 1}
+car_accident   n=106 p(pos)=0.899 p(neg)=0.099 TP@.5= 98 FP@.5=  38 tIoU=0.354
+   co-occur: {'fighting': 2, 'shooting': 10, 'abuse': 1, 'car_accident': 106, 'explosion': 4}
+explosion      n=103 p(pos)=0.794 p(neg)=0.111 TP@.5= 89 FP@.5=  42 tIoU=0.408
+   co-occur: {'shooting': 16, 'riot': 1, 'car_accident': 4, 'explosion': 103}
+[diag] written -> runs/2026-09-30_p3vggish30ep_pwlate_sqrt/class_diagnostic.json
+[rest] ALL DONE 2026-09-30T12:00:45+01:00

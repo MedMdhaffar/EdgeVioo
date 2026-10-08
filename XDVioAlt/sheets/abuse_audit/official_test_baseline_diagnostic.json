@@ -1,0 +1,594 @@
+{
+  "checkpoint": "runs/2026-09-30_p3vggish30ep_cross_s43/ckpt_best.pt",
+  "test_csv": "data/lists_official/test.csv",
+  "per_category": {
+    "fighting": {
+      "n_positives": 126,
+      "n_negatives": 674,
+      "mean_prob_positive": 0.9177226029366018,
+      "mean_prob_negative": 0.11989534749655252,
+      "n_positive_above_0.5": 121,
+      "n_negative_above_0.5": 65,
+      "co_occurrence_in_positives": {
+        "fighting": 126,
+        "shooting": 18,
+        "car_accident": 2
+      },
+      "lowest_scoring_positives": [
+        {
+          "clip_id": "v=OE9t3XImErk__#1_label_B1-0-0",
+          "p": 0.029,
+          "labels": "fighting"
+        },
+        {
+          "clip_id": "New.Kids.Turbo.2010__#00-50-13_00-50-34_label_B1-0-0",
+          "p": 0.0453,
+          "labels": "fighting"
+        },
+        {
+          "clip_id": "Casino.Royale.2006__#00-50-05_00-51-16_label_B1-B2-B6",
+          "p": 0.1645,
+          "labels": "fighting|shooting|car_accident"
+        },
+        {
+          "clip_id": "New.Kids.Turbo.2010__#00-22-35_00-23-14_label_B1-0-0",
+          "p": 0.4059,
+          "labels": "fighting"
+        },
+        {
+          "clip_id": "GoldenEye.1995__#02-02-15_02-02-47_label_B1-0-0",
+          "p": 0.4941,
+          "labels": "fighting"
+        },
+        {
+          "clip_id": "Casino.Royale.2006__#00-51-16_00-52-41_label_B1-B6-0",
+          "p": 0.5111,
+          "labels": "fighting|car_accident"
+        },
+        {
+          "clip_id": "v=cuUK-3MNqtw__#1_label_B1-0-0",
+          "p": 0.5114,
+          "labels": "fighting"
+        },
+        {
+          "clip_id": "Braveheart.1995__#02-07-00_02-08-15_label_B1-0-0",
+          "p": 0.6119,
+          "labels": "fighting"
+        }
+      ],
+      "highest_scoring_negatives": [
+        {
+          "clip_id": "Taken.2.UNRATED.EXTENDED.2012__#00-13-42_00-14-16_label_B5-0-0",
+          "p": 0.9972,
+          "labels": "abuse"
+        },
+        {
+          "clip_id": "God.Bless.America.2011__#01-32-00_01-32-50_label_B2-0-0",
+          "p": 0.9967,
+          "labels": "shooting"
+        },
+        {
+          "clip_id": "Sin.City.2005__#0-22-04_0-22-18_label_B5-0-0",
+          "p": 0.9921,
+          "labels": "abuse"
+        },
+        {
+          "clip_id": "Yellow.Sea.2010__#01-58-30_01-59-27_label_B5-0-0",
+          "p": 0.9872,
+          "labels": "abuse"
+        },
+        {
+          "clip_id": "Mission.Impossible.V.Rogue.Nation.2015__#00-17-27_00-17-55_label_B2-0-0",
+          "p": 0.9821,
+          "labels": "shooting"
+        },
+        {
+          "clip_id": "City.of.God.2002__#00-40-16_00-41-30_label_B2-0-0",
+          "p": 0.9789,
+          "labels": "shooting"
+        },
+        {
+          "clip_id": "City.Of.Men.2007__#00-57-37_00-58-27_label_B2-0-0",
+          "p": 0.974,
+          "labels": "shooting"
+        },
+        {
+          "clip_id": "Black.Hawk.Down.2001__#01-32-40_01-34-00_label_B4-0-0",
+          "p": 0.971,
+          "labels": "riot"
+        }
+      ]
+    },
+    "shooting": {
+      "n_positives": 104,
+      "n_negatives": 696,
+      "mean_prob_positive": 0.7765150254305738,
+      "mean_prob_negative": 0.1405660102466953,
+      "n_positive_above_0.5": 91,
+      "n_negative_above_0.5": 91,
+      "co_occurrence_in_positives": {
+        "fighting": 18,
+        "shooting": 104,
+        "abuse": 2,
+        "car_accident": 10,
+        "explosion": 16
+      },
+      "lowest_scoring_positives": [
+        {
+          "clip_id": "Rush.Hour.3.2007.BluRay__#00-04-59_00-05-31_label_B2-0-0",
+          "p": 0.0354,
+          "labels": "shooting"
+        },
+        {
+          "clip_id": "City.Of.Men.2007__#01-17-27_01-17-59_label_B2-0-0",
+          "p": 0.0739,
+          "labels": "shooting"
+        },
+        {
+          "clip_id": "God.Bless.America.2011__#00-38-25_00-39-37_label_B2-B5-0",
+          "p": 0.1393,
+          "labels": "shooting|abuse"
+        },
+        {
+          "clip_id": "Tropa.de.Elite.2.2010__#00-42-00_00-43-00_label_B2-0-0",
+          "p": 0.1924,
+          "labels": "shooting"
+        },
+        {
+          "clip_id": "v=YhCSFZNwfHc__#00-01-15_00-01-42_label_G-B2-0",
+          "p": 0.2393,
+          "labels": "explosion|shooting"
+        },
+        {
+          "clip_id": "Fury.2014__#00-39-36_00-40-44_label_B1-B2-0",
+          "p": 0.2438,
+          "labels": "fighting|shooting"
+        },
+        {
+          "clip_id": "wangted.2008__#0-48-30_0-49-00_label_B2-0-0",
+          "p": 0.2577,
+          "labels": "shooting"
+        },
+        {
+          "clip_id": "Fast.Furious.2009__#01-29-10_01-29-55_label_B2-0-0",
+          "p": 0.2673,
+          "labels": "shooting"
+        }
+      ],
+      "highest_scoring_negatives": [
+        {
+          "clip_id": "Quantum.Of.Solace.2008__#01-19-30_01-20-05_label_B1-0-0",
+          "p": 0.9753,
+          "labels": "fighting"
+        },
+        {
+          "clip_id": "GoldenEye.1995__#02-02-15_02-02-47_label_B1-0-0",
+          "p": 0.9592,
+          "labels": "fighting"
+        },
+        {
+          "clip_id": "Taken.2.UNRATED.EXTENDED.2012__#01-18-40_01-19-00_label_B1-0-0",
+          "p": 0.944,
+          "labels": "fighting"
+        },
+        {
+          "clip_id": "The.Bourne.Legacy.2012__#0-39-56_0-40-15_label_G-0-0",
+          "p": 0.9352,
+          "labels": "explosion"
+        },
+        {
+          "clip_id": "Spectre.2015__#02-15-30_02-16-05_label_G-0-0",
+          "p": 0.9331,
+          "labels": "explosion"
+        },
+        {
+          "clip_id": "Skyfall.2012__#02-08-44_02-09-17_label_B1-0-0",
+          "p": 0.9291,
+          "labels": "fighting"
+        },
+        {
+          "clip_id": "Mission.Impossible.II.2000__#01-29-30_01-29-44_label_B1-0-0",
+          "p": 0.9284,
+          "labels": "fighting"
+        },
+        {
+          "clip_id": "Casino.Royale.2006__#01-46-40_01-47-14_label_B6-0-0",
+          "p": 0.927,
+          "labels": "car_accident"
+        }
+      ]
+    },
+    "riot": {
+      "n_positives": 101,
+      "n_negatives": 699,
+      "mean_prob_positive": 0.9227896862395919,
+      "mean_prob_negative": 0.0632620248168506,
+      "n_positive_above_0.5": 94,
+      "n_negative_above_0.5": 26,
+      "co_occurrence_in_positives": {
+        "riot": 101,
+        "abuse": 1,
+        "explosion": 1
+      },
+      "lowest_scoring_positives": [
+        {
+          "clip_id": "Jason.Bourne.2016__#0-29-48_0-30-29_label_B4-0-0",
+          "p": 0.1135,
+          "labels": "riot"
+        },
+        {
+          "clip_id": "v=aWPWHU8x6kE__#1_label_B4-0-0",
+          "p": 0.1211,
+          "labels": "riot"
+        },
+        {
+          "clip_id": "v=ZCjNPgNu42g__#1_label_B4-0-0",
+          "p": 0.3206,
+          "labels": "riot"
+        },
+        {
+          "clip_id": "Tropa.de.Elite.2.2010__#00-13-41_00-14-56_label_B4-0-0",
+          "p": 0.3941,
+          "labels": "riot"
+        },
+        {
+          "clip_id": "Bullet.in.the.Head.1990__#00-41-30_00-44-16_label_B4-G-0",
+          "p": 0.3972,
+          "labels": "riot|explosion"
+        },
+        {
+          "clip_id": "v=ZnFlL84K7HE__#00-27-53_00-34-45_label_B4-0-0",
+          "p": 0.3987,
+          "labels": "riot"
+        },
+        {
+          "clip_id": "Ip.Man.2008__#01-40-37_01-42-07_label_B4-0-0",
+          "p": 0.4123,
+          "labels": "riot"
+        },
+        {
+          "clip_id": "v=AF9p0YA0hyA__#00-00-45_00-01-44_label_B4-0-0",
+          "p": 0.5283,
+          "labels": "riot"
+        }
+      ],
+      "highest_scoring_negatives": [
+        {
+          "clip_id": "v=0W8LohxH9nI__#1_label_B1-0-0",
+          "p": 0.9811,
+          "labels": "fighting"
+        },
+        {
+          "clip_id": "v=DdIA1Owbcdc__#1_label_A",
+          "p": 0.9649,
+          "labels": ""
+        },
+        {
+          "clip_id": "v=q_DhkdHGXos__#1_label_B1-0-0",
+          "p": 0.9619,
+          "labels": "fighting"
+        },
+        {
+          "clip_id": "v=wG-2t0M8CPc__#1_label_B1-0-0",
+          "p": 0.959,
+          "labels": "fighting"
+        },
+        {
+          "clip_id": "v=lVJVRywgmYM__#1_label_A",
+          "p": 0.9299,
+          "labels": ""
+        },
+        {
+          "clip_id": "v=3e3C-LQWF2s__#1_label_B1-0-0",
+          "p": 0.9248,
+          "labels": "fighting"
+        },
+        {
+          "clip_id": "The.Fast.and.the.Furious.2001__#01-14-04_01-15-20_label_B1-0-0",
+          "p": 0.9055,
+          "labels": "fighting"
+        },
+        {
+          "clip_id": "v=KUeUxbsBO6s__#1_label_B1-0-0",
+          "p": 0.8057,
+          "labels": "fighting"
+        }
+      ]
+    },
+    "abuse": {
+      "n_positives": 11,
+      "n_negatives": 789,
+      "mean_prob_positive": 0.2971423435109583,
+      "mean_prob_negative": 0.10341231425080634,
+      "n_positive_above_0.5": 4,
+      "n_negative_above_0.5": 57,
+      "co_occurrence_in_positives": {
+        "shooting": 2,
+        "riot": 1,
+        "abuse": 11,
+        "car_accident": 1
+      },
+      "lowest_scoring_positives": [
+        {
+          "clip_id": "Operation.Red.Sea.2018__#01-20-58_01-22-00_label_B5-0-0",
+          "p": 0.0083,
+          "labels": "abuse"
+        },
+        {
+          "clip_id": "v=78u9uBJBqIw__#1_label_B4-B5-0",
+          "p": 0.0152,
+          "labels": "riot|abuse"
+        },
+        {
+          "clip_id": "City.of.God.2002__#00-37-20_00-38-02_label_B5-0-0",
+          "p": 0.0184,
+          "labels": "abuse"
+        },
+        {
+          "clip_id": "God.Bless.America.2011__#00-38-25_00-39-37_label_B2-B5-0",
+          "p": 0.0414,
+          "labels": "shooting|abuse"
+        },
+        {
+          "clip_id": "Death.Proof.2007__#01-40-41_01-42-17_label_B5-B6-0",
+          "p": 0.0901,
+          "labels": "abuse|car_accident"
+        },
+        {
+          "clip_id": "Election.2005__#00-47-57_00-50-54_label_B5-0-0",
+          "p": 0.1167,
+          "labels": "abuse"
+        },
+        {
+          "clip_id": "Mission.Impossible.II.2000__#01-38-25_01-38-41_label_B2-B5-0",
+          "p": 0.1414,
+          "labels": "shooting|abuse"
+        },
+        {
+          "clip_id": "Sin.City.2005__#0-22-04_0-22-18_label_B5-0-0",
+          "p": 0.5954,
+          "labels": "abuse"
+        }
+      ],
+      "highest_scoring_negatives": [
+        {
+          "clip_id": "Fast.Furious.6.2013__#01-38-33_01-39-20_label_B1-0-0",
+          "p": 0.8985,
+          "labels": "fighting"
+        },
+        {
+          "clip_id": "Ip.Man.2008__#00-46-51_00-47-30_label_B1-0-0",
+          "p": 0.8745,
+          "labels": "fighting"
+        },
+        {
+          "clip_id": "Fast.Furious.2009__#00-25-59_00-26-25_label_B1-0-0",
+          "p": 0.8683,
+          "labels": "fighting"
+        },
+        {
+          "clip_id": "The.Bourne.Identity.2002__#0-19-53_0-21-48_label_B1-0-0",
+          "p": 0.8605,
+          "labels": "fighting"
+        },
+        {
+          "clip_id": "Casino.Royale.2006__#01-17-29_01-17-46_label_B1-0-0",
+          "p": 0.846,
+          "labels": "fighting"
+        },
+        {
+          "clip_id": "Kill.Bill.Vol.1.2003__#01-26-56_01-28-18_label_B1-0-0",
+          "p": 0.8457,
+          "labels": "fighting"
+        },
+        {
+          "clip_id": "Sin.City.2005__#0-06-42_0-07-06_label_B1-0-0",
+          "p": 0.8441,
+          "labels": "fighting"
+        },
+        {
+          "clip_id": "Taken.3.2014__#01-19-13_01-19-30_label_B1-0-0",
+          "p": 0.8321,
+          "labels": "fighting"
+        }
+      ]
+    },
+    "car_accident": {
+      "n_positives": 106,
+      "n_negatives": 694,
+      "mean_prob_positive": 0.8980212560591271,
+      "mean_prob_negative": 0.08265739049108353,
+      "n_positive_above_0.5": 97,
+      "n_negative_above_0.5": 38,
+      "co_occurrence_in_positives": {
+        "fighting": 2,
+        "shooting": 10,
+        "abuse": 1,
+        "car_accident": 106,
+        "explosion": 4
+      },
+      "lowest_scoring_positives": [
+        {
+          "clip_id": "Fast.Furious.2009__#00-21-06_00-21-57_label_B6-B2-0",
+          "p": 0.027,
+          "labels": "car_accident|shooting"
+        },
+        {
+          "clip_id": "Bad.Boys.1995__#01-11-55_01-12-40_label_G-B2-B6",
+          "p": 0.1085,
+          "labels": "explosion|shooting|car_accident"
+        },
+        {
+          "clip_id": "Bullet.in.the.Head.1990__#02-02-00_02-05-22_label_B2-B6-G",
+          "p": 0.1893,
+          "labels": "shooting|car_accident|explosion"
+        },
+        {
+          "clip_id": "Casino.Royale.2006__#00-51-16_00-52-41_label_B1-B6-0",
+          "p": 0.2091,
+          "labels": "fighting|car_accident"
+        },
+        {
+          "clip_id": "Casino.Royale.2006__#01-46-40_01-47-14_label_B6-0-0",
+          "p": 0.2254,
+          "labels": "car_accident"
+        },
+        {
+          "clip_id": "Fast.Furious.2009__#01-18-00_01-19-00_label_B2-B6-0",
+          "p": 0.3032,
+          "labels": "shooting|car_accident"
+        },
+        {
+          "clip_id": "Young.And.Dangerous.I.1996__#0-46-25_0-46-55_label_B6-0-0",
+          "p": 0.3461,
+          "labels": "car_accident"
+        },
+        {
+          "clip_id": "Death.Proof.2007__#01-40-41_01-42-17_label_B5-B6-0",
+          "p": 0.3847,
+          "labels": "abuse|car_accident"
+        }
+      ],
+      "highest_scoring_negatives": [
+        {
+          "clip_id": "v=rmDBn5Rpd3s__#1_label_A",
+          "p": 0.9997,
+          "labels": ""
+        },
+        {
+          "clip_id": "v=35zynOrkvMk__#1_label_G-0-0",
+          "p": 0.9997,
+          "labels": "explosion"
+        },
+        {
+          "clip_id": "v=EeUTpfyb0qo__#1_label_A",
+          "p": 0.9993,
+          "labels": ""
+        },
+        {
+          "clip_id": "v=fkps18H3SXY__#00-00-00_00-06-00_label_A",
+          "p": 0.9987,
+          "labels": ""
+        },
+        {
+          "clip_id": "v=y7JEq-kf-2I__#00-01-50_00-02-30_label_A",
+          "p": 0.9975,
+          "labels": ""
+        },
+        {
+          "clip_id": "v=yviKz5J-pEA__#1_label_A",
+          "p": 0.9895,
+          "labels": ""
+        },
+        {
+          "clip_id": "Kill.Bill.Vol.2.2004__#01-03-13_01-04-13_label_A",
+          "p": 0.9842,
+          "labels": ""
+        },
+        {
+          "clip_id": "v=n0AhGnEjako__#1_label_A",
+          "p": 0.9841,
+          "labels": ""
+        }
+      ]
+    },
+    "explosion": {
+      "n_positives": 103,
+      "n_negatives": 697,
+      "mean_prob_positive": 0.8734342662201634,
+      "mean_prob_negative": 0.1076400704902386,
+      "n_positive_above_0.5": 92,
+      "n_negative_above_0.5": 64,
+      "co_occurrence_in_positives": {
+        "shooting": 16,
+        "riot": 1,
+        "car_accident": 4,
+        "explosion": 103
+      },
+      "lowest_scoring_positives": [
+        {
+          "clip_id": "v=35zynOrkvMk__#1_label_G-0-0",
+          "p": 0.0023,
+          "labels": "explosion"
+        },
+        {
+          "clip_id": "Bullet.in.the.Head.1990__#00-41-30_00-44-16_label_B4-G-0",
+          "p": 0.0026,
+          "labels": "riot|explosion"
+        },
+        {
+          "clip_id": "v=EH_QB6cm6BE__#1_label_G-0-0",
+          "p": 0.0053,
+          "labels": "explosion"
+        },
+        {
+          "clip_id": "Jason.Bourne.2016__#0-50-20_0-50-30_label_G-0-0",
+          "p": 0.0452,
+          "labels": "explosion"
+        },
+        {
+          "clip_id": "v=73uRcX0Dvfc__#00-00-00_00-01-51_label_B6-G-0",
+          "p": 0.2685,
+          "labels": "car_accident|explosion"
+        },
+        {
+          "clip_id": "Kingsman.The.Secret.Service.2014__#01-43-40_01-44-50_label_B2-G-0",
+          "p": 0.2913,
+          "labels": "shooting|explosion"
+        },
+        {
+          "clip_id": "Rush.Hour.1998.BluRay__#00-08-08_00-09-15_label_B2-B6-G",
+          "p": 0.3571,
+          "labels": "shooting|car_accident|explosion"
+        },
+        {
+          "clip_id": "Operation.Red.Sea.2018__#01-37-22_01-37-36_label_G-B2-0",
+          "p": 0.3913,
+          "labels": "explosion|shooting"
+        }
+      ],
+      "highest_scoring_negatives": [
+        {
+          "clip_id": "v=ZnFlL84K7HE__#00-27-53_00-34-45_label_B4-0-0",
+          "p": 0.9975,
+          "labels": "riot"
+        },
+        {
+          "clip_id": "v=CLFYvG6MsZU__#00-02-16_00-05-06_label_B2-0-0",
+          "p": 0.9892,
+          "labels": "shooting"
+        },
+        {
+          "clip_id": "The.Hurt.Locker.2008__#01-02-10_01-03-55_label_B2-0-0",
+          "p": 0.9871,
+          "labels": "shooting"
+        },
+        {
+          "clip_id": "Skyfall.2012__#02-08-44_02-09-17_label_B1-0-0",
+          "p": 0.9768,
+          "labels": "fighting"
+        },
+        {
+          "clip_id": "The.Fast.and.the.Furious.2001__#01-24-18_01-25-05_label_B6-0-0",
+          "p": 0.9722,
+          "labels": "car_accident"
+        },
+        {
+          "clip_id": "v=gbRIKogNZvE__#1_label_B4-0-0",
+          "p": 0.9539,
+          "labels": "riot"
+        },
+        {
+          "clip_id": "Brick.Mansions.2014__#01-02-00_01-02-43_label_B2-0-0",
+          "p": 0.9509,
+          "labels": "shooting"
+        },
+        {
+          "clip_id": "Mission.Impossible.V.Rogue.Nation.2015__#01-19-48_01-20-20_label_B6-0-0",
+          "p": 0.9506,
+          "labels": "car_accident"
+        }
+      ]
+    }
+  }
+}

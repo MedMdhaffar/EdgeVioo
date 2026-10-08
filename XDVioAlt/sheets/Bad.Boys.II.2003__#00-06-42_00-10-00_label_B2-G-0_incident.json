@@ -1,0 +1,208 @@
+{
+  "clip_id": "Bad.Boys.II.2003__#00-06-42_00-10-00_label_B2-G-0",
+  "video": "data/raw/xd-violence/data/video/test_videos/Bad.Boys.II.2003__#00-06-42_00-10-00_label_B2-G-0.mp4",
+  "duration_s": null,
+  "grid": {
+    "stride_frames": 64.0,
+    "fps": 24.0,
+    "stride_s": 2.667,
+    "n_snippets": 75
+  },
+  "config": {
+    "threshold": 0.5,
+    "min_seconds": 5.0,
+    "max_gap_seconds": 2.5,
+    "language": "fr"
+  },
+  "category": {
+    "available": true,
+    "label": "shooting",
+    "probability": 0.594,
+    "ranked": [
+      {
+        "category": "shooting",
+        "probability": 0.594
+      },
+      {
+        "category": "fighting",
+        "probability": 0.4379
+      },
+      {
+        "category": "explosion",
+        "probability": 0.4328
+      }
+    ],
+    "all": {
+      "shooting": 0.594,
+      "fighting": 0.4379,
+      "explosion": 0.4328,
+      "riot": 0.2045,
+      "car_accident": 0.1291,
+      "abuse": 0.0306
+    },
+    "note": "raw sigmoid outputs of the multi-label head (uncalibrated), trained on weak clip labels; 'abuse' has only 8 test clips so its probability is the least reliable"
+  },
+  "segments": [
+    {
+      "start_s": 0.0,
+      "end_s": 88.0,
+      "duration_s": 88.0,
+      "n_snippets": 33,
+      "mean_probability": 0.9244,
+      "peak_probability": 0.9998,
+      "n_snippets_above_threshold": 33
+    },
+    {
+      "start_s": 93.33,
+      "end_s": 200.0,
+      "duration_s": 106.67,
+      "n_snippets": 40,
+      "mean_probability": 0.9806,
+      "peak_probability": 1.0,
+      "n_snippets_above_threshold": 40
+    }
+  ],
+  "visual_evidence": {
+    "criterion": "ranked by snippet score, ties broken by temporal attention",
+    "top_snippets": [
+      {
+        "snippet": 51,
+        "second": 136.0,
+        "probability": 1.0,
+        "attention": 0.06455
+      },
+      {
+        "snippet": 50,
+        "second": 133.33,
+        "probability": 1.0,
+        "attention": 0.0545
+      },
+      {
+        "snippet": 52,
+        "second": 138.67,
+        "probability": 1.0,
+        "attention": 0.05121
+      },
+      {
+        "snippet": 49,
+        "second": 130.67,
+        "probability": 1.0,
+        "attention": 0.0413
+      },
+      {
+        "snippet": 45,
+        "second": 120.0,
+        "probability": 0.9999,
+        "attention": 0.03901
+      }
+    ],
+    "peak_attention": {
+      "snippet": 51,
+      "second": 136.0,
+      "attention": 0.06455
+    },
+    "attention_entropy": 3.8683,
+    "attention_entropy_normalised": 0.896
+  },
+  "audio_evidence": {
+    "channels": [
+      "rms",
+      "rms_db",
+      "flatness",
+      "zcr",
+      "clip_ratio"
+    ],
+    "available": true,
+    "segment_vs_background_db": 1.9,
+    "rms_db": {
+      "segment_mean": -18.0,
+      "clip_median": -19.91,
+      "segment_peak": 0.0
+    },
+    "spectral_flatness": 0.0455,
+    "clipping_ratio_max": 0.02747,
+    "descriptions": [
+      "spectre tonal (sirene, moteur, voix tenue) / tonal spectrum",
+      "signal sature sur 2.7 % des echantillons / channel saturation"
+    ]
+  },
+  "modality_contribution": {
+    "available": true,
+    "type": "per-modality score curves (late fusion) + score without each modality",
+    "mean_probability": {
+      "visual": 0.9905,
+      "audio": 0.439
+    },
+    "peak_probability": {
+      "visual": 1.0,
+      "audio": 0.9092
+    },
+    "drop_one": {
+      "audio": {
+        "mean_probability_intact": 0.9377,
+        "mean_probability_without": 0.9479,
+        "delta": -0.0102
+      },
+      "visual": {
+        "mean_probability_intact": 0.9377,
+        "mean_probability_without": 0.2651,
+        "delta": 0.6726
+      }
+    }
+  },
+  "confidence": {
+    "raw_clip_probability": 1.0,
+    "raw_alert_probability": 0.9806,
+    "top_k": 5,
+    "calibrated": true,
+    "temperature": 1.4047,
+    "clip_probability": 0.9992,
+    "alert_probability": 0.9422,
+    "evidence": {
+      "ece_before": 0.039,
+      "ece_after": 0.0368,
+      "fitted_on": "val",
+      "n_samples": 434,
+      "note": "temperature fitted on the validation split; applied to snippet scores as well (shared-scale assumption, see safewatch/eval/calibration.py)"
+    }
+  },
+  "media": {
+    "key_frames": [
+      {
+        "second": 137.33,
+        "path": "sheets/frames/Bad.Boys.II.2003__#00-06-42_00-10-00_label_B2-G-0_00_0137.33s.jpg"
+      },
+      {
+        "second": 134.67,
+        "path": "sheets/frames/Bad.Boys.II.2003__#00-06-42_00-10-00_label_B2-G-0_01_0134.67s.jpg"
+      },
+      {
+        "second": 140.0,
+        "path": "sheets/frames/Bad.Boys.II.2003__#00-06-42_00-10-00_label_B2-G-0_02_0140.00s.jpg"
+      },
+      {
+        "second": 132.0,
+        "path": "sheets/frames/Bad.Boys.II.2003__#00-06-42_00-10-00_label_B2-G-0_03_0132.00s.jpg"
+      },
+      {
+        "second": 121.33,
+        "path": "sheets/frames/Bad.Boys.II.2003__#00-06-42_00-10-00_label_B2-G-0_04_0121.33s.jpg"
+      }
+    ],
+    "spectrogram": "sheets/Bad.Boys.II.2003__#00-06-42_00-10-00_label_B2-G-0_spectrogram.png"
+  },
+  "requires_human_verification": true,
+  "caveats": [
+    "weak supervision: clip-level labels during training, frame-level only for evaluation",
+    "temporal resolution is the snippet grid (2.67 s here)",
+    "category probabilities come from an uncalibrated multi-label head",
+    "audio channels are signal statistics, not an acoustic-event classifier"
+  ],
+  "provenance": {
+    "checkpoint": "runs/2026-09-29_p3full_late/ckpt_best.pt",
+    "clip_id": "Bad.Boys.II.2003__#00-06-42_00-10-00_label_B2-G-0",
+    "stride_frames": 64.0,
+    "fusion_mode": "late"
+  },
+  "text": "Incident detecte entre 01:33 et 03:20. Categorie probable : shooting (59%). Indices visuels : snippet le plus anormal a 02:16 (p=1.00). Indices audio : spectre tonal (sirene, moteur, voix tenue) / tonal spectrum; signal sature sur 2.7 % des echantillons / channel saturation. Contribution des modalites : per-modality score curves (late fusion) + score without each modality - visuel 0.99 vs audio 0.44. Confiance globale : 94% (calibree, temperature 1.4047). Verification humaine recommandee avant toute action. Modele faiblement supervise : il localise une zone suspecte, il ne confirme pas l'evenement."
+}

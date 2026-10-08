@@ -1,0 +1,47 @@
+[score] ckpt=runs/2026-10-04_p3full_late_s43/ckpt_best.pt kind=fusion modality=both test=data/lists/test.csv stride=64 frames/snippet rule=(2,1) snippets = (5.33,2.67) s
+{
+  "n_clips": 800,
+  "n_snippets": 36900,
+  "stride_frames": 64.0,
+  "segment_rule": {
+    "threshold": 0.5,
+    "min_length": 2,
+    "max_gap": 1,
+    "min_seconds": 5.333,
+    "max_gap_seconds": 2.667
+  },
+  "ap": {
+    "global__pr_auc": 0.8206078171445337,
+    "global__average_precision": 0.8206138964364668,
+    "per_video__pr_auc": 0.7531367597974635,
+    "per_video__average_precision": 0.7748049435516563
+  },
+  "prevalence": 0.2586178779602051,
+  "localization": {
+    "n_pred_segments": 808,
+    "n_gt_segments": 1238,
+    "mean_best_iou": 0.4307262662450516,
+    "mean_detection_delay_snippets": 4.665294924554184,
+    "mean_detection_delay_frames": 298.57887517146776,
+    "mean_detection_delay_seconds": 12.440786465477823,
+    "precision@iou0.1": 0.754950495049505,
+    "recall@iou0.1": 0.4927302100161551,
+    "f1@iou0.1": 0.5962854349951124,
+    "precision@iou0.2": 0.6745049504950495,
+    "recall@iou0.2": 0.44022617124394187,
+    "f1@iou0.2": 0.5327468230694037,
+    "precision@iou0.3": 0.5643564356435643,
+    "recall@iou0.3": 0.3683360258481422,
+    "f1@iou0.3": 0.44574780058651026,
+    "precision@iou0.4": 0.4665841584158416,
+    "recall@iou0.4": 0.3045234248788368,
+    "f1@iou0.4": 0.3685239491691104,
+    "precision@iou0.5": 0.400990099009901,
+    "recall@iou0.5": 0.2617124394184168,
+    "f1@iou0.5": 0.31671554252199413
+  },
+  "macro_per_class_ap": 0.6390698234080415,
+  "dropped_modality": "none"
+}
+per-class clip-level AP: {'fighting': 0.7493, 'shooting': 0.5247, 'riot': 0.9589, 'abuse': 0.0232, 'car_accident': 0.9288, 'explosion': 0.6495}
+[ok] predictions + metrics -> runs/2026-10-04_p3full_late_s43

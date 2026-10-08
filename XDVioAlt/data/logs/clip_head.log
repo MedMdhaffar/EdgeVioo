@@ -1,0 +1,182 @@
+[clip-head] 2026-10-04T14:24:46+01:00 training head on CLIP visual + mel audio
+[run] runs/2026-10-04_p3clip_cross
+[cfg] fusion=cross params=792841 reliability=7d dropout=0.15 train=3513 val=434 device=cpu
+[epoch   1/30] loss=1.0739 val_ap=0.9705 val_abuse_ap=0.0178 *best* [68.6s]
+[epoch   2/30] loss=0.5443 val_ap=0.9840 val_abuse_ap=0.0588 *best* [62.1s]
+[epoch   3/30] loss=0.4564 val_ap=0.9861 val_abuse_ap=0.0675 *best* [65.0s]
+[epoch   4/30] loss=0.3350 val_ap=0.9888 val_abuse_ap=0.2024 *best* [99.7s]
+[epoch   5/30] loss=0.3819 val_ap=0.9878 val_abuse_ap=0.1438 [57.5s]
+[epoch   6/30] loss=0.3022 val_ap=0.9903 val_abuse_ap=0.1560 *best* [51.5s]
+[epoch   7/30] loss=0.2905 val_ap=0.9908 val_abuse_ap=0.1914 *best* [55.3s]
+[epoch   8/30] loss=0.2624 val_ap=0.9901 val_abuse_ap=0.2130 [57.6s]
+[epoch   9/30] loss=0.2926 val_ap=0.9904 val_abuse_ap=0.3208 [65.4s]
+[epoch  10/30] loss=0.2696 val_ap=0.9908 val_abuse_ap=0.4673 *best* [61.8s]
+[epoch  11/30] loss=0.2168 val_ap=0.9913 val_abuse_ap=0.4710 *best* [60.8s]
+[epoch  12/30] loss=0.2477 val_ap=0.9912 val_abuse_ap=0.4786 [57.4s]
+[epoch  13/30] loss=0.2134 val_ap=0.9913 val_abuse_ap=0.4811 *best* [52.3s]
+[epoch  14/30] loss=0.2126 val_ap=0.9914 val_abuse_ap=0.4913 *best* [51.2s]
+[epoch  15/30] loss=0.2020 val_ap=0.9913 val_abuse_ap=0.4915 [50.8s]
+[epoch  16/30] loss=0.2105 val_ap=0.9914 val_abuse_ap=0.4614 *best* [51.0s]
+[epoch  17/30] loss=0.2384 val_ap=0.9915 val_abuse_ap=0.4757 *best* [50.7s]
+[epoch  18/30] loss=0.2411 val_ap=0.9913 val_abuse_ap=0.4776 [51.1s]
+[epoch  19/30] loss=0.2308 val_ap=0.9911 val_abuse_ap=0.4934 [50.8s]
+[epoch  20/30] loss=0.1870 val_ap=0.9911 val_abuse_ap=0.4965 [50.8s]
+[epoch  21/30] loss=0.2241 val_ap=0.9910 val_abuse_ap=0.4639 [51.3s]
+[epoch  22/30] loss=0.2179 val_ap=0.9912 val_abuse_ap=0.4967 [56.1s]
+[epoch  23/30] loss=0.2263 val_ap=0.9912 val_abuse_ap=0.4650 [51.1s]
+[epoch  24/30] loss=0.2143 val_ap=0.9910 val_abuse_ap=0.4640 [50.8s]
+[epoch  25/30] loss=0.2545 val_ap=0.9911 val_abuse_ap=0.4981 [52.3s]
+[epoch  26/30] loss=0.1823 val_ap=0.9909 val_abuse_ap=0.4645 [51.4s]
+[epoch  27/30] loss=0.1791 val_ap=0.9907 val_abuse_ap=0.4656 [49.4s]
+[epoch  28/30] loss=0.1977 val_ap=0.9908 val_abuse_ap=0.5025 [60.4s]
+[epoch  29/30] loss=0.1858 val_ap=0.9907 val_abuse_ap=0.4919 [62.9s]
+[epoch  30/30] loss=0.1794 val_ap=0.9907 val_abuse_ap=0.5127 [51.4s]
+[done] best epoch 17 val_ap=0.9915 | last val_ap=0.9907 -> runs/2026-10-04_p3clip_cross
+[clip-head] 2026-10-04T14:53:21+01:00 scoring runs/2026-10-04_p3clip_cross
+[score] ckpt=runs/2026-10-04_p3clip_cross/ckpt_best.pt kind=fusion modality=both test=data/lists_clip/test.csv stride=64 frames/snippet rule=(2,1) snippets = (5.33,2.67) s
+{
+  "n_clips": 800,
+  "n_snippets": 36900,
+  "stride_frames": 64.0,
+  "segment_rule": {
+    "threshold": 0.5,
+    "min_length": 2,
+    "max_gap": 1,
+    "min_seconds": 5.333,
+    "max_gap_seconds": 2.667
+  },
+  "ap": {
+    "global__pr_auc": 0.7687565658448205,
+    "global__average_precision": 0.7686741740441061,
+    "per_video__pr_auc": 0.6671486513270198,
+    "per_video__average_precision": 0.6947680574280372
+  },
+  "prevalence": 0.2586178779602051,
+  "localization": {
+    "n_pred_segments": 603,
+    "n_gt_segments": 1238,
+    "mean_best_iou": 0.3993655721782396,
+    "mean_detection_delay_snippets": -3.260707635009311,
+    "mean_detection_delay_frames": -208.6852886405959,
+    "mean_detection_delay_seconds": -8.695220360024829,
+    "precision@iou0.1": 0.7777777777777778,
+    "recall@iou0.1": 0.3788368336025848,
+    "f1@iou0.1": 0.5095057034220533,
+    "precision@iou0.2": 0.6368159203980099,
+    "recall@iou0.2": 0.31017770597738287,
+    "f1@iou0.2": 0.4171645844649647,
+    "precision@iou0.3": 0.5190713101160862,
+    "recall@iou0.3": 0.252827140549273,
+    "f1@iou0.3": 0.34003259098316135,
+    "precision@iou0.4": 0.41127694859038144,
+    "recall@iou0.4": 0.20032310177705978,
+    "f1@iou0.4": 0.269418794133623,
+    "precision@iou0.5": 0.34328358208955223,
+    "recall@iou0.5": 0.16720516962843296,
+    "f1@iou0.5": 0.22487778381314502
+  },
+  "macro_per_class_ap": 0.6262407579177222,
+  "dropped_modality": "none"
+}
+per-class clip-level AP: {'fighting': 0.6594, 'shooting': 0.5679, 'riot': 0.9351, 'abuse': 0.036, 'car_accident': 0.8883, 'explosion': 0.6707}
+[ok] predictions + metrics -> runs/2026-10-04_p3clip_cross
+[score] ckpt=runs/2026-10-04_p3clip_cross/ckpt_best.pt kind=fusion modality=both test=data/lists_clip/test.csv stride=64 frames/snippet rule=(2,1) snippets = (5.33,2.67) s drop=audio
+{
+  "n_clips": 800,
+  "n_snippets": 36900,
+  "stride_frames": 64.0,
+  "segment_rule": {
+    "threshold": 0.5,
+    "min_length": 2,
+    "max_gap": 1,
+    "min_seconds": 5.333,
+    "max_gap_seconds": 2.667
+  },
+  "ap": {
+    "global__pr_auc": 0.7867873144403704,
+    "global__average_precision": 0.7866047210016786,
+    "per_video__pr_auc": 0.6756121826767582,
+    "per_video__average_precision": 0.6996216662634818
+  },
+  "prevalence": 0.2586178779602051,
+  "localization": {
+    "n_pred_segments": 567,
+    "n_gt_segments": 1238,
+    "mean_best_iou": 0.39862662800725845,
+    "mean_detection_delay_snippets": -4.72007722007722,
+    "mean_detection_delay_frames": -302.0849420849421,
+    "mean_detection_delay_seconds": -12.586872586872587,
+    "precision@iou0.1": 0.7971781305114638,
+    "recall@iou0.1": 0.3651050080775444,
+    "f1@iou0.1": 0.5008310249307478,
+    "precision@iou0.2": 0.63668430335097,
+    "recall@iou0.2": 0.29159935379644586,
+    "f1@iou0.2": 0.39999999999999997,
+    "precision@iou0.3": 0.5097001763668431,
+    "recall@iou0.3": 0.2334410339256866,
+    "f1@iou0.3": 0.32022160664819943,
+    "precision@iou0.4": 0.3985890652557319,
+    "recall@iou0.4": 0.1825525040387722,
+    "f1@iou0.4": 0.2504155124653739,
+    "precision@iou0.5": 0.3350970017636684,
+    "recall@iou0.5": 0.15347334410339256,
+    "f1@iou0.5": 0.21052631578947367
+  },
+  "macro_per_class_ap": 0.612231835714846,
+  "dropped_modality": "audio"
+}
+per-class clip-level AP: {'fighting': 0.6405, 'shooting': 0.5467, 'riot': 0.9235, 'abuse': 0.0619, 'car_accident': 0.8838, 'explosion': 0.6171}
+[ok] predictions + metrics -> runs/2026-10-04_p3clip_cross
+[score] ckpt=runs/2026-10-04_p3clip_cross/ckpt_best.pt kind=fusion modality=both test=data/lists_clip/test.csv stride=64 frames/snippet rule=(2,1) snippets = (5.33,2.67) s drop=visual
+{
+  "n_clips": 800,
+  "n_snippets": 36900,
+  "stride_frames": 64.0,
+  "segment_rule": {
+    "threshold": 0.5,
+    "min_length": 2,
+    "max_gap": 1,
+    "min_seconds": 5.333,
+    "max_gap_seconds": 2.667
+  },
+  "ap": {
+    "global__pr_auc": 0.4386357952807398,
+    "global__average_precision": 0.4387978225193543,
+    "per_video__pr_auc": 0.5740553636254675,
+    "per_video__average_precision": 0.6093938284623959
+  },
+  "prevalence": 0.2586178779602051,
+  "localization": {
+    "n_pred_segments": 300,
+    "n_gt_segments": 1238,
+    "mean_best_iou": 0.3351396139365625,
+    "mean_detection_delay_snippets": 1.7359307359307359,
+    "mean_detection_delay_frames": 111.0995670995671,
+    "mean_detection_delay_seconds": 4.629148629148629,
+    "precision@iou0.1": 0.6433333333333333,
+    "recall@iou0.1": 0.15589660743134087,
+    "f1@iou0.1": 0.25097529258777634,
+    "precision@iou0.2": 0.58,
+    "recall@iou0.2": 0.14054927302100162,
+    "f1@iou0.2": 0.22626788036410922,
+    "precision@iou0.3": 0.44333333333333336,
+    "recall@iou0.3": 0.1074313408723748,
+    "f1@iou0.3": 0.17295188556566968,
+    "precision@iou0.4": 0.34,
+    "recall@iou0.4": 0.08239095315024232,
+    "f1@iou0.4": 0.13263979193758127,
+    "precision@iou0.5": 0.27666666666666667,
+    "recall@iou0.5": 0.06704361873990307,
+    "f1@iou0.5": 0.10793237971391417
+  },
+  "macro_per_class_ap": 0.3271863417701078,
+  "dropped_modality": "visual"
+}
+per-class clip-level AP: {'fighting': 0.295, 'shooting': 0.4111, 'riot': 0.4343, 'abuse': 0.0142, 'car_accident': 0.5996, 'explosion': 0.209}
+[ok] predictions + metrics -> runs/2026-10-04_p3clip_cross
+[clip-head] 2026-10-04T14:53:38+01:00 comparison vs the VideoSwin baseline
+run                                AP global AP per-clip F1@IoU.5
+------------------------------------------------------------------
+BASELINE (VideoSwin)                  0.7981      0.7433   0.2078
+2026-10-04_p3clip_cross               0.7688      0.6671   0.2249
+[clip-head] ALL_DONE 2026-10-04T14:53:38+01:00

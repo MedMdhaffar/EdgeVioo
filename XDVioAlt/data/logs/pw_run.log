@@ -1,0 +1,121 @@
+[pw] 2026-09-30T09:06:48+01:00 train late
+[cfg] multi pos_weight (auto): fighting=7.2, shooting=7.9, riot=9.4, abuse=75.1, car_accident=8.0, explosion=9.2
+[run] runs/2026-09-30_p3vggish30ep_pwlate
+[cfg] fusion=late params=887691 reliability=7d dropout=0.15 train=3804 val=150 device=cpu
+[warn] missing audio quality stats for v=8cTqh9tMz_I__#1_label_A -> zeros (run scripts/extract_audio_features.py)
+[epoch   1/30] loss=1.0663 val_ap=0.9819 val_abuse_ap=nan *best* [171.1s]
+[epoch   2/30] loss=0.5920 val_ap=0.9869 val_abuse_ap=nan *best* [159.3s]
+[epoch   3/30] loss=0.5323 val_ap=0.9882 val_abuse_ap=nan *best* [174.1s]
+[epoch   4/30] loss=0.4552 val_ap=0.9873 val_abuse_ap=nan [180.9s]
+[epoch   5/30] loss=0.4448 val_ap=0.9883 val_abuse_ap=nan *best* [195.4s]
+[epoch   6/30] loss=0.4191 val_ap=0.9905 val_abuse_ap=nan *best* [70.9s]
+[epoch   7/30] loss=0.4109 val_ap=0.9902 val_abuse_ap=nan [71.1s]
+[epoch   8/30] loss=0.3752 val_ap=0.9891 val_abuse_ap=nan [50.9s]
+[epoch   9/30] loss=0.3617 val_ap=0.9911 val_abuse_ap=nan *best* [49.3s]
+[epoch  10/30] loss=0.3626 val_ap=0.9914 val_abuse_ap=nan *best* [52.2s]
+[epoch  11/30] loss=0.3244 val_ap=0.9916 val_abuse_ap=nan *best* [61.7s]
+[epoch  12/30] loss=0.3044 val_ap=0.9922 val_abuse_ap=nan *best* [67.8s]
+[epoch  13/30] loss=0.3155 val_ap=0.9923 val_abuse_ap=nan *best* [83.7s]
+[epoch  14/30] loss=0.3092 val_ap=0.9923 val_abuse_ap=nan [64.2s]
+[epoch  15/30] loss=0.3083 val_ap=0.9925 val_abuse_ap=nan *best* [62.6s]
+[epoch  16/30] loss=0.2954 val_ap=0.9921 val_abuse_ap=nan [75.0s]
+[epoch  17/30] loss=0.3121 val_ap=0.9923 val_abuse_ap=nan [109.4s]
+[epoch  18/30] loss=0.2987 val_ap=0.9922 val_abuse_ap=nan [170.3s]
+[epoch  19/30] loss=0.2995 val_ap=0.9926 val_abuse_ap=nan *best* [143.1s]
+[epoch  20/30] loss=0.2943 val_ap=0.9925 val_abuse_ap=nan [151.0s]
+[epoch  21/30] loss=0.2889 val_ap=0.9925 val_abuse_ap=nan [143.6s]
+[epoch  22/30] loss=0.2890 val_ap=0.9926 val_abuse_ap=nan [128.6s]
+[epoch  23/30] loss=0.2988 val_ap=0.9927 val_abuse_ap=nan *best* [149.8s]
+[epoch  24/30] loss=0.2747 val_ap=0.9926 val_abuse_ap=nan [174.1s]
+[epoch  25/30] loss=0.2782 val_ap=0.9924 val_abuse_ap=nan [112.0s]
+[epoch  26/30] loss=0.2794 val_ap=0.9924 val_abuse_ap=nan [125.7s]
+[epoch  27/30] loss=0.2950 val_ap=0.9927 val_abuse_ap=nan *best* [128.6s]
+[epoch  28/30] loss=0.2764 val_ap=0.9930 val_abuse_ap=nan *best* [211.0s]
+[epoch  29/30] loss=0.2797 val_ap=0.9928 val_abuse_ap=nan [300.4s]
+[epoch  30/30] loss=0.2780 val_ap=0.9930 val_abuse_ap=nan *best* [259.9s]
+[done] best epoch 30 val_ap=0.9930 -> runs/2026-09-30_p3vggish30ep_pwlate
+[pw] 2026-09-30T10:11:57+01:00 score runs/2026-09-30_p3vggish30ep_pwlate
+[score] ckpt=runs/2026-09-30_p3vggish30ep_pwlate/ckpt_best.pt kind=fusion modality=both test=data/lists_official/test.csv stride=16 frames/snippet rule=(8,4) snippets = (5.33,2.67) s
+{
+  "n_clips": 800,
+  "n_snippets": 145649,
+  "stride_frames": 16.0,
+  "segment_rule": {
+    "threshold": 0.5,
+    "min_length": 8,
+    "max_gap": 4,
+    "min_seconds": 5.333,
+    "max_gap_seconds": 2.667
+  },
+  "ap": {
+    "global__pr_auc": 0.7747452912236079,
+    "global__average_precision": 0.7747415525881852,
+    "per_video__pr_auc": 0.7812974250051663,
+    "per_video__average_precision": 0.7871057397815358
+  },
+  "prevalence": 0.2379419058561325,
+  "localization": {
+    "n_pred_segments": 918,
+    "n_gt_segments": 1238,
+    "mean_best_iou": 0.3574964777132548,
+    "mean_detection_delay_snippets": 37.370720188902006,
+    "mean_detection_delay_frames": 597.9315230224321,
+    "mean_detection_delay_seconds": 24.913813459268003,
+    "precision@iou0.1": 0.6318082788671024,
+    "recall@iou0.1": 0.46849757673667203,
+    "f1@iou0.1": 0.5380333951762523,
+    "precision@iou0.2": 0.5566448801742919,
+    "recall@iou0.2": 0.41276252019386106,
+    "f1@iou0.2": 0.474025974025974,
+    "precision@iou0.3": 0.4531590413943355,
+    "recall@iou0.3": 0.3360258481421648,
+    "f1@iou0.3": 0.385899814471243,
+    "precision@iou0.4": 0.3779956427015251,
+    "recall@iou0.4": 0.2802907915993538,
+    "f1@iou0.4": 0.3218923933209647,
+    "precision@iou0.5": 0.3137254901960784,
+    "recall@iou0.5": 0.23263327948303716,
+    "f1@iou0.5": 0.26716141001855287
+  },
+  "macro_per_class_ap": 0.757119841258215,
+  "dropped_modality": "none"
+}
+per-class clip-level AP: {'fighting': 0.921, 'shooting': 0.7309, 'riot': 0.9724, 'abuse': 0.0956, 'car_accident': 0.9509, 'explosion': 0.8719}
+[ok] predictions + metrics -> runs/2026-09-30_p3vggish30ep_pwlate
+[diag] runs/2026-09-30_p3vggish30ep_pwlate/ckpt_best.pt test=data/lists_official/test.csv device=cpu
+fighting       n=126 p(pos)=0.930 p(neg)=0.151 TP@.5=122 FP@.5=  83 tIoU=0.445
+   co-occur: {'fighting': 126, 'shooting': 18, 'car_accident': 2}
+shooting       n=104 p(pos)=0.880 p(neg)=0.185 TP@.5= 98 FP@.5= 121 tIoU=0.552
+   co-occur: {'fighting': 18, 'shooting': 104, 'abuse': 2, 'car_accident': 10, 'explosion': 16}
+riot           n=101 p(pos)=0.957 p(neg)=0.081 TP@.5= 98 FP@.5=  33 tIoU=0.224
+   co-occur: {'riot': 101, 'abuse': 1, 'explosion': 1}
+abuse          n= 11 p(pos)=0.635 p(neg)=0.187 TP@.5=  7 FP@.5= 146 tIoU=0.561
+   co-occur: {'shooting': 2, 'riot': 1, 'abuse': 11, 'car_accident': 1}
+car_accident   n=106 p(pos)=0.950 p(neg)=0.148 TP@.5=104 FP@.5=  76 tIoU=0.348
+   co-occur: {'fighting': 2, 'shooting': 10, 'abuse': 1, 'car_accident': 106, 'explosion': 4}
+explosion      n=103 p(pos)=0.884 p(neg)=0.134 TP@.5= 95 FP@.5=  65 tIoU=0.406
+   co-occur: {'shooting': 16, 'riot': 1, 'car_accident': 4, 'explosion': 103}
+[diag] written -> runs/2026-09-30_p3vggish30ep_pwlate/class_diagnostic.json
+[pw] 2026-09-30T10:14:24+01:00 train cross
+[cfg] multi pos_weight (auto): fighting=7.2, shooting=7.9, riot=9.4, abuse=75.1, car_accident=8.0, explosion=9.2
+[warn] val split (150 clips) has no abuse clip(s): model selection is blind to it
+[run] runs/2026-09-30_p3vggish30ep_pwcross
+[cfg] fusion=cross params=1052937 reliability=7d dropout=0.15 train=3804 val=150 device=cpu
+[warn] missing audio quality stats for NewAdd.NBA-2017.12.25_CLE@GSW__#01-08-34 -> zeros (run scripts/extract_audio_features.py)
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/aarf101/projtutore/safewatch/train_fusion.py", line 262, in <module>
+    raise SystemExit(main())
+                     ~~~~^^
+  File "/home/aarf101/projtutore/safewatch/train_fusion.py", line 257, in main
+    train(FusionConfig(**vars(parser.parse_args())))
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aarf101/projtutore/safewatch/train_fusion.py", line 221, in train
+    val = validate(model, val_loader, device)
+  File "/home/aarf101/projtutore/safewatch/train_fusion.py", line 147, in validate
+    scores.append(torch.sigmoid(out["clip_logits"]).cpu().numpy())
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+RuntimeError: Can't call numpy() on Tensor that requires grad. Use tensor.detach().numpy() instead.
+[pw] FAILED train cross
+[pw] done 2026-09-30T10:20:08+01:00

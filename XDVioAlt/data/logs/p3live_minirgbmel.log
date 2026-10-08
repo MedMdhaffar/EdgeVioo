@@ -1,0 +1,33 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/aarf101/projtutore/safewatch/train_fusion.py", line 264, in <module>
+    raise SystemExit(main())
+                     ~~~~^^
+  File "/home/aarf101/projtutore/safewatch/train_fusion.py", line 259, in main
+    train(FusionConfig(**vars(parser.parse_args())))
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aarf101/projtutore/safewatch/train_fusion.py", line 173, in train
+    train_loader, val_loader = build_loaders(cfg)
+                               ~~~~~~~~~~~~~^^^^^
+  File "/home/aarf101/projtutore/safewatch/train_fusion.py", line 104, in build_loaders
+    train_ds = _dataset(cfg, Path(cfg.lists_dir) / "train.csv", True)
+  File "/home/aarf101/projtutore/safewatch/train_fusion.py", line 75, in _dataset
+    return MultimodalClipDataset(csv_path, cfg.audio_dir, modality="both",
+                                 audio_stats=cfg.audio_stats, audio_norm=cfg.audio_norm,
+    ...<3 lines>...
+                                 quality_stats=cfg.quality_stats, max_snippets=cfg.max_snippets,
+                                 crop="mean", train=train, seed=cfg.seed)
+  File "/home/aarf101/projtutore/safewatch/data/multimodal.py", line 142, in __init__
+    super().__init__(csv_path, **kwargs)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/home/aarf101/projtutore/safewatch/data/dataset.py", line 65, in __init__
+    self.rows = load_rows(csv_path)
+                ~~~~~~~~~^^^^^^^^^^
+  File "/home/aarf101/projtutore/safewatch/data/dataset.py", line 56, in load_rows
+    with Path(csv_path).open(newline="", encoding="utf-8") as fh:
+         ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aarf101/.pyenv/versions/3.14.0/lib/python3.14/pathlib/__init__.py", line 776, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'data/lists_minirgb/train.csv'

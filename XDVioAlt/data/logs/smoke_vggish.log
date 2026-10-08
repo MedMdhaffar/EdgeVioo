@@ -1,0 +1,6 @@
+[run] runs/2026-09-29_smoke_vggish_official
+[cfg] fusion=late params=887691 reliability=7d dropout=0.15 train=3804 val=150 device=cpu
+[warn] missing audio quality stats for v=8cTqh9tMz_I__#1_label_A -> zeros (run scripts/extract_audio_features.py)
+[epoch   1/2] loss=0.8230 val_ap=0.9832 *best* [114.0s]
+[epoch   2/2] loss=0.4475 val_ap=0.9857 *best* [112.8s]
+[done] best epoch 2 val_ap=0.9857 -> runs/2026-09-29_smoke_vggish_official

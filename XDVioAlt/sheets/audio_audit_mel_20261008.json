@@ -1,0 +1,72 @@
+{
+  "audio_dir": "data/features/mel",
+  "audio_grid": "patch",
+  "expected_dim": 132,
+  "stride_frames": 64.0,
+  "quality_dir": "data/features/audio_quality",
+  "counts": {
+    "clips": 4750,
+    "present": 4750,
+    "missing": 0,
+    "load_error": 0,
+    "empty": 0,
+    "wrong_ndim": 0,
+    "wrong_dim": 0,
+    "non_finite": 0,
+    "misaligned": 0,
+    "quality_missing": 0,
+    "quality_load_error": 0,
+    "quality_invalid": 0,
+    "silent_audio": 4,
+    "constant_features": 0
+  },
+  "examples": [
+    "v=7G4IvR1vQ7M__#00-00-00_00-00-45_label_B1-0-0: silent_audio (all patches at or below -75 dB RMS)",
+    "v=87ss-JRZIs4__#1_label_G-0-0: silent_audio (all patches at or below -75 dB RMS)",
+    "v=pZttb6pJM8U__#1_label_B1-0-0: silent_audio (all patches at or below -75 dB RMS)",
+    "v=9CWJd1SezkA__#1_label_G-0-0: silent_audio (all patches at or below -75 dB RMS)"
+  ],
+  "issues": [
+    {
+      "clip_id": "v=7G4IvR1vQ7M__#00-00-00_00-00-45_label_B1-0-0",
+      "split": "train",
+      "csv": "data/lists/train.csv",
+      "issue": "silent_audio",
+      "detail": "all patches at or below -75 dB RMS"
+    },
+    {
+      "clip_id": "v=87ss-JRZIs4__#1_label_G-0-0",
+      "split": "train",
+      "csv": "data/lists/train.csv",
+      "issue": "silent_audio",
+      "detail": "all patches at or below -75 dB RMS"
+    },
+    {
+      "clip_id": "v=pZttb6pJM8U__#1_label_B1-0-0",
+      "split": "train",
+      "csv": "data/lists/train.csv",
+      "issue": "silent_audio",
+      "detail": "all patches at or below -75 dB RMS"
+    },
+    {
+      "clip_id": "v=9CWJd1SezkA__#1_label_G-0-0",
+      "split": "test",
+      "csv": "data/lists/test.csv",
+      "issue": "silent_audio",
+      "detail": "all patches at or below -75 dB RMS"
+    }
+  ],
+  "issues_truncated": false,
+  "orphan_feature_files": 47,
+  "time_rows": {
+    "observed_min": 1,
+    "observed_median": 109.0,
+    "observed_max": 11266,
+    "expected_median": 111.1111111111111
+  },
+  "csv_files": [
+    "data/lists/train.csv",
+    "data/lists/val.csv",
+    "data/lists/test.csv"
+  ]
+}

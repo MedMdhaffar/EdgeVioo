@@ -1,0 +1,47 @@
+run                        degradation    stream   level  APglob  APclip   macro   IoU   ΔAPglob
+------------------------------------------------------------------------------------------------
+2026-09-29_p3full_late     attenuation    audio    1.000  0.8143  0.7792  0.6505 0.422    0.0000
+2026-09-29_p3full_late     attenuation    audio    0.500  0.8150  0.7756  0.6525 0.425   -0.0006
+2026-09-29_p3full_late     attenuation    audio    0.000  0.8133  0.7705  0.6457 0.429    0.0010
+
+2026-09-29_p3vggish30ep_cross attenuation    audio    1.000  0.7745  0.7961  0.6958 0.369    0.0000
+2026-09-29_p3vggish30ep_cross attenuation    audio    0.750  0.7743  0.7982  0.7038 0.377    0.0002
+2026-09-29_p3vggish30ep_cross attenuation    audio    0.500  0.7726  0.7981  0.7066 0.365    0.0019
+2026-09-29_p3vggish30ep_cross attenuation    audio    0.250  0.7665  0.7900  0.6999 0.360    0.0080
+2026-09-29_p3vggish30ep_cross attenuation    audio    0.000  0.7243  0.7249  0.5961 0.356    0.0502
+
+2026-09-29_p3vggish30ep_cross drop-snippets  audio    0.000  0.7745  0.7961  0.6958 0.369    0.0000
+2026-09-29_p3vggish30ep_cross drop-snippets  audio    0.250  0.7736  0.7887  0.6959 0.369    0.0009
+2026-09-29_p3vggish30ep_cross drop-snippets  audio    0.500  0.7699  0.7694  0.6938 0.361    0.0046
+2026-09-29_p3vggish30ep_cross drop-snippets  audio    0.750  0.7594  0.7423  0.6932 0.351    0.0151
+
+2026-09-29_p3vggish30ep_cross noise          audio   60.000  0.7745  0.7961  0.6958 0.369    0.0000
+2026-09-29_p3vggish30ep_cross noise          audio   30.000  0.7745  0.7962  0.6957 0.369    0.0000
+2026-09-29_p3vggish30ep_cross noise          audio   15.000  0.7746  0.7959  0.6962 0.370   -0.0001
+2026-09-29_p3vggish30ep_cross noise          audio    5.000  0.7758  0.7922  0.6948 0.370   -0.0013
+2026-09-29_p3vggish30ep_cross noise          audio    0.000  0.7768  0.7852  0.6910 0.371   -0.0022
+
+2026-09-29_p3vggish30ep_cross occlusion      visual   0.000  0.7745  0.7961  0.6958 0.369    0.0000
+2026-09-29_p3vggish30ep_cross occlusion      visual   5.000  0.7726  0.7894  0.6908 0.362    0.0019
+2026-09-29_p3vggish30ep_cross occlusion      visual  15.000  0.7686  0.7645  0.6684 0.355    0.0059
+2026-09-29_p3vggish30ep_cross occlusion      visual  30.000  0.7623  0.7429  0.6240 0.358    0.0122
+
+2026-09-29_p3vggish30ep_late attenuation    audio    1.000  0.7719  0.7857  0.7200 0.354    0.0000
+2026-09-29_p3vggish30ep_late attenuation    audio    0.500  0.7767  0.7817  0.6961 0.351   -0.0047
+2026-09-29_p3vggish30ep_late attenuation    audio    0.000  0.7178  0.7239  0.5783 0.325    0.0541
+
+2026-09-29_p3vggish30ep_late occlusion      visual   0.000  0.7719  0.7857  0.7200 0.354    0.0000
+2026-09-29_p3vggish30ep_late occlusion      visual  15.000  0.7601  0.7677  0.6794 0.341    0.0118
+2026-09-29_p3vggish30ep_late occlusion      visual  30.000  0.7480  0.7482  0.6475 0.342    0.0240
+
+2026-09-30_p3vggish30ep_adaptive occlusion      visual   0.000  0.7281  0.7665  0.6930 0.329    0.0000
+2026-09-30_p3vggish30ep_adaptive occlusion      visual  15.000  0.7227  0.7410  0.6624 0.317    0.0054
+2026-09-30_p3vggish30ep_adaptive occlusion      visual  30.000  0.7192  0.7321  0.6192 0.319    0.0089
+
+2026-09-30_p3vggish30ep_adaptive occlusion      visual   0.000  0.7281  0.7665  0.6930 0.329    0.0000
+2026-09-30_p3vggish30ep_adaptive occlusion      visual  15.000  0.7391  0.7487  0.6625 0.322   -0.0110
+2026-09-30_p3vggish30ep_adaptive occlusion      visual  30.000  0.7389  0.7412  0.6175 0.325   -0.0108
+
+9 sweep file(s). legend: level is gain (1=clean) / dB SNR / occlusion seconds / drop rate | macro = macro per-class AP
+ΔAPglob = drop against that sweep's clean level (first row), so positive = degradation cost AP
+space: FEATURE-space degradations (precomputed features), not media - see safewatch/eval/robustness.py

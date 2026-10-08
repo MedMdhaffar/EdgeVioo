@@ -1,0 +1,926 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/hp5is6",
+    "id": "hp5is6",
+    "slide": 6,
+    "layoutId": "3f0817c9-046b-4f48-b04d-0c2c232e5c49",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "eec5488a-0c89-4369-b7b3-1c44e12cb1ce",
+    "masterLayoutName": "Master",
+    "backgroundColor": "#0A1220",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ChatGPT",
+    "colors": {
+      "accent1": "#156082",
+      "accent2": "#E97132",
+      "accent3": "#196B24",
+      "accent4": "#0F9ED5",
+      "accent5": "#A02B93",
+      "accent6": "#4EA72E",
+      "bg1": "#FFFFFF",
+      "bg2": "#000000",
+      "tx1": "#1F1F1F",
+      "tx2": "#FFFFFF",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#0E2841",
+      "lt2": "#E8E8E8",
+      "hlink": "#467886",
+      "folHlink": "#96607D"
+    },
+    "typefaces": [
+      "DejaVu Sans"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "3f0817c9-046b-4f48-b04d-0c2c232e5c49",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "eec5488a-0c89-4369-b7b3-1c44e12cb1ce",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "eec5488a-0c89-4369-b7b3-1c44e12cb1ce",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/3a5wr6l4",
+      "id": "1",
+      "name": "slide-6-title",
+      "bbox": [
+        72,
+        42,
+        1136,
+        58
+      ],
+      "geometry": "rect",
+      "text": "Weak-label training objective",
+      "textPreview": "Weak-label training objective",
+      "resolvedFontSize": 40.33,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 42,
+        "typeface": "DejaVu Sans",
+        "color": "#F4F7FB",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "autoFit": "shrinkText",
+        "autoFitScale": 0.96,
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Weak-label training objective"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Weak-label training objective",
+          "resolvedTextStyle": {
+            "fontSize": 42,
+            "typeface": "DejaVu Sans",
+            "color": "#F4F7FB",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Weak-label training objective",
+              "fontSize": 42,
+              "typeface": "DejaVu Sans",
+              "color": "#F4F7FB",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/obexkb2p",
+      "id": "2",
+      "bbox": [
+        74,
+        106,
+        1128,
+        38
+      ],
+      "geometry": "rect",
+      "text": "Clip labels supervise ranking across time; the model does not receive exact boundary labels.",
+      "textPreview": "Clip labels supervise ranking across time; the model does not receive exact boundary labels.",
+      "resolvedFontSize": 21,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 21,
+        "typeface": "DejaVu Sans",
+        "color": "#B4C0D2",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "autoFit": "shrinkText",
+        "autoFitScale": 1,
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Clip labels supervise ranking across time; the model does not receive exact boundary labels."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Clip labels supervise ranking across time; the model does not receive exact boundary labels.",
+          "resolvedTextStyle": {
+            "fontSize": 21,
+            "typeface": "DejaVu Sans",
+            "color": "#B4C0D2"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Clip labels supervise ranking across time; the model does not receive exact boundary labels.",
+              "fontSize": 21,
+              "typeface": "DejaVu Sans",
+              "color": "#B4C0D2"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/pc7etg3a",
+      "id": "3",
+      "bbox": [
+        74,
+        676,
+        1132,
+        20
+      ],
+      "geometry": "rect",
+      "text": "SAFEWATCH  /  MODEL MATHEMATICS                                      06",
+      "textPreview": "SAFEWATCH  /  MODEL MATHEMATICS                                      06",
+      "resolvedFontSize": 8.67,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 14,
+        "typeface": "DejaVu Sans",
+        "color": "#8291A7",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "autoFit": "shrinkText",
+        "autoFitScale": 0.62,
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "SAFEWATCH  /  MODEL MATHEMATICS                                      06"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "SAFEWATCH  /  MODEL MATHEMATICS                                      06",
+          "resolvedTextStyle": {
+            "fontSize": 14,
+            "typeface": "DejaVu Sans",
+            "color": "#8291A7"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "SAFEWATCH  /  MODEL MATHEMATICS                                      06",
+              "fontSize": 14,
+              "typeface": "DejaVu Sans",
+              "color": "#8291A7"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/qdgfmlkf",
+      "id": "4",
+      "bbox": [
+        80,
+        159,
+        610,
+        29
+      ],
+      "geometry": "rect",
+      "text": "Top-5 multiple-instance score",
+      "textPreview": "Top-5 multiple-instance score",
+      "resolvedFontSize": 16.17,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 20,
+        "typeface": "DejaVu Sans",
+        "color": "#56D7CB",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "autoFit": "shrinkText",
+        "autoFitScale": 0.81,
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Top-5 multiple-instance score"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Top-5 multiple-instance score",
+          "resolvedTextStyle": {
+            "fontSize": 20,
+            "typeface": "DejaVu Sans",
+            "color": "#56D7CB",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Top-5 multiple-instance score",
+              "fontSize": 20,
+              "typeface": "DejaVu Sans",
+              "color": "#56D7CB",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/bypwvql0",
+      "id": "5",
+      "bbox": [
+        80,
+        198,
+        1090,
+        44
+      ],
+      "geometry": "rect",
+      "text": "pbag = (1/5) Σₜ∈Top5(p) pₜ",
+      "textPreview": "pbag = (1/5) Σₜ∈Top5(p) pₜ",
+      "resolvedFontSize": 28,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 28,
+        "typeface": "DejaVu Sans",
+        "color": "#F4F7FB",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "autoFit": "shrinkText",
+        "autoFitScale": 1,
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "pbag = (1/5) Σₜ∈Top5(p) pₜ"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "pbag = (1/5) Σₜ∈Top5(p) pₜ",
+          "resolvedTextStyle": {
+            "fontSize": 28,
+            "typeface": "DejaVu Sans",
+            "color": "#F4F7FB",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "pbag = (1/5) Σₜ∈Top5(p) pₜ",
+              "fontSize": 28,
+              "typeface": "DejaVu Sans",
+              "color": "#F4F7FB",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/czyxov2l",
+      "id": "6",
+      "bbox": [
+        80,
+        251,
+        1090,
+        46
+      ],
+      "geometry": "rect",
+      "text": "LMIL = −y log(pbag) − (1−y) log(1−pbag)",
+      "textPreview": "LMIL = −y log(pbag) − (1−y) log(1−pbag)",
+      "resolvedFontSize": 25,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 25,
+        "typeface": "DejaVu Sans",
+        "color": "#DCE7F5",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "autoFit": "shrinkText",
+        "autoFitScale": 1,
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "LMIL = −y log(pbag) − (1−y) log(1−pbag)"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "LMIL = −y log(pbag) − (1−y) log(1−pbag)",
+          "resolvedTextStyle": {
+            "fontSize": 25,
+            "typeface": "DejaVu Sans",
+            "color": "#DCE7F5"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "LMIL = −y log(pbag) − (1−y) log(1−pbag)",
+              "fontSize": 25,
+              "typeface": "DejaVu Sans",
+              "color": "#DCE7F5"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/d07ex036",
+      "id": "7",
+      "bbox": [
+        80,
+        330,
+        500,
+        28
+      ],
+      "geometry": "rect",
+      "text": "Attention clip loss",
+      "textPreview": "Attention clip loss",
+      "resolvedFontSize": 15.33,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 20,
+        "typeface": "DejaVu Sans",
+        "color": "#F4C66A",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "autoFit": "shrinkText",
+        "autoFitScale": 0.77,
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Attention clip loss"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Attention clip loss",
+          "resolvedTextStyle": {
+            "fontSize": 20,
+            "typeface": "DejaVu Sans",
+            "color": "#F4C66A",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Attention clip loss",
+              "fontSize": 20,
+              "typeface": "DejaVu Sans",
+              "color": "#F4C66A",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/6hcvq14b",
+      "id": "8",
+      "bbox": [
+        80,
+        366,
+        520,
+        38
+      ],
+      "geometry": "rect",
+      "text": "Latt = BCE(pclip, y)",
+      "textPreview": "Latt = BCE(pclip, y)",
+      "resolvedFontSize": 23.67,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 24,
+        "typeface": "DejaVu Sans",
+        "color": "#F4F7FB",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "autoFit": "shrinkText",
+        "autoFitScale": 0.99,
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Latt = BCE(pclip, y)"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Latt = BCE(pclip, y)",
+          "resolvedTextStyle": {
+            "fontSize": 24,
+            "typeface": "DejaVu Sans",
+            "color": "#F4F7FB",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Latt = BCE(pclip, y)",
+              "fontSize": 24,
+              "typeface": "DejaVu Sans",
+              "color": "#F4F7FB",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/r2lwjmlw",
+      "id": "9",
+      "bbox": [
+        680,
+        330,
+        520,
+        28
+      ],
+      "geometry": "rect",
+      "text": "Multi-label category loss",
+      "textPreview": "Multi-label category loss",
+      "resolvedFontSize": 15.33,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 20,
+        "typeface": "DejaVu Sans",
+        "color": "#F4C66A",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "autoFit": "shrinkText",
+        "autoFitScale": 0.77,
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Multi-label category loss"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Multi-label category loss",
+          "resolvedTextStyle": {
+            "fontSize": 20,
+            "typeface": "DejaVu Sans",
+            "color": "#F4C66A",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Multi-label category loss",
+              "fontSize": 20,
+              "typeface": "DejaVu Sans",
+              "color": "#F4C66A",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/3a1crydo",
+      "id": "10",
+      "bbox": [
+        680,
+        366,
+        520,
+        68
+      ],
+      "geometry": "rect",
+      "text": "Lmulti = −(1/6) Σc [yc log(qc) + (1−yc) log(1−qc)]",
+      "textPreview": "Lmulti = −(1/6) Σc [yc log(qc) + (1−yc) log(1−qc)]",
+      "resolvedFontSize": 20,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 20,
+        "typeface": "DejaVu Sans",
+        "color": "#F4F7FB",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "autoFit": "shrinkText",
+        "autoFitScale": 1,
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Lmulti = −(1/6) Σc [yc log(qc) + (1−yc)"
+          },
+          {
+            "index": 2,
+            "text": "log(1−qc)]"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Lmulti = −(1/6) Σc [yc log(qc) + (1−yc) log(1−qc)]",
+          "resolvedTextStyle": {
+            "fontSize": 20,
+            "typeface": "DejaVu Sans",
+            "color": "#F4F7FB",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Lmulti = −(1/6) Σc [yc log(qc) + (1−yc) log(1−qc)]",
+              "fontSize": 20,
+              "typeface": "DejaVu Sans",
+              "color": "#F4F7FB",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 11,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/i9svytw3",
+      "id": "11",
+      "bbox": [
+        80,
+        474,
+        1110,
+        52
+      ],
+      "geometry": "rect",
+      "text": "L = LMIL + 0.5 Latt + 0.3 Lmulti",
+      "textPreview": "L = LMIL + 0.5 Latt + 0.3 Lmulti",
+      "resolvedFontSize": 31,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 31,
+        "typeface": "DejaVu Sans",
+        "color": "#56D7CB",
+        "bold": true,
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "autoFit": "shrinkText",
+        "autoFitScale": 1,
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "L = LMIL + 0.5 Latt + 0.3 Lmulti"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "L = LMIL + 0.5 Latt + 0.3 Lmulti",
+          "resolvedTextStyle": {
+            "fontSize": 31,
+            "typeface": "DejaVu Sans",
+            "color": "#56D7CB",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "L = LMIL + 0.5 Latt + 0.3 Lmulti",
+              "fontSize": 31,
+              "typeface": "DejaVu Sans",
+              "color": "#56D7CB",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/5cjut8ve",
+      "id": "12",
+      "bbox": [
+        82,
+        543,
+        1000,
+        34
+      ],
+      "geometry": "rect",
+      "text": "Adam · learning rate 10⁻⁴ · 30 epochs · batch 32",
+      "textPreview": "Adam · learning rate 10⁻⁴ · 30 epochs · batch 32",
+      "resolvedFontSize": 20.33,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 21,
+        "typeface": "DejaVu Sans",
+        "color": "#DCE7F5",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "autoFit": "shrinkText",
+        "autoFitScale": 0.97,
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Adam · learning rate 10⁻⁴ · 30 epochs · batch 32"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Adam · learning rate 10⁻⁴ · 30 epochs · batch 32",
+          "resolvedTextStyle": {
+            "fontSize": 21,
+            "typeface": "DejaVu Sans",
+            "color": "#DCE7F5"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Adam · learning rate 10⁻⁴ · 30 epochs · batch 32",
+              "fontSize": 21,
+              "typeface": "DejaVu Sans",
+              "color": "#DCE7F5"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/4bad03et",
+      "id": "13",
+      "bbox": [
+        82,
+        590,
+        1000,
+        32
+      ],
+      "geometry": "rect",
+      "text": "Modality dropout: p = 0.15 during training",
+      "textPreview": "Modality dropout: p = 0.15 during training",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "anchor": 2,
+        "fontSize": 20,
+        "typeface": "DejaVu Sans",
+        "color": "#B4C0D2",
+        "alignment": "left",
+        "verticalAlignment": "middle",
+        "autoFit": "shrinkText",
+        "autoFitScale": 0.93,
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Modality dropout: p = 0.15 during training"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Modality dropout: p = 0.15 during training",
+          "resolvedTextStyle": {
+            "fontSize": 20,
+            "typeface": "DejaVu Sans",
+            "color": "#B4C0D2"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "Modality dropout: p = 0.15 during training",
+              "fontSize": 20,
+              "typeface": "DejaVu Sans",
+              "color": "#B4C0D2"
+            }
+          ],
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

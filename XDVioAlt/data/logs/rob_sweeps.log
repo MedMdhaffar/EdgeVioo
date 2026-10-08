@@ -1,0 +1,321 @@
+[rob] 2026-09-30T09:34:10+01:00 waiting for A
+[rob] 2026-09-30T09:35:10+01:00 waiting for A
+[rob] 2026-09-30T09:36:10+01:00 waiting for A
+[rob] 2026-09-30T09:37:10+01:00 waiting for A
+[rob] 2026-09-30T09:38:10+01:00 waiting for A
+[rob] 2026-09-30T09:39:10+01:00 waiting for A
+[rob] 2026-09-30T09:40:10+01:00 waiting for A
+[rob] 2026-09-30T09:41:10+01:00 waiting for A
+[rob] 2026-09-30T09:42:10+01:00 waiting for A
+[rob] 2026-09-30T09:43:10+01:00 waiting for A
+[rob] 2026-09-30T09:44:10+01:00 waiting for A
+[rob] 2026-09-30T09:45:10+01:00 waiting for A
+[rob] 2026-09-30T09:46:10+01:00 waiting for A
+[rob] 2026-09-30T09:47:10+01:00 waiting for A
+[rob] 2026-09-30T09:48:10+01:00 waiting for A
+[rob] 2026-09-30T09:49:10+01:00 waiting for A
+[rob] 2026-09-30T09:50:11+01:00 waiting for A
+[rob] 2026-09-30T09:51:11+01:00 waiting for A
+[rob] 2026-09-30T09:52:11+01:00 waiting for A
+[rob] 2026-09-30T09:53:11+01:00 waiting for A
+[rob] 2026-09-30T09:54:11+01:00 waiting for A
+[rob] 2026-09-30T09:55:11+01:00 waiting for A
+[rob] 2026-09-30T09:56:11+01:00 waiting for A
+[rob] 2026-09-30T09:57:11+01:00 waiting for A
+[rob] 2026-09-30T09:58:11+01:00 waiting for A
+[rob] 2026-09-30T09:59:11+01:00 waiting for A
+[rob] 2026-09-30T10:00:11+01:00 waiting for A
+[rob] 2026-09-30T10:01:11+01:00 waiting for A
+[rob] 2026-09-30T10:02:11+01:00 waiting for A
+[rob] 2026-09-30T10:03:11+01:00 waiting for A
+[rob] 2026-09-30T10:04:11+01:00 waiting for A
+[rob] 2026-09-30T10:05:11+01:00 waiting for A
+[rob] 2026-09-30T10:06:11+01:00 waiting for A
+[rob] 2026-09-30T10:07:12+01:00 waiting for A
+[rob] 2026-09-30T10:08:12+01:00 waiting for A
+[rob] 2026-09-30T10:09:12+01:00 waiting for A
+[rob] 2026-09-30T10:10:12+01:00 waiting for A
+[rob] 2026-09-30T10:11:12+01:00 waiting for A
+[rob] 2026-09-30T10:12:12+01:00 waiting for A
+[rob] 2026-09-30T10:13:12+01:00 waiting for A
+[rob] 2026-09-30T10:14:12+01:00 waiting for A
+[rob] 2026-09-30T10:15:12+01:00 waiting for A
+[rob] 2026-09-30T10:16:12+01:00 waiting for A
+[rob] 2026-09-30T10:17:12+01:00 waiting for A
+[rob] 2026-09-30T10:18:12+01:00 waiting for A
+[rob] 2026-09-30T10:19:12+01:00 waiting for A
+[rob] 2026-09-30T10:20:12+01:00 A done -> launching 9 sweeps, 3 at a time
+[sweep] runs/2026-09-29_p3vggish30ep_cross/ckpt_best.pt kind=noise stream=audio stride=16 rule=(8,4) snippets = (5.33,2.67) s flag_reliability=False
+   level applied  APglob  APclip macroAP   IoU  F1@.5
+-----------------------------------------------------
+[sweep] runs/2026-09-29_p3vggish30ep_cross/ckpt_best.pt kind=attenuation stream=audio stride=16 rule=(8,4) snippets = (5.33,2.67) s flag_reliability=False
+   level applied  APglob  APclip macroAP   IoU  F1@.5
+-----------------------------------------------------
+[sweep] runs/2026-09-29_p3vggish30ep_cross/ckpt_best.pt kind=occlusion stream=visual stride=16 rule=(8,4) snippets = (5.33,2.67) s flag_reliability=False
+   level applied  APglob  APclip macroAP   IoU  F1@.5
+-----------------------------------------------------
+  60.000    True  0.7745  0.7961  0.6957 0.369  0.243
+   0.000   False  0.7745  0.7961  0.6958 0.369  0.243
+   1.000   False  0.7745  0.7961  0.6958 0.369  0.243
+Traceback (most recent call last):
+  File "/home/aarf101/projtutore/scripts/robustness_sweep.py", line 194, in <module>
+    raise SystemExit(main())
+                     ~~~~^^
+  File "/home/aarf101/projtutore/scripts/robustness_sweep.py", line 129, in main
+    report = sweep_level(args.ckpt, test_csv, device, args.kind, level, args.stream, cfg,
+                         rows, intervals, stride, args.threshold, min_length, max_gap,
+                         args.fps, args.seed, args.flag_reliability, visual_mean)
+  File "/home/aarf101/projtutore/scripts/robustness_sweep.py", line 63, in sweep_level
+    scores, _valid, multilogits = score_clips(ckpt, test_csv, device, perturb=hook)
+                                  ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aarf101/projtutore/.venv/lib/python3.14/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+  File "/home/aarf101/projtutore/safewatch/eval/runner.py", line 154, in score_clips
+    out = model(visual, audio, mask, reliability)
+  File "/home/aarf101/projtutore/.venv/lib/python3.14/site-packages/torch/nn/modules/module.py", line 1783, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/aarf101/projtutore/.venv/lib/python3.14/site-packages/torch/nn/modules/module.py", line 1794, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/aarf101/projtutore/safewatch/models/fusion.py", line 121, in forward
+    emb_a = self.audio_encoder(audio)
+  File "/home/aarf101/projtutore/.venv/lib/python3.14/site-packages/torch/nn/modules/module.py", line 1783, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/aarf101/projtutore/.venv/lib/python3.14/site-packages/torch/nn/modules/module.py", line 1794, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/aarf101/projtutore/safewatch/models/mil.py", line 37, in forward
+    return self.net(x.transpose(1, 2)).transpose(1, 2)  # (B,T,out_dim)
+           ~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/home/aarf101/projtutore/.venv/lib/python3.14/site-packages/torch/nn/modules/module.py", line 1783, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/aarf101/projtutore/.venv/lib/python3.14/site-packages/torch/nn/modules/module.py", line 1794, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/aarf101/projtutore/.venv/lib/python3.14/site-packages/torch/nn/modules/container.py", line 259, in forward
+    input = module(input)
+  File "/home/aarf101/projtutore/.venv/lib/python3.14/site-packages/torch/nn/modules/module.py", line 1783, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/aarf101/projtutore/.venv/lib/python3.14/site-packages/torch/nn/modules/module.py", line 1794, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/aarf101/projtutore/.venv/lib/python3.14/site-packages/torch/nn/modules/conv.py", line 385, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aarf101/projtutore/.venv/lib/python3.14/site-packages/torch/nn/modules/conv.py", line 380, in _conv_forward
+    return F.conv1d(
+           ~~~~~~~~^
+        input, weight, bias, self.stride, self.padding, self.dilation, self.groups
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+RuntimeError: Given groups=1, weight of size [512, 128, 1], expected input[1, 1024, 360] to have 128 channels, but got 1024 channels instead
+[sweep] runs/2026-09-29_p3vggish30ep_cross/ckpt_best.pt kind=drop-snippets stream=audio stride=16 rule=(8,4) snippets = (5.33,2.67) s flag_reliability=False
+   level applied  APglob  APclip macroAP   IoU  F1@.5
+-----------------------------------------------------
+  20.000    True  0.7746  0.7961  0.6955 0.370  0.246
+   0.750    True  0.7751  0.7989  0.7058 0.376  0.253
+   0.000   False  0.7745  0.7961  0.6958 0.369  0.243
+  10.000    True  0.7746  0.7957  0.6953 0.367  0.242
+   0.500    True  0.7753  0.7971  0.7101 0.368  0.257
+   0.250    True  0.7736  0.7887  0.6959 0.369  0.238
+   5.000    True  0.7747  0.7947  0.6945 0.369  0.245
+   0.250    True  0.7713  0.7844  0.7066 0.369  0.264
+   0.500    True  0.7699  0.7694  0.6938 0.361  0.242
+   0.000   False  0.7745  0.7961  0.6958 0.369  0.243
+[sweep] written -> runs/2026-09-29_p3vggish30ep_cross/robustness_noise_audio.json
+[sweep] figure -> runs/2026-09-29_p3vggish30ep_cross/robustness_noise_audio.png
+   0.000    True  0.7536  0.7317  0.5972 0.359  0.251
+[sweep] written -> runs/2026-09-29_p3vggish30ep_cross/robustness_attenuation_audio.json
+[sweep] figure -> runs/2026-09-29_p3vggish30ep_cross/robustness_attenuation_audio.png
+   0.750    True  0.7594  0.7423  0.6932 0.351  0.253
+[sweep] written -> runs/2026-09-29_p3vggish30ep_cross/robustness_dropsnips_audio.json
+[sweep] figure -> runs/2026-09-29_p3vggish30ep_cross/robustness_dropsnips_audio.png
+[sweep] runs/2026-09-29_p3vggish30ep_late/ckpt_best.pt kind=attenuation stream=audio stride=16 rule=(8,4) snippets = (5.33,2.67) s flag_reliability=False
+   level applied  APglob  APclip macroAP   IoU  F1@.5
+-----------------------------------------------------
+[sweep] runs/2026-09-29_p3vggish30ep_late/ckpt_best.pt kind=occlusion stream=visual stride=16 rule=(8,4) snippets = (5.33,2.67) s flag_reliability=False
+   level applied  APglob  APclip macroAP   IoU  F1@.5
+-----------------------------------------------------
+[sweep] runs/2026-09-30_p3vggish30ep_adaptive/ckpt_best.pt kind=occlusion stream=visual stride=16 rule=(8,4) snippets = (5.33,2.67) s flag_reliability=False
+   level applied  APglob  APclip macroAP   IoU  F1@.5
+-----------------------------------------------------
+   1.000   False  0.7719  0.7857  0.7200 0.354  0.265
+   0.000   False  0.7719  0.7857  0.7200 0.354  0.265
+Traceback (most recent call last):
+  File "/home/aarf101/projtutore/scripts/robustness_sweep.py", line 194, in <module>
+    raise SystemExit(main())
+                     ~~~~^^
+  File "/home/aarf101/projtutore/scripts/robustness_sweep.py", line 129, in main
+    report = sweep_level(args.ckpt, test_csv, device, args.kind, level, args.stream, cfg,
+                         rows, intervals, stride, args.threshold, min_length, max_gap,
+                         args.fps, args.seed, args.flag_reliability, visual_mean)
+  File "/home/aarf101/projtutore/scripts/robustness_sweep.py", line 63, in sweep_level
+    scores, _valid, multilogits = score_clips(ckpt, test_csv, device, perturb=hook)
+                                  ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aarf101/projtutore/.venv/lib/python3.14/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+  File "/home/aarf101/projtutore/safewatch/eval/runner.py", line 154, in score_clips
+    out = model(visual, audio, mask, reliability)
+  File "/home/aarf101/projtutore/.venv/lib/python3.14/site-packages/torch/nn/modules/module.py", line 1783, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/aarf101/projtutore/.venv/lib/python3.14/site-packages/torch/nn/modules/module.py", line 1794, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/aarf101/projtutore/safewatch/models/fusion.py", line 121, in forward
+    emb_a = self.audio_encoder(audio)
+  File "/home/aarf101/projtutore/.venv/lib/python3.14/site-packages/torch/nn/modules/module.py", line 1783, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/aarf101/projtutore/.venv/lib/python3.14/site-packages/torch/nn/modules/module.py", line 1794, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/aarf101/projtutore/safewatch/models/mil.py", line 37, in forward
+    return self.net(x.transpose(1, 2)).transpose(1, 2)  # (B,T,out_dim)
+           ~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/home/aarf101/projtutore/.venv/lib/python3.14/site-packages/torch/nn/modules/module.py", line 1783, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/aarf101/projtutore/.venv/lib/python3.14/site-packages/torch/nn/modules/module.py", line 1794, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/aarf101/projtutore/.venv/lib/python3.14/site-packages/torch/nn/modules/container.py", line 259, in forward
+    input = module(input)
+  File "/home/aarf101/projtutore/.venv/lib/python3.14/site-packages/torch/nn/modules/module.py", line 1783, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/aarf101/projtutore/.venv/lib/python3.14/site-packages/torch/nn/modules/module.py", line 1794, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/aarf101/projtutore/.venv/lib/python3.14/site-packages/torch/nn/modules/conv.py", line 385, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aarf101/projtutore/.venv/lib/python3.14/site-packages/torch/nn/modules/conv.py", line 380, in _conv_forward
+    return F.conv1d(
+           ~~~~~~~~^
+        input, weight, bias, self.stride, self.padding, self.dilation, self.groups
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+RuntimeError: Given groups=1, weight of size [512, 128, 1], expected input[1, 1024, 360] to have 128 channels, but got 1024 channels instead
+[sweep] runs/2026-09-30_p3vggish30ep_adaptive/ckpt_best.pt kind=occlusion stream=visual stride=16 rule=(8,4) snippets = (5.33,2.67) s flag_reliability=True
+   level applied  APglob  APclip macroAP   IoU  F1@.5
+-----------------------------------------------------
+   0.000   False  0.7281  0.7665  0.6930 0.329  0.198
+Traceback (most recent call last):
+  File "/home/aarf101/projtutore/scripts/robustness_sweep.py", line 194, in <module>
+    raise SystemExit(main())
+                     ~~~~^^
+  File "/home/aarf101/projtutore/scripts/robustness_sweep.py", line 129, in main
+    report = sweep_level(args.ckpt, test_csv, device, args.kind, level, args.stream, cfg,
+                         rows, intervals, stride, args.threshold, min_length, max_gap,
+                         args.fps, args.seed, args.flag_reliability, visual_mean)
+  File "/home/aarf101/projtutore/scripts/robustness_sweep.py", line 63, in sweep_level
+    scores, _valid, multilogits = score_clips(ckpt, test_csv, device, perturb=hook)
+                                  ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aarf101/projtutore/.venv/lib/python3.14/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+  File "/home/aarf101/projtutore/safewatch/eval/runner.py", line 154, in score_clips
+    out = model(visual, audio, mask, reliability)
+  File "/home/aarf101/projtutore/.venv/lib/python3.14/site-packages/torch/nn/modules/module.py", line 1783, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/aarf101/projtutore/.venv/lib/python3.14/site-packages/torch/nn/modules/module.py", line 1794, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/aarf101/projtutore/safewatch/models/fusion.py", line 121, in forward
+    emb_a = self.audio_encoder(audio)
+  File "/home/aarf101/projtutore/.venv/lib/python3.14/site-packages/torch/nn/modules/module.py", line 1783, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/aarf101/projtutore/.venv/lib/python3.14/site-packages/torch/nn/modules/module.py", line 1794, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/aarf101/projtutore/safewatch/models/mil.py", line 37, in forward
+    return self.net(x.transpose(1, 2)).transpose(1, 2)  # (B,T,out_dim)
+           ~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/home/aarf101/projtutore/.venv/lib/python3.14/site-packages/torch/nn/modules/module.py", line 1783, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/aarf101/projtutore/.venv/lib/python3.14/site-packages/torch/nn/modules/module.py", line 1794, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/aarf101/projtutore/.venv/lib/python3.14/site-packages/torch/nn/modules/container.py", line 259, in forward
+    input = module(input)
+  File "/home/aarf101/projtutore/.venv/lib/python3.14/site-packages/torch/nn/modules/module.py", line 1783, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/aarf101/projtutore/.venv/lib/python3.14/site-packages/torch/nn/modules/module.py", line 1794, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/aarf101/projtutore/.venv/lib/python3.14/site-packages/torch/nn/modules/conv.py", line 385, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aarf101/projtutore/.venv/lib/python3.14/site-packages/torch/nn/modules/conv.py", line 380, in _conv_forward
+    return F.conv1d(
+           ~~~~~~~~^
+        input, weight, bias, self.stride, self.padding, self.dilation, self.groups
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+RuntimeError: Given groups=1, weight of size [512, 128, 1], expected input[1, 1024, 360] to have 128 channels, but got 1024 channels instead
+   0.500    True  0.7764  0.7814  0.6955 0.350  0.267
+[sweep] runs/2026-09-29_p3full_late/ckpt_best.pt kind=attenuation stream=audio stride=64 rule=(2,1) snippets = (5.33,2.67) s flag_reliability=False
+   level applied  APglob  APclip macroAP   IoU  F1@.5
+-----------------------------------------------------
+   1.000   False  0.8143  0.7792  0.6505 0.422  0.317
+   0.000   False  0.7281  0.7665  0.6930 0.329  0.198
+Traceback (most recent call last):
+  File "/home/aarf101/projtutore/scripts/robustness_sweep.py", line 194, in <module>
+    raise SystemExit(main())
+                     ~~~~^^
+  File "/home/aarf101/projtutore/scripts/robustness_sweep.py", line 129, in main
+    report = sweep_level(args.ckpt, test_csv, device, args.kind, level, args.stream, cfg,
+                         rows, intervals, stride, args.threshold, min_length, max_gap,
+                         args.fps, args.seed, args.flag_reliability, visual_mean)
+  File "/home/aarf101/projtutore/scripts/robustness_sweep.py", line 63, in sweep_level
+    scores, _valid, multilogits = score_clips(ckpt, test_csv, device, perturb=hook)
+                                  ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aarf101/projtutore/.venv/lib/python3.14/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+  File "/home/aarf101/projtutore/safewatch/eval/runner.py", line 154, in score_clips
+    out = model(visual, audio, mask, reliability)
+  File "/home/aarf101/projtutore/.venv/lib/python3.14/site-packages/torch/nn/modules/module.py", line 1783, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/aarf101/projtutore/.venv/lib/python3.14/site-packages/torch/nn/modules/module.py", line 1794, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/aarf101/projtutore/safewatch/models/fusion.py", line 121, in forward
+    emb_a = self.audio_encoder(audio)
+  File "/home/aarf101/projtutore/.venv/lib/python3.14/site-packages/torch/nn/modules/module.py", line 1783, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/aarf101/projtutore/.venv/lib/python3.14/site-packages/torch/nn/modules/module.py", line 1794, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/aarf101/projtutore/safewatch/models/mil.py", line 37, in forward
+    return self.net(x.transpose(1, 2)).transpose(1, 2)  # (B,T,out_dim)
+           ~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/home/aarf101/projtutore/.venv/lib/python3.14/site-packages/torch/nn/modules/module.py", line 1783, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/aarf101/projtutore/.venv/lib/python3.14/site-packages/torch/nn/modules/module.py", line 1794, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/aarf101/projtutore/.venv/lib/python3.14/site-packages/torch/nn/modules/container.py", line 259, in forward
+    input = module(input)
+  File "/home/aarf101/projtutore/.venv/lib/python3.14/site-packages/torch/nn/modules/module.py", line 1783, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/aarf101/projtutore/.venv/lib/python3.14/site-packages/torch/nn/modules/module.py", line 1794, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/aarf101/projtutore/.venv/lib/python3.14/site-packages/torch/nn/modules/conv.py", line 385, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aarf101/projtutore/.venv/lib/python3.14/site-packages/torch/nn/modules/conv.py", line 380, in _conv_forward
+    return F.conv1d(
+           ~~~~~~~~^
+        input, weight, bias, self.stride, self.padding, self.dilation, self.groups
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+RuntimeError: Given groups=1, weight of size [512, 128, 1], expected input[1, 1024, 360] to have 128 channels, but got 1024 channels instead
+   0.000    True  0.7175  0.7223  0.5784 0.319  0.208
+[sweep] written -> runs/2026-09-29_p3vggish30ep_late/robustness_attenuation_audio.json
+[sweep] figure -> runs/2026-09-29_p3vggish30ep_late/robustness_attenuation_audio.png
+   0.500    True  0.7992  0.7305  0.4136 0.375  0.154
+   0.000    True  0.7880  0.6178  0.3467 0.398  0.146
+[sweep] written -> runs/2026-09-29_p3full_late/robustness_attenuation_audio.json
+[sweep] figure -> runs/2026-09-29_p3full_late/robustness_attenuation_audio.png
+[rob] all sweeps done 2026-09-30T10:22:37+01:00

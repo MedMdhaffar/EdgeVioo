@@ -1,0 +1,11 @@
+[calib] 2026-09-29_p3vggish30ep_cross 2026-09-30T08:12:18+01:00
+[calib] val split: 150 clips, positive rate 0.520, mean raw confidence 0.535
+[calib] temperature = 1.7035 | ECE 0.0421 -> 0.0427 | NLL 0.1544 -> 0.1261
+[calib] test (reconstructed, n=800): ECE 0.0313 -> 0.0311 | mean confidence 0.599 -> 0.594 vs positive rate 0.625
+[calib] written -> runs/2026-09-29_p3vggish30ep_cross/calibration.json
+[calib] 2026-09-29_p3vggish30ep_late 2026-09-30T08:12:31+01:00
+[calib] val split: 150 clips, positive rate 0.520, mean raw confidence 0.517
+[calib] temperature = 1.3601 | ECE 0.0348 -> 0.0369 | NLL 0.1235 -> 0.1161
+[calib] test (reconstructed, n=800): ECE 0.0181 -> 0.0244 | mean confidence 0.612 -> 0.611 vs positive rate 0.625
+[calib] written -> runs/2026-09-29_p3vggish30ep_late/calibration.json
+[calib] done 2026-09-30T08:12:42+01:00

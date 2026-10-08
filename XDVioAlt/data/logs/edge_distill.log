@@ -1,0 +1,32 @@
+[distill] 80 (video, I3D) pairs; 64 train / 16 holdout
+[distill] decoded 0/80
+[distill] decoded 10/80
+[distill] decoded 20/80
+[distill] decoded 30/80
+[distill] decoded 40/80
+[distill] decoded 50/80
+[distill] decoded 60/80
+[distill] decoded 70/80
+[distill] clips kept 80, dropped 0
+[distill] built 2531 samples in 118s (80 clips, 22-32 samples each)
+[distill] train 2031 samples / holdout 500 (64 vs 16 clips)
+[distill] epoch   1 loss 0.2723 holdout cosine +0.8263
+[distill] epoch   2 loss 0.1649 holdout cosine +0.8282
+[distill] epoch   4 loss 0.1624 holdout cosine +0.8287
+[distill] epoch   6 loss 0.1601 holdout cosine +0.8297
+[distill] epoch   8 loss 0.1584 holdout cosine +0.8302
+[distill] epoch  10 loss 0.1575 holdout cosine +0.8306
+[distill] epoch  12 loss 0.1565 holdout cosine +0.8317
+[distill] epoch  14 loss 0.1552 holdout cosine +0.8325
+[distill] epoch  16 loss 0.1543 holdout cosine +0.8331
+[distill] epoch  18 loss 0.1538 holdout cosine +0.8333
+[distill] epoch  20 loss 0.1536 holdout cosine +0.8334
+
+[distill] holdout cosine - raw is flattered by the target's constant component;
+           centered (mean removed) is the number that shows input-dependent structure:
+                           raw  centered
+    random init        +0.0027   -0.0551
+    constant (mean)    +0.8288   +0.0000
+    trained            +0.8334   +0.0747
+[distill] verdict: input-dependent structure present (centered cosine +0.0747 over the constant predictor)
+[distill] report -> export/onnx/edge_distill_report.json

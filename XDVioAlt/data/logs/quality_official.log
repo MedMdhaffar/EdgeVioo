@@ -1,0 +1,8 @@
+[ok] 3804 clips / 988480 snippets -> data/features/quality_stats_official.json (clips without quality stats: 4)
+     rms              mean=    0.0254 std=   0.0667
+     rms_db           mean=   -6.2784 std=  12.5220
+     flatness         mean=    0.0133 std=   0.0628
+     zcr              mean=    0.0293 std=   0.0595
+     clip_ratio       mean=    0.0005 std=   0.0085
+     feature_energy   mean=    0.2753 std=   0.0767
+     temporal_motion  mean=    0.1061 std=   0.0575

@@ -1,0 +1,16 @@
+[fair] 2026-09-29_p2vggish30ep_visual 2026-09-30T08:10:44+01:00
+per-class clip-level AP: {'fighting': 0.8443, 'shooting': 0.4292, 'riot': 0.9238, 'abuse': 0.0875, 'car_accident': 0.8846, 'explosion': 0.7073}
+[ok] predictions + metrics -> runs/2026-09-29_p2vggish30ep_visual/seg_seconds
+[fair] 2026-09-29_p2vggish30ep_audio 2026-09-30T08:10:55+01:00
+per-class clip-level AP: {'fighting': 0.7078, 'shooting': 0.6186, 'riot': 0.8524, 'abuse': 0.0251, 'car_accident': 0.8755, 'explosion': 0.3291}
+[ok] predictions + metrics -> runs/2026-09-29_p2vggish30ep_audio/seg_seconds
+[fair] 2026-09-29_p3vggish30ep_late 2026-09-30T08:11:00+01:00
+per-class clip-level AP: {'fighting': 0.8999, 'shooting': 0.681, 'riot': 0.9323, 'abuse': 0.1382, 'car_accident': 0.9239, 'explosion': 0.7449}
+[ok] predictions + metrics -> runs/2026-09-29_p3vggish30ep_late/seg_seconds
+[fair] 2026-09-29_p3vggish30ep_cross 2026-09-30T08:11:14+01:00
+per-class clip-level AP: {'fighting': 0.858, 'shooting': 0.563, 'riot': 0.9342, 'abuse': 0.0808, 'car_accident': 0.9151, 'explosion': 0.8234}
+[ok] predictions + metrics -> runs/2026-09-29_p3vggish30ep_cross/seg_seconds
+[fair] 2026-09-30_p3vggish30ep_early 2026-09-30T08:11:33+01:00
+per-class clip-level AP: {'fighting': 0.8959, 'shooting': 0.58, 'riot': 0.9526, 'abuse': 0.1163, 'car_accident': 0.9211, 'explosion': 0.7383}
+[ok] predictions + metrics -> runs/2026-09-30_p3vggish30ep_early/seg_seconds
+[fair] done 2026-09-30T08:11:47+01:00

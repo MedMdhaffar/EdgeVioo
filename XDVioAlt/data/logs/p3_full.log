@@ -1,0 +1,390 @@
+[p3full] start 2026-09-28T22:33:27+01:00 lists=data/lists epochs=30 dropout=0.15
+[p3full] reliability stats: present
+[p3full] 2026-09-28T22:33:27+01:00 training audio-only MIL on data/lists
+[run] runs/2026-09-28_p2_audio_full
+[cfg] modality=audio feature_set=swin_rgb in_dim=132 epochs=30 batch=32 lr=0.0001 k=5
+[data] train=3516 val=434 device=cpu threads=6
+[epoch   1/30] loss=1.1999 (mil=0.7309) val_pr_auc=0.7638 val_ap=0.7647 *best* [65.0s]
+[epoch   2/30] loss=1.1071 (mil=0.6898) val_pr_auc=0.7619 val_ap=0.7628 [69.7s]
+[epoch   3/30] loss=1.0702 (mil=0.6668) val_pr_auc=0.7712 val_ap=0.7720 *best* [45.1s]
+[epoch   4/30] loss=1.0359 (mil=0.6500) val_pr_auc=0.7919 val_ap=0.7927 *best* [19.9s]
+[epoch   5/30] loss=1.0010 (mil=0.6291) val_pr_auc=0.8182 val_ap=0.8188 *best* [19.9s]
+[epoch   6/30] loss=0.9746 (mil=0.6166) val_pr_auc=0.8451 val_ap=0.8456 *best* [19.6s]
+[epoch   7/30] loss=0.9516 (mil=0.6039) val_pr_auc=0.8833 val_ap=0.8836 *best* [19.3s]
+[epoch   8/30] loss=0.9346 (mil=0.5916) val_pr_auc=0.8912 val_ap=0.8915 *best* [18.8s]
+[epoch   9/30] loss=0.9181 (mil=0.5841) val_pr_auc=0.9049 val_ap=0.9052 *best* [18.7s]
+[epoch  10/30] loss=0.9029 (mil=0.5772) val_pr_auc=0.9144 val_ap=0.9147 *best* [18.6s]
+[epoch  11/30] loss=0.8873 (mil=0.5653) val_pr_auc=0.9147 val_ap=0.9149 *best* [18.9s]
+[epoch  12/30] loss=0.8822 (mil=0.5638) val_pr_auc=0.9157 val_ap=0.9159 *best* [18.5s]
+[epoch  13/30] loss=0.8779 (mil=0.5594) val_pr_auc=0.9148 val_ap=0.9150 [18.6s]
+[epoch  14/30] loss=0.8818 (mil=0.5656) val_pr_auc=0.9142 val_ap=0.9144 [18.5s]
+[epoch  15/30] loss=0.8831 (mil=0.5626) val_pr_auc=0.9143 val_ap=0.9145 [18.7s]
+[epoch  16/30] loss=0.8777 (mil=0.5591) val_pr_auc=0.9149 val_ap=0.9152 [18.8s]
+[epoch  17/30] loss=0.8751 (mil=0.5588) val_pr_auc=0.9151 val_ap=0.9153 [18.7s]
+[epoch  18/30] loss=0.8710 (mil=0.5540) val_pr_auc=0.9160 val_ap=0.9162 *best* [18.8s]
+[epoch  19/30] loss=0.8740 (mil=0.5601) val_pr_auc=0.9167 val_ap=0.9169 *best* [18.7s]
+[epoch  20/30] loss=0.8756 (mil=0.5586) val_pr_auc=0.9171 val_ap=0.9173 *best* [18.7s]
+[epoch  21/30] loss=0.8766 (mil=0.5581) val_pr_auc=0.9184 val_ap=0.9186 *best* [18.6s]
+[epoch  22/30] loss=0.8626 (mil=0.5509) val_pr_auc=0.9186 val_ap=0.9188 *best* [18.8s]
+[epoch  23/30] loss=0.8635 (mil=0.5529) val_pr_auc=0.9190 val_ap=0.9192 *best* [18.8s]
+[epoch  24/30] loss=0.8609 (mil=0.5508) val_pr_auc=0.9189 val_ap=0.9191 [18.7s]
+[epoch  25/30] loss=0.8605 (mil=0.5485) val_pr_auc=0.9200 val_ap=0.9202 *best* [18.7s]
+[epoch  26/30] loss=0.8632 (mil=0.5515) val_pr_auc=0.9196 val_ap=0.9198 [18.7s]
+[epoch  27/30] loss=0.8601 (mil=0.5510) val_pr_auc=0.9211 val_ap=0.9213 *best* [18.7s]
+[epoch  28/30] loss=0.8547 (mil=0.5442) val_pr_auc=0.9220 val_ap=0.9221 *best* [18.7s]
+[epoch  29/30] loss=0.8600 (mil=0.5489) val_pr_auc=0.9232 val_ap=0.9234 *best* [18.7s]
+[epoch  30/30] loss=0.8564 (mil=0.5486) val_pr_auc=0.9224 val_ap=0.9226 [18.7s]
+[done] best epoch 29: val_ap=0.9234 val_pr_auc=0.9232
+[done] artifacts -> runs/2026-09-28_p2_audio_full
+[p3full] scoring audio-only(2026-09-28_p2_audio_full) (both / drop-audio / drop-video)
+[score] ckpt=runs/2026-09-28_p2_audio_full/ckpt_best.pt kind=mil modality=audio test=data/lists/test.csv stride=64 frames/snippet rule=(2,1) snippets
+[warn] missing audio features for Before.Sunset.2004__#01-14-30_01-16-51_l -> zeros (run scripts/extract_audio_features.py)
+{
+  "n_clips": 800,
+  "n_snippets": 36900,
+  "stride_frames": 64.0,
+  "segment_rule": {
+    "threshold": 0.5,
+    "min_length": 2,
+    "max_gap": 1,
+    "min_seconds": 5.333,
+    "max_gap_seconds": 2.667
+  },
+  "ap": {
+    "global__pr_auc": 0.4464486636093985,
+    "global__average_precision": 0.4465542896073965,
+    "per_video__pr_auc": 0.5941681771067046,
+    "per_video__average_precision": 0.6252350316498694
+  },
+  "prevalence": 0.2586178779602051,
+  "localization": {
+    "n_pred_segments": 855,
+    "n_gt_segments": 1238,
+    "mean_best_iou": 0.3023637007525856,
+    "mean_detection_delay_snippets": 5.928308823529412,
+    "mean_detection_delay_frames": 379.4117647058824,
+    "mean_detection_delay_seconds": 15.808823529411766,
+    "precision@iou0.1": 0.49005847953216375,
+    "recall@iou0.1": 0.3384491114701131,
+    "f1@iou0.1": 0.40038222646918303,
+    "precision@iou0.2": 0.43625730994152045,
+    "recall@iou0.2": 0.30129240710823907,
+    "f1@iou0.2": 0.356426182513139,
+    "precision@iou0.3": 0.3497076023391813,
+    "recall@iou0.3": 0.24151857835218093,
+    "f1@iou0.3": 0.28571428571428575,
+    "precision@iou0.4": 0.28421052631578947,
+    "recall@iou0.4": 0.1962843295638126,
+    "f1@iou0.4": 0.23220258002866698,
+    "precision@iou0.5": 0.22456140350877193,
+    "recall@iou0.5": 0.15508885298869143,
+    "f1@iou0.5": 0.18346870520783565
+  },
+  "macro_per_class_ap": 0.29435705976168863,
+  "dropped_modality": "none"
+}
+per-class clip-level AP: {'fighting': 0.258, 'shooting': 0.4459, 'riot': 0.281, 'abuse': 0.033, 'car_accident': 0.5659, 'explosion': 0.1824}
+[ok] predictions + metrics -> runs/2026-09-28_p2_audio_full
+[score] ckpt=runs/2026-09-28_p2_audio_full/ckpt_best.pt kind=mil modality=audio test=data/lists/test.csv stride=64 frames/snippet rule=(2,1) snippets drop=audio
+[warn] missing audio features for Before.Sunset.2004__#01-14-30_01-16-51_l -> zeros (run scripts/extract_audio_features.py)
+{
+  "n_clips": 800,
+  "n_snippets": 36900,
+  "stride_frames": 64.0,
+  "segment_rule": {
+    "threshold": 0.5,
+    "min_length": 2,
+    "max_gap": 1,
+    "min_seconds": 5.333,
+    "max_gap_seconds": 2.667
+  },
+  "ap": {
+    "global__pr_auc": 0.24626768387003917,
+    "global__average_precision": 0.25636533956295193,
+    "per_video__pr_auc": 0.4048016287882945,
+    "per_video__average_precision": 0.5087233593203245
+  },
+  "prevalence": 0.2586178779602051,
+  "localization": {
+    "n_pred_segments": 0,
+    "n_gt_segments": 1238,
+    "mean_best_iou": NaN,
+    "mean_detection_delay_snippets": NaN,
+    "mean_detection_delay_frames": NaN,
+    "mean_detection_delay_seconds": NaN,
+    "precision@iou0.1": NaN,
+    "recall@iou0.1": 0.0,
+    "f1@iou0.1": 0.0,
+    "precision@iou0.2": NaN,
+    "recall@iou0.2": 0.0,
+    "f1@iou0.2": 0.0,
+    "precision@iou0.3": NaN,
+    "recall@iou0.3": 0.0,
+    "f1@iou0.3": 0.0,
+    "precision@iou0.4": NaN,
+    "recall@iou0.4": 0.0,
+    "f1@iou0.4": 0.0,
+    "precision@iou0.5": NaN,
+    "recall@iou0.5": 0.0,
+    "f1@iou0.5": 0.0
+  },
+  "macro_per_class_ap": 0.1662616275125225,
+  "dropped_modality": "audio"
+}
+per-class clip-level AP: {'fighting': 0.1953, 'shooting': 0.2725, 'riot': 0.0996, 'abuse': 0.0243, 'car_accident': 0.1481, 'explosion': 0.2578}
+[ok] predictions + metrics -> runs/2026-09-28_p2_audio_full
+[score] a mil/audio checkpoint cannot drop visual: it has no such branch
+[p3full] FAILED scoring audio-only(2026-09-28_p2_audio_full) (drop video)
+[p3full] 2026-09-28T22:45:13+01:00 training fusion=early (reliability gate + dropout 0.15)
+[run] runs/2026-09-28_p3full_early
+[cfg] fusion=early params=610185 reliability=7d dropout=0.15 train=3516 val=434 device=cpu
+[epoch   1/30] loss=1.1107 val_ap=0.9475 *best* [24.0s]
+[epoch   2/30] loss=0.6938 val_ap=0.9717 *best* [23.7s]
+[epoch   3/30] loss=0.5672 val_ap=0.9775 *best* [23.6s]
+[epoch   4/30] loss=0.4590 val_ap=0.9817 *best* [23.9s]
+[epoch   5/30] loss=0.4569 val_ap=0.9829 *best* [23.9s]
+[epoch   6/30] loss=0.3895 val_ap=0.9846 *best* [23.6s]
+[epoch   7/30] loss=0.3783 val_ap=0.9836 [23.7s]
+[epoch   8/30] loss=0.3338 val_ap=0.9846 *best* [23.1s]
+[epoch   9/30] loss=0.3868 val_ap=0.9851 *best* [23.3s]
+[epoch  10/30] loss=0.3571 val_ap=0.9845 [23.3s]
+[epoch  11/30] loss=0.2828 val_ap=0.9861 *best* [23.2s]
+[epoch  12/30] loss=0.3371 val_ap=0.9864 *best* [23.6s]
+[epoch  13/30] loss=0.2870 val_ap=0.9867 *best* [23.6s]
+[epoch  14/30] loss=0.2835 val_ap=0.9874 *best* [23.5s]
+[epoch  15/30] loss=0.2812 val_ap=0.9867 [22.4s]
+[epoch  16/30] loss=0.2869 val_ap=0.9870 [23.5s]
+[epoch  17/30] loss=0.3053 val_ap=0.9864 [23.4s]
+[epoch  18/30] loss=0.3015 val_ap=0.9868 [23.5s]
+[epoch  19/30] loss=0.3027 val_ap=0.9870 [23.3s]
+[epoch  20/30] loss=0.2569 val_ap=0.9869 [23.7s]
+[epoch  21/30] loss=0.3069 val_ap=0.9870 [23.1s]
+[epoch  22/30] loss=0.3028 val_ap=0.9873 [23.3s]
+[epoch  23/30] loss=0.2947 val_ap=0.9870 [23.3s]
+[epoch  24/30] loss=0.2743 val_ap=0.9875 *best* [23.5s]
+[epoch  25/30] loss=0.3056 val_ap=0.9877 *best* [23.2s]
+[epoch  26/30] loss=0.2369 val_ap=0.9876 [23.3s]
+[epoch  27/30] loss=0.2493 val_ap=0.9877 [23.4s]
+[epoch  28/30] loss=0.2706 val_ap=0.9874 [23.0s]
+[epoch  29/30] loss=0.2610 val_ap=0.9874 [39.0s]
+[epoch  30/30] loss=0.2475 val_ap=0.9878 *best* [35.0s]
+[done] best epoch 30 val_ap=0.9878 -> runs/2026-09-28_p3full_early
+[p3full] scoring early(2026-09-28_p3full_early) (both / drop-audio / drop-video)
+[score] ckpt=runs/2026-09-28_p3full_early/ckpt_best.pt kind=fusion modality=both test=data/lists/test.csv stride=64 frames/snippet rule=(2,1) snippets
+[warn] missing audio features for Before.Sunset.2004__#01-14-30_01-16-51_l -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio quality stats for Before.Sunset.2004__#01-14-30_01-16-51_l -> zeros (run scripts/extract_audio_features.py)
+{
+  "n_clips": 800,
+  "n_snippets": 36900,
+  "stride_frames": 64.0,
+  "segment_rule": {
+    "threshold": 0.5,
+    "min_length": 2,
+    "max_gap": 1,
+    "min_seconds": 5.333,
+    "max_gap_seconds": 2.667
+  },
+  "ap": {
+    "global__pr_auc": 0.8014643300563817,
+    "global__average_precision": 0.8014669533064243,
+    "per_video__pr_auc": 0.7613858015035287,
+    "per_video__average_precision": 0.7817529486804264
+  },
+  "prevalence": 0.2586178779602051,
+  "localization": {
+    "n_pred_segments": 823,
+    "n_gt_segments": 1238,
+    "mean_best_iou": 0.415511650791848,
+    "mean_detection_delay_snippets": 4.566347469220246,
+    "mean_detection_delay_frames": 292.24623803009575,
+    "mean_detection_delay_seconds": 12.176926584587322,
+    "precision@iou0.1": 0.7436208991494532,
+    "recall@iou0.1": 0.49434571890145396,
+    "f1@iou0.1": 0.5938864628820961,
+    "precision@iou0.2": 0.6597812879708383,
+    "recall@iou0.2": 0.438610662358643,
+    "f1@iou0.2": 0.5269286754002912,
+    "precision@iou0.3": 0.5394896719319563,
+    "recall@iou0.3": 0.35864297253634897,
+    "f1@iou0.3": 0.4308588064046579,
+    "precision@iou0.4": 0.45443499392466585,
+    "recall@iou0.4": 0.30210016155088854,
+    "f1@iou0.4": 0.36293061620572536,
+    "precision@iou0.5": 0.38760631834750914,
+    "recall@iou0.5": 0.25767366720516965,
+    "f1@iou0.5": 0.30955846676370696
+  },
+  "macro_per_class_ap": 0.6583378104598442,
+  "dropped_modality": "none"
+}
+per-class clip-level AP: {'fighting': 0.799, 'shooting': 0.5819, 'riot': 0.9554, 'abuse': 0.0833, 'car_accident': 0.8975, 'explosion': 0.6329}
+[ok] predictions + metrics -> runs/2026-09-28_p3full_early
+[score] ckpt=runs/2026-09-28_p3full_early/ckpt_best.pt kind=fusion modality=both test=data/lists/test.csv stride=64 frames/snippet rule=(2,1) snippets drop=audio
+[warn] missing audio features for Before.Sunset.2004__#01-14-30_01-16-51_l -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio quality stats for Before.Sunset.2004__#01-14-30_01-16-51_l -> zeros (run scripts/extract_audio_features.py)
+{
+  "n_clips": 800,
+  "n_snippets": 36900,
+  "stride_frames": 64.0,
+  "segment_rule": {
+    "threshold": 0.5,
+    "min_length": 2,
+    "max_gap": 1,
+    "min_seconds": 5.333,
+    "max_gap_seconds": 2.667
+  },
+  "ap": {
+    "global__pr_auc": 0.8138365516704031,
+    "global__average_precision": 0.8138462115863377,
+    "per_video__pr_auc": 0.7388084558878467,
+    "per_video__average_precision": 0.7620043312836509
+  },
+  "prevalence": 0.2586178779602051,
+  "localization": {
+    "n_pred_segments": 794,
+    "n_gt_segments": 1238,
+    "mean_best_iou": 0.42401231604362494,
+    "mean_detection_delay_snippets": 3.8607594936708862,
+    "mean_detection_delay_frames": 247.08860759493672,
+    "mean_detection_delay_seconds": 10.29535864978903,
+    "precision@iou0.1": 0.7619647355163728,
+    "recall@iou0.1": 0.4886914378029079,
+    "f1@iou0.1": 0.5954724409448818,
+    "precision@iou0.2": 0.6675062972292192,
+    "recall@iou0.2": 0.4281098546042003,
+    "f1@iou0.2": 0.5216535433070866,
+    "precision@iou0.3": 0.5579345088161209,
+    "recall@iou0.3": 0.3578352180936995,
+    "f1@iou0.3": 0.4360236220472441,
+    "precision@iou0.4": 0.4596977329974811,
+    "recall@iou0.4": 0.2948303715670436,
+    "f1@iou0.4": 0.3592519685039371,
+    "precision@iou0.5": 0.3866498740554156,
+    "recall@iou0.5": 0.24798061389337642,
+    "f1@iou0.5": 0.3021653543307087
+  },
+  "macro_per_class_ap": 0.6687794799058148,
+  "dropped_modality": "audio"
+}
+per-class clip-level AP: {'fighting': 0.7682, 'shooting': 0.5177, 'riot': 0.9549, 'abuse': 0.1586, 'car_accident': 0.8969, 'explosion': 0.7164}
+[ok] predictions + metrics -> runs/2026-09-28_p3full_early
+[score] ckpt=runs/2026-09-28_p3full_early/ckpt_best.pt kind=fusion modality=both test=data/lists/test.csv stride=64 frames/snippet rule=(2,1) snippets drop=visual
+[warn] missing audio features for Before.Sunset.2004__#01-14-30_01-16-51_l -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio quality stats for Before.Sunset.2004__#01-14-30_01-16-51_l -> zeros (run scripts/extract_audio_features.py)
+{
+  "n_clips": 800,
+  "n_snippets": 36900,
+  "stride_frames": 64.0,
+  "segment_rule": {
+    "threshold": 0.5,
+    "min_length": 2,
+    "max_gap": 1,
+    "min_seconds": 5.333,
+    "max_gap_seconds": 2.667
+  },
+  "ap": {
+    "global__pr_auc": 0.4621123759966841,
+    "global__average_precision": 0.46223093510749014,
+    "per_video__pr_auc": 0.6002569105796542,
+    "per_video__average_precision": 0.6278157346074996
+  },
+  "prevalence": 0.2586178779602051,
+  "localization": {
+    "n_pred_segments": 569,
+    "n_gt_segments": 1238,
+    "mean_best_iou": 0.3342549390238904,
+    "mean_detection_delay_snippets": 4.997395833333333,
+    "mean_detection_delay_frames": 319.8333333333333,
+    "mean_detection_delay_seconds": 13.326388888888888,
+    "precision@iou0.1": 0.5096660808435852,
+    "recall@iou0.1": 0.23424878836833601,
+    "f1@iou0.1": 0.32097399003873817,
+    "precision@iou0.2": 0.45518453427065025,
+    "recall@iou0.2": 0.20920840064620355,
+    "f1@iou0.2": 0.2866629773104593,
+    "precision@iou0.3": 0.38312829525483305,
+    "recall@iou0.3": 0.17609046849757673,
+    "f1@iou0.3": 0.24128389596015498,
+    "precision@iou0.4": 0.3110720562390158,
+    "recall@iou0.4": 0.1429725363489499,
+    "f1@iou0.4": 0.19590481460985057,
+    "precision@iou0.5": 0.2478031634446397,
+    "recall@iou0.5": 0.11389337641357028,
+    "f1@iou0.5": 0.15605976757055892
+  },
+  "macro_per_class_ap": 0.3146507677112656,
+  "dropped_modality": "visual"
+}
+per-class clip-level AP: {'fighting': 0.3159, 'shooting': 0.4661, 'riot': 0.3932, 'abuse': 0.0167, 'car_accident': 0.5288, 'explosion': 0.1672}
+[ok] predictions + metrics -> runs/2026-09-28_p3full_early
+[p3full] 2026-09-28T22:58:15+01:00 training fusion=late (reliability gate + dropout 0.15)
+[run] runs/2026-09-28_p3full_late
+[cfg] fusion=late params=758667 reliability=7d dropout=0.15 train=3516 val=434 device=cpu
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/aarf101/projtutore/safewatch/train_fusion.py", line 195, in <module>
+  File "/home/aarf101/projtutore/safewatch/train_fusion.py", line 190, in main
+    else:
+  File "/home/aarf101/projtutore/safewatch/train_fusion.py", line 164, in train
+    scheduler.step()
+          ~~~~~~~~^^
+  File "/home/aarf101/projtutore/.venv/lib/python3.14/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+  File "/home/aarf101/projtutore/safewatch/train_fusion.py", line 101, in validate
+    scores: list[np.ndarray] = []
+                 ^^^^^^
+  File "/home/aarf101/projtutore/.venv/lib/python3.14/site-packages/torch/utils/data/dataloader.py", line 725, in __next__
+    data = self._next_data()
+  File "/home/aarf101/projtutore/.venv/lib/python3.14/site-packages/torch/utils/data/dataloader.py", line 1531, in _next_data
+    return self._process_data(data, worker_id)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/aarf101/projtutore/.venv/lib/python3.14/site-packages/torch/utils/data/dataloader.py", line 1569, in _process_data
+    data.reraise()
+    ~~~~~~~~~~~~^^
+  File "/home/aarf101/projtutore/.venv/lib/python3.14/site-packages/torch/_utils.py", line 803, in reraise
+    raise exception
+AttributeError: Caught AttributeError in DataLoader worker process 0.
+Original Traceback (most recent call last):
+  File "/home/aarf101/projtutore/.venv/lib/python3.14/site-packages/torch/utils/data/_utils/worker.py", line 375, in _worker_loop
+    data = fetcher.fetch(index)  # type: ignore[possibly-undefined]
+  File "/home/aarf101/projtutore/.venv/lib/python3.14/site-packages/torch/utils/data/_utils/fetch.py", line 54, in fetch
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+            ~~~~~~~~~~~~^^^^^
+  File "/home/aarf101/projtutore/safewatch/data/multimodal.py", line 186, in __getitem__
+    item["audio"] = torch.from_numpy(self._audio(row["clip_id"], n_snippets, index_map))
+                                     ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aarf101/projtutore/safewatch/data/multimodal.py", line 145, in _audio
+    if self.audio_norm == "clip":
+       ^^^^^^^^^^^^^^^
+AttributeError: 'MultimodalClipDataset' object has no attribute 'audio_norm'. Did you mean: 'audio_dir'?
+
+[p3full] FAILED training late
+[p3full] 2026-09-28T23:00:07+01:00 training fusion=cross (reliability gate + dropout 0.15)
+[run] runs/2026-09-28_p3full_cross
+[cfg] fusion=cross params=923913 reliability=7d dropout=0.15 train=3516 val=434 device=cpu
+[epoch   1/30] loss=0.9584 val_ap=0.9725 *best* [207.6s]
+[epoch   2/30] loss=0.5741 val_ap=0.9747 *best* [193.3s]
+[epoch   3/30] loss=0.4758 val_ap=0.9779 *best* [88.0s]
+[epoch   4/30] loss=0.3834 val_ap=0.9781 *best* [58.2s]
+[epoch   5/30] loss=0.3849 val_ap=0.9778 [75.6s]
+[epoch   6/30] loss=0.3147 val_ap=0.9797 *best* [73.9s]
+[epoch   7/30] loss=0.2737 val_ap=0.9810 *best* [224.6s]
+[epoch   8/30] loss=0.2713 val_ap=0.9837 *best* [259.3s]
+[epoch   9/30] loss=0.2973 val_ap=0.9833 [132.7s]
+[epoch  10/30] loss=0.2782 val_ap=0.9835 [66.5s]
+[epoch  11/30] loss=0.1955 val_ap=0.9832 [74.0s]
+[epoch  12/30] loss=0.2337 val_ap=0.9836 [75.4s]
+[epoch  13/30] loss=0.1944 val_ap=0.9832 [65.8s]
+[epoch  14/30] loss=0.1864 val_ap=0.9836 [89.1s]
+[epoch  15/30] loss=0.1806 val_ap=0.9837 *best* [65.8s]
+[epoch  16/30] loss=0.1902 val_ap=0.9838 *best* [59.7s]
+[epoch  17/30] loss=0.2138 val_ap=0.9833 [52.9s]
+[epoch  18/30] loss=0.1992 val_ap=0.9833 [52.8s]
+[epoch  19/30] loss=0.2015 val_ap=0.9835 [52.9s]
+[epoch  20/30] loss=0.1609 val_ap=0.9832 [52.8s]
+[epoch  21/30] loss=0.1980 val_ap=0.9837 [52.7s]
+[epoch  22/30] loss=0.1936 val_ap=0.9836 [52.6s]
+[epoch  23/30] loss=0.1909 val_ap=0.9836 [61.5s]
+/home/aarf101/.pyenv/versions/3.14.0/lib/python3.14/multiprocessing/resource_tracker.py:297: UserWarning: resource_tracker: There appear to be 14 leaked semaphore objects to clean up at shutdown: {'/loky-330317-la__th6h', '/loky-330317-ejuu3_tw', '/loky-330317-cvu8v439', '/loky-330317-d6k5mp7l', '/loky-330317-0knnndc8', '/loky-330317-vq4_uuvu', '/loky-330317-z3z524x4', '/loky-330317-h3regjmw', '/loky-330317-y7g12y1n', '/loky-330317-mnlh0cqi', '/loky-330317-sqs6y2ow', '/loky-330317-f76q4arw', '/loky-330317-ib2spzsn', '/loky-330317-6b0ke64c'}
+  warnings.warn(

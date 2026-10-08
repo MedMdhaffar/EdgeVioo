@@ -1,0 +1,167 @@
+[causal] start 2026-10-01T09:45:25+01:00 K=8 threads=4
+[causal] 2026-10-01T09:45:25+01:00 scoring p3vggish30ep_cross ckpt=runs/2026-09-29_p3vggish30ep_cross/ckpt_best.pt
+[score] ckpt=runs/2026-09-29_p3vggish30ep_cross/ckpt_best.pt kind=fusion modality=both test=data/lists_official/test.csv stride=16 frames/snippet rule=(2,1) snippets = (1.33,0.67) s c=8
+[score] clip 0 t=0s
+[score] clip 200 t=30s
+[score] clip 400 t=59s
+[score] clip 600 t=146s
+{
+  "n_clips": 800,
+  "n_snippets": 145649,
+  "stride_frames": 16.0,
+  "segment_rule": {
+    "threshold": 0.5,
+    "min_length": 2,
+    "max_gap": 1,
+    "min_seconds": 1.333,
+    "max_gap_seconds": 0.667
+  },
+  "ap": {
+    "global__pr_auc": 0.6963665739174133,
+    "global__average_precision": 0.6963982875482881,
+    "per_video__pr_auc": 0.6012562755007181,
+    "per_video__average_precision": 0.6118474669557904
+  },
+  "prevalence": 0.2379419058561325,
+  "localization": {
+    "n_pred_segments": 864,
+    "n_gt_segments": 1238,
+    "mean_best_iou": 0.29712641117443944,
+    "mean_detection_delay_snippets": 20.294617563739376,
+    "mean_detection_delay_frames": 324.71388101983,
+    "mean_detection_delay_seconds": 13.529745042492918,
+    "precision@iou0.1": 0.5995370370370371,
+    "recall@iou0.1": 0.4184168012924071,
+    "f1@iou0.1": 0.4928639391056137,
+    "precision@iou0.2": 0.4837962962962963,
+    "recall@iou0.2": 0.3376413570274637,
+    "f1@iou0.2": 0.3977164605137964,
+    "precision@iou0.3": 0.36921296296296297,
+    "recall@iou0.3": 0.25767366720516965,
+    "f1@iou0.3": 0.30352045670789723,
+    "precision@iou0.4": 0.3020833333333333,
+    "recall@iou0.4": 0.21082390953150243,
+    "f1@iou0.4": 0.24833491912464317,
+    "precision@iou0.5": 0.2534722222222222,
+    "recall@iou0.5": 0.17689822294022617,
+    "f1@iou0.5": 0.20837297811607994
+  },
+  "macro_per_class_ap": 0.6957547995841411,
+  "dropped_modality": "none"
+}
+per-class clip-level AP: {'fighting': 0.858, 'shooting': 0.563, 'riot': 0.9342, 'abuse': 0.0808, 'car_accident': 0.9151, 'explosion': 0.8234}
+[ok] predictions + metrics -> runs/2026-09-29_p3vggish30ep_cross
+[causal] 2026-10-01T09:49:23+01:00 scoring p3vggish30ep_late ckpt=runs/2026-09-29_p3vggish30ep_late/ckpt_best.pt
+[score] ckpt=runs/2026-09-29_p3vggish30ep_late/ckpt_best.pt kind=fusion modality=both test=data/lists_official/test.csv stride=16 frames/snippet rule=(2,1) snippets = (1.33,0.67) s c=8
+[score] clip 0 t=0s
+[score] clip 200 t=23s
+[score] clip 400 t=36s
+[score] clip 600 t=65s
+{
+  "n_clips": 800,
+  "n_snippets": 145649,
+  "stride_frames": 16.0,
+  "segment_rule": {
+    "threshold": 0.5,
+    "min_length": 2,
+    "max_gap": 1,
+    "min_seconds": 1.333,
+    "max_gap_seconds": 0.667
+  },
+  "ap": {
+    "global__pr_auc": 0.6951049665352366,
+    "global__average_precision": 0.6951450251066901,
+    "per_video__pr_auc": 0.6256056831075397,
+    "per_video__average_precision": 0.6328398375890889
+  },
+  "prevalence": 0.2379419058561325,
+  "localization": {
+    "n_pred_segments": 1273,
+    "n_gt_segments": 1238,
+    "mean_best_iou": 0.25002423975106647,
+    "mean_detection_delay_snippets": 46.819870009285054,
+    "mean_detection_delay_frames": 749.1179201485609,
+    "mean_detection_delay_seconds": 31.2132466728567,
+    "precision@iou0.1": 0.5255302435192458,
+    "recall@iou0.1": 0.5403877221324718,
+    "f1@iou0.1": 0.5328554360812426,
+    "precision@iou0.2": 0.43283582089552236,
+    "recall@iou0.2": 0.44507269789983844,
+    "f1@iou0.2": 0.43886897650338513,
+    "precision@iou0.3": 0.3424980361351139,
+    "recall@iou0.3": 0.35218093699515346,
+    "f1@iou0.3": 0.34727200318598167,
+    "precision@iou0.4": 0.25216025137470544,
+    "recall@iou0.4": 0.2592891760904685,
+    "f1@iou0.4": 0.2556750298685782,
+    "precision@iou0.5": 0.19402985074626866,
+    "recall@iou0.5": 0.19951534733441034,
+    "f1@iou0.5": 0.19673436877737951
+  },
+  "macro_per_class_ap": 0.7200322956322253,
+  "dropped_modality": "none"
+}
+per-class clip-level AP: {'fighting': 0.8999, 'shooting': 0.681, 'riot': 0.9323, 'abuse': 0.1382, 'car_accident': 0.9239, 'explosion': 0.7449}
+[ok] predictions + metrics -> runs/2026-09-29_p3vggish30ep_late
+[causal] 2026-10-01T09:50:49+01:00 scoring p2vggish30ep_visual ckpt=runs/2026-09-29_p2vggish30ep_visual/ckpt_best.pt
+[score] ckpt=runs/2026-09-29_p2vggish30ep_visual/ckpt_best.pt kind=mil modality=visual test=data/lists_official/test.csv stride=16 frames/snippet rule=(2,1) snippets = (1.33,0.67) s c=8
+[score] clip 0 t=0s
+[score] clip 200 t=5s
+[score] clip 400 t=9s
+[score] clip 600 t=32s
+{
+  "n_clips": 800,
+  "n_snippets": 145649,
+  "stride_frames": 16.0,
+  "segment_rule": {
+    "threshold": 0.5,
+    "min_length": 2,
+    "max_gap": 1,
+    "min_seconds": 1.333,
+    "max_gap_seconds": 0.667
+  },
+  "ap": {
+    "global__pr_auc": 0.6521376359055365,
+    "global__average_precision": 0.6521747082428622,
+    "per_video__pr_auc": 0.5987112580773946,
+    "per_video__average_precision": 0.6112453540078371
+  },
+  "prevalence": 0.2379419058561325,
+  "localization": {
+    "n_pred_segments": 1314,
+    "n_gt_segments": 1238,
+    "mean_best_iou": 0.23971852702983457,
+    "mean_detection_delay_snippets": 47.384469696969695,
+    "mean_detection_delay_frames": 758.1515151515151,
+    "mean_detection_delay_seconds": 31.589646464646464,
+    "precision@iou0.1": 0.4885844748858447,
+    "recall@iou0.1": 0.518578352180937,
+    "f1@iou0.1": 0.5031347962382445,
+    "precision@iou0.2": 0.4033485540334855,
+    "recall@iou0.2": 0.4281098546042003,
+    "f1@iou0.2": 0.41536050156739807,
+    "precision@iou0.3": 0.3112633181126332,
+    "recall@iou0.3": 0.33037156704361875,
+    "f1@iou0.3": 0.3205329153605016,
+    "precision@iou0.4": 0.23059360730593606,
+    "recall@iou0.4": 0.24474959612277866,
+    "f1@iou0.4": 0.2374608150470219,
+    "precision@iou0.5": 0.17579908675799086,
+    "recall@iou0.5": 0.18659127625201938,
+    "f1@iou0.5": 0.18103448275862066
+  },
+  "macro_per_class_ap": 0.646087230837433,
+  "dropped_modality": "none"
+}
+per-class clip-level AP: {'fighting': 0.8443, 'shooting': 0.4292, 'riot': 0.9238, 'abuse': 0.0875, 'car_accident': 0.8846, 'explosion': 0.7073}
+[ok] predictions + metrics -> runs/2026-09-29_p2vggish30ep_visual
+[causal] offline vs causal (test split, official grid)
+run                              mode   APglob   APclip   F1@.5  delay_s
+------------------------------------------------------------------------
+2026-09-29_p3vggish30ep_cross  offline   0.7745   0.7961  0.2390    17.68
+2026-09-29_p3vggish30ep_cross  causal8   0.6964   0.6118  0.2084    13.53
+2026-09-29_p3vggish30ep_late  offline   0.7719   0.7857  0.2585    31.51
+2026-09-29_p3vggish30ep_late  causal8   0.6951   0.6328  0.1967    31.21
+2026-09-29_p2vggish30ep_visual  offline   0.7259   0.7148  0.2009    35.27
+2026-09-29_p2vggish30ep_visual  causal8   0.6521   0.6112  0.1810    31.59
+[causal] done 2026-10-01T09:52:05+01:00

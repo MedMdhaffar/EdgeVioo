@@ -1,0 +1,11 @@
+[sweep] runs/2026-09-29_p3vggish30ep_cross/ckpt_best.pt kind=noise stream=audio stride=16 rule=(8,4) snippets = (5.33,2.67) s flag_reliability=False
+   level applied  APglob  APclip macroAP   IoU  F1@.5
+-----------------------------------------------------
+  60.000    True  0.7745  0.7961  0.6958 0.369  0.243
+  30.000    True  0.7745  0.7962  0.6957 0.369  0.246
+  15.000    True  0.7746  0.7959  0.6962 0.370  0.247
+   5.000    True  0.7758  0.7922  0.6948 0.370  0.255
+   0.000    True  0.7768  0.7852  0.6910 0.371  0.267
+[sweep] written -> runs/2026-09-29_p3vggish30ep_cross/robustness_noise_audio.json
+[sweep] figure -> runs/2026-09-29_p3vggish30ep_cross/robustness_noise_audio.png
+[noise] done

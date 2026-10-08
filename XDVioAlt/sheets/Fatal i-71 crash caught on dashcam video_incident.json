@@ -1,0 +1,180 @@
+{
+  "clip_id": "Fatal i-71 crash caught on dashcam video",
+  "video": "data/raw/uploads/Fatal i-71 crash caught on dashcam video.mp4",
+  "duration_s": null,
+  "grid": {
+    "stride_frames": 64.0,
+    "fps": 29.97002997002997,
+    "stride_s": 2.135,
+    "n_snippets": 14
+  },
+  "config": {
+    "threshold": 0.5,
+    "min_seconds": 5.333,
+    "max_gap_seconds": 2.667,
+    "language": "fr"
+  },
+  "category": {
+    "available": true,
+    "label": "explosion",
+    "probability": 0.252,
+    "ranked": [
+      {
+        "category": "explosion",
+        "probability": 0.252
+      },
+      {
+        "category": "car_accident",
+        "probability": 0.2495
+      },
+      {
+        "category": "shooting",
+        "probability": 0.2399
+      }
+    ],
+    "all": {
+      "explosion": 0.252,
+      "car_accident": 0.2495,
+      "shooting": 0.2399,
+      "fighting": 0.2311,
+      "riot": 0.1834,
+      "abuse": 0.1201
+    },
+    "note": "raw sigmoid outputs of the multi-label head (uncalibrated), trained on weak clip labels; 'abuse' has only 8 test clips so its probability is the least reliable"
+  },
+  "segments": [],
+  "visual_evidence": {
+    "criterion": "ranked by snippet score, ties broken by temporal attention",
+    "top_snippets": [
+      {
+        "snippet": 0,
+        "second": 0.0,
+        "probability": 0.342,
+        "attention": 0.08138
+      },
+      {
+        "snippet": 7,
+        "second": 14.95,
+        "probability": 0.3037,
+        "attention": 0.06537
+      },
+      {
+        "snippet": 1,
+        "second": 2.14,
+        "probability": 0.2975,
+        "attention": 0.07402
+      },
+      {
+        "snippet": 6,
+        "second": 12.81,
+        "probability": 0.2903,
+        "attention": 0.06723
+      },
+      {
+        "snippet": 5,
+        "second": 10.68,
+        "probability": 0.2893,
+        "attention": 0.06746
+      }
+    ],
+    "peak_attention": {
+      "snippet": 11,
+      "second": 23.49,
+      "attention": 0.08443
+    },
+    "attention_entropy": 2.6338,
+    "attention_entropy_normalised": 0.998
+  },
+  "audio_evidence": {
+    "channels": [
+      "rms",
+      "rms_db",
+      "flatness",
+      "zcr",
+      "clip_ratio"
+    ],
+    "available": true,
+    "segment_vs_background_db": 0.0,
+    "rms_db": {
+      "segment_mean": 0.0,
+      "clip_median": 0.0,
+      "segment_peak": 0.0
+    },
+    "spectral_flatness": 0.0,
+    "clipping_ratio_max": 0.0,
+    "descriptions": [
+      "spectre tonal (sirene, moteur, voix tenue) / tonal spectrum"
+    ]
+  },
+  "modality_contribution": {
+    "available": true,
+    "type": "per-modality score curves (late fusion) + score without each modality",
+    "mean_probability": {
+      "visual": 0.1497,
+      "audio": 0.5626
+    },
+    "peak_probability": {
+      "visual": 0.3051,
+      "audio": 0.7334
+    },
+    "drop_one": {
+      "audio": {
+        "mean_probability_intact": 0.2726,
+        "mean_probability_without": 0.2794,
+        "delta": -0.0068
+      },
+      "visual": {
+        "mean_probability_intact": 0.2726,
+        "mean_probability_without": 0.4279,
+        "delta": -0.1553
+      }
+    }
+  },
+  "confidence": {
+    "raw_clip_probability": 0.3046,
+    "raw_alert_probability": 0.3046,
+    "top_k": 5,
+    "calibrated": false,
+    "clip_probability": 0.3046,
+    "alert_probability": 0.3046,
+    "note": "no calibration.json for this run: the numbers are raw sigmoid outputs and must not be read as probabilities - run scripts/fit_calibration.py"
+  },
+  "media": {
+    "key_frames": [
+      {
+        "second": 1.07,
+        "path": "sheets/frames/Fatal i-71 crash caught on dashcam video_00_0001.07s.jpg"
+      },
+      {
+        "second": 16.02,
+        "path": "sheets/frames/Fatal i-71 crash caught on dashcam video_01_0016.02s.jpg"
+      },
+      {
+        "second": 3.2,
+        "path": "sheets/frames/Fatal i-71 crash caught on dashcam video_02_0003.20s.jpg"
+      },
+      {
+        "second": 13.88,
+        "path": "sheets/frames/Fatal i-71 crash caught on dashcam video_03_0013.88s.jpg"
+      },
+      {
+        "second": 11.75,
+        "path": "sheets/frames/Fatal i-71 crash caught on dashcam video_04_0011.75s.jpg"
+      }
+    ]
+  },
+  "requires_human_verification": true,
+  "caveats": [
+    "weak supervision: clip-level labels during training, frame-level only for evaluation",
+    "temporal resolution is the snippet grid (2.14 s here)",
+    "category probabilities come from an uncalibrated multi-label head",
+    "audio channels are signal statistics, not an acoustic-event classifier"
+  ],
+  "provenance": {
+    "checkpoint": "runs/2026-09-29_p3full_late_clipnorm/ckpt_best.pt",
+    "clip_id": "Fatal i-71 crash caught on dashcam video",
+    "stride_frames": 64.0,
+    "fusion_mode": "late"
+  },
+  "text": "Aucun segment au-dessus du seuil 0.5 : clip considere comme normal. Categorie probable : explosion (25%). Indices visuels : snippet le plus anormal a 00:00 (p=0.34). Indices audio : spectre tonal (sirene, moteur, voix tenue) / tonal spectrum. Contribution des modalites : per-modality score curves (late fusion) + score without each modality - visuel 0.15 vs audio 0.56. Confiance globale : 30% (non calibree - lire comme un score, pas une probabilite). Verification humaine recommandee avant toute action. Modele faiblement supervise : il localise une zone suspecte, il ne confirme pas l'evenement."
+}

@@ -1,0 +1,16 @@
+[run] runs/2026-09-25_p1_official_rgb
+[cfg] modality=visual feature_set=i3d_official in_dim=1024 epochs=30 batch=32 lr=0.0001 k=5
+[data] train=3804 val=150 device=cpu threads=8
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/aarf101/projtutore/safewatch/train.py", line 208, in <module>
+    raise SystemExit(main())
+                     ~~~~^^
+  File "/home/aarf101/projtutore/safewatch/train.py", line 203, in main
+    train(cfg)
+    ~~~~~^^^^^
+  File "/home/aarf101/projtutore/safewatch/train.py", line 159, in train
+    out = model(batch[cfg.feature_key].to(device), batch["mask"].to(device))
+                ~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'visual'

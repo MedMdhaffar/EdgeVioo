@@ -1,0 +1,13 @@
+[seq] 2026-09-30T17:37:36+01:00 seed 43 visual
+per-class clip-level AP: {'fighting': 0.8636, 'shooting': 0.4219, 'riot': 0.9051, 'abuse': 0.1742, 'car_accident': 0.8812, 'explosion': 0.625}
+[ok] predictions + metrics -> runs/2026-09-30_p2vggish30ep_visual_s43
+[seq] 2026-09-30T18:00:01+01:00 seed 43 cross
+per-class clip-level AP: {'fighting': 0.889, 'shooting': 0.6773, 'riot': 0.9498, 'abuse': 0.1324, 'car_accident': 0.9195, 'explosion': 0.8714}
+[ok] predictions + metrics -> runs/2026-09-30_p3vggish30ep_cross_s43
+[seq] 2026-09-30T18:35:13+01:00 seed 44 visual
+per-class clip-level AP: {'fighting': 0.8581, 'shooting': 0.3964, 'riot': 0.9342, 'abuse': 0.0904, 'car_accident': 0.8916, 'explosion': 0.7403}
+[ok] predictions + metrics -> runs/2026-09-30_p2vggish30ep_visual_s44
+[seq] 2026-09-30T18:53:23+01:00 seed 44 cross
+per-class clip-level AP: {'fighting': 0.8948, 'shooting': 0.6645, 'riot': 0.9602, 'abuse': 0.0776, 'car_accident': 0.92, 'explosion': 0.8684}
+[ok] predictions + metrics -> runs/2026-09-30_p3vggish30ep_cross_s44
+[seq] ALL DONE 2026-09-30T19:38:29+01:00

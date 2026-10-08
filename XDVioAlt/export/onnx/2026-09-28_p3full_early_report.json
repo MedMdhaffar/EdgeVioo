@@ -1,0 +1,36 @@
+{
+  "checkpoint": "runs/2026-09-28_p3full_early/ckpt_best.pt",
+  "kind": "fusion",
+  "device": "cpu/3 threads",
+  "shapes": {
+    "visual_dim": 768,
+    "audio_dim": 132,
+    "reliability_dim": 7,
+    "time_steps": 100
+  },
+  "attention_weights_in_graph": false,
+  "pytorch_reference_taken": "before export (the legacy exporter mutates the model in place)",
+  "fp32": {
+    "file": "2026-09-28_p3full_early_fp32.onnx",
+    "size_mb": 2.331,
+    "max_abs_diff_vs_pytorch": 7.62939453125e-06,
+    "runs": 25,
+    "p50_ms": 5.697,
+    "p95_ms": 14.029,
+    "snippets_per_second": 17554.2
+  },
+  "fusion_mode": "early",
+  "int8": {
+    "file": "2026-09-28_p3full_early_int8.onnx",
+    "size_mb": 0.597,
+    "max_abs_diff_vs_pytorch_logits": 0.15712547302246094,
+    "accepted": false,
+    "parity_tolerance": 0.05,
+    "runs": 25,
+    "p50_ms": 12.516,
+    "p95_ms": 13.962,
+    "snippets_per_second": 7989.9
+  },
+  "size_ratio_int8_over_fp32": 0.256,
+  "speedup_int8": 0.455
+}
