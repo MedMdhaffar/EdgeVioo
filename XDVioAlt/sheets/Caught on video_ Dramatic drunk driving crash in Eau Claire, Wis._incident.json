@@ -1,0 +1,176 @@
+{
+  "clip_id": "Caught on video_ Dramatic drunk driving crash in Eau Claire, Wis.",
+  "video": "data/raw/uploads/Caught on video_ Dramatic drunk driving crash in Eau Claire, Wis..mp4",
+  "duration_s": null,
+  "grid": {
+    "stride_frames": 64.0,
+    "fps": 29.97002997002997,
+    "stride_s": 2.135,
+    "n_snippets": 10
+  },
+  "config": {
+    "threshold": 0.5,
+    "min_seconds": 5.333,
+    "max_gap_seconds": 2.667,
+    "language": "fr"
+  },
+  "category": {
+    "available": true,
+    "label": "riot",
+    "probability": 0.2849,
+    "ranked": [
+      {
+        "category": "riot",
+        "probability": 0.2849
+      },
+      {
+        "category": "shooting",
+        "probability": 0.0865
+      },
+      {
+        "category": "fighting",
+        "probability": 0.05
+      }
+    ],
+    "all": {
+      "riot": 0.2849,
+      "shooting": 0.0865,
+      "fighting": 0.05,
+      "explosion": 0.0371,
+      "abuse": 0.0172,
+      "car_accident": 0.0015
+    },
+    "note": "raw sigmoid outputs of the multi-label head (uncalibrated), trained on weak clip labels; 'abuse' has only 8 test clips so its probability is the least reliable"
+  },
+  "segments": [],
+  "visual_evidence": {
+    "criterion": "ranked by snippet score, ties broken by temporal attention",
+    "top_snippets": [
+      {
+        "snippet": 0,
+        "second": 0.0,
+        "probability": 0.0529,
+        "attention": 0.07777
+      },
+      {
+        "snippet": 1,
+        "second": 2.14,
+        "probability": 0.0354,
+        "attention": 0.0694
+      },
+      {
+        "snippet": 9,
+        "second": 19.22,
+        "probability": 0.0195,
+        "attention": 0.18342
+      },
+      {
+        "snippet": 7,
+        "second": 14.95,
+        "probability": 0.019,
+        "attention": 0.11851
+      },
+      {
+        "snippet": 8,
+        "second": 17.08,
+        "probability": 0.0184,
+        "attention": 0.25072
+      }
+    ],
+    "peak_attention": {
+      "snippet": 8,
+      "second": 17.08,
+      "attention": 0.25072
+    },
+    "attention_entropy": 2.1373,
+    "attention_entropy_normalised": 0.9282
+  },
+  "audio_evidence": {
+    "channels": [
+      "rms",
+      "rms_db",
+      "flatness",
+      "zcr",
+      "clip_ratio"
+    ],
+    "available": true,
+    "segment_vs_background_db": 0.0,
+    "rms_db": {
+      "segment_mean": 0.0,
+      "clip_median": 0.0,
+      "segment_peak": 0.0
+    },
+    "spectral_flatness": 0.0,
+    "clipping_ratio_max": 0.0,
+    "descriptions": [
+      "spectre tonal (sirene, moteur, voix tenue) / tonal spectrum"
+    ]
+  },
+  "modality_contribution": {
+    "available": true,
+    "drop_one": {
+      "audio": {
+        "mean_probability_intact": 0.0209,
+        "mean_probability_without": 0.7439,
+        "delta": -0.723
+      },
+      "visual": {
+        "mean_probability_intact": 0.0209,
+        "mean_probability_without": 0.0218,
+        "delta": -0.0009
+      }
+    },
+    "type": "score without each modality",
+    "mean_probability": {
+      "visual": 0.5,
+      "audio": 0.5
+    }
+  },
+  "confidence": {
+    "raw_clip_probability": 0.029,
+    "raw_alert_probability": 0.029,
+    "top_k": 5,
+    "calibrated": false,
+    "clip_probability": 0.029,
+    "alert_probability": 0.029,
+    "note": "no calibration.json for this run: the numbers are raw sigmoid outputs and must not be read as probabilities - run scripts/fit_calibration.py"
+  },
+  "media": {
+    "key_frames": [
+      {
+        "second": 1.07,
+        "path": "sheets/frames/Caught on video_ Dramatic drunk driving crash in Eau Claire, Wis._00_0001.07s.jpg"
+      },
+      {
+        "second": 3.2,
+        "path": "sheets/frames/Caught on video_ Dramatic drunk driving crash in Eau Claire, Wis._01_0003.20s.jpg"
+      },
+      {
+        "second": 20.29,
+        "path": "sheets/frames/Caught on video_ Dramatic drunk driving crash in Eau Claire, Wis._02_0020.29s.jpg"
+      },
+      {
+        "second": 16.02,
+        "path": "sheets/frames/Caught on video_ Dramatic drunk driving crash in Eau Claire, Wis._03_0016.02s.jpg"
+      },
+      {
+        "second": 18.15,
+        "path": "sheets/frames/Caught on video_ Dramatic drunk driving crash in Eau Claire, Wis._04_0018.15s.jpg"
+      }
+    ]
+  },
+  "requires_human_verification": true,
+  "caveats": [
+    "weak supervision: clip-level labels during training, frame-level only for evaluation",
+    "temporal resolution is the snippet grid (2.14 s here)",
+    "category probabilities come from an uncalibrated multi-label head",
+    "audio channels are signal statistics, not an acoustic-event classifier"
+  ],
+  "provenance": {
+    "checkpoint": "runs/2026-09-29_p3full_cross/ckpt_best.pt",
+    "clip_id": "Caught on video_ Dramatic drunk driving crash in Eau Claire, Wis.",
+    "stride_frames": 64.0,
+    "fusion_mode": "cross"
+  },
+  "text": "Aucun segment au-dessus du seuil 0.5 : clip considere comme normal. Categorie probable : riot (28%). Indices visuels : snippet le plus anormal a 00:00 (p=0.05). Indices audio : spectre tonal (sirene, moteur, voix tenue) / tonal spectrum. Contribution des modalites : score without each modality - visuel 0.50 vs audio 0.50. Confiance globale : 3% (non calibree - lire comme un score, pas une probabilite). Verification humaine recommandee avant toute action. Modele faiblement supervise : il localise une zone suspecte, il ne confirme pas l'evenement."
+}

@@ -1,0 +1,19 @@
+[distill] 12 (video, I3D) pairs; 9 train / 3 holdout
+[distill] decoded 0/12
+[distill] decoded 10/12
+/home/aarf101/projtutore/scripts/edge_distill.py:198: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:820.)
+  total += float(loss) * index.numel()
+[distill] clips kept 12, dropped 0
+[distill] built 192 samples in 20s (12 clips, 16-16 samples each)
+[distill] train 144 samples / holdout 48 (9 vs 3 clips)
+[distill] epoch   1 loss 0.8500 holdout cosine +0.5381
+[distill] epoch   2 loss 0.4328 holdout cosine +0.6910
+Traceback (most recent call last):
+  File "/home/aarf101/projtutore/scripts/edge_distill.py", line 245, in <module>
+    raise SystemExit(main())
+                     ~~~~^^
+  File "/home/aarf101/projtutore/scripts/edge_distill.py", line 220, in main
+    "samples": {"per_clip": per_clip, "train": int(train_x.shape[0]),
+                            ^^^^^^^^
+NameError: name 'per_clip' is not defined

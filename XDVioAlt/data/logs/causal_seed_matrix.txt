@@ -1,0 +1,20 @@
+Per-seed streaming deltas (causal8 - offline), official grid, 800 test clips
+======================================================================================
+seed   model  dAPglob  dAPclip   dF1@.5     dIoU  ddelay_s
+  42   cross  -0.0781  -0.1843  -0.0306   +0.037      -4.2
+  42  visual  -0.0737  -0.1035  -0.0198   +0.031      -3.7
+  43   cross  -0.0901  -0.1906  -0.0450   -0.080      +7.9
+  43  visual  -0.0750  -0.1025  -0.0399   -0.097      +7.8
+  44   cross  -0.0819  -0.1840  -0.0494   -0.074      +6.8
+  44  visual  -0.0717  -0.1041  -0.0390   -0.090      +5.1
+
+Sign-consistency across the 6 cells (is the effect robust to seed?):
+  APglobal  range -0.0901..-0.0717  -> ROBUST
+  APperclip range -0.1906..-0.1025  -> ROBUST
+  F1@0.5    range -0.0494..-0.0198  -> ROBUST
+  IoU       range -0.0973..+0.0368  -> SIGN FLIPS
+  delay_s   range -4.1551..+7.9392  -> SIGN FLIPS
+
+Offline detection delay per seed (stability check):
+  cross  :  17.7   3.5   0.2  spread 17.5s
+  visual :  35.3  27.3  28.3  spread 8.0s

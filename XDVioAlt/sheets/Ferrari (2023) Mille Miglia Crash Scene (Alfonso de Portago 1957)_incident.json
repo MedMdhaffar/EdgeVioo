@@ -1,0 +1,176 @@
+{
+  "clip_id": "Ferrari (2023) Mille Miglia Crash Scene (Alfonso de Portago 1957)",
+  "video": "data/raw/normalized/Ferrari (2023) Mille Miglia Crash Scene (Alfonso de Portago 1957)__24fps.mp4",
+  "duration_s": null,
+  "grid": {
+    "stride_frames": 16.0,
+    "fps": 24.0,
+    "stride_s": 0.667,
+    "n_snippets": 58
+  },
+  "config": {
+    "threshold": 0.5,
+    "min_seconds": 5.333,
+    "max_gap_seconds": 2.667,
+    "language": "fr"
+  },
+  "category": {
+    "available": true,
+    "label": "shooting",
+    "probability": 0.117,
+    "ranked": [
+      {
+        "category": "shooting",
+        "probability": 0.117
+      },
+      {
+        "category": "car_accident",
+        "probability": 0.0481
+      },
+      {
+        "category": "fighting",
+        "probability": 0.0391
+      }
+    ],
+    "all": {
+      "shooting": 0.117,
+      "car_accident": 0.0481,
+      "fighting": 0.0391,
+      "explosion": 0.0278,
+      "riot": 0.0067,
+      "abuse": 0.0043
+    },
+    "note": "raw sigmoid outputs of the multi-label head (uncalibrated), trained on weak clip labels; 'abuse' has only 8 test clips so its probability is the least reliable"
+  },
+  "segments": [],
+  "visual_evidence": {
+    "criterion": "ranked by snippet score, ties broken by temporal attention",
+    "top_snippets": [
+      {
+        "snippet": 37,
+        "second": 24.67,
+        "probability": 0.5607,
+        "attention": 0.13435
+      },
+      {
+        "snippet": 6,
+        "second": 4.0,
+        "probability": 0.4948,
+        "attention": 0.04473
+      },
+      {
+        "snippet": 9,
+        "second": 6.0,
+        "probability": 0.431,
+        "attention": 0.05092
+      },
+      {
+        "snippet": 35,
+        "second": 23.33,
+        "probability": 0.3111,
+        "attention": 0.12362
+      },
+      {
+        "snippet": 10,
+        "second": 6.67,
+        "probability": 0.2971,
+        "attention": 0.04398
+      }
+    ],
+    "peak_attention": {
+      "snippet": 37,
+      "second": 24.67,
+      "attention": 0.13435
+    },
+    "attention_entropy": 3.2632,
+    "attention_entropy_normalised": 0.8037
+  },
+  "audio_evidence": {
+    "channels": [
+      "rms",
+      "rms_db",
+      "flatness",
+      "zcr",
+      "clip_ratio"
+    ],
+    "available": true,
+    "segment_vs_background_db": 1.84,
+    "rms_db": {
+      "segment_mean": 0.5,
+      "clip_median": -1.34,
+      "segment_peak": 0.5
+    },
+    "spectral_flatness": -0.2117,
+    "clipping_ratio_max": -0.05367,
+    "descriptions": [
+      "spectre tonal (sirene, moteur, voix tenue) / tonal spectrum"
+    ]
+  },
+  "modality_contribution": {
+    "available": true,
+    "drop_one": {
+      "audio": {
+        "mean_probability_intact": 0.0848,
+        "mean_probability_without": 0.1475,
+        "delta": -0.0627
+      },
+      "visual": {
+        "mean_probability_intact": 0.0848,
+        "mean_probability_without": 0.0238,
+        "delta": 0.061
+      }
+    },
+    "type": "score without each modality",
+    "mean_probability": {
+      "visual": 1.0,
+      "audio": 0.0
+    }
+  },
+  "confidence": {
+    "raw_clip_probability": 0.4189,
+    "raw_alert_probability": 0.4189,
+    "top_k": 5,
+    "calibrated": false,
+    "clip_probability": 0.4189,
+    "alert_probability": 0.4189,
+    "note": "no calibration.json for this run: the numbers are raw sigmoid outputs and must not be read as probabilities - run scripts/fit_calibration.py"
+  },
+  "media": {
+    "key_frames": [
+      {
+        "second": 25.0,
+        "path": "sheets/frames/Ferrari (2023) Mille Miglia Crash Scene (Alfonso de Portago 1957)_00_0025.00s.jpg"
+      },
+      {
+        "second": 4.33,
+        "path": "sheets/frames/Ferrari (2023) Mille Miglia Crash Scene (Alfonso de Portago 1957)_01_0004.33s.jpg"
+      },
+      {
+        "second": 6.33,
+        "path": "sheets/frames/Ferrari (2023) Mille Miglia Crash Scene (Alfonso de Portago 1957)_02_0006.33s.jpg"
+      },
+      {
+        "second": 23.67,
+        "path": "sheets/frames/Ferrari (2023) Mille Miglia Crash Scene (Alfonso de Portago 1957)_03_0023.67s.jpg"
+      },
+      {
+        "second": 7.0,
+        "path": "sheets/frames/Ferrari (2023) Mille Miglia Crash Scene (Alfonso de Portago 1957)_04_0007.00s.jpg"
+      }
+    ]
+  },
+  "requires_human_verification": true,
+  "caveats": [
+    "weak supervision: clip-level labels during training, frame-level only for evaluation",
+    "temporal resolution is the snippet grid (0.67 s here)",
+    "category probabilities come from an uncalibrated multi-label head",
+    "audio channels are signal statistics, not an acoustic-event classifier"
+  ],
+  "provenance": {
+    "checkpoint": "runs/2026-10-01_p3edge_i3dmel/ckpt_best.pt",
+    "clip_id": "Ferrari (2023) Mille Miglia Crash Scene (Alfonso de Portago 1957)",
+    "stride_frames": 16.0,
+    "fusion_mode": "cross"
+  },
+  "text": "Aucun segment au-dessus du seuil 0.5 : clip considere comme normal. Categorie probable : shooting (12%). Indices visuels : snippet le plus anormal a 00:25 (p=0.56). Indices audio : spectre tonal (sirene, moteur, voix tenue) / tonal spectrum. Contribution des modalites : score without each modality - visuel 1.00 vs audio 0.00. Confiance globale : 42% (non calibree - lire comme un score, pas une probabilite). Verification humaine recommandee avant toute action. Modele faiblement supervise : il localise une zone suspecte, il ne confirme pas l'evenement."
+}

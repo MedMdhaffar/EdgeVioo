@@ -1,0 +1,216 @@
+[live] extract features (resumable) 10:40:19
+[minirgb] extractor <- export/onnx/minirgb_w24_distilled.pt (width 24) | 1 workers
+[minirgb] train: 500/3772 [1s]
+[minirgb] train: 1000/3772 [1s]
+[minirgb] train: 1500/3772 [1s]
+[minirgb] train: 2000/3772 [2s]
+[minirgb] train: 2500/3772 [2s]
+[minirgb] train: 3000/3772 [2s]
+[minirgb] train: 3500/3772 [3s]
+[minirgb] train: wrote 3772 (1 no-video, 31 oversize, 0 skipped) -> data/features/minirgb/train  [3s]
+[minirgb] val: wrote 149 (0 no-video, 1 oversize, 0 skipped) -> data/features/minirgb/val  [3s]
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x5632cb398b40] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x5632cb398b40] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x5632cb051c00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x5632cb5c60c0] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x5632cb5c60c0] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x5632cb857700] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x5632cb5eeb00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x5632cb389180] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x5632cb1ab500] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x5632cb416100] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x5632cb1ab500] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x5632cb416100] Referenced QT chapter track not found
+[minirgb] test: 500/799 [405s]
+[minirgb] test: wrote 799 (0 no-video, 1 oversize, 0 skipped) -> data/features/minirgb/test  [865s]
+[minirgb] done: 4720 features, 0 skipped, lists -> data/lists_minirgb in 865s
+[live] train head on (MiniRGB + log-mel) 10:54:46
+[warn] val split (149 clips) has no abuse clip(s): model selection is blind to it
+[run] runs/2026-10-03_p3live_minirgbmel
+[cfg] fusion=cross params=1054985 reliability=7d dropout=0.15 train=3772 val=149 device=cpu
+[warn] missing audio features for v=9eME1y6V-T4__#01-12-00_01-18-00_label_ -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio quality stats for v=9eME1y6V-T4__#01-12-00_01-18-00_label_ -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio features for Saving.Private.Ryan.1998__#02-29-31_02-3 -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio quality stats for Saving.Private.Ryan.1998__#02-29-31_02-3 -> zeros (run scripts/extract_audio_features.py)
+[epoch   1/30] loss=1.1576 val_ap=0.8706 val_abuse=n/a *best* [71.9s]
+[warn] missing audio features for v=9eME1y6V-T4__#01-12-00_01-18-00_label_ -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio quality stats for v=9eME1y6V-T4__#01-12-00_01-18-00_label_ -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio features for Saving.Private.Ryan.1998__#02-29-31_02-3 -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio quality stats for Saving.Private.Ryan.1998__#02-29-31_02-3 -> zeros (run scripts/extract_audio_features.py)
+[epoch   2/30] loss=1.0152 val_ap=0.8912 val_abuse=n/a *best* [70.3s]
+[warn] missing audio features for v=9eME1y6V-T4__#01-12-00_01-18-00_label_ -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio quality stats for v=9eME1y6V-T4__#01-12-00_01-18-00_label_ -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio features for Saving.Private.Ryan.1998__#02-29-31_02-3 -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio quality stats for Saving.Private.Ryan.1998__#02-29-31_02-3 -> zeros (run scripts/extract_audio_features.py)
+[epoch   3/30] loss=0.8979 val_ap=0.9048 val_abuse=n/a *best* [72.2s]
+[warn] missing audio features for v=9eME1y6V-T4__#01-12-00_01-18-00_label_ -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio quality stats for v=9eME1y6V-T4__#01-12-00_01-18-00_label_ -> zeros (run scripts/extract_audio_features.py)
+[epoch   4/30] loss=0.8092 val_ap=0.9098 val_abuse=n/a *best* [73.8s]
+[warn] missing audio features for v=9eME1y6V-T4__#01-12-00_01-18-00_label_ -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio quality stats for v=9eME1y6V-T4__#01-12-00_01-18-00_label_ -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio features for Saving.Private.Ryan.1998__#02-29-31_02-3 -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio quality stats for Saving.Private.Ryan.1998__#02-29-31_02-3 -> zeros (run scripts/extract_audio_features.py)
+[epoch   5/30] loss=0.8106 val_ap=0.8989 val_abuse=n/a [74.8s]
+[warn] missing audio features for v=9eME1y6V-T4__#01-12-00_01-18-00_label_ -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio quality stats for v=9eME1y6V-T4__#01-12-00_01-18-00_label_ -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio features for Saving.Private.Ryan.1998__#02-29-31_02-3 -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio quality stats for Saving.Private.Ryan.1998__#02-29-31_02-3 -> zeros (run scripts/extract_audio_features.py)
+[epoch   6/30] loss=0.7852 val_ap=0.8990 val_abuse=n/a [71.2s]
+[warn] missing audio features for Saving.Private.Ryan.1998__#02-29-31_02-3 -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio quality stats for Saving.Private.Ryan.1998__#02-29-31_02-3 -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio features for v=9eME1y6V-T4__#01-12-00_01-18-00_label_ -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio quality stats for v=9eME1y6V-T4__#01-12-00_01-18-00_label_ -> zeros (run scripts/extract_audio_features.py)
+[epoch   7/30] loss=0.7380 val_ap=0.8662 val_abuse=n/a [77.5s]
+[warn] missing audio features for v=9eME1y6V-T4__#01-12-00_01-18-00_label_ -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio quality stats for v=9eME1y6V-T4__#01-12-00_01-18-00_label_ -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio features for Saving.Private.Ryan.1998__#02-29-31_02-3 -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio quality stats for Saving.Private.Ryan.1998__#02-29-31_02-3 -> zeros (run scripts/extract_audio_features.py)
+[epoch   8/30] loss=0.7338 val_ap=0.9130 val_abuse=n/a *best* [76.6s]
+[warn] missing audio features for v=9eME1y6V-T4__#01-12-00_01-18-00_label_ -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio quality stats for v=9eME1y6V-T4__#01-12-00_01-18-00_label_ -> zeros (run scripts/extract_audio_features.py)
+[epoch   9/30] loss=0.7317 val_ap=0.8933 val_abuse=n/a [99.8s]
+[warn] missing audio features for Saving.Private.Ryan.1998__#02-29-31_02-3 -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio quality stats for Saving.Private.Ryan.1998__#02-29-31_02-3 -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio features for v=9eME1y6V-T4__#01-12-00_01-18-00_label_ -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio quality stats for v=9eME1y6V-T4__#01-12-00_01-18-00_label_ -> zeros (run scripts/extract_audio_features.py)
+[epoch  10/30] loss=0.6810 val_ap=0.8504 val_abuse=n/a [82.3s]
+[warn] missing audio features for Saving.Private.Ryan.1998__#02-29-31_02-3 -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio quality stats for Saving.Private.Ryan.1998__#02-29-31_02-3 -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio features for v=9eME1y6V-T4__#01-12-00_01-18-00_label_ -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio quality stats for v=9eME1y6V-T4__#01-12-00_01-18-00_label_ -> zeros (run scripts/extract_audio_features.py)
+[epoch  11/30] loss=0.6831 val_ap=0.8696 val_abuse=n/a [77.8s]
+[warn] missing audio features for Saving.Private.Ryan.1998__#02-29-31_02-3 -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio quality stats for Saving.Private.Ryan.1998__#02-29-31_02-3 -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio features for v=9eME1y6V-T4__#01-12-00_01-18-00_label_ -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio quality stats for v=9eME1y6V-T4__#01-12-00_01-18-00_label_ -> zeros (run scripts/extract_audio_features.py)
+[epoch  12/30] loss=0.6562 val_ap=0.8690 val_abuse=n/a [73.8s]
+[warn] missing audio features for Saving.Private.Ryan.1998__#02-29-31_02-3 -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio quality stats for Saving.Private.Ryan.1998__#02-29-31_02-3 -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio features for v=9eME1y6V-T4__#01-12-00_01-18-00_label_ -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio quality stats for v=9eME1y6V-T4__#01-12-00_01-18-00_label_ -> zeros (run scripts/extract_audio_features.py)
+[epoch  13/30] loss=0.6487 val_ap=0.8794 val_abuse=n/a [76.5s]
+[warn] missing audio features for Saving.Private.Ryan.1998__#02-29-31_02-3 -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio quality stats for Saving.Private.Ryan.1998__#02-29-31_02-3 -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio features for v=9eME1y6V-T4__#01-12-00_01-18-00_label_ -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio quality stats for v=9eME1y6V-T4__#01-12-00_01-18-00_label_ -> zeros (run scripts/extract_audio_features.py)
+[epoch  14/30] loss=0.6397 val_ap=0.8784 val_abuse=n/a [95.4s]
+[warn] missing audio features for v=9eME1y6V-T4__#01-12-00_01-18-00_label_ -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio quality stats for v=9eME1y6V-T4__#01-12-00_01-18-00_label_ -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio features for Saving.Private.Ryan.1998__#02-29-31_02-3 -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio quality stats for Saving.Private.Ryan.1998__#02-29-31_02-3 -> zeros (run scripts/extract_audio_features.py)
+[epoch  15/30] loss=0.6402 val_ap=0.8820 val_abuse=n/a [79.5s]
+[warn] missing audio features for Saving.Private.Ryan.1998__#02-29-31_02-3 -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio quality stats for Saving.Private.Ryan.1998__#02-29-31_02-3 -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio features for v=9eME1y6V-T4__#01-12-00_01-18-00_label_ -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio quality stats for v=9eME1y6V-T4__#01-12-00_01-18-00_label_ -> zeros (run scripts/extract_audio_features.py)
+[epoch  16/30] loss=0.6431 val_ap=0.8741 val_abuse=n/a [78.7s]
+[warn] missing audio features for Saving.Private.Ryan.1998__#02-29-31_02-3 -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio quality stats for Saving.Private.Ryan.1998__#02-29-31_02-3 -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio features for v=9eME1y6V-T4__#01-12-00_01-18-00_label_ -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio quality stats for v=9eME1y6V-T4__#01-12-00_01-18-00_label_ -> zeros (run scripts/extract_audio_features.py)
+[epoch  17/30] loss=0.6485 val_ap=0.8793 val_abuse=n/a [60.2s]
+[warn] missing audio features for v=9eME1y6V-T4__#01-12-00_01-18-00_label_ -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio quality stats for v=9eME1y6V-T4__#01-12-00_01-18-00_label_ -> zeros (run scripts/extract_audio_features.py)
+[epoch  18/30] loss=0.6375 val_ap=0.8807 val_abuse=n/a [57.1s]
+[warn] missing audio features for Saving.Private.Ryan.1998__#02-29-31_02-3 -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio quality stats for Saving.Private.Ryan.1998__#02-29-31_02-3 -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio features for v=9eME1y6V-T4__#01-12-00_01-18-00_label_ -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio quality stats for v=9eME1y6V-T4__#01-12-00_01-18-00_label_ -> zeros (run scripts/extract_audio_features.py)
+[epoch  19/30] loss=0.6265 val_ap=0.8830 val_abuse=n/a [57.6s]
+[warn] missing audio features for Saving.Private.Ryan.1998__#02-29-31_02-3 -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio quality stats for Saving.Private.Ryan.1998__#02-29-31_02-3 -> zeros (run scripts/extract_audio_features.py)
+[epoch  20/30] loss=0.6559 val_ap=0.8793 val_abuse=n/a [57.8s]
+[warn] missing audio features for Saving.Private.Ryan.1998__#02-29-31_02-3 -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio quality stats for Saving.Private.Ryan.1998__#02-29-31_02-3 -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio features for v=9eME1y6V-T4__#01-12-00_01-18-00_label_ -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio quality stats for v=9eME1y6V-T4__#01-12-00_01-18-00_label_ -> zeros (run scripts/extract_audio_features.py)
+[epoch  21/30] loss=0.6460 val_ap=0.8798 val_abuse=n/a [59.6s]
+[warn] missing audio features for Saving.Private.Ryan.1998__#02-29-31_02-3 -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio quality stats for Saving.Private.Ryan.1998__#02-29-31_02-3 -> zeros (run scripts/extract_audio_features.py)
+[epoch  22/30] loss=0.6199 val_ap=0.8785 val_abuse=n/a [57.6s]
+[warn] missing audio features for Saving.Private.Ryan.1998__#02-29-31_02-3 -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio quality stats for Saving.Private.Ryan.1998__#02-29-31_02-3 -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio features for v=9eME1y6V-T4__#01-12-00_01-18-00_label_ -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio quality stats for v=9eME1y6V-T4__#01-12-00_01-18-00_label_ -> zeros (run scripts/extract_audio_features.py)
+[epoch  23/30] loss=0.6389 val_ap=0.8814 val_abuse=n/a [57.5s]
+[warn] missing audio features for v=9eME1y6V-T4__#01-12-00_01-18-00_label_ -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio quality stats for v=9eME1y6V-T4__#01-12-00_01-18-00_label_ -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio features for Saving.Private.Ryan.1998__#02-29-31_02-3 -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio quality stats for Saving.Private.Ryan.1998__#02-29-31_02-3 -> zeros (run scripts/extract_audio_features.py)
+[epoch  24/30] loss=0.6170 val_ap=0.8864 val_abuse=n/a [57.4s]
+[warn] missing audio features for Saving.Private.Ryan.1998__#02-29-31_02-3 -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio quality stats for Saving.Private.Ryan.1998__#02-29-31_02-3 -> zeros (run scripts/extract_audio_features.py)
+[epoch  25/30] loss=0.6285 val_ap=0.8847 val_abuse=n/a [57.4s]
+[warn] missing audio features for v=9eME1y6V-T4__#01-12-00_01-18-00_label_ -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio quality stats for v=9eME1y6V-T4__#01-12-00_01-18-00_label_ -> zeros (run scripts/extract_audio_features.py)
+[epoch  26/30] loss=0.6378 val_ap=0.8822 val_abuse=n/a [57.4s]
+[warn] missing audio features for v=9eME1y6V-T4__#01-12-00_01-18-00_label_ -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio quality stats for v=9eME1y6V-T4__#01-12-00_01-18-00_label_ -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio features for Saving.Private.Ryan.1998__#02-29-31_02-3 -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio quality stats for Saving.Private.Ryan.1998__#02-29-31_02-3 -> zeros (run scripts/extract_audio_features.py)
+[epoch  27/30] loss=0.6270 val_ap=0.8916 val_abuse=n/a [57.4s]
+[warn] missing audio features for v=9eME1y6V-T4__#01-12-00_01-18-00_label_ -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio quality stats for v=9eME1y6V-T4__#01-12-00_01-18-00_label_ -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio features for Saving.Private.Ryan.1998__#02-29-31_02-3 -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio quality stats for Saving.Private.Ryan.1998__#02-29-31_02-3 -> zeros (run scripts/extract_audio_features.py)
+[epoch  28/30] loss=0.6302 val_ap=0.8877 val_abuse=n/a [57.3s]
+[warn] missing audio features for v=9eME1y6V-T4__#01-12-00_01-18-00_label_ -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio quality stats for v=9eME1y6V-T4__#01-12-00_01-18-00_label_ -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio features for Saving.Private.Ryan.1998__#02-29-31_02-3 -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio quality stats for Saving.Private.Ryan.1998__#02-29-31_02-3 -> zeros (run scripts/extract_audio_features.py)
+[epoch  29/30] loss=0.6036 val_ap=0.8801 val_abuse=n/a [87.5s]
+[warn] missing audio features for Saving.Private.Ryan.1998__#02-29-31_02-3 -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio quality stats for Saving.Private.Ryan.1998__#02-29-31_02-3 -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio features for v=9eME1y6V-T4__#01-12-00_01-18-00_label_ -> zeros (run scripts/extract_audio_features.py)
+[warn] missing audio quality stats for v=9eME1y6V-T4__#01-12-00_01-18-00_label_ -> zeros (run scripts/extract_audio_features.py)
+[epoch  30/30] loss=0.6114 val_ap=0.8792 val_abuse=n/a [57.5s]
+[done] best epoch 8 val_ap=0.9130 | last val_ap=0.8792 -> runs/2026-10-03_p3live_minirgbmel
+[live] score test with runs/2026-10-03_p3live_minirgbmel/ckpt_best.pt 11:29:42
+[score] ckpt=runs/2026-10-03_p3live_minirgbmel/ckpt_best.pt kind=fusion modality=both test=data/lists_minirgb/test.csv stride=16 frames/snippet rule=(2,1) snippets = (1.33,0.67) s
+{
+  "n_clips": 799,
+  "n_snippets": 143575,
+  "stride_frames": 16.0,
+  "segment_rule": {
+    "threshold": 0.5,
+    "min_length": 2,
+    "max_gap": 1,
+    "min_seconds": 1.333,
+    "max_gap_seconds": 0.667
+  },
+  "ap": {
+    "global__pr_auc": 0.40841755957001885,
+    "global__average_precision": 0.4084336222980211,
+    "per_video__pr_auc": 0.47519231566812015,
+    "per_video__average_precision": 0.4876717866965475
+  },
+  "prevalence": 0.24137906730175018,
+  "localization": {
+    "n_pred_segments": 174,
+    "n_gt_segments": 1238,
+    "mean_best_iou": 0.10788294737119866,
+    "mean_detection_delay_snippets": 38.86619718309859,
+    "mean_detection_delay_frames": 621.8591549295775,
+    "mean_detection_delay_seconds": 25.910798122065728,
+    "precision@iou0.1": 0.26436781609195403,
+    "recall@iou0.1": 0.03715670436187399,
+    "f1@iou0.1": 0.06515580736543908,
+    "precision@iou0.2": 0.16091954022988506,
+    "recall@iou0.2": 0.022617124394184167,
+    "f1@iou0.2": 0.03966005665722379,
+    "precision@iou0.3": 0.1206896551724138,
+    "recall@iou0.3": 0.016962843295638127,
+    "f1@iou0.3": 0.029745042492917848,
+    "precision@iou0.4": 0.06896551724137931,
+    "recall@iou0.4": 0.009693053311793215,
+    "f1@iou0.4": 0.016997167138810197,
+    "precision@iou0.5": 0.028735632183908046,
+    "recall@iou0.5": 0.004038772213247173,
+    "f1@iou0.5": 0.007082152974504249
+  },
+  "macro_per_class_ap": 0.32539083752797343,
+  "dropped_modality": "none"
+}
+per-class clip-level AP: {'fighting': 0.2763, 'shooting': 0.1962, 'riot': 0.5719, 'abuse': 0.0141, 'car_accident': 0.6229, 'explosion': 0.2709}
+[ok] predictions + metrics -> runs/2026-10-03_p3live_minirgbmel
+[live] ALL_DONE 11:29:52

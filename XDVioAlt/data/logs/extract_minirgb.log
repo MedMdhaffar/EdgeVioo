@@ -1,0 +1,112 @@
+[minirgb] extractor <- export/onnx/minirgb_w24_distilled.pt (width 24) | 6 workers
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x561f23a71d80] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x561f221803c0] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x561f231a1f40] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x561f2e0ba240] Referenced QT chapter track not found
+[minirgb] train: 500/3803 [641s]
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x561f275aeb40] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x561f275aeb40] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x561f267c9700] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x561f2a857680] Referenced QT chapter track not found
+[minirgb] train: 1000/3803 [1274s]
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x561f26f45c40] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x561f306e0440] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x561f2354dd00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x561f2354dd00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x561f25b1e540] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x561f28c7fd80] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x561f2ed266c0] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x561f23cce500] Referenced QT chapter track not found
+[h264 @ 0x561f25b0d840] Invalid NAL unit size (481379152 > 6973).
+[h264 @ 0x561f25b0d840] missing picture in access unit with size 6977
+[h264 @ 0x561f28b97d00] Invalid NAL unit size (481379152 > 6973).
+[h264 @ 0x561f28b97d00] Error splitting the input into NAL units.
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x561f232be140] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x561f231b3600] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x561f307c6480] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x561f307c6480] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x561f23129e80] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x561f2c552d40] Referenced QT chapter track not found
+[minirgb] train: 1500/3803 [1727s]
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x561f383864c0] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x561f383864c0] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x561f245cca80] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x561f245cca80] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x561f23393540] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x561f25918200] Referenced QT chapter track not found
+[minirgb] train: 2000/3803 [2169s]
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x561f2729df00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x561f2729df00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x561f25961240] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x561f25961240] Referenced QT chapter track not found
+[minirgb] train: 2500/3803 [2955s]
+[h264 @ 0x561f27920cc0] Reference 4 >= 4
+[h264 @ 0x561f27920cc0] error while decoding MB 19 17, bytestream 1225
+[h264 @ 0x561f32e5f6c0] Invalid NAL unit size (5046349 > 3821).
+[h264 @ 0x561f32e5f6c0] missing picture in access unit with size 3825
+[h264 @ 0x561f33474180] Invalid NAL unit size (5046349 > 3821).
+[h264 @ 0x561f33474180] Error splitting the input into NAL units.
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x561f22809140] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x561f232f7480] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x561f27357c80] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x561f381a9200] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x561f2a95dac0] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x561f29eb8340] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x561f232f7480] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x561f2a44fa80] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x561f2a3d1040] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x561f30f24800] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x561f3339efc0] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x561f2295a700] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x561f29eb8340] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x561f28dcdb00] Referenced QT chapter track not found
+[minirgb] train: 3000/3803 [3732s]
+/home/aarf101/.pyenv/versions/3.14.0/lib/python3.14/multiprocessing/resource_tracker.py:297: UserWarning: resource_tracker: There appear to be 6 leaked semaphore objects to clean up at shutdown: {'/mp-j_13cfbx', '/mp-s4egjaih', '/mp-p2fajl08', '/mp-bol6r3zu', '/mp-mhnjt866', '/mp-a4k_iqk3'}
+  warnings.warn(
+[minirgb] extractor <- export/onnx/minirgb_w24_distilled.pt (width 24) | 3 workers
+[minirgb] train: 500/3803 [3s]
+[minirgb] train: 1000/3803 [3s]
+[minirgb] train: 1500/3803 [3s]
+[minirgb] train: 2000/3803 [3s]
+[minirgb] train: 2500/3803 [3s]
+[minirgb] train: 3000/3803 [3s]
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55756f162000] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55756f162000] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55756c5d3900] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55756f162000] Referenced QT chapter track not found
+/home/aarf101/.pyenv/versions/3.14.0/lib/python3.14/multiprocessing/resource_tracker.py:297: UserWarning: resource_tracker: There appear to be 6 leaked semaphore objects to clean up at shutdown: {'/mp-zu4rmcgs', '/mp-m23q_c26', '/mp-drvmte98', '/mp-_bvrfjfa', '/mp-c5vcbmcu', '/mp-qsm0mzlt'}
+  warnings.warn(
+[minirgb] extractor <- export/onnx/minirgb_w24_distilled.pt (width 24) | 1 workers
+[minirgb] train: 500/3803 [0s]
+[minirgb] train: 1000/3803 [0s]
+[minirgb] train: 1500/3803 [0s]
+[minirgb] train: 2000/3803 [0s]
+[minirgb] train: 2500/3803 [0s]
+[minirgb] extractor <- export/onnx/minirgb_w24_distilled.pt (width 24) | 1 workers
+[minirgb] train: 500/3772 [0s]
+[minirgb] train: 1000/3772 [0s]
+[minirgb] train: 1500/3772 [0s]
+[minirgb] train: 2000/3772 [0s]
+[minirgb] train: 2500/3772 [0s]
+[minirgb] train: 3000/3772 [35s]
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x562bb1b7e780] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x562bb29b6840] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x562bb2c503c0] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x562bb2d9e4c0] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x562bb28eb000] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x562bb66c1480] Referenced QT chapter track not found
+[minirgb] train: 3500/3772 [346s]
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x562bb28eb000] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x562bb49e0a80] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x562bb49e0a80] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x562bb3db0f80] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x562bb09876c0] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x562bb673f900] Referenced QT chapter track not found
+[minirgb] train: wrote 3772 (1 no-video, 31 oversize, 0 skipped) -> data/features/minirgb/train  [610s]
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x562bb099c780] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x562bb0953600] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x562bb2d76180] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x562bb28cc740] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x562bb099c780] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x562bb0f575c0] Referenced QT chapter track not found
+[minirgb] val: wrote 149 (0 no-video, 1 oversize, 0 skipped) -> data/features/minirgb/val  [752s]

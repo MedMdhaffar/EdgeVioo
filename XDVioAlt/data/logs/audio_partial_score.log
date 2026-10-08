@@ -1,0 +1,43 @@
+{
+  "n_clips": 799,
+  "n_snippets": 36869,
+  "stride_frames": 64.0,
+  "segment_rule": {
+    "threshold": 0.5,
+    "min_length": 2,
+    "max_gap": 1
+  },
+  "ap": {
+    "global__pr_auc": 0.3337118237849935,
+    "global__average_precision": 0.33373891555106294,
+    "per_video__pr_auc": 0.6850172395709037,
+    "per_video__average_precision": 0.7090083530475633
+  },
+  "prevalence": 0.2588353455066681,
+  "localization": {
+    "n_pred_segments": 684,
+    "n_gt_segments": 1238,
+    "mean_best_iou": 0.3822756552855214,
+    "mean_detection_delay_snippets": 5.257075471698113,
+    "mean_detection_delay_frames": 336.45283018867923,
+    "mean_detection_delay_seconds": 14.018867924528301,
+    "precision@iou0.1": 0.4868421052631579,
+    "recall@iou0.1": 0.2689822294022617,
+    "f1@iou0.1": 0.34651404786680534,
+    "precision@iou0.2": 0.4342105263157895,
+    "recall@iou0.2": 0.23990306946688206,
+    "f1@iou0.2": 0.3090530697190426,
+    "precision@iou0.3": 0.3669590643274854,
+    "recall@iou0.3": 0.20274636510500807,
+    "f1@iou0.3": 0.26118626430801245,
+    "precision@iou0.4": 0.2953216374269006,
+    "recall@iou0.4": 0.1631663974151858,
+    "f1@iou0.4": 0.21019771071800208,
+    "precision@iou0.5": 0.2236842105263158,
+    "recall@iou0.5": 0.12358642972536349,
+    "f1@iou0.5": 0.15920915712799166
+  },
+  "macro_per_class_ap": 0.15394142234466077
+}
+per-class clip-level AP: {'fighting': 0.2802, 'shooting': 0.2135, 'riot': 0.1194, 'abuse': 0.0139, 'car_accident': 0.1258, 'explosion': 0.1708}
+[ok] predictions + metrics -> runs/2026-09-24_p2_audio_partial

@@ -1,0 +1,166 @@
+{
+  "clip_id": "Before.Sunset.2004__#01-14-30_01-16-51_label_A",
+  "video": "",
+  "duration_s": null,
+  "grid": {
+    "stride_frames": 64.0,
+    "fps": 24.0,
+    "stride_s": 2.667,
+    "n_snippets": 31
+  },
+  "config": {
+    "threshold": 0.5,
+    "min_seconds": 5.0,
+    "max_gap_seconds": 2.5,
+    "language": "fr"
+  },
+  "category": {
+    "available": true,
+    "label": "shooting",
+    "probability": 0.5975,
+    "ranked": [
+      {
+        "category": "shooting",
+        "probability": 0.5975
+      },
+      {
+        "category": "fighting",
+        "probability": 0.4522
+      },
+      {
+        "category": "explosion",
+        "probability": 0.1223
+      }
+    ],
+    "all": {
+      "shooting": 0.5975,
+      "fighting": 0.4522,
+      "explosion": 0.1223,
+      "car_accident": 0.0258,
+      "riot": 0.0229,
+      "abuse": 0.0002
+    },
+    "note": "raw sigmoid outputs of the multi-label head (uncalibrated), trained on weak clip labels; 'abuse' has only 8 test clips so its probability is the least reliable"
+  },
+  "segments": [
+    {
+      "start_s": 0.0,
+      "end_s": 82.67,
+      "duration_s": 82.67,
+      "n_snippets": 31,
+      "mean_probability": 0.9605,
+      "peak_probability": 1.0,
+      "n_snippets_above_threshold": 31
+    }
+  ],
+  "visual_evidence": {
+    "criterion": "ranked by snippet score, ties broken by temporal attention",
+    "top_snippets": [
+      {
+        "snippet": 2,
+        "second": 5.33,
+        "probability": 1.0,
+        "attention": 0.10034
+      },
+      {
+        "snippet": 1,
+        "second": 2.67,
+        "probability": 1.0,
+        "attention": 0.04924
+      },
+      {
+        "snippet": 10,
+        "second": 26.67,
+        "probability": 1.0,
+        "attention": 0.10025
+      },
+      {
+        "snippet": 9,
+        "second": 24.0,
+        "probability": 1.0,
+        "attention": 0.05186
+      },
+      {
+        "snippet": 23,
+        "second": 61.33,
+        "probability": 1.0,
+        "attention": 0.04392
+      }
+    ],
+    "peak_attention": {
+      "snippet": 2,
+      "second": 5.33,
+      "attention": 0.10034
+    },
+    "attention_entropy": 3.1176,
+    "attention_entropy_normalised": 0.9079
+  },
+  "audio_evidence": {
+    "channels": [
+      "rms",
+      "rms_db",
+      "flatness",
+      "zcr",
+      "clip_ratio"
+    ],
+    "available": false,
+    "note": "no reliability channels for this run (trained before Session 9)"
+  },
+  "modality_contribution": {
+    "available": true,
+    "type": "per-modality score curves (late fusion) + score without each modality",
+    "mean_probability": {
+      "visual": 0.9974,
+      "audio": 0.6212
+    },
+    "peak_probability": {
+      "visual": 1.0,
+      "audio": 0.9716
+    },
+    "drop_one": {
+      "audio": {
+        "mean_probability_intact": 0.9605,
+        "mean_probability_without": 0.9532,
+        "delta": 0.0073
+      },
+      "visual": {
+        "mean_probability_intact": 0.9605,
+        "mean_probability_without": 0.3352,
+        "delta": 0.6253
+      }
+    }
+  },
+  "confidence": {
+    "raw_clip_probability": 1.0,
+    "raw_alert_probability": 0.9605,
+    "top_k": 5,
+    "calibrated": true,
+    "temperature": 1.4047,
+    "clip_probability": 0.9995,
+    "alert_probability": 0.9066,
+    "evidence": {
+      "ece_before": 0.039,
+      "ece_after": 0.0368,
+      "fitted_on": "val",
+      "n_samples": 434,
+      "note": "temperature fitted on the validation split; applied to snippet scores as well (shared-scale assumption, see safewatch/eval/calibration.py)"
+    }
+  },
+  "media": {
+    "note": "clip mp4 not found on disk; no frames or spectrogram rendered"
+  },
+  "requires_human_verification": true,
+  "caveats": [
+    "weak supervision: clip-level labels during training, frame-level only for evaluation",
+    "temporal resolution is the snippet grid (2.67 s here)",
+    "category probabilities come from an uncalibrated multi-label head",
+    "audio channels are signal statistics, not an acoustic-event classifier"
+  ],
+  "provenance": {
+    "checkpoint": "runs/2026-09-29_p3full_late/ckpt_best.pt",
+    "clip_id": "Before.Sunset.2004__#01-14-30_01-16-51_label_A",
+    "stride_frames": 64.0,
+    "fusion_mode": "late"
+  },
+  "text": "Incident detecte entre 00:00 et 01:23. Categorie probable : shooting (60%). Indices visuels : snippet le plus anormal a 00:05 (p=1.00). Contribution des modalites : per-modality score curves (late fusion) + score without each modality - visuel 1.00 vs audio 0.62. Confiance globale : 91% (calibree, temperature 1.4047). Verification humaine recommandee avant toute action. Modele faiblement supervise : il localise une zone suspecte, il ne confirme pas l'evenement."
+}

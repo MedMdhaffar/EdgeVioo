@@ -1,0 +1,396 @@
+[p2] start 2026-09-24T17:22:16+01:00  free disk: 188G
+[p2] downloading the 800 test videos (~14 GB, kept for the demo/UI)
+[dl] 800 files under data/video/test_videos/
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[dl] SKIP data/video/test_videos/Before.Sunset.2004__#01-14-30_01-16-51_label_A.mp4 (OSError)
+[dl] 600/800 processed | 599 present | 1 skipped
+[dl] 650/800 processed | 649 present | 1 skipped
+[dl] 700/800 processed | 699 present | 1 skipped
+[dl] 750/800 processed | 749 present | 1 skipped
+[dl] 800/800 processed | 799 present | 1 skipped
+[dl] done: 799/800 present, 1 skipped
+[dl] skip log -> data/features/skipped_data_video_test_videos_.json
+[p2] test videos present: 799/800
+[p2] extracting audio features for test clips
+[audio] 799 clips to process (backend=mel) -> data/features/mel
+[25/799] ok           Black.Hawk.Down.2001__#00-06-44_00-07-39_lab 57 
+[50/799] ok           Casino.Royale.2006__#00-18-30_00-19-20_label 52 
+[75/799] ok           Death.Proof.2007__#01-40-41_01-42-17_label_B 100 
+[100/799] ok           Flipped.2010__#00-45-40_00-47-30_label_A 114 
+[125/799] ok           Haywire.2011__#00-02-06_00-03-29_label_A 86 
+[150/799] ok           Jason.Bourne.2016__#0-50-20_0-50-30_label_G- 10 
+[175/799] ok           Love.Actually.2003__#01-39-05_01-46-40_label 474 
+[200/799] ok           Mission.Impossible.II.2000__#01-32-56_01-33- 30 
+[225/799] ok           Operation.Red.Sea.2018__#01-37-22_01-37-36_l 14 
+[250/799] ok           Saving.Private.Ryan.1998__#02-24-18_02-25-42 87 
+[275/799] ok           Spectre.2015__#01-08-58_01-09-20_label_B1-B2 22 
+[300/799] ok           The.Attorney.2013__#00-47-00_00-49-30_label_ 156 
+[325/799] ok           The.Hurt.Locker.2008__#0-29-25_0-30-15_label 52 
+[350/799] ok           Tropa.de.Elite.2.2010__#00-42-00_00-43-00_la 62 
+[375/799] ok           v=-fOWSLV6Esw__#1_label_B4-0-0 34 
+[400/799] ok           v=2WkuPNLfl5s__#1_label_B4-0-0 53 
+[425/799] ok           v=6nfo9c7a5pE__#1_label_B1-0-0 53 
+[450/799] ok           v=9eME1y6V-T4__#01-36-00_01-42-00_label_A 375 
+[475/799] ok           v=DRGMajXo_PI__#00-02-15_00-03-02_label_G-0- 49 
+[500/799] ok           v=H5W58Loofks__#00-05-50_00-06-20_label_B6-0 31 
+[525/799] ok           v=JzrpCC7XmyE__#00-06-00_00-12-00_label_A 375 
+[550/799] ok           v=PRH5rYUHoVU__#00-00-25_00-02-50_label_B6-0 151 
+[575/799] ok           v=SdYFFo_tsfk__#00-00-00_00-06-00_label_A 375 
+[600/799] ok           v=X6Tbn8_X-Os__#1_label_B1-0-0 212 
+[625/799] ok           v=abATVcjFumY__#1_label_G-0-0 79 
+[650/799] ok           v=fkps18H3SXY__#00-00-00_00-06-00_label_A 375 
+[675/799] ok           v=k98yVPXiYoU__#1_label_G-0-0 31 
+[700/799] ok           v=pCyCi-q4MqY__#1_label_A 204 
+[725/799] ok           v=sbEHU4GskX4__#1_label_B1-0-0 122 
+[750/799] ok           v=vFPQ_NiDBIU__#01-00-00_01-06-00_label_A 375 
+[775/799] ok           v=waIS8TaJxts__#00-05-50_00-06-20_label_B6-0 31 
+[audio] done: {'skipped': 10, 'ok': 789}
+[audio] feature files present: 799
+[p2] chunk 1-1004: 0 videos already present
+[p2] downloading chunk 1-1004
+[dl] 1004 files under data/video/1-1004/
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[dl] 50/1004 processed | 50 present | 0 skipped
+[dl] 100/1004 processed | 100 present | 0 skipped
+[dl] 150/1004 processed | 150 present | 0 skipped
+[dl] 200/1004 processed | 200 present | 0 skipped
+[dl] 250/1004 processed | 250 present | 0 skipped
+[dl] 300/1004 processed | 300 present | 0 skipped
+[dl] 350/1004 processed | 350 present | 0 skipped
+[dl] 400/1004 processed | 400 present | 0 skipped
+[dl] 450/1004 processed | 450 present | 0 skipped
+[dl] 500/1004 processed | 500 present | 0 skipped
+[dl] 550/1004 processed | 550 present | 0 skipped
+[dl] 600/1004 processed | 600 present | 0 skipped
+[dl] 650/1004 processed | 650 present | 0 skipped
+[dl] 700/1004 processed | 700 present | 0 skipped
+[dl] 750/1004 processed | 750 present | 0 skipped
+[dl] 800/1004 processed | 800 present | 0 skipped
+[dl] 850/1004 processed | 850 present | 0 skipped
+[dl] 900/1004 processed | 900 present | 0 skipped
+[dl] 950/1004 processed | 950 present | 0 skipped
+[dl] 1000/1004 processed | 1000 present | 0 skipped
+[dl] done: 1004/1004 present, 0 skipped
+[p2] extracting audio features for chunk 1-1004
+[audio] 1004 clips to process (backend=mel) -> data/features/mel
+[25/1004] ok           About.Time.2013__#00-01-45_00-02-15_label_A 31 
+[50/1004] ok           About.Time.2013__#01-50-20_01-56-30_label_A 385 
+[75/1004] ok           Bad.Boys.II.2003__#01-29-04_01-30-03_label_B 61 
+[100/1004] ok           Be.with.You.2018__#01-33-18_01-36-11_label_A 180 
+[125/1004] ok           Before.Sunset.2004__#00-04-20_00-05-35_label 78 
+[150/1004] ok           Black.Hawk.Down.2001__#00-47-30_00-47-58_lab 29 
+[175/1004] ok           Braveheart.1995__#02-14-41_02-16-20_label_B1 103 
+[200/1004] ok           Brick.Mansions.2014__#00-58-05_00-58-57_labe 54 
+[225/1004] ok           Bullet.in.the.Head.1990__#00-57-53_01-00-57_ 191 
+[250/1004] ok           Casino.Royale.2006__#00-00-37_00-01-52_label 78 
+[275/1004] ok           City.Of.Men.2007__#00-53-50_00-54-30_label_B 41 
+[300/1004] ok           City.of.God.2002__#01-02-36_01-04-02_label_A 89 
+[325/1004] ok           Deadpool.2.2018__#0-03-38_0-03-50_label_B2-0 12 
+[350/1004] ok           Deadpool.2016__#0-30-17_0-31-51_label_A 97 
+[375/1004] ok           Death.Proof.2007__#01-48-30_01-49-26_label_B 58 
+[400/1004] ok           Fast.Five.2011__#00-07-53_00-08-53_label_A 62 
+[425/1004] ok           Fast.Furious.2009__#00-06-33_00-07-30_label_ 59 
+[450/1004] ok           Fast.Furious.6.2013__#00-30-50_00-32-31_labe 105 
+[475/1004] ok           Flipped.2010__#00-23-50_00-24-31_label_A 42 
+[500/1004] ok           Fury.2014__#00-31-22_00-35-11_label_B2-G-0 238 
+[525/1004] ok           Gladiator.2000__#01-55-09_01-59-36_label_B1- 278 
+[550/1004] ok           GoldenEye.1995__#00-28-54_00-31-08_label_A 139 
+[575/1004] ok           Good.Will.Hunting.1997__#00-04-20_00-05-35_l 78 
+[600/1004] ok           Haywire.2011__#00-05-37_00-07-13_label_A 100 
+[625/1004] ok           Hear.Me.2009__#01-04-40_01-06-59_label_A 144 
+[650/1004] ok           IP.Man.2.2010__#00-29-16_00-30-36_label_A 83 
+[675/1004] ok           Ip.Man.2008__#00-43-36_00-44-34_label_A 60 
+[700/1004] ok           Ip.Man.3.2015__#01-13-45_01-15-18_label_B1-0 96 
+[725/1004] ok           Jason.Bourne.2016__#0-53-59_0-54-53_label_B1 56 
+[750/1004] ok           Kill.Bill.Vol.1.2003__#01-16-11_01-17-12_lab 63 
+[775/1004] ok           Kingsman.The.Golden.Circle.2017__#01-32-27_0 72 
+[800/1004] ok           Law.Abiding.Citizen.2009__#01-14-22_01-14-38 16 
+[825/1004] ok           Love.Actually.2003__#00-38-52_00-40-31_label 103 
+[850/1004] ok           Love.Death.and.Robots.S01E12__#0-00-40_0-05- 270 
+[875/1004] ok           Mindhunters.2004__#00-10-04_00-11-04_label_A 62 
+[900/1004] ok           Mission.Impossible.Fallout.2018__#02-05-29_0 54 
+[925/1004] ok           Mission.Impossible.II.2000__#00-32-03_00-32- 55 
+[950/1004] ok           Mission.Impossible.II.2000__#01-56-14_01-58- 120 
+[975/1004] ok           Mission.Impossible.V.Rogue.Nation.2015__#00- 62 
+[1000/1004] ok           New.Kids.Turbo.2010__#00-46-23_00-47-55_labe 95 
+[audio] done: {'ok': 1004}
+[audio] feature files present: 1803
+[p2] chunk 1-1004 extracted -> deleting videos to free disk
+[p2] chunk 1-1004 done, feature files: 1803, free disk: 188G
+[p2] chunk 1005-2004: 0 videos already present
+[p2] downloading chunk 1005-2004
+[dl] 996 files under data/video/1005-2004/
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[dl] 50/996 processed | 50 present | 0 skipped
+[dl] 100/996 processed | 100 present | 0 skipped
+[dl] 150/996 processed | 150 present | 0 skipped
+[dl] 200/996 processed | 200 present | 0 skipped
+[dl] 250/996 processed | 250 present | 0 skipped
+[dl] 300/996 processed | 300 present | 0 skipped
+[dl] 350/996 processed | 350 present | 0 skipped
+[dl] 400/996 processed | 400 present | 0 skipped
+[dl] 450/996 processed | 450 present | 0 skipped
+[dl] 500/996 processed | 500 present | 0 skipped
+[dl] 550/996 processed | 550 present | 0 skipped
+[dl] 600/996 processed | 600 present | 0 skipped
+[dl] 650/996 processed | 650 present | 0 skipped
+[dl] 700/996 processed | 700 present | 0 skipped
+[dl] 750/996 processed | 750 present | 0 skipped
+[dl] 800/996 processed | 800 present | 0 skipped
+[dl] 850/996 processed | 850 present | 0 skipped
+[dl] 900/996 processed | 900 present | 0 skipped
+[dl] 950/996 processed | 950 present | 0 skipped
+[dl] done: 996/996 present, 0 skipped
+[p2] extracting audio features for chunk 1005-2004
+[audio] 996 clips to process (backend=mel) -> data/features/mel
+[25/996] ok           One.Day.2011__#01-31-56_01-38-14_label_A 393 
+[50/996] ok           Operation.Red.Sea.2018__#01-32-16_01-33-29_l 76 
+[75/996] ok           Quantum.Of.Solace.2008__#01-25-15_01-26-05_l 52 
+[100/996] ok           Rush.Hour.1998.BluRay__#01-21-48_01-22-19_la 32 
+[125/996] ok           Salt.2010__#00-31-00_00-32-01_label_A 63 
+[150/996] ok           Salt.2010__#01-26-40_01-28-10_label_B2-B1-B5 93 
+[175/996] ok           Saving.Private.Ryan.1998__#02-17-44_02-18-50 68 
+[200/996] ok           Shoplifters.2018__#00-11-00_00-15-08_label_A 258 
+[225/996] ok           Sin.City.2005__#0-05-10_0-06-07_label_A 59 
+[250/996] ok           Sin.City.2005__#01-53-40_01-54-12_label_B5-0 33 
+[275/996] ok           Skyfall.2012__#01-19-10_01-20-00_label_B2-0- 52 
+[300/996] ok           Spectre.2015__#01-15-30_01-16-30_label_A 62 
+[325/996] ok           Still.Walking.2008__#00-25-20_00-29-40_label 270 
+[350/996] ok           Taken.2.UNRATED.EXTENDED.2012__#00-32-36_00- 14 
+[375/996] ok           Taken.3.2014__#00-44-08_00-44-30_label_B1-0- 22 
+[400/996] ok           Taken.3.2014__#01-48-52_01-49-42_label_A 52 
+[425/996] ok           Taken.Extended.Cut.2008__#01-22-28_01-22-40_ 12 
+[450/996] ok           The.Bourne.Identity.2002__#0-04-37_0-05-45_l 70 
+[475/996] ok           The.Bourne.Legacy.2012__#0-38-41_0-38-51_lab 10 
+[500/996] ok           The.Bourne.Supremacy.2004__#01-17-32_01-18-0 31 
+[525/996] ok           The.Bourne.Ultimatum.2007__#01-44-21_01-46-0 108 
+[550/996] ok           The.Intouchables.2011__#00-16-18_00-17-27_la 71 
+[575/996] ok           The.Notebook.2004__#00-05-52_00-08-22_label_ 156 
+[600/996] ok           The.Pursuit.of.Happyness.2006__#00-23-50_00- 42 
+[625/996] ok           The.Secret.Life.of.Walter.Mitty.2013__#00-23 42 
+[650/996] ok           The.World.Is.Not.Enough.1999__#01-40-20_01-4 16 
+[675/996] ok           Tropa.de.Elite.2.2010__#00-49-00_00-50-20_la 83 
+[700/996] ok           sportsviolence__#1_label_B1-0-0 512 
+[725/996] ok           v=0hi_wpaM54s__#1_label_A 179 
+[750/996] ok           v=1Up20_cLdVQ__#1_label_A 372 
+[775/996] ok           v=2Z-LmV6Zycs__#1_label_B1-0-0 133 
+[800/996] ok           v=3NklthJ7foI__#1_label_B1-0-0 90 
+[825/996] ok           v=4sQE6T2O0EQ__#00-02-00_00-02-35_label_B6-0 36 
+[850/996] ok           v=5Tnl7_8RqlA__#00-04-10_00-06-09_label_B6-0 123 
+[875/996] ok           v=6FnL9s4SaAc__#1_label_G-0-0 77 
+[900/996] ok           v=7JKWRE9yx5M__#1_label_B4-0-0 69 
+[925/996] ok           v=7lqJYZhVzPE__#1_label_A 192 
+[950/996] ok           v=8teJmzR7Z18__#1_label_A 14 
+[975/996] ok           v=_1AW8Nfe9gw__#1_label_B1-0-0 72 
+[audio] done: {'ok': 996}
+[audio] feature files present: 2799
+[p2] chunk 1005-2004 extracted -> deleting videos to free disk
+[p2] chunk 1005-2004 done, feature files: 2799, free disk: 188G
+[p2] chunk 2005-2804: 0 videos already present
+[p2] downloading chunk 2005-2804
+[dl] 800 files under data/video/2005-2804/
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[dl] 50/800 processed | 50 present | 0 skipped
+[dl] 100/800 processed | 100 present | 0 skipped
+=== restart 2026-09-25T11:48:36+01:00 (interrupted 2026-09-24 after chunk 1005-2004) ===
+[p2] start 2026-09-25T11:48:36+01:00  free disk: 99G
+[p2] downloading the 800 test videos (~14 GB, kept for the demo/UI)
+[dl] 800 files under data/video/test_videos/
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[dl] SKIP data/video/test_videos/Before.Sunset.2004__#01-14-30_01-16-51_label_A.mp4 (OSError)
+[dl] done: 799/800 present, 1 skipped
+[dl] skip log -> data/features/skipped_data_video_test_videos_.json
+[p2] test videos present: 799/800
+[p2] extracting audio features for test clips
+[audio] 799 clips to process (backend=mel) -> data/features/mel
+[25/799] skipped      Black.Hawk.Down.2001__#00-06-44_00-07-39_lab  
+[50/799] skipped      Casino.Royale.2006__#00-18-30_00-19-20_label  
+[75/799] skipped      Death.Proof.2007__#01-40-41_01-42-17_label_B  
+[100/799] skipped      Flipped.2010__#00-45-40_00-47-30_label_A  
+[125/799] skipped      Haywire.2011__#00-02-06_00-03-29_label_A  
+[150/799] skipped      Jason.Bourne.2016__#0-50-20_0-50-30_label_G-  
+[175/799] skipped      Love.Actually.2003__#01-39-05_01-46-40_label  
+[200/799] skipped      Mission.Impossible.II.2000__#01-32-56_01-33-  
+[225/799] skipped      Operation.Red.Sea.2018__#01-37-22_01-37-36_l  
+[250/799] skipped      Saving.Private.Ryan.1998__#02-24-18_02-25-42  
+[275/799] skipped      Spectre.2015__#01-08-58_01-09-20_label_B1-B2  
+[300/799] skipped      The.Attorney.2013__#00-47-00_00-49-30_label_  
+[325/799] skipped      The.Hurt.Locker.2008__#0-29-25_0-30-15_label  
+[350/799] skipped      Tropa.de.Elite.2.2010__#00-42-00_00-43-00_la  
+[375/799] skipped      v=-fOWSLV6Esw__#1_label_B4-0-0  
+[400/799] skipped      v=2WkuPNLfl5s__#1_label_B4-0-0  
+[425/799] skipped      v=6nfo9c7a5pE__#1_label_B1-0-0  
+[450/799] skipped      v=9eME1y6V-T4__#01-36-00_01-42-00_label_A  
+[475/799] skipped      v=DRGMajXo_PI__#00-02-15_00-03-02_label_G-0-  
+[500/799] skipped      v=H5W58Loofks__#00-05-50_00-06-20_label_B6-0  
+[525/799] skipped      v=JzrpCC7XmyE__#00-06-00_00-12-00_label_A  
+[550/799] skipped      v=PRH5rYUHoVU__#00-00-25_00-02-50_label_B6-0  
+[575/799] skipped      v=SdYFFo_tsfk__#00-00-00_00-06-00_label_A  
+[600/799] skipped      v=X6Tbn8_X-Os__#1_label_B1-0-0  
+[625/799] skipped      v=abATVcjFumY__#1_label_G-0-0  
+[650/799] skipped      v=fkps18H3SXY__#00-00-00_00-06-00_label_A  
+[675/799] skipped      v=k98yVPXiYoU__#1_label_G-0-0  
+[700/799] skipped      v=pCyCi-q4MqY__#1_label_A  
+[725/799] skipped      v=sbEHU4GskX4__#1_label_B1-0-0  
+[750/799] skipped      v=vFPQ_NiDBIU__#01-00-00_01-06-00_label_A  
+[775/799] skipped      v=waIS8TaJxts__#00-05-50_00-06-20_label_B6-0  
+[audio] done: {'skipped': 799}
+[audio] feature files present: 2799
+[p2] chunk 1-1004: 0 videos already present
+[p2] downloading chunk 1-1004
+[dl] 1004 files under data/video/1-1004/
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+=== coverage-aware restart 2026-09-25T11:52:02+01:00 ===
+[p2] start 2026-09-25T11:52:02+01:00  free disk: 99G
+[p2] test features already complete: 799/800 (mirror files skipped: 1)
+[p2] chunk 1-1004: features already complete (1004/1004) -> skip
+[p2] chunk 1005-2004: features already complete (996/996) -> skip
+[p2] chunk 2005-2804: 0/800 features, 144 videos present
+[p2] downloading chunk 2005-2804 (existing files are skipped, so a partial chunk resumes)
+[dl] 800 files under data/video/2005-2804/
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[dl] 150/800 processed | 150 present | 0 skipped
+[dl] 200/800 processed | 200 present | 0 skipped
+[dl] 250/800 processed | 250 present | 0 skipped
+[dl] 300/800 processed | 300 present | 0 skipped
+[dl] 350/800 processed | 350 present | 0 skipped
+[dl] 400/800 processed | 400 present | 0 skipped
+[dl] 450/800 processed | 450 present | 0 skipped
+[dl] 500/800 processed | 500 present | 0 skipped
+[dl] 550/800 processed | 550 present | 0 skipped
+[dl] 600/800 processed | 600 present | 0 skipped
+[dl] 650/800 processed | 650 present | 0 skipped
+[dl] 700/800 processed | 700 present | 0 skipped
+[dl] 750/800 processed | 750 present | 0 skipped
+[dl] 800/800 processed | 800 present | 0 skipped
+[dl] done: 800/800 present, 0 skipped
+[p2] extracting audio features for chunk 2005-2804
+[audio] 800 clips to process (backend=mel) -> data/features/mel
+[25/800] ok           v=36VcW5DWJyI__#1_label_B1-0-0 238 
+[50/800] ok           v=883gJGDi8Xw__#1_label_B6-0-0 316 
+[75/800] ok           v=9u_gz0hG0HA__#1_label_B1-0-0 157 
+[100/800] ok           v=AqFWYZsOgWY__#00-18-00_00-21-00_label_A 187 
+[125/800] ok           v=Bc_ALE4oGSE__#1_label_A 72 
+[150/800] ok           v=C1ZCZ-PBGzI__#00-13-00_00-14-51_label_B6-0 115 
+[175/800] ok           v=CoYFjryuFjs__#1_label_B4-0-0 141 
+[200/800] ok           v=DD3jfKr8e-k__#00-04-27_00-07-08_label_B4-0 167 
+[225/800] ok           v=Dn_SDu22WpM__#00-07-22_00-08-19_label_B6-0 59 
+[250/800] ok           v=F1ZSPzNiyNE__#1_label_B4-0-0 52 
+[275/800] ok           v=FfrXebzAwOg__#00-04-10_00-06-09_label_B6-0 123 
+[300/800] ok           v=GmN002rn6qY__#1_label_B4-0-0 209 
+[325/800] ok           v=H9Y5_X1sEEA__#00-51-00_00-54-00_label_A 187 
+[350/800] ok           v=I6L7CBhVvaY__#1_label_B4-0-0 206 
+[375/800] ok           v=IsAw7y1TM3U__#1_label_A 21 
+[400/800] ok           v=JnCMUGnWVIg__#1_label_A 1255 
+[425/800] ok           v=K5ls-rAcaHs__#00-03-17_00-06-08_label_G-0- 178 
+[450/800] ok           v=aaFoHfBfv_8__#1_label_B4-0-0 129 
+[475/800] ok           v=bml5E2gBuDk__#1_label_B4-0-0 114 
+[500/800] ok           v=cu1ImwKxezg__#1_label_A 35 
+[525/800] ok           v=d_T0lqsypw8__#1_label_A 226 
+[550/800] ok           v=eXjd7GkHKfU__#00-01-58_00-02-33_label_B4-0 36 
+[575/800] ok           v=f6j3YWgVBto__#00-03-40_00-04-40_label_A 62 
+[600/800] ok           v=fjlUZHwh858__#1_label_B4-0-0 58 
+[625/800] ok           v=fnNHjFcCRDs__#1_label_B1-0-0 42 
+[650/800] ok           v=gM3qsp6CXMk__#00-03-40_00-05-09_label_B6-0 92 
+[675/800] ok           v=hBnl8q1Sonw__#1_label_A 788 
+[700/800] ok           v=hq_j5icEM9c__#1_label_A 16 
+[725/800] ok           v=idBwMN0E9Qg__#00-05-30_00-10-39_label_B4-0 321 
+[750/800] ok           v=jAvOGTD7_pU__#00-09-00_00-12-00_label_A 187 
+[775/800] ok           v=jpmQSeObStc__#00-03-25_00-04-54_label_B6-0 92 
+[800/800] ok           v=kdub1GS6CbI__#1_label_B1-0-0 108 
+[audio] done: {'ok': 800}
+[audio] feature files present: 3599
+[p2] chunk 2005-2804 extracted -> deleting videos to free disk
+[p2] chunk 2005-2804 done, feature files: 3599 (chunk coverage 800/800), free disk: 101G
+[p2] chunk 2805-3319: 0/515 features, 0 videos present
+[p2] downloading chunk 2805-3319 (existing files are skipped, so a partial chunk resumes)
+[dl] 515 files under data/video/2805-3319/
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[dl] 50/515 processed | 50 present | 0 skipped
+[dl] 100/515 processed | 100 present | 0 skipped
+[dl] 150/515 processed | 150 present | 0 skipped
+[dl] 200/515 processed | 200 present | 0 skipped
+[dl] 250/515 processed | 250 present | 0 skipped
+[dl] 300/515 processed | 300 present | 0 skipped
+[dl] 350/515 processed | 350 present | 0 skipped
+[dl] 400/515 processed | 400 present | 0 skipped
+[dl] 450/515 processed | 450 present | 0 skipped
+[dl] 500/515 processed | 500 present | 0 skipped
+[dl] done: 515/515 present, 0 skipped
+[p2] extracting audio features for chunk 2805-3319
+[audio] 515 clips to process (backend=mel) -> data/features/mel
+[25/515] ok           v=KsjzuLCuV9U__#1_label_B4-0-0 5131 
+[50/515] ok           v=LMK1VKvqIcU__#1_label_A 142 
+[75/515] ok           v=MmudJafnQh0__#1_label_B4-0-0 233 
+[100/515] ok           v=NPa2j8eQogc__#1_label_A 175 
+[125/515] ok           v=OjUzOiOzUa0__#00-00-00_00-01-37_label_B6-0 101 
+[150/515] ok           v=P_w9DifJuAU__#1_label_A 899 
+[175/515] ok           v=QrLO9AFNix0__#1_label_A 128 
+[200/515] ok           v=SJjLFVHC4RU__#1_label_A 155 
+[225/515] ok           v=kIreUqA1fNA__#1_label_A 45 
+[250/515] ok           v=lMXcMGxidG8__#1_label_A 224 
+[275/515] ok           v=mAWHCHZ2v7I__#1_label_A 908 
+[300/515] ok           v=nC2izmw0I9c__#1_label_A 191 
+[325/515] ok           v=o1Ye9f641Rg__#1_label_A 787 
+[350/515] ok           v=o_uUQoQwIZ8__#1_label_B4-0-0 132 
+[375/515] ok           v=pFamvR9CpYw__#00-25-20_00-35-20_label_B4-0 625 
+[400/515] ok           v=q2SP66Jb6Cw__#00-36-00_00-42-00_label_A 375 
+[425/515] ok           v=qegvGtGmOg8__#1_label_A 90 
+[450/515] ok           v=r22wGeBDJdw__#1_label_A 638 
+[475/515] ok           v=rVZxrx_qxgA__#00-09-55_00-17-35_label_B4-0 479 
+[500/515] ok           v=sJrdxXGR-BY__#1_label_A 138 
+[audio] done: {'ok': 515}
+[audio] feature files present: 4114
+[p2] chunk 2805-3319 extracted -> deleting videos to free disk
+[p2] chunk 2805-3319 done, feature files: 4114 (chunk coverage 515/515), free disk: 100G
+[p2] chunk 3320-3954: 0/635 features, 0 videos present
+[p2] downloading chunk 3320-3954 (existing files are skipped, so a partial chunk resumes)
+[dl] 635 files under data/video/3320-3954/
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[dl] 50/635 processed | 50 present | 0 skipped
+[dl] 100/635 processed | 100 present | 0 skipped
+[dl] 150/635 processed | 150 present | 0 skipped
+[dl] 200/635 processed | 200 present | 0 skipped
+[dl] 250/635 processed | 250 present | 0 skipped
+[dl] 300/635 processed | 300 present | 0 skipped
+[dl] 350/635 processed | 350 present | 0 skipped
+[dl] 400/635 processed | 400 present | 0 skipped
+[dl] 450/635 processed | 450 present | 0 skipped
+[dl] 500/635 processed | 500 present | 0 skipped
+[dl] 550/635 processed | 550 present | 0 skipped
+[dl] 600/635 processed | 600 present | 0 skipped
+[dl] done: 635/635 present, 0 skipped
+[p2] extracting audio features for chunk 3320-3954
+[audio] 635 clips to process (backend=mel) -> data/features/mel
+[25/635] ok           Yellow.Sea.2010__#01-44-02_01-45-02_label_A 62 
+[50/635] ok           Young.And.Dangerous.III.1996__#0-00-48_0-02- 120 
+[75/635] ok           Your.Name.2016__#00-25-20_00-29-40_label_A 270 
+[100/635] ok           v=T1s-h38GvmA__#1_label_A 177 
+[125/635] ok           v=U6eE_gbvyQc__#1_label_B4-0-0 145 
+[150/635] ok           v=VRn8Tc02TbU__#00-09-00_00-12-00_label_A 187 
+[175/635] ok           v=WQjp06C3-y4__#1_label_B1-0-0 197 
+[200/635] ok           v=WxiUccHD1Bc__#1_label_A 86 
+[225/635] ok           v=XWbY5jdJnHg__#1_label_A 230 
+[250/635] ok           v=Y43UkfAe_bc__#00-01-40_00-02-27_label_B4-0 49 
+[275/635] ok           v=Yr41_8QOTF8__#00-33-00_00-36-00_label_A 187 
+[300/635] ok           v=ZmKdNIXzVOo__#1_label_A 157 
+[325/635] ok           v=szDuMz-T7b4__#1_label_A 171 
+[350/635] ok           v=tT-SrQC6Ddw__#00-01-00_00-02-45_label_B6-0 109 
+[375/635] ok           v=u5SF4SlqNDQ__#00-03-41_00-05-54_label_G-0- 138 
+[400/635] ok           v=uhyNtgBUXHE__#1_label_B4-0-0 97 
+[425/635] ok           v=vFPQ_NiDBIU__#00-12-00_00-18-00_label_A 375 
+[450/635] ok           v=vFPQ_NiDBIU__#03-06-00_03-13-06_label_A 443 
+[475/635] ok           v=vsI_pKNcgeQ__#00-00-00_00-03-00_label_A 187 
+[500/635] ok           v=wXjRmA91RGo__#1_label_B1-0-0 231 
+[525/635] ok           v=xLFbqPzSI2Y__#1_label_B4-0-0 159 
+[550/635] ok           v=y7JEq-kf-2I__#00-00-00_00-01-00_label_A 62 
+[575/635] ok           v=ycwXaZK_Wf0__#1_label_B4-0-0 117 
+[600/635] ok           v=zlKoID_9yvE__#1_label_G-0-0 110 
+[625/635] ok           wangted.2008__#0-44-27_0-44-44_label_G-0-0 17 
+[audio] done: {'ok': 635}
+[audio] feature files present: 4749
+[p2] chunk 3320-3954 extracted -> deleting videos to free disk
+[p2] chunk 3320-3954 done, feature files: 4749 (chunk coverage 635/635), free disk: 100G
+[p2] all done 2026-09-25T15:30:22+01:00  feature files: 4749
+900K	data/features/vggish
+27M	data/features/audio_quality

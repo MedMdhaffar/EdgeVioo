@@ -1,0 +1,12 @@
+[vggish] train: 500 written [1s]
+[vggish] train: 1000 written [1s]
+[vggish] train: 1500 written [2s]
+[vggish] train: 2000 written [2s]
+[vggish] train: 2500 written [3s]
+[vggish] train: 3000 written [3s]
+[vggish] train: 3500 written [4s]
+[vggish] train: wrote 3516 (0 cached, 0 missing) -> data/features/vggish_mirror/train [4s]
+[vggish] val: wrote 434 (0 cached, 0 missing) -> data/features/vggish_mirror/val [4s]
+[vggish] test: 500 written [5s]
+[vggish] test: wrote 800 (0 cached, 0 missing) -> data/features/vggish_mirror/test [5s]
+[vggish] done: 4750 features in 5s

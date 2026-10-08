@@ -1,0 +1,187 @@
+{
+  "device": "cpu/4 threads",
+  "clips": {
+    "total": 1200,
+    "kept": 1200,
+    "train": 1160,
+    "holdout": 40
+  },
+  "samples": {
+    "train": 18537,
+    "holdout": 632,
+    "per_clip_min": 7,
+    "per_clip_max": 16
+  },
+  "extractor": {
+    "width": 24,
+    "params": 417520
+  },
+  "controls": {
+    "random_init_cosine": -0.0028816114645451307,
+    "random_init_cosine_centered": 0.1160418838262558,
+    "constant_train_mean_cosine": 0.8107307553291321,
+    "constant_train_mean_cosine_centered": 0.0
+  },
+  "trained": {
+    "mean_cosine": 0.8477252721786499,
+    "p10": 0.7695998549461365,
+    "p90": 0.916788637638092,
+    "mean_cosine_centered": 0.17776697874069214,
+    "p10_centered": -0.19790486991405487
+  },
+  "gain_over_best_control_centered": 0.17776697874069214,
+  "verdict": "input-dependent structure present (centered cosine +0.1778 over the constant predictor)",
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.1983,
+      "holdout_cosine": 0.818
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.1798,
+      "holdout_cosine": 0.8223
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.1727,
+      "holdout_cosine": 0.8291
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.1665,
+      "holdout_cosine": 0.8332
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.1626,
+      "holdout_cosine": 0.8351
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.1591,
+      "holdout_cosine": 0.8391
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.1561,
+      "holdout_cosine": 0.8411
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.1533,
+      "holdout_cosine": 0.8405
+    },
+    {
+      "epoch": 9,
+      "train_loss": 0.1505,
+      "holdout_cosine": 0.8439
+    },
+    {
+      "epoch": 10,
+      "train_loss": 0.1479,
+      "holdout_cosine": 0.8439
+    },
+    {
+      "epoch": 11,
+      "train_loss": 0.1456,
+      "holdout_cosine": 0.8456
+    },
+    {
+      "epoch": 12,
+      "train_loss": 0.1441,
+      "holdout_cosine": 0.8464
+    },
+    {
+      "epoch": 13,
+      "train_loss": 0.1419,
+      "holdout_cosine": 0.8455
+    },
+    {
+      "epoch": 14,
+      "train_loss": 0.1406,
+      "holdout_cosine": 0.8462
+    },
+    {
+      "epoch": 15,
+      "train_loss": 0.1389,
+      "holdout_cosine": 0.847
+    },
+    {
+      "epoch": 16,
+      "train_loss": 0.1377,
+      "holdout_cosine": 0.847
+    },
+    {
+      "epoch": 17,
+      "train_loss": 0.1365,
+      "holdout_cosine": 0.8479
+    },
+    {
+      "epoch": 18,
+      "train_loss": 0.1355,
+      "holdout_cosine": 0.8468
+    },
+    {
+      "epoch": 19,
+      "train_loss": 0.1345,
+      "holdout_cosine": 0.8481
+    },
+    {
+      "epoch": 20,
+      "train_loss": 0.1335,
+      "holdout_cosine": 0.847
+    },
+    {
+      "epoch": 21,
+      "train_loss": 0.1327,
+      "holdout_cosine": 0.8483
+    },
+    {
+      "epoch": 22,
+      "train_loss": 0.1318,
+      "holdout_cosine": 0.8478
+    },
+    {
+      "epoch": 23,
+      "train_loss": 0.1311,
+      "holdout_cosine": 0.8482
+    },
+    {
+      "epoch": 24,
+      "train_loss": 0.1304,
+      "holdout_cosine": 0.848
+    },
+    {
+      "epoch": 25,
+      "train_loss": 0.1299,
+      "holdout_cosine": 0.8477
+    },
+    {
+      "epoch": 26,
+      "train_loss": 0.1296,
+      "holdout_cosine": 0.8479
+    },
+    {
+      "epoch": 27,
+      "train_loss": 0.1292,
+      "holdout_cosine": 0.8477
+    },
+    {
+      "epoch": 28,
+      "train_loss": 0.129,
+      "holdout_cosine": 0.8477
+    },
+    {
+      "epoch": 29,
+      "train_loss": 0.1289,
+      "holdout_cosine": 0.8478
+    },
+    {
+      "epoch": 30,
+      "train_loss": 0.1287,
+      "holdout_cosine": 0.8477
+    }
+  ],
+  "caveat": "fitted on TEST-split video (it is the only split with videos here), so no detection AP is reported from these features; fidelity only"
+}

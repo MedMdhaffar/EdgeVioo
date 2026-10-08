@@ -1,0 +1,103 @@
+{
+  "device": "cpu/4 threads",
+  "kind": "edge_pipeline_budget",
+  "video_glob": "data/raw/xd-violence/data/video/test_videos/*.mp4",
+  "extractor": {
+    "width": 24,
+    "input_size": 112,
+    "params": 417520,
+    "fp32": {
+      "file": "minirgb_w24_fp32.onnx",
+      "size_mb": 1.595,
+      "max_abs_diff_vs_pytorch": 5.960464477539063e-08,
+      "latency_ms": {
+        "n": 30,
+        "mean": 0.1814,
+        "p50": 0.1811,
+        "min": 0.1767,
+        "max": 0.1901
+      }
+    }
+  },
+  "stages": {
+    "probe": {
+      "n": 5,
+      "mean": 0.0143,
+      "p50": 0.0077,
+      "min": 0.004,
+      "max": 0.0413
+    },
+    "decode": {
+      "n": 5,
+      "mean": 0.8604,
+      "p50": 0.8385,
+      "min": 0.1669,
+      "max": 1.537
+    },
+    "extractor": {
+      "n": 5,
+      "mean": 0.0593,
+      "p50": 0.0668,
+      "min": 0.0207,
+      "max": 0.0915
+    }
+  },
+  "clips": [
+    {
+      "video": "A.Beautiful.Mind.2001__#00-25-20_00-29-20_label_A.mp4",
+      "frames": 5761,
+      "snippets": 361,
+      "duration_s": 240.0,
+      "decode_s": 1.374,
+      "extractor_s": 0.081,
+      "head_s": 0.0,
+      "total_s": 1.496,
+      "realtime_factor": 160.5
+    },
+    {
+      "video": "A.Beautiful.Mind.2001__#00-40-52_00-42-01_label_A.mp4",
+      "frames": 1657,
+      "snippets": 104,
+      "duration_s": 69.0,
+      "decode_s": 0.386,
+      "extractor_s": 0.036,
+      "head_s": 0.0,
+      "total_s": 0.428,
+      "realtime_factor": 161.5
+    },
+    {
+      "video": "A.Beautiful.Mind.2001__#00-50-26_00-55-16_label_A.mp4",
+      "frames": 6962,
+      "snippets": 436,
+      "duration_s": 290.1,
+      "decode_s": 1.537,
+      "extractor_s": 0.091,
+      "head_s": 0.0,
+      "total_s": 1.636,
+      "realtime_factor": 177.3
+    },
+    {
+      "video": "A.Beautiful.Mind.2001__#01-14-30_01-16-59_label_A.mp4",
+      "frames": 3577,
+      "snippets": 224,
+      "duration_s": 149.0,
+      "decode_s": 0.839,
+      "extractor_s": 0.067,
+      "head_s": 0.0,
+      "total_s": 0.919,
+      "realtime_factor": 162.2
+    },
+    {
+      "video": "About.Time.2013__#00-23-50_00-24-31_label_A.mp4",
+      "frames": 985,
+      "snippets": 62,
+      "duration_s": 41.0,
+      "decode_s": 0.167,
+      "extractor_s": 0.021,
+      "head_s": 0.0,
+      "total_s": 0.192,
+      "realtime_factor": 214.2
+    }
+  ],
+  "note": "decode is seek-free (one sequential walk); the extractor/head are priced on the frames the deployed path would actually receive"
+}

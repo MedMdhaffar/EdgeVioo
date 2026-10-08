@@ -1,0 +1,44 @@
+=== p3vggish30ep_cross ===
+[calib] val split: 150 clips x 6 categories
+[calib] per-class temperature (val: the split it was fitted on -> optimistic)
+    fighting      T= 1.536 n_pos= 18  ECE 0.1039 -> 0.0967
+    shooting      T= 1.196 n_pos= 16  ECE 0.0731 -> 0.0863
+    riot          T= 1.328 n_pos= 17  ECE 0.0541 -> 0.0721
+    abuse         UNFITTED (n_pos=0)  ECE 0.0223  <- no label in val, stays at T=1
+    car_accident  T= 1.652 n_pos= 21  ECE 0.0564 -> 0.0782
+    explosion     T= 0.412 n_pos= 10  ECE 0.0899 -> 0.0537
+[calib] macro ECE over fitted heads 0.0755 -> 0.0774 | unfitted: ['abuse']
+[calib] test split (800 clips) - the honest evaluation:
+    fighting      n_pos=126  conf 0.244 vs rate 0.158  ECE 0.0866 -> 0.1107
+    shooting      n_pos=104  conf 0.253 vs rate 0.130  ECE 0.1230 -> 0.1269
+    riot          n_pos=101  conf 0.163 vs rate 0.126  ECE 0.0367 -> 0.0493
+    abuse         n_pos= 11  conf 0.031 vs rate 0.014  ECE 0.0176 -> 0.0176  (unfitted: T=1)
+    car_accident  n_pos=106  conf 0.169 vs rate 0.133  ECE 0.0503 -> 0.0720
+    explosion     n_pos=103  conf 0.182 vs rate 0.129  ECE 0.0726 -> 0.0464
+[calib] test macro ECE 0.0738 -> 0.0810
+[calib] test macro ECE - uncalibrated 0.0738 | per-class 0.0810 | one global T=1.7035 0.1100
+[calib] best of the three: uncalibrated
+[calib] written -> runs/2026-09-29_p3vggish30ep_cross/calibration_per_class.json
+
+=== p3vggish30ep_late ===
+[calib] val split: 150 clips x 6 categories
+[calib] per-class temperature (val: the split it was fitted on -> optimistic)
+    fighting      T= 1.246 n_pos= 18  ECE 0.0782 -> 0.0596
+    shooting      T= 1.090 n_pos= 16  ECE 0.0593 -> 0.0628
+    riot          T= 0.803 n_pos= 17  ECE 0.0372 -> 0.0398
+    abuse         UNFITTED (n_pos=0)  ECE 0.0219  <- no label in val, stays at T=1
+    car_accident  T= 1.034 n_pos= 21  ECE 0.0386 -> 0.0413
+    explosion     T= 0.522 n_pos= 10  ECE 0.0774 -> 0.0474
+[calib] macro ECE over fitted heads 0.0581 -> 0.0502 | unfitted: ['abuse']
+[calib] test split (800 clips) - the honest evaluation:
+    fighting      n_pos=126  conf 0.199 vs rate 0.158  ECE 0.0586 -> 0.0753
+    shooting      n_pos=104  conf 0.174 vs rate 0.130  ECE 0.0484 -> 0.0544
+    riot          n_pos=101  conf 0.140 vs rate 0.126  ECE 0.0274 -> 0.0218
+    abuse         n_pos= 11  conf 0.029 vs rate 0.014  ECE 0.0150 -> 0.0150  (unfitted: T=1)
+    car_accident  n_pos=106  conf 0.163 vs rate 0.133  ECE 0.0309 -> 0.0330
+    explosion     n_pos=103  conf 0.152 vs rate 0.129  ECE 0.0476 -> 0.0280
+[calib] test macro ECE 0.0426 -> 0.0425
+[calib] test macro ECE - uncalibrated 0.0426 | per-class 0.0425 | one global T=1.3601 0.0676
+[calib] best of the three: per-class
+[calib] written -> runs/2026-09-29_p3vggish30ep_late/calibration_per_class.json
+

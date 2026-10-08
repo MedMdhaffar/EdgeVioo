@@ -1,0 +1,713 @@
+[vggish] start 2026-09-29T21:52:38+01:00 epochs=2
+[vggish] 2026-09-29T21:52:38+01:00 training unimodal visual
+[run] runs/2026-09-29_p2vggish_visual
+[cfg] modality=visual feature_set=i3d_official in_dim=1024 epochs=2 batch=8 lr=0.0001 k=5
+[data] train=3804 val=150 device=cpu threads=4
+[epoch   1/2] loss=0.9030 (mil=0.5270) val_pr_auc=0.9277 val_ap=0.9286 *best* [62.8s]
+[epoch   2/2] loss=0.5917 (mil=0.3517) val_pr_auc=0.9323 val_ap=0.9333 *best* [80.2s]
+[done] best epoch 2: val_ap=0.9333 val_pr_auc=0.9323
+[done] artifacts -> runs/2026-09-29_p2vggish_visual
+[score] ckpt=runs/2026-09-29_p2vggish_visual/ckpt_best.pt kind=mil modality=visual test=data/lists_official/test.csv stride=16 frames/snippet rule=(2,1) snippets
+{
+  "n_clips": 800,
+  "n_snippets": 145649,
+  "stride_frames": 16.0,
+  "segment_rule": {
+    "threshold": 0.5,
+    "min_length": 2,
+    "max_gap": 1,
+    "min_seconds": 1.333,
+    "max_gap_seconds": 0.667
+  },
+  "ap": {
+    "global__pr_auc": 0.6714194919707661,
+    "global__average_precision": 0.6714269857796566,
+    "per_video__pr_auc": 0.6938919946251433,
+    "per_video__average_precision": 0.703192095182192
+  },
+  "prevalence": 0.2379419058561325,
+  "localization": {
+    "n_pred_segments": 1723,
+    "n_gt_segments": 1238,
+    "mean_best_iou": 0.20816372613509362,
+    "mean_detection_delay_snippets": 47.219657483246465,
+    "mean_detection_delay_frames": 755.5145197319434,
+    "mean_detection_delay_seconds": 31.479771655497643,
+    "precision@iou0.1": 0.3784097504352873,
+    "recall@iou0.1": 0.5266558966074314,
+    "f1@iou0.1": 0.4403917595406957,
+    "precision@iou0.2": 0.3284968078932095,
+    "recall@iou0.2": 0.45718901453957994,
+    "f1@iou0.2": 0.3823032759202972,
+    "precision@iou0.3": 0.2629135229251306,
+    "recall@iou0.3": 0.36591276252019383,
+    "f1@iou0.3": 0.3059777102330294,
+    "precision@iou0.4": 0.2008125362739408,
+    "recall@iou0.4": 0.27948303715670436,
+    "f1@iou0.4": 0.23370482944951032,
+    "precision@iou0.5": 0.15322112594312245,
+    "recall@iou0.5": 0.21324717285945072,
+    "f1@iou0.5": 0.1783181357649443
+  },
+  "macro_per_class_ap": 0.29761493690595847,
+  "dropped_modality": "none"
+}
+per-class clip-level AP: {'fighting': 0.383, 'shooting': 0.1987, 'riot': 0.3618, 'abuse': 0.0446, 'car_accident': 0.3408, 'explosion': 0.4567}
+[ok] predictions + metrics -> runs/2026-09-29_p2vggish_visual
+[vggish] 2026-09-29T21:55:28+01:00 training unimodal audio
+[run] runs/2026-09-29_p2vggish_audio
+[cfg] modality=audio feature_set=i3d_official in_dim=128 epochs=2 batch=8 lr=0.0001 k=5
+[data] train=3804 val=150 device=cpu threads=4
+[epoch   1/2] loss=0.8647 (mil=0.5119) val_pr_auc=0.9593 val_ap=0.9595 *best* [32.1s]
+[epoch   2/2] loss=0.5629 (mil=0.3388) val_pr_auc=0.9702 val_ap=0.9703 *best* [29.2s]
+[done] best epoch 2: val_ap=0.9703 val_pr_auc=0.9702
+[done] artifacts -> runs/2026-09-29_p2vggish_audio
+[score] ckpt=runs/2026-09-29_p2vggish_audio/ckpt_best.pt kind=mil modality=audio test=data/lists_official/test.csv stride=16 frames/snippet rule=(2,1) snippets
+{
+  "n_clips": 800,
+  "n_snippets": 145649,
+  "stride_frames": 16.0,
+  "segment_rule": {
+    "threshold": 0.5,
+    "min_length": 2,
+    "max_gap": 1,
+    "min_seconds": 1.333,
+    "max_gap_seconds": 0.667
+  },
+  "ap": {
+    "global__pr_auc": 0.3658099789496153,
+    "global__average_precision": 0.3383333133704132,
+    "per_video__pr_auc": 0.42366934682253715,
+    "per_video__average_precision": 0.4629880808814276
+  },
+  "prevalence": 0.2379419058561325,
+  "localization": {
+    "n_pred_segments": 831,
+    "n_gt_segments": 1238,
+    "mean_best_iou": 0.12535698253151178,
+    "mean_detection_delay_snippets": 16.66532258064516,
+    "mean_detection_delay_frames": 266.64516129032256,
+    "mean_detection_delay_seconds": 11.11021505376344,
+    "precision@iou0.1": 0.30324909747292417,
+    "recall@iou0.1": 0.2035541195476575,
+    "f1@iou0.1": 0.24359594006766555,
+    "precision@iou0.2": 0.22984356197352587,
+    "recall@iou0.2": 0.154281098546042,
+    "f1@iou0.2": 0.1846302561623973,
+    "precision@iou0.3": 0.15764139590854392,
+    "recall@iou0.3": 0.10581583198707593,
+    "f1@iou0.3": 0.1266312228129531,
+    "precision@iou0.4": 0.10348977135980746,
+    "recall@iou0.4": 0.06946688206785137,
+    "f1@iou0.4": 0.08313194780086999,
+    "precision@iou0.5": 0.06257521058965103,
+    "recall@iou0.5": 0.0420032310177706,
+    "f1@iou0.5": 0.05026582890285161
+  },
+  "macro_per_class_ap": 0.3471211513924253,
+  "dropped_modality": "none"
+}
+per-class clip-level AP: {'fighting': 0.3244, 'shooting': 0.5388, 'riot': 0.5968, 'abuse': 0.0194, 'car_accident': 0.4005, 'explosion': 0.2028}
+[ok] predictions + metrics -> runs/2026-09-29_p2vggish_audio
+[vggish] 2026-09-29T21:56:51+01:00 training fusion=late epochs=2
+[run] runs/2026-09-29_p3vggish_late
+[cfg] fusion=late params=887691 reliability=7d dropout=0.15 train=3804 val=150 device=cpu
+[warn] missing audio quality stats for v=8cTqh9tMz_I__#1_label_A -> zeros (run scripts/extract_audio_features.py)
+[epoch   1/2] loss=0.8230 val_ap=0.9832 *best* [142.9s]
+[epoch   2/2] loss=0.4475 val_ap=0.9857 *best* [77.1s]
+[done] best epoch 2 val_ap=0.9857 -> runs/2026-09-29_p3vggish_late
+[score] ckpt=runs/2026-09-29_p3vggish_late/ckpt_best.pt kind=fusion modality=both test=data/lists_official/test.csv stride=16 frames/snippet rule=(2,1) snippets
+[warn] missing audio quality stats for Before.Sunset.2004__#01-14-30_01-16-51_l -> zeros (run scripts/extract_audio_features.py)
+{
+  "n_clips": 800,
+  "n_snippets": 145649,
+  "stride_frames": 16.0,
+  "segment_rule": {
+    "threshold": 0.5,
+    "min_length": 2,
+    "max_gap": 1,
+    "min_seconds": 1.333,
+    "max_gap_seconds": 0.667
+  },
+  "ap": {
+    "global__pr_auc": 0.7417078331427642,
+    "global__average_precision": 0.7417169311793378,
+    "per_video__pr_auc": 0.7631255823584521,
+    "per_video__average_precision": 0.7695038573119736
+  },
+  "prevalence": 0.2379419058561325,
+  "localization": {
+    "n_pred_segments": 2045,
+    "n_gt_segments": 1238,
+    "mean_best_iou": 0.24427150099326836,
+    "mean_detection_delay_snippets": 49.51938461538462,
+    "mean_detection_delay_frames": 792.3101538461539,
+    "mean_detection_delay_seconds": 33.01292307692308,
+    "precision@iou0.1": 0.42200488997555013,
+    "recall@iou0.1": 0.697092084006462,
+    "f1@iou0.1": 0.5257386536704234,
+    "precision@iou0.2": 0.3721271393643032,
+    "recall@iou0.2": 0.6147011308562197,
+    "f1@iou0.2": 0.4636003655193421,
+    "precision@iou0.3": 0.30709046454767724,
+    "recall@iou0.3": 0.5072697899838449,
+    "f1@iou0.3": 0.3825769113615595,
+    "precision@iou0.4": 0.25134474327628364,
+    "recall@iou0.4": 0.41518578352180935,
+    "f1@iou0.4": 0.31312823636917453,
+    "precision@iou0.5": 0.1980440097799511,
+    "recall@iou0.5": 0.327140549273021,
+    "f1@iou0.5": 0.2467255558939994
+  },
+  "macro_per_class_ap": 0.5208143717635819,
+  "dropped_modality": "none"
+}
+per-class clip-level AP: {'fighting': 0.5031, 'shooting': 0.5925, 'riot': 0.7634, 'abuse': 0.0615, 'car_accident': 0.8173, 'explosion': 0.387}
+[ok] predictions + metrics -> runs/2026-09-29_p3vggish_late
+[score] ckpt=runs/2026-09-29_p3vggish_late/ckpt_best.pt kind=fusion modality=both test=data/lists_official/test.csv stride=16 frames/snippet rule=(2,1) snippets drop=audio
+[warn] missing audio quality stats for Before.Sunset.2004__#01-14-30_01-16-51_l -> zeros (run scripts/extract_audio_features.py)
+{
+  "n_clips": 800,
+  "n_snippets": 145649,
+  "stride_frames": 16.0,
+  "segment_rule": {
+    "threshold": 0.5,
+    "min_length": 2,
+    "max_gap": 1,
+    "min_seconds": 1.333,
+    "max_gap_seconds": 0.667
+  },
+  "ap": {
+    "global__pr_auc": 0.666549346487333,
+    "global__average_precision": 0.6665570655349724,
+    "per_video__pr_auc": 0.701626470820018,
+    "per_video__average_precision": 0.7106016493271264
+  },
+  "prevalence": 0.2379419058561325,
+  "localization": {
+    "n_pred_segments": 2240,
+    "n_gt_segments": 1238,
+    "mean_best_iou": 0.22906907086914624,
+    "mean_detection_delay_snippets": 44.22229639519359,
+    "mean_detection_delay_frames": 707.5567423230974,
+    "mean_detection_delay_seconds": 29.481530930129058,
+    "precision@iou0.1": 0.3638392857142857,
+    "recall@iou0.1": 0.6583198707592892,
+    "f1@iou0.1": 0.4686601495112134,
+    "precision@iou0.2": 0.31741071428571427,
+    "recall@iou0.2": 0.574313408723748,
+    "f1@iou0.2": 0.40885566417481306,
+    "precision@iou0.3": 0.2575892857142857,
+    "recall@iou0.3": 0.46607431340872374,
+    "f1@iou0.3": 0.33179988499137436,
+    "precision@iou0.4": 0.20223214285714286,
+    "recall@iou0.4": 0.36591276252019383,
+    "f1@iou0.4": 0.2604945370902818,
+    "precision@iou0.5": 0.16026785714285716,
+    "recall@iou0.5": 0.28998384491114704,
+    "f1@iou0.5": 0.20644048303622772
+  },
+  "macro_per_class_ap": 0.40835423945629595,
+  "dropped_modality": "audio"
+}
+per-class clip-level AP: {'fighting': 0.5483, 'shooting': 0.3392, 'riot': 0.3998, 'abuse': 0.0667, 'car_accident': 0.6581, 'explosion': 0.438}
+[ok] predictions + metrics -> runs/2026-09-29_p3vggish_late
+[score] ckpt=runs/2026-09-29_p3vggish_late/ckpt_best.pt kind=fusion modality=both test=data/lists_official/test.csv stride=16 frames/snippet rule=(2,1) snippets drop=visual
+[warn] missing audio quality stats for Before.Sunset.2004__#01-14-30_01-16-51_l -> zeros (run scripts/extract_audio_features.py)
+{
+  "n_clips": 800,
+  "n_snippets": 145649,
+  "stride_frames": 16.0,
+  "segment_rule": {
+    "threshold": 0.5,
+    "min_length": 2,
+    "max_gap": 1,
+    "min_seconds": 1.333,
+    "max_gap_seconds": 0.667
+  },
+  "ap": {
+    "global__pr_auc": 0.6310707968668965,
+    "global__average_precision": 0.6305074070993254,
+    "per_video__pr_auc": 0.6873859932849439,
+    "per_video__average_precision": 0.6933849700038518
+  },
+  "prevalence": 0.2379419058561325,
+  "localization": {
+    "n_pred_segments": 2266,
+    "n_gt_segments": 1238,
+    "mean_best_iou": 0.2131592082590622,
+    "mean_detection_delay_snippets": 45.09010840108401,
+    "mean_detection_delay_frames": 721.4417344173442,
+    "mean_detection_delay_seconds": 30.06007226738934,
+    "precision@iou0.1": 0.33318623124448365,
+    "recall@iou0.1": 0.6098546042003231,
+    "f1@iou0.1": 0.4309360730593607,
+    "precision@iou0.2": 0.2890556045895852,
+    "recall@iou0.2": 0.5290791599353797,
+    "f1@iou0.2": 0.3738584474885845,
+    "precision@iou0.3": 0.2383053839364519,
+    "recall@iou0.3": 0.43618739903069464,
+    "f1@iou0.3": 0.3082191780821918,
+    "precision@iou0.4": 0.18976169461606354,
+    "recall@iou0.4": 0.3473344103392569,
+    "f1@iou0.4": 0.2454337899543379,
+    "precision@iou0.5": 0.1531332744924978,
+    "recall@iou0.5": 0.2802907915993538,
+    "f1@iou0.5": 0.19805936073059363
+  },
+  "macro_per_class_ap": 0.4380565904046107,
+  "dropped_modality": "visual"
+}
+per-class clip-level AP: {'fighting': 0.3438, 'shooting': 0.5686, 'riot': 0.7356, 'abuse': 0.0223, 'car_accident': 0.7643, 'explosion': 0.1938}
+[ok] predictions + metrics -> runs/2026-09-29_p3vggish_late
+[vggish] 2026-09-29T22:01:54+01:00 training fusion=cross epochs=2
+[run] runs/2026-09-29_p3vggish_cross
+[cfg] fusion=cross params=1052937 reliability=7d dropout=0.15 train=3804 val=150 device=cpu
+[warn] missing audio quality stats for NewAdd.NBA-2017.12.25_CLE@GSW__#01-08-34 -> zeros (run scripts/extract_audio_features.py)
+[epoch   1/2] loss=0.6982 val_ap=0.9857 *best* [94.4s]
+[epoch   2/2] loss=0.4318 val_ap=0.9817 [106.9s]
+[done] best epoch 1 val_ap=0.9857 -> runs/2026-09-29_p3vggish_cross
+[score] ckpt=runs/2026-09-29_p3vggish_cross/ckpt_best.pt kind=fusion modality=both test=data/lists_official/test.csv stride=16 frames/snippet rule=(2,1) snippets
+[warn] missing audio quality stats for Before.Sunset.2004__#01-14-30_01-16-51_l -> zeros (run scripts/extract_audio_features.py)
+{
+  "n_clips": 800,
+  "n_snippets": 145649,
+  "stride_frames": 16.0,
+  "segment_rule": {
+    "threshold": 0.5,
+    "min_length": 2,
+    "max_gap": 1,
+    "min_seconds": 1.333,
+    "max_gap_seconds": 0.667
+  },
+  "ap": {
+    "global__pr_auc": 0.6734084685751687,
+    "global__average_precision": 0.6734224409377658,
+    "per_video__pr_auc": 0.7302375143244367,
+    "per_video__average_precision": 0.7385617638556627
+  },
+  "prevalence": 0.2379419058561325,
+  "localization": {
+    "n_pred_segments": 1572,
+    "n_gt_segments": 1238,
+    "mean_best_iou": 0.22964454617694963,
+    "mean_detection_delay_snippets": 37.82902418682235,
+    "mean_detection_delay_frames": 605.2643869891576,
+    "mean_detection_delay_seconds": 25.219349457881567,
+    "precision@iou0.1": 0.42366412213740456,
+    "recall@iou0.1": 0.5379644588045234,
+    "f1@iou0.1": 0.4740213523131672,
+    "precision@iou0.2": 0.3555979643765903,
+    "recall@iou0.2": 0.45153473344103395,
+    "f1@iou0.2": 0.397864768683274,
+    "precision@iou0.3": 0.28880407124681934,
+    "recall@iou0.3": 0.3667205169628433,
+    "f1@iou0.3": 0.3231316725978648,
+    "precision@iou0.4": 0.22837150127226463,
+    "recall@iou0.4": 0.28998384491114704,
+    "f1@iou0.4": 0.25551601423487547,
+    "precision@iou0.5": 0.17938931297709923,
+    "recall@iou0.5": 0.22778675282714056,
+    "f1@iou0.5": 0.200711743772242
+  },
+  "macro_per_class_ap": 0.3710137597245963,
+  "dropped_modality": "none"
+}
+per-class clip-level AP: {'fighting': 0.4114, 'shooting': 0.4518, 'riot': 0.4536, 'abuse': 0.0111, 'car_accident': 0.5654, 'explosion': 0.3329}
+[ok] predictions + metrics -> runs/2026-09-29_p3vggish_cross
+[score] ckpt=runs/2026-09-29_p3vggish_cross/ckpt_best.pt kind=fusion modality=both test=data/lists_official/test.csv stride=16 frames/snippet rule=(2,1) snippets drop=audio
+[warn] missing audio quality stats for Before.Sunset.2004__#01-14-30_01-16-51_l -> zeros (run scripts/extract_audio_features.py)
+{
+  "n_clips": 800,
+  "n_snippets": 145649,
+  "stride_frames": 16.0,
+  "segment_rule": {
+    "threshold": 0.5,
+    "min_length": 2,
+    "max_gap": 1,
+    "min_seconds": 1.333,
+    "max_gap_seconds": 0.667
+  },
+  "ap": {
+    "global__pr_auc": 0.6454224474180635,
+    "global__average_precision": 0.6454344984968341,
+    "per_video__pr_auc": 0.6630560378992948,
+    "per_video__average_precision": 0.6736308385737092
+  },
+  "prevalence": 0.2379419058561325,
+  "localization": {
+    "n_pred_segments": 1282,
+    "n_gt_segments": 1238,
+    "mean_best_iou": 0.19957008569492055,
+    "mean_detection_delay_snippets": 43.64426059979318,
+    "mean_detection_delay_frames": 698.3081695966908,
+    "mean_detection_delay_seconds": 29.096173733195453,
+    "precision@iou0.1": 0.36349453978159124,
+    "recall@iou0.1": 0.3764135702746365,
+    "f1@iou0.1": 0.3698412698412699,
+    "precision@iou0.2": 0.30577223088923555,
+    "recall@iou0.2": 0.3166397415185784,
+    "f1@iou0.2": 0.3111111111111111,
+    "precision@iou0.3": 0.23712948517940718,
+    "recall@iou0.3": 0.2455573505654281,
+    "f1@iou0.3": 0.24126984126984125,
+    "precision@iou0.4": 0.17784711388455537,
+    "recall@iou0.4": 0.1841680129240711,
+    "f1@iou0.4": 0.18095238095238095,
+    "precision@iou0.5": 0.1435257410296412,
+    "recall@iou0.5": 0.14862681744749595,
+    "f1@iou0.5": 0.146031746031746
+  },
+  "macro_per_class_ap": 0.22214732004686058,
+  "dropped_modality": "audio"
+}
+per-class clip-level AP: {'fighting': 0.1524, 'shooting': 0.1827, 'riot': 0.2641, 'abuse': 0.0099, 'car_accident': 0.3121, 'explosion': 0.4117}
+[ok] predictions + metrics -> runs/2026-09-29_p3vggish_cross
+[score] ckpt=runs/2026-09-29_p3vggish_cross/ckpt_best.pt kind=fusion modality=both test=data/lists_official/test.csv stride=16 frames/snippet rule=(2,1) snippets drop=visual
+[warn] missing audio quality stats for Before.Sunset.2004__#01-14-30_01-16-51_l -> zeros (run scripts/extract_audio_features.py)
+{
+  "n_clips": 800,
+  "n_snippets": 145649,
+  "stride_frames": 16.0,
+  "segment_rule": {
+    "threshold": 0.5,
+    "min_length": 2,
+    "max_gap": 1,
+    "min_seconds": 1.333,
+    "max_gap_seconds": 0.667
+  },
+  "ap": {
+    "global__pr_auc": 0.610239671061965,
+    "global__average_precision": 0.6102237599407541,
+    "per_video__pr_auc": 0.6533865514136097,
+    "per_video__average_precision": 0.6587313557012622
+  },
+  "prevalence": 0.2379419058561325,
+  "localization": {
+    "n_pred_segments": 1624,
+    "n_gt_segments": 1238,
+    "mean_best_iou": 0.2015987557463419,
+    "mean_detection_delay_snippets": 25.5847208619001,
+    "mean_detection_delay_frames": 409.3555337904016,
+    "mean_detection_delay_seconds": 17.056480574600066,
+    "precision@iou0.1": 0.35344827586206895,
+    "recall@iou0.1": 0.46365105008077545,
+    "f1@iou0.1": 0.4011180992313068,
+    "precision@iou0.2": 0.2881773399014778,
+    "recall@iou0.2": 0.3780290791599354,
+    "f1@iou0.2": 0.3270440251572327,
+    "precision@iou0.3": 0.22413793103448276,
+    "recall@iou0.3": 0.2940226171243942,
+    "f1@iou0.3": 0.25436757512229213,
+    "precision@iou0.4": 0.17733990147783252,
+    "recall@iou0.4": 0.23263327948303716,
+    "f1@iou0.4": 0.20125786163522014,
+    "precision@iou0.5": 0.13608374384236452,
+    "recall@iou0.5": 0.17851373182552505,
+    "f1@iou0.5": 0.1544374563242488
+  },
+  "macro_per_class_ap": 0.36470110639893516,
+  "dropped_modality": "visual"
+}
+per-class clip-level AP: {'fighting': 0.4218, 'shooting': 0.4274, 'riot': 0.5027, 'abuse': 0.0133, 'car_accident': 0.6331, 'explosion': 0.1898}
+[ok] predictions + metrics -> runs/2026-09-29_p3vggish_cross
+[vggish] 2026-09-29T22:05:55+01:00 training fusion=adaptive epochs=2
+[run] runs/2026-09-29_p3vggish_adaptive
+[cfg] fusion=adaptive params=1069898 reliability=7d dropout=0.15 train=3804 val=150 device=cpu
+[warn] missing audio quality stats for v=8cTqh9tMz_I__#1_label_A -> zeros (run scripts/extract_audio_features.py)
+[epoch   1/2] loss=0.7088 val_ap=0.9736 *best* [93.1s]
+[epoch   2/2] loss=0.4435 val_ap=0.9645 [98.0s]
+[done] best epoch 1 val_ap=0.9736 -> runs/2026-09-29_p3vggish_adaptive
+[score] ckpt=runs/2026-09-29_p3vggish_adaptive/ckpt_best.pt kind=fusion modality=both test=data/lists_official/test.csv stride=16 frames/snippet rule=(2,1) snippets
+[warn] missing audio quality stats for Before.Sunset.2004__#01-14-30_01-16-51_l -> zeros (run scripts/extract_audio_features.py)
+{
+  "n_clips": 800,
+  "n_snippets": 145649,
+  "stride_frames": 16.0,
+  "segment_rule": {
+    "threshold": 0.5,
+    "min_length": 2,
+    "max_gap": 1,
+    "min_seconds": 1.333,
+    "max_gap_seconds": 0.667
+  },
+  "ap": {
+    "global__pr_auc": 0.630617173124606,
+    "global__average_precision": 0.6306315317184031,
+    "per_video__pr_auc": 0.6668178108358976,
+    "per_video__average_precision": 0.6766425552074995
+  },
+  "prevalence": 0.2379419058561325,
+  "localization": {
+    "n_pred_segments": 1226,
+    "n_gt_segments": 1238,
+    "mean_best_iou": 0.21122005043906927,
+    "mean_detection_delay_snippets": 33.35828877005348,
+    "mean_detection_delay_frames": 533.7326203208556,
+    "mean_detection_delay_seconds": 22.23885918003565,
+    "precision@iou0.1": 0.41517128874388254,
+    "recall@iou0.1": 0.4111470113085622,
+    "f1@iou0.1": 0.4131493506493506,
+    "precision@iou0.2": 0.32463295269168024,
+    "recall@iou0.2": 0.32148626817447495,
+    "f1@iou0.2": 0.32305194805194803,
+    "precision@iou0.3": 0.23898858075040783,
+    "recall@iou0.3": 0.23667205169628433,
+    "f1@iou0.3": 0.23782467532467533,
+    "precision@iou0.4": 0.1835236541598695,
+    "recall@iou0.4": 0.18174474959612277,
+    "f1@iou0.4": 0.18262987012987014,
+    "precision@iou0.5": 0.14437194127243066,
+    "recall@iou0.5": 0.1429725363489499,
+    "f1@iou0.5": 0.14366883116883117
+  },
+  "macro_per_class_ap": 0.35301466663833664,
+  "dropped_modality": "none"
+}
+per-class clip-level AP: {'fighting': 0.3091, 'shooting': 0.454, 'riot': 0.5596, 'abuse': 0.0112, 'car_accident': 0.4416, 'explosion': 0.3426}
+[ok] predictions + metrics -> runs/2026-09-29_p3vggish_adaptive
+[score] ckpt=runs/2026-09-29_p3vggish_adaptive/ckpt_best.pt kind=fusion modality=both test=data/lists_official/test.csv stride=16 frames/snippet rule=(2,1) snippets drop=audio
+[warn] missing audio quality stats for Before.Sunset.2004__#01-14-30_01-16-51_l -> zeros (run scripts/extract_audio_features.py)
+{
+  "n_clips": 800,
+  "n_snippets": 145649,
+  "stride_frames": 16.0,
+  "segment_rule": {
+    "threshold": 0.5,
+    "min_length": 2,
+    "max_gap": 1,
+    "min_seconds": 1.333,
+    "max_gap_seconds": 0.667
+  },
+  "ap": {
+    "global__pr_auc": 0.6499401464587709,
+    "global__average_precision": 0.649947845884299,
+    "per_video__pr_auc": 0.6894925299502165,
+    "per_video__average_precision": 0.6986278657763217
+  },
+  "prevalence": 0.2379419058561325,
+  "localization": {
+    "n_pred_segments": 1232,
+    "n_gt_segments": 1238,
+    "mean_best_iou": 0.1851242488002479,
+    "mean_detection_delay_snippets": 50.154773869346734,
+    "mean_detection_delay_frames": 802.4763819095477,
+    "mean_detection_delay_seconds": 33.436515912897825,
+    "precision@iou0.1": 0.351461038961039,
+    "recall@iou0.1": 0.34975767366720517,
+    "f1@iou0.1": 0.35060728744939273,
+    "precision@iou0.2": 0.275974025974026,
+    "recall@iou0.2": 0.27463651050080773,
+    "f1@iou0.2": 0.27530364372469635,
+    "precision@iou0.3": 0.21672077922077923,
+    "recall@iou0.3": 0.21567043618739903,
+    "f1@iou0.3": 0.21619433198380567,
+    "precision@iou0.4": 0.16233766233766234,
+    "recall@iou0.4": 0.16155088852988692,
+    "f1@iou0.4": 0.16194331983805668,
+    "precision@iou0.5": 0.125,
+    "recall@iou0.5": 0.12439418416801293,
+    "f1@iou0.5": 0.12469635627530365
+  },
+  "macro_per_class_ap": 0.26306158356275317,
+  "dropped_modality": "audio"
+}
+per-class clip-level AP: {'fighting': 0.2104, 'shooting': 0.3142, 'riot': 0.3561, 'abuse': 0.01, 'car_accident': 0.1625, 'explosion': 0.5252}
+[ok] predictions + metrics -> runs/2026-09-29_p3vggish_adaptive
+[score] ckpt=runs/2026-09-29_p3vggish_adaptive/ckpt_best.pt kind=fusion modality=both test=data/lists_official/test.csv stride=16 frames/snippet rule=(2,1) snippets drop=visual
+[warn] missing audio quality stats for Before.Sunset.2004__#01-14-30_01-16-51_l -> zeros (run scripts/extract_audio_features.py)
+{
+  "n_clips": 800,
+  "n_snippets": 145649,
+  "stride_frames": 16.0,
+  "segment_rule": {
+    "threshold": 0.5,
+    "min_length": 2,
+    "max_gap": 1,
+    "min_seconds": 1.333,
+    "max_gap_seconds": 0.667
+  },
+  "ap": {
+    "global__pr_auc": 0.4881919450018365,
+    "global__average_precision": 0.4882226262808074,
+    "per_video__pr_auc": 0.4391793317572284,
+    "per_video__average_precision": 0.45421892748349774
+  },
+  "prevalence": 0.2379419058561325,
+  "localization": {
+    "n_pred_segments": 452,
+    "n_gt_segments": 1238,
+    "mean_best_iou": 0.3780720243309291,
+    "mean_detection_delay_snippets": -35.77171215880893,
+    "mean_detection_delay_frames": -572.3473945409429,
+    "mean_detection_delay_seconds": -23.84780810587262,
+    "precision@iou0.1": 0.7411504424778761,
+    "recall@iou0.1": 0.27059773828756056,
+    "f1@iou0.1": 0.3964497041420118,
+    "precision@iou0.2": 0.5309734513274337,
+    "recall@iou0.2": 0.1938610662358643,
+    "f1@iou0.2": 0.28402366863905326,
+    "precision@iou0.3": 0.4092920353982301,
+    "recall@iou0.3": 0.1494345718901454,
+    "f1@iou0.3": 0.21893491124260353,
+    "precision@iou0.4": 0.3075221238938053,
+    "recall@iou0.4": 0.1122778675282714,
+    "f1@iou0.4": 0.16449704142011834,
+    "precision@iou0.5": 0.2610619469026549,
+    "recall@iou0.5": 0.09531502423263329,
+    "f1@iou0.5": 0.13964497041420118
+  },
+  "macro_per_class_ap": 0.3575363187327567,
+  "dropped_modality": "visual"
+}
+per-class clip-level AP: {'fighting': 0.3486, 'shooting': 0.4372, 'riot': 0.5144, 'abuse': 0.0126, 'car_accident': 0.6279, 'explosion': 0.2046}
+[ok] predictions + metrics -> runs/2026-09-29_p3vggish_adaptive
+[vggish] 2026-09-29T22:10:12+01:00 training fusion=early epochs=2
+[run] runs/2026-09-29_p3vggish_early
+[cfg] fusion=early params=739209 reliability=7d dropout=0.15 train=3804 val=150 device=cpu
+[warn] missing audio quality stats for v=9eME1y6V-T4__#01-12-00_01-18-00_label_ -> zeros (run scripts/extract_audio_features.py)
+[epoch   1/2] loss=0.7852 val_ap=0.9829 *best* [77.9s]
+[epoch   2/2] loss=0.4609 val_ap=0.9905 *best* [79.0s]
+[done] best epoch 2 val_ap=0.9905 -> runs/2026-09-29_p3vggish_early
+[score] ckpt=runs/2026-09-29_p3vggish_early/ckpt_best.pt kind=fusion modality=both test=data/lists_official/test.csv stride=16 frames/snippet rule=(2,1) snippets
+{
+  "n_clips": 800,
+  "n_snippets": 145649,
+  "stride_frames": 16.0,
+  "segment_rule": {
+    "threshold": 0.5,
+    "min_length": 2,
+    "max_gap": 1,
+    "min_seconds": 1.333,
+    "max_gap_seconds": 0.667
+  },
+  "ap": {
+    "global__pr_auc": 0.7629749565058626,
+    "global__average_precision": 0.7629806626968128,
+    "per_video__pr_auc": 0.7662384234766649,
+    "per_video__average_precision": 0.7727385875538989
+  },
+  "prevalence": 0.2379419058561325,
+  "localization": {
+    "n_pred_segments": 2148,
+    "n_gt_segments": 1238,
+    "mean_best_iou": 0.24799164471248458,
+    "mean_detection_delay_snippets": 45.79739776951673,
+    "mean_detection_delay_frames": 732.7583643122676,
+    "mean_detection_delay_seconds": 30.53159851301115,
+    "precision@iou0.1": 0.419925512104283,
+    "recall@iou0.1": 0.72859450726979,
+    "f1@iou0.1": 0.5327820437093916,
+    "precision@iou0.2": 0.37662942271880817,
+    "recall@iou0.2": 0.6534733441033925,
+    "f1@iou0.2": 0.47784997046662725,
+    "precision@iou0.3": 0.3133147113594041,
+    "recall@iou0.3": 0.5436187399030694,
+    "f1@iou0.3": 0.3975191966922622,
+    "precision@iou0.4": 0.25558659217877094,
+    "recall@iou0.4": 0.44345718901453957,
+    "f1@iou0.4": 0.32427643236857645,
+    "precision@iou0.5": 0.20018621973929238,
+    "recall@iou0.5": 0.3473344103392569,
+    "f1@iou0.5": 0.25398700531600715
+  },
+  "macro_per_class_ap": 0.4240405418011613,
+  "dropped_modality": "none"
+}
+per-class clip-level AP: {'fighting': 0.343, 'shooting': 0.4899, 'riot': 0.7217, 'abuse': 0.0337, 'car_accident': 0.6185, 'explosion': 0.3376}
+[ok] predictions + metrics -> runs/2026-09-29_p3vggish_early
+[score] ckpt=runs/2026-09-29_p3vggish_early/ckpt_best.pt kind=fusion modality=both test=data/lists_official/test.csv stride=16 frames/snippet rule=(2,1) snippets drop=audio
+{
+  "n_clips": 800,
+  "n_snippets": 145649,
+  "stride_frames": 16.0,
+  "segment_rule": {
+    "threshold": 0.5,
+    "min_length": 2,
+    "max_gap": 1,
+    "min_seconds": 1.333,
+    "max_gap_seconds": 0.667
+  },
+  "ap": {
+    "global__pr_auc": 0.6380664588518915,
+    "global__average_precision": 0.6380753213733639,
+    "per_video__pr_auc": 0.6907368398330328,
+    "per_video__average_precision": 0.6999713656031646
+  },
+  "prevalence": 0.2379419058561325,
+  "localization": {
+    "n_pred_segments": 2168,
+    "n_gt_segments": 1238,
+    "mean_best_iou": 0.22151203696867108,
+    "mean_detection_delay_snippets": 42.18194161575017,
+    "mean_detection_delay_frames": 674.9110658520027,
+    "mean_detection_delay_seconds": 28.121294410500113,
+    "precision@iou0.1": 0.3625461254612546,
+    "recall@iou0.1": 0.6348949919224556,
+    "f1@iou0.1": 0.46153846153846156,
+    "precision@iou0.2": 0.31411439114391143,
+    "recall@iou0.2": 0.5500807754442649,
+    "f1@iou0.2": 0.3998825601879037,
+    "precision@iou0.3": 0.25276752767527677,
+    "recall@iou0.3": 0.44264943457189015,
+    "f1@iou0.3": 0.32178508514386384,
+    "precision@iou0.4": 0.19326568265682656,
+    "recall@iou0.4": 0.3384491114701131,
+    "f1@iou0.4": 0.24603640634174984,
+    "precision@iou0.5": 0.14990774907749077,
+    "recall@iou0.5": 0.26252019386106623,
+    "f1@iou0.5": 0.19083969465648853
+  },
+  "macro_per_class_ap": 0.2526661123426285,
+  "dropped_modality": "audio"
+}
+per-class clip-level AP: {'fighting': 0.2404, 'shooting': 0.1879, 'riot': 0.2947, 'abuse': 0.0331, 'car_accident': 0.2462, 'explosion': 0.5137}
+[ok] predictions + metrics -> runs/2026-09-29_p3vggish_early
+[score] ckpt=runs/2026-09-29_p3vggish_early/ckpt_best.pt kind=fusion modality=both test=data/lists_official/test.csv stride=16 frames/snippet rule=(2,1) snippets drop=visual
+{
+  "n_clips": 800,
+  "n_snippets": 145649,
+  "stride_frames": 16.0,
+  "segment_rule": {
+    "threshold": 0.5,
+    "min_length": 2,
+    "max_gap": 1,
+    "min_seconds": 1.333,
+    "max_gap_seconds": 0.667
+  },
+  "ap": {
+    "global__pr_auc": 0.661411401187711,
+    "global__average_precision": 0.6613892731542916,
+    "per_video__pr_auc": 0.6970849549249878,
+    "per_video__average_precision": 0.7061358474113133
+  },
+  "prevalence": 0.2379419058561325,
+  "localization": {
+    "n_pred_segments": 1862,
+    "n_gt_segments": 1238,
+    "mean_best_iou": 0.20921684063365095,
+    "mean_detection_delay_snippets": 56.07827359180688,
+    "mean_detection_delay_frames": 897.25237746891,
+    "mean_detection_delay_seconds": 37.38551572787125,
+    "precision@iou0.1": 0.3372717508055854,
+    "recall@iou0.1": 0.5072697899838449,
+    "f1@iou0.1": 0.40516129032258064,
+    "precision@iou0.2": 0.29430719656283566,
+    "recall@iou0.2": 0.44264943457189015,
+    "f1@iou0.2": 0.3535483870967743,
+    "precision@iou0.3": 0.24167561761546724,
+    "recall@iou0.3": 0.36348949919224555,
+    "f1@iou0.3": 0.2903225806451613,
+    "precision@iou0.4": 0.20139634801288936,
+    "recall@iou0.4": 0.30290791599353795,
+    "f1@iou0.4": 0.24193548387096775,
+    "precision@iou0.5": 0.16272824919441461,
+    "recall@iou0.5": 0.24474959612277866,
+    "f1@iou0.5": 0.19548387096774192
+  },
+  "macro_per_class_ap": 0.3961443044957758,
+  "dropped_modality": "visual"
+}
+per-class clip-level AP: {'fighting': 0.304, 'shooting': 0.5885, 'riot': 0.6913, 'abuse': 0.0232, 'car_accident': 0.5648, 'explosion': 0.205}
+[ok] predictions + metrics -> runs/2026-09-29_p3vggish_early
+scripts/run_p3_vggish.sh: line 59: unexpected EOF while looking for matching `"'

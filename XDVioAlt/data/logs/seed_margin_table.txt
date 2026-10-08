@@ -1,0 +1,42 @@
+variant                       n APglob mean    APglob range APclip mean    APclip range
+----------------------------------------------------------------------------------------
+p1_official_rgb               1      0.7223   0.7223-0.7223      0.7155   0.7155-0.7155   (single seed: no margin known)
+p1_visual_swin                1      0.8100   0.8100-0.8100      0.7709   0.7709-0.7709   (single seed: no margin known)
+p1_visual_swin_group          1      0.8133   0.8133-0.8133      0.7642   0.7642-0.7642   (single seed: no margin known)
+p2_audio_full                 1      0.4464   0.4464-0.4464      0.6252   0.6252-0.6252   (single seed: no margin known)
+p2_audio_full_clipnorm        1      0.3285   0.3285-0.3285      0.5931   0.5931-0.5931   (single seed: no margin known)
+p2_audio_partial              1      0.3337   0.3337-0.3337      0.7090   0.7090-0.7090   (single seed: no margin known)
+p2vggish30ep_audio            1      0.6403   0.6403-0.6403      0.6986   0.6986-0.6986   (single seed: no margin known)
+p2vggish30ep_visual           3      0.7287   0.7259-0.7323      0.7146   0.7123-0.7166
+p2vggish_audio                1      0.6186   0.6186-0.6186      0.6914   0.6914-0.6914   (single seed: no margin known)
+p2vggish_visual               1      0.6714   0.6714-0.6714      0.7032   0.7032-0.7032   (single seed: no margin known)
+p3_adaptive                   1      0.7321   0.7321-0.7321      0.7407   0.7407-0.7407   (single seed: no margin known)
+p3_cross                      1      0.7083   0.7083-0.7083      0.7094   0.7094-0.7094   (single seed: no margin known)
+p3_early                      1      0.7460   0.7460-0.7460      0.7650   0.7650-0.7650   (single seed: no margin known)
+p3_late                       1      0.7511   0.7511-0.7511      0.7663   0.7663-0.7663   (single seed: no margin known)
+p3full_adaptive               1      0.7553   0.7553-0.7553      0.7462   0.7462-0.7462   (single seed: no margin known)
+p3full_adaptive_clipnorm      1      0.7668   0.7668-0.7668      0.7520   0.7520-0.7520   (single seed: no margin known)
+p3full_cross                  1      0.7981   0.7981-0.7981      0.7613   0.7613-0.7613   (single seed: no margin known)
+p3full_early                  1      0.8015   0.8015-0.8015      0.7818   0.7818-0.7818   (single seed: no margin known)
+p3full_late                   1      0.8125   0.8125-0.8125      0.7825   0.7825-0.7825   (single seed: no margin known)
+p3full_late_clipnorm          1      0.8135   0.8135-0.8135      0.7703   0.7703-0.7703   (single seed: no margin known)
+p3vggish30ep_adaptive         1      0.7281   0.7281-0.7281      0.7665   0.7665-0.7665   (single seed: no margin known)
+p3vggish30ep_cross            3      0.7720   0.7695-0.7745      0.7924   0.7847-0.7964
+p3vggish30ep_early            1      0.7643   0.7643-0.7643      0.7830   0.7830-0.7830   (single seed: no margin known)
+p3vggish30ep_late             1      0.7719   0.7719-0.7719      0.7857   0.7857-0.7857   (single seed: no margin known)
+p3vggish30ep_pwcross          1      0.7666   0.7666-0.7666      0.7903   0.7903-0.7903   (single seed: no margin known)
+p3vggish30ep_pwlate           1      0.7747   0.7747-0.7747      0.7871   0.7871-0.7871   (single seed: no margin known)
+p3vggish30ep_pwlate_sqrt      1      0.7753   0.7753-0.7753      0.7869   0.7869-0.7869   (single seed: no margin known)
+p3vggish_adaptive             1      0.6306   0.6306-0.6306      0.6766   0.6766-0.6766   (single seed: no margin known)
+p3vggish_cross                1      0.6734   0.6734-0.6734      0.7386   0.7386-0.7386   (single seed: no margin known)
+p3vggish_early                1      0.7630   0.7630-0.7630      0.7727   0.7727-0.7727   (single seed: no margin known)
+p3vggish_late                 1      0.7417   0.7417-0.7417      0.7695   0.7695-0.7695   (single seed: no margin known)
+
+paired margin  p3vggish30ep_cross - p2vggish30ep_visual  (per seed)
+ seed        A        B      A-B
+   42   0.7745   0.7259  +0.0486
+   43   0.7719   0.7323  +0.0396
+   44   0.7695   0.7278  +0.0417
+
+mean margin +0.0433   range +0.0396 to +0.0486   n=3
+seed spread: p3vggish30ep_cross 0.0050, p2vggish30ep_visual 0.0065 -> margin is LARGER than the wider spread

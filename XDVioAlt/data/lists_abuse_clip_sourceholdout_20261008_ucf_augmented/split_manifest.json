@@ -1,0 +1,21 @@
+{
+  "purpose": "paired supplementary UCF-Crime Abuse training ablation; source-heldout XD validation",
+  "created": "2026-10-08",
+  "visual_features": "CLIP ViT-B-32 quickgelu openai, 2 frames/snippet, mean+std, stride 64 frames",
+  "xd_source_split": "data/lists_abuse_sourceholdout_20261007",
+  "xd_clip_list": "data/lists_clip_k2_mstd/train.csv",
+  "xd_train_features_available": 2708,
+  "xd_train_abuse": 34,
+  "xd_validation_features_available": 672,
+  "xd_validation_abuse": 10,
+  "excluded_xd_rows_without_clip_features": 424,
+  "ucf_crime_official_training_abuse_videos": 48,
+  "ucf_rows_in_validation": 0,
+  "ucf_test_videos_excluded": [
+    "Abuse028_x264",
+    "Abuse030_x264"
+  ],
+  "label_caveat": "UCF-Crime Abuse is a broader weak clip-level category; not all examples have been individually confirmed against the narrower project definition.",
+  "audio": "mel and quality features used when present; Abuse002_x264 has no audio and is represented with the dataset missing-audio fallback.",
+  "split_overlap_sources": []
+}

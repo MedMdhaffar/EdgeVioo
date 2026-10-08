@@ -1,0 +1,73 @@
+[redo] 2026-09-30T10:51:10+01:00 waiting
+[redo] 2026-09-30T10:53:10+01:00 waiting
+[redo] 2026-09-30T10:55:10+01:00 waiting
+[redo] 2026-09-30T10:57:10+01:00 waiting
+[redo] 2026-09-30T10:59:10+01:00 waiting
+[redo] 2026-09-30T11:01:10+01:00 waiting
+[redo] 2026-09-30T11:03:10+01:00 waiting
+[redo] 2026-09-30T11:05:10+01:00 waiting
+[redo] 2026-09-30T11:07:10+01:00 waiting
+[redo] 2026-09-30T11:09:10+01:00 waiting
+[redo] 2026-09-30T11:11:10+01:00 waiting
+[redo] 2026-09-30T11:13:10+01:00 waiting
+[redo] 2026-09-30T11:15:10+01:00 waiting
+[redo] 2026-09-30T11:17:10+01:00 waiting
+[redo] 2026-09-30T11:19:10+01:00 waiting
+[redo] 2026-09-30T11:21:10+01:00 waiting
+[redo] 2026-09-30T11:23:10+01:00 waiting
+[redo] 2026-09-30T11:25:10+01:00 waiting
+[redo] 2026-09-30T11:27:10+01:00 waiting
+[redo] 2026-09-30T11:29:10+01:00 waiting
+[redo] 2026-09-30T11:31:10+01:00 waiting
+[redo] 2026-09-30T11:33:10+01:00 waiting
+[redo] 2026-09-30T11:35:10+01:00 waiting
+[redo] 2026-09-30T11:37:10+01:00 waiting
+[redo] 2026-09-30T11:39:10+01:00 waiting
+[redo] 2026-09-30T11:41:10+01:00 waiting
+[redo] 2026-09-30T11:43:10+01:00 waiting
+[redo] 2026-09-30T11:45:10+01:00 waiting
+[redo] 2026-09-30T11:47:10+01:00 waiting
+[redo] 2026-09-30T11:49:10+01:00 waiting
+[redo] 2026-09-30T11:51:10+01:00 waiting
+[redo] 2026-09-30T11:53:11+01:00 waiting
+[redo] 2026-09-30T11:55:11+01:00 waiting
+[redo] 2026-09-30T11:57:11+01:00 waiting
+[redo] 2026-09-30T11:59:11+01:00 waiting
+[redo] 2026-09-30T12:01:11+01:00 re-running the 4 sweeps affected by the reference-space fix
+[sweep] runs/2026-09-29_p3vggish30ep_cross/ckpt_best.pt kind=noise stream=audio stride=16 rule=(8,4) snippets = (5.33,2.67) s flag_reliability=False
+   level applied  APglob  APclip macroAP   IoU  F1@.5
+-----------------------------------------------------
+[sweep] runs/2026-09-29_p3vggish30ep_cross/ckpt_best.pt kind=attenuation stream=audio stride=16 rule=(8,4) snippets = (5.33,2.67) s flag_reliability=False
+   level applied  APglob  APclip macroAP   IoU  F1@.5
+-----------------------------------------------------
+   1.000   False  0.7745  0.7961  0.6958 0.369  0.243
+  40.000    True  0.7745  0.7961  0.6958 0.369  0.244
+   0.750    True  0.7743  0.7982  0.7038 0.377  0.255
+  20.000    True  0.7745  0.7958  0.6955 0.369  0.243
+   0.500    True  0.7726  0.7981  0.7066 0.365  0.246
+  10.000    True  0.7750  0.7949  0.6966 0.369  0.250
+   0.250    True  0.7665  0.7900  0.6999 0.360  0.255
+   5.000    True  0.7758  0.7922  0.6948 0.370  0.255
+   0.000    True  0.7243  0.7249  0.5961 0.356  0.247
+[sweep] written -> runs/2026-09-29_p3vggish30ep_cross/robustness_attenuation_audio.json
+[sweep] figure -> runs/2026-09-29_p3vggish30ep_cross/robustness_attenuation_audio.png
+   0.000   False  0.7745  0.7961  0.6958 0.369  0.243
+[sweep] written -> runs/2026-09-29_p3vggish30ep_cross/robustness_noise_audio.json
+[sweep] figure -> runs/2026-09-29_p3vggish30ep_cross/robustness_noise_audio.png
+[sweep] runs/2026-09-29_p3vggish30ep_late/ckpt_best.pt kind=attenuation stream=audio stride=16 rule=(8,4) snippets = (5.33,2.67) s flag_reliability=False
+   level applied  APglob  APclip macroAP   IoU  F1@.5
+-----------------------------------------------------
+[sweep] runs/2026-09-29_p3full_late/ckpt_best.pt kind=attenuation stream=audio stride=64 rule=(2,1) snippets = (5.33,2.67) s flag_reliability=False
+   level applied  APglob  APclip macroAP   IoU  F1@.5
+-----------------------------------------------------
+   1.000   False  0.8143  0.7792  0.6505 0.422  0.317
+   1.000   False  0.7719  0.7857  0.7200 0.354  0.265
+   0.500    True  0.8150  0.7756  0.6525 0.425  0.321
+   0.000    True  0.8133  0.7705  0.6457 0.429  0.316
+[sweep] written -> runs/2026-09-29_p3full_late/robustness_attenuation_audio.json
+[sweep] figure -> runs/2026-09-29_p3full_late/robustness_attenuation_audio.png
+   0.500    True  0.7767  0.7817  0.6961 0.351  0.265
+   0.000    True  0.7178  0.7239  0.5783 0.325  0.216
+[sweep] written -> runs/2026-09-29_p3vggish30ep_late/robustness_attenuation_audio.json
+[sweep] figure -> runs/2026-09-29_p3vggish30ep_late/robustness_attenuation_audio.png
+[redo] DONE 2026-09-30T12:02:16+01:00

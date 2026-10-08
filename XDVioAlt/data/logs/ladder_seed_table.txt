@@ -1,0 +1,10 @@
+variant                     n    mean             range  spread  vs baseline
+----------------------------------------------------------------------------
+p3vggish30ep_cross          3  0.7720 0.7695-0.7745  0.0050      +0.0433
+p3vggish30ep_late           1  0.7719 0.7719-0.7719  0.0000      +0.0432  (1 seed: no spread)
+p3vggish30ep_early          1  0.7643 0.7643-0.7643  0.0000      +0.0356  (1 seed: no spread)
+p3vggish30ep_adaptive       3  0.6900 0.6319-0.7281  0.0962      -0.0387
+p2vggish30ep_visual         3  0.7287 0.7259-0.7323  0.0065      +0.0000
+p2vggish30ep_audio          1  0.6403 0.6403-0.6403  0.0000      -0.0884  (1 seed: no spread)
+
+baseline p2vggish30ep_visual mean = 0.7287 (n=3); a variant only 'beats' it when the margin is larger than the wider of the two spreads

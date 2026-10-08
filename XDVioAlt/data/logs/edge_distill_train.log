@@ -1,0 +1,165 @@
+[distill] 1200 (video, I3D) pairs; 1160 train / 40 holdout
+[distill] 1200 usable clips -> <= 19169 samples (~2.7 GB frames)
+[distill] decoded 0/1200
+[distill] decoded 10/1200
+[distill] decoded 20/1200
+[distill] decoded 30/1200
+[distill] decoded 40/1200
+[distill] decoded 50/1200
+[distill] decoded 60/1200
+[distill] decoded 70/1200
+[distill] decoded 80/1200
+[distill] decoded 90/1200
+[distill] decoded 100/1200
+[distill] decoded 110/1200
+[distill] decoded 120/1200
+[distill] decoded 130/1200
+[distill] decoded 140/1200
+[distill] decoded 150/1200
+[distill] decoded 160/1200
+[distill] decoded 170/1200
+[distill] decoded 180/1200
+[distill] decoded 190/1200
+[distill] decoded 200/1200
+[distill] decoded 210/1200
+[distill] decoded 220/1200
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x556b436a1a00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x556b43033cc0] Referenced QT chapter track not found
+[distill] decoded 230/1200
+[distill] decoded 240/1200
+[distill] decoded 250/1200
+[distill] decoded 260/1200
+[distill] decoded 270/1200
+[distill] decoded 280/1200
+[distill] decoded 290/1200
+[distill] decoded 300/1200
+[distill] decoded 310/1200
+[distill] decoded 320/1200
+[distill] decoded 330/1200
+[distill] decoded 340/1200
+[distill] decoded 350/1200
+[distill] decoded 360/1200
+[distill] decoded 370/1200
+[distill] decoded 380/1200
+[distill] decoded 390/1200
+[distill] decoded 400/1200
+[distill] decoded 410/1200
+[distill] decoded 420/1200
+[distill] decoded 430/1200
+[distill] decoded 440/1200
+[distill] decoded 450/1200
+[distill] decoded 460/1200
+[distill] decoded 470/1200
+[distill] decoded 480/1200
+[distill] decoded 490/1200
+[distill] decoded 500/1200
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x556b43033cc0] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x556b436a1a00] Referenced QT chapter track not found
+[distill] decoded 510/1200
+[distill] decoded 520/1200
+[distill] decoded 530/1200
+[distill] decoded 540/1200
+[distill] decoded 550/1200
+[distill] decoded 560/1200
+[distill] decoded 570/1200
+[distill] decoded 580/1200
+[distill] decoded 590/1200
+[distill] decoded 600/1200
+[distill] decoded 610/1200
+[distill] decoded 620/1200
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x556b436a1a00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x556b436a1a00] Referenced QT chapter track not found
+[distill] decoded 630/1200
+[distill] decoded 640/1200
+[distill] decoded 650/1200
+[distill] decoded 660/1200
+[distill] decoded 670/1200
+[distill] decoded 680/1200
+[distill] decoded 690/1200
+[distill] decoded 700/1200
+[distill] decoded 710/1200
+[distill] decoded 720/1200
+[distill] decoded 730/1200
+[distill] decoded 740/1200
+[distill] decoded 750/1200
+[distill] decoded 760/1200
+[distill] decoded 770/1200
+[distill] decoded 780/1200
+[distill] decoded 790/1200
+[distill] decoded 800/1200
+[distill] decoded 810/1200
+[distill] decoded 820/1200
+[distill] decoded 830/1200
+[distill] decoded 840/1200
+[distill] decoded 850/1200
+[distill] decoded 860/1200
+[distill] decoded 870/1200
+[distill] decoded 880/1200
+[distill] decoded 890/1200
+[distill] decoded 900/1200
+[distill] decoded 910/1200
+[distill] decoded 920/1200
+[distill] decoded 930/1200
+[distill] decoded 940/1200
+[distill] decoded 950/1200
+[distill] decoded 960/1200
+[distill] decoded 970/1200
+[distill] decoded 980/1200
+[distill] decoded 990/1200
+[distill] decoded 1000/1200
+[distill] decoded 1010/1200
+[distill] decoded 1020/1200
+[distill] decoded 1030/1200
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x556b436a1a00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x556b43033cc0] Referenced QT chapter track not found
+[distill] decoded 1040/1200
+[distill] decoded 1050/1200
+[distill] decoded 1060/1200
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x556b436a1a00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x556b4330e700] Referenced QT chapter track not found
+[distill] decoded 1070/1200
+[distill] decoded 1080/1200
+[distill] decoded 1090/1200
+[distill] decoded 1100/1200
+[distill] decoded 1110/1200
+[distill] decoded 1120/1200
+[distill] decoded 1130/1200
+[distill] decoded 1140/1200
+[distill] decoded 1150/1200
+[distill] decoded 1160/1200
+[distill] decoded 1170/1200
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x556b436a1a00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x556b436a1a00] Referenced QT chapter track not found
+[distill] decoded 1180/1200
+[distill] decoded 1190/1200
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x556b4330e700] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x556b436a1a00] Referenced QT chapter track not found
+[distill] clips kept 1200, dropped 0
+[distill] built 19169 samples in 1222s (1200 clips, 7-16 samples each)
+[distill] train 18537 samples / holdout 632 (1160 vs 40 clips)
+[distill] epoch   1 loss 0.1983 holdout cosine +0.8180
+[distill] epoch   2 loss 0.1798 holdout cosine +0.8223
+[distill] epoch   4 loss 0.1665 holdout cosine +0.8332
+[distill] epoch   6 loss 0.1591 holdout cosine +0.8391
+[distill] epoch   8 loss 0.1533 holdout cosine +0.8405
+[distill] epoch  10 loss 0.1479 holdout cosine +0.8439
+[distill] epoch  12 loss 0.1441 holdout cosine +0.8464
+[distill] epoch  14 loss 0.1406 holdout cosine +0.8462
+[distill] epoch  16 loss 0.1377 holdout cosine +0.8470
+[distill] epoch  18 loss 0.1355 holdout cosine +0.8468
+[distill] epoch  20 loss 0.1335 holdout cosine +0.8470
+[distill] epoch  22 loss 0.1318 holdout cosine +0.8478
+[distill] epoch  24 loss 0.1304 holdout cosine +0.8480
+[distill] epoch  26 loss 0.1296 holdout cosine +0.8479
+[distill] epoch  28 loss 0.1290 holdout cosine +0.8477
+[distill] epoch  30 loss 0.1287 holdout cosine +0.8477
+[distill] extractor weights -> export/onnx/minirgb_w24_distilled.pt
+
+[distill] holdout cosine - raw is flattered by the target's constant component;
+           centered (mean removed) is the number that shows input-dependent structure:
+                           raw  centered
+    random init        -0.0029   +0.1160
+    constant (mean)    +0.8107   +0.0000
+    trained            +0.8477   +0.1778
+[distill] verdict: input-dependent structure present (centered cosine +0.1778 over the constant predictor)
+[distill] report -> export/onnx/edge_distill_train_report.json

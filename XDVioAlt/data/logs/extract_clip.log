@@ -1,0 +1,275 @@
+[clip] extractor <- ViT-B-32-quickgelu/openai (dim 512, 224px) | 8 threads, bs 32
+[clip] train: 25 written, 0 cached [70s]
+[clip] train: 50 written, 0 cached [161s]
+[clip] train: 75 written, 0 cached [221s]
+[clip] train: 100 written, 0 cached [296s]
+[clip] train: 125 written, 0 cached [362s]
+[clip] train: 150 written, 0 cached [406s]
+[clip] train: 175 written, 0 cached [451s]
+[clip] train: 200 written, 0 cached [515s]
+[clip] train: 225 written, 0 cached [592s]
+[clip] train: 250 written, 0 cached [622s]
+[clip] train: 275 written, 0 cached [654s]
+[clip] train: 300 written, 0 cached [691s]
+[clip] train: 325 written, 0 cached [743s]
+[clip] train: 350 written, 0 cached [813s]
+[clip] train: 375 written, 0 cached [848s]
+[clip] train: 400 written, 0 cached [903s]
+[clip] train: 425 written, 0 cached [979s]
+[clip] train: 450 written, 0 cached [1069s]
+[clip] train: 475 written, 0 cached [1141s]
+[clip] train: 500 written, 0 cached [1190s]
+[clip] train: 525 written, 0 cached [1328s]
+[clip] train: 550 written, 0 cached [1426s]
+[clip] train: 575 written, 0 cached [1495s]
+[clip] train: 600 written, 0 cached [1552s]
+[clip] train: 625 written, 0 cached [1598s]
+[clip] train: 650 written, 0 cached [1642s]
+[clip] train: 675 written, 0 cached [1733s]
+[clip] train: 700 written, 0 cached [1779s]
+[clip] train: 725 written, 0 cached [1818s]
+[clip] train: 750 written, 0 cached [1891s]
+[clip] train: 775 written, 0 cached [1955s]
+[clip] train: 800 written, 0 cached [2028s]
+[clip] train: 825 written, 0 cached [2068s]
+[clip] train: 850 written, 0 cached [2104s]
+[clip] train: 875 written, 0 cached [2148s]
+[clip] train: 900 written, 0 cached [2265s]
+[clip] train: 925 written, 0 cached [2333s]
+[clip] train: 950 written, 0 cached [2357s]
+[clip] train: 975 written, 0 cached [2396s]
+[clip] train: 1000 written, 0 cached [2437s]
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fbd7cc00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fbd7cc00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fbd7cc00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fbd7cc00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fbd7cc00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fbd7cc00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fbd7cc00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fbd7cc00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fbd7cc00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fb9fed80] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fbd7cc00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fbd7cc00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fbd7cc00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fbd7cc00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fb54ca80] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fbd7cc00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fbd7cc00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fbd7cc00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fbd7cc00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fbd7cc00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fbd7cc00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fbd7cc00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fbd7cc00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fbd7cc00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fbd7cc00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fbd7cf00] Referenced QT chapter track not found
+[clip] train: 1025 written, 0 cached [2468s]
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fbd7cc00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fbd7cc00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fbd7cc00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fbd7cf00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fbd7cc00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fb5e0a80] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fbd7cc00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fbd7cc00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fbd7cc00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fbd7cc00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fbd7cc00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fbd7cc00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fbd7cc00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fbd7cc00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fbd7cc00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fb820640] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fb5e0a80] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fbd7cc00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fbd7cc00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fbd7cc00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fbd7cc00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fb9fed80] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fbd7cc00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fbd7cc00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fbd7cc00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fbd7cc00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fbd7cc00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fbd7cc00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fbd7cc00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fbd7cc00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fbd7cc00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fbd7cc00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fbd7cc00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fbd7cc00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fbd7cc00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fbd7cc00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fbd7cc00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fbd7cc00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fbd7cc00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fbd7cc00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fbd7cc00] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x55e6fbd7cc00] Referenced QT chapter track not found
+[clip] train: 1050 written, 0 cached [2524s]
+[clip] train: 1075 written, 0 cached [2594s]
+[clip] train: 1100 written, 0 cached [2638s]
+[clip] train: 1125 written, 0 cached [2718s]
+[clip] train: 1150 written, 0 cached [2740s]
+[clip] train: 1175 written, 0 cached [2869s]
+[clip] train: 1200 written, 0 cached [2898s]
+[clip] train: 1225 written, 0 cached [2933s]
+[clip] train: 1250 written, 0 cached [3001s]
+[clip] train: 1275 written, 0 cached [3047s]
+[clip] train: 1300 written, 0 cached [3089s]
+[clip] train: 1325 written, 0 cached [3125s]
+[clip] train: 1350 written, 0 cached [3165s]
+[clip] train: 1375 written, 0 cached [3236s]
+[clip] train: 1400 written, 0 cached [3305s]
+[clip] train: 1425 written, 0 cached [3358s]
+[clip] train: 1450 written, 0 cached [3390s]
+[clip] train: 1475 written, 0 cached [3436s]
+[clip] train: 1500 written, 0 cached [3535s]
+[clip] train: 1525 written, 0 cached [3652s]
+[clip] train: 1550 written, 0 cached [3763s]
+[clip] train: 1575 written, 0 cached [3843s]
+[clip] train: 1600 written, 0 cached [3908s]
+[clip] train: 1625 written, 0 cached [3962s]
+[clip] train: 1650 written, 0 cached [4103s]
+[clip] train: 1675 written, 0 cached [4180s]
+[clip] train: 1700 written, 0 cached [4325s]
+[clip] train: 1725 written, 0 cached [4503s]
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+WARNING:huggingface_hub.utils._http:Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[clip] extractor <- ViT-B-32-quickgelu/openai (dim 512, 224px) | 8 threads, bs 32
+[clip] train: 25 written, 1732 cached [137s]
+[clip] train: 50 written, 1732 cached [185s]
+[clip] train: 75 written, 1732 cached [262s]
+[clip] train: 100 written, 1732 cached [366s]
+[clip] train: 125 written, 1732 cached [443s]
+[clip] train: 150 written, 1732 cached [488s]
+[clip] train: 175 written, 1732 cached [575s]
+[clip] train: 200 written, 1732 cached [670s]
+[clip] train: 225 written, 1732 cached [748s]
+[clip] train: 250 written, 1732 cached [830s]
+[clip] train: 275 written, 1732 cached [890s]
+[clip] train: 300 written, 1732 cached [982s]
+[clip] train: 325 written, 1732 cached [1065s]
+[clip] train: 350 written, 1732 cached [1163s]
+[clip] train: 375 written, 1732 cached [1315s]
+[clip] train: 400 written, 1732 cached [1467s]
+[clip] train: 425 written, 1732 cached [1561s]
+[clip] train: 450 written, 1732 cached [1676s]
+[clip] train: 475 written, 1732 cached [1824s]
+[clip] train: 500 written, 1732 cached [1949s]
+[clip] train: 525 written, 1732 cached [2054s]
+[clip] train: 550 written, 1732 cached [2200s]
+[clip] train: 575 written, 1732 cached [2362s]
+[clip] train: 600 written, 1732 cached [2444s]
+[clip] train: 625 written, 1732 cached [2516s]
+[clip] train: 650 written, 1732 cached [2666s]
+[clip] train: 675 written, 1732 cached [2760s]
+[clip] train: 700 written, 1732 cached [2859s]
+[clip] train: 725 written, 1732 cached [2956s]
+[clip] train: 750 written, 1732 cached [3056s]
+[clip] train: 775 written, 1732 cached [3324s]
+[clip] train: 800 written, 1732 cached [3431s]
+[clip] train: 825 written, 1732 cached [3577s]
+[clip] train: 850 written, 1732 cached [3680s]
+[clip] train: 875 written, 1732 cached [3810s]
+[clip] train: 900 written, 1732 cached [3981s]
+[clip] train: 925 written, 1732 cached [4163s]
+[clip] train: 950 written, 1732 cached [4307s]
+[clip] train: 975 written, 1732 cached [4523s]
+[clip] train: 1000 written, 1732 cached [4627s]
+[clip] train: 1025 written, 1732 cached [4754s]
+[clip] train: 1050 written, 1732 cached [4848s]
+[clip] train: 1075 written, 1732 cached [5022s]
+[clip] train: 1100 written, 1732 cached [5134s]
+[clip] train: 1125 written, 1732 cached [5212s]
+[clip] train: 1150 written, 1732 cached [5429s]
+[clip] train: 1175 written, 1732 cached [5480s]
+[clip] train: 1200 written, 1732 cached [5534s]
+[clip] train: 1225 written, 1732 cached [5558s]
+[clip] train: 1250 written, 1732 cached [5598s]
+[clip] train: 1275 written, 1732 cached [5695s]
+[clip] train: 1300 written, 1732 cached [5794s]
+[clip] train: 1325 written, 1732 cached [5918s]
+[clip] train: 1350 written, 1732 cached [6088s]
+[clip] train: 1375 written, 1732 cached [6295s]
+[clip] train: 1400 written, 1732 cached [6418s]
+[clip] train: 1425 written, 1732 cached [6633s]
+[clip] train: 1450 written, 1732 cached [6755s]
+[clip] train: 1475 written, 1732 cached [6932s]
+[clip] train: 1500 written, 1732 cached [7016s]
+[clip] train: 1525 written, 1732 cached [7100s]
+[clip] train: 1550 written, 1732 cached [7163s]
+[clip] train: 1575 written, 1732 cached [7290s]
+[clip] train: 1600 written, 1732 cached [7434s]
+[clip] train: 1625 written, 1732 cached [7519s]
+[clip] train: 1650 written, 1732 cached [7591s]
+[clip] train: 1675 written, 1732 cached [7680s]
+[clip] train: 1700 written, 1732 cached [7805s]
+[clip] train: 1725 written, 1732 cached [7888s]
+[clip] train: 1750 written, 1732 cached [7948s]
+[clip] train: 1775 written, 1732 cached [7993s]
+[clip] train: wrote 1781 (1732 cached, 0 failed, 0 no-video, 3 oversize) -> data/features/clip/train  [8001s]
+[clip] val: 25 written, 0 cached [8100s]
+[clip] val: 50 written, 0 cached [8177s]
+[clip] val: 75 written, 0 cached [8232s]
+[clip] val: 100 written, 0 cached [8293s]
+[clip] val: 125 written, 0 cached [8318s]
+[clip] val: 150 written, 0 cached [8350s]
+[clip] val: 175 written, 0 cached [8374s]
+[clip] val: 200 written, 0 cached [8406s]
+[clip] val: 225 written, 0 cached [8482s]
+[clip] val: 250 written, 0 cached [8538s]
+[clip] val: 275 written, 0 cached [8613s]
+[clip] val: 300 written, 0 cached [8685s]
+[clip] val: 325 written, 0 cached [8777s]
+[clip] val: 350 written, 0 cached [9091s]
+[clip] val: 375 written, 0 cached [9195s]
+[clip] val: 400 written, 0 cached [9290s]
+[clip] val: 425 written, 0 cached [9403s]
+[clip] val: wrote 434 (0 cached, 0 failed, 0 no-video, 0 oversize) -> data/features/clip/val  [9439s]
+[clip] test: 25 written, 48 cached [9471s]
+[clip] test: 50 written, 48 cached [9509s]
+[clip] test: 75 written, 48 cached [9559s]
+[clip] test: 100 written, 48 cached [9619s]
+[clip] test: 125 written, 48 cached [9665s]
+[clip] test: 150 written, 48 cached [9736s]
+[clip] test: 175 written, 48 cached [9771s]
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x5594009d5a40] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x5594008afec0] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x5594008afec0] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x5594008afec0] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x5594009d5a40] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x5594008afec0] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x5594008afec0] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x5594008afec0] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x5594008afec0] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x5594009d5a40] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x5594008afec0] Referenced QT chapter track not found
+[mov,mp4,m4a,3gp,3g2,mj2 @ 0x5594008afec0] Referenced QT chapter track not found
+[clip] test: 200 written, 48 cached [9814s]
+[clip] test: 225 written, 48 cached [9836s]
+[clip] test: 250 written, 48 cached [9865s]
+[clip] test: 275 written, 48 cached [9925s]
+[clip] test: 300 written, 48 cached [10060s]
+[clip] test: 325 written, 48 cached [10142s]
+[clip] test: 350 written, 48 cached [10296s]
+[clip] test: 375 written, 48 cached [10494s]
+[clip] test: 400 written, 48 cached [10633s]
+[clip] test: 425 written, 48 cached [10815s]
+[clip] test: 450 written, 48 cached [11008s]
+[clip] test: 475 written, 48 cached [11167s]
+[clip] test: 500 written, 48 cached [11381s]
+[clip] test: 525 written, 48 cached [11502s]
+[clip] test: 550 written, 48 cached [11629s]
+[clip] test: 575 written, 48 cached [11762s]
+[clip] test: 600 written, 48 cached [11907s]
+[clip] test: 625 written, 48 cached [12049s]
+[clip] test: 650 written, 48 cached [12152s]
+[clip] test: 675 written, 48 cached [12361s]
+[clip] test: 700 written, 48 cached [12490s]
+[clip] test: 725 written, 48 cached [12579s]
+[clip] test: 750 written, 48 cached [12626s]
+[clip] test: wrote 752 (48 cached, 0 failed, 0 no-video, 0 oversize) -> data/features/clip/test  [12628s]
+[clip] done: 2967 extracted, 1780 cached, lists -> data/lists_clip in 12628s

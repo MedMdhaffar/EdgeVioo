@@ -1,0 +1,60 @@
+[ok] 896 clips / 36084 snippets -> data/features/audio_stats.json
+[info] std range: 0.000 .. 264.161
+[run] runs/2026-09-24_p2_audio_partial
+[cfg] modality=audio feature_set=swin_rgb in_dim=132 epochs=30 batch=32 lr=0.0001 k=5
+[data] train=896 val=108 device=cpu threads=8
+[epoch   1/30] loss=1.2235 (mil=0.7206) val_pr_auc=0.9006 val_ap=0.9018 *best* [28.0s]
+[epoch   2/30] loss=1.1017 (mil=0.6621) val_pr_auc=0.9179 val_ap=0.9188 *best* [11.4s]
+[epoch   3/30] loss=1.0335 (mil=0.6331) val_pr_auc=0.9310 val_ap=0.9317 *best* [11.2s]
+[epoch   4/30] loss=0.9873 (mil=0.6060) val_pr_auc=0.9461 val_ap=0.9466 *best* [11.0s]
+[epoch   5/30] loss=0.9366 (mil=0.5735) val_pr_auc=0.9560 val_ap=0.9564 *best* [10.9s]
+[epoch   6/30] loss=0.9116 (mil=0.5580) val_pr_auc=0.9634 val_ap=0.9637 *best* [11.0s]
+[epoch   7/30] loss=0.8803 (mil=0.5481) val_pr_auc=0.9675 val_ap=0.9679 *best* [11.0s]
+[epoch   8/30] loss=0.8543 (mil=0.5355) val_pr_auc=0.9727 val_ap=0.9730 *best* [11.0s]
+[epoch   9/30] loss=0.8126 (mil=0.5087) val_pr_auc=0.9753 val_ap=0.9756 *best* [11.0s]
+[epoch  10/30] loss=0.7773 (mil=0.4893) val_pr_auc=0.9768 val_ap=0.9771 *best* [15.6s]
+[epoch  11/30] loss=0.7687 (mil=0.4853) val_pr_auc=0.9772 val_ap=0.9774 *best* [27.6s]
+[epoch  12/30] loss=0.7648 (mil=0.4813) val_pr_auc=0.9781 val_ap=0.9783 *best* [14.0s]
+[epoch  13/30] loss=0.7566 (mil=0.4772) val_pr_auc=0.9784 val_ap=0.9786 *best* [11.2s]
+[epoch  14/30] loss=0.7642 (mil=0.4859) val_pr_auc=0.9784 val_ap=0.9786 [11.2s]
+[epoch  15/30] loss=0.7732 (mil=0.4882) val_pr_auc=0.9790 val_ap=0.9792 *best* [11.2s]
+[epoch  16/30] loss=0.7636 (mil=0.4891) val_pr_auc=0.9793 val_ap=0.9795 *best* [11.2s]
+[epoch  17/30] loss=0.7606 (mil=0.4841) val_pr_auc=0.9799 val_ap=0.9801 *best* [11.1s]
+[epoch  18/30] loss=0.7557 (mil=0.4758) val_pr_auc=0.9796 val_ap=0.9798 [11.0s]
+[epoch  19/30] loss=0.7511 (mil=0.4735) val_pr_auc=0.9804 val_ap=0.9806 *best* [11.0s]
+[epoch  20/30] loss=0.7612 (mil=0.4837) val_pr_auc=0.9808 val_ap=0.9810 *best* [10.9s]
+[epoch  21/30] loss=0.7552 (mil=0.4817) val_pr_auc=0.9804 val_ap=0.9806 [11.0s]
+[epoch  22/30] loss=0.7333 (mil=0.4632) val_pr_auc=0.9804 val_ap=0.9806 [11.0s]
+[epoch  23/30] loss=0.7478 (mil=0.4706) val_pr_auc=0.9808 val_ap=0.9810 [10.9s]
+[epoch  24/30] loss=0.7397 (mil=0.4684) val_pr_auc=0.9808 val_ap=0.9810 [11.0s]
+[epoch  25/30] loss=0.7438 (mil=0.4718) val_pr_auc=0.9813 val_ap=0.9815 *best* [11.0s]
+[epoch  26/30] loss=0.7473 (mil=0.4752) val_pr_auc=0.9822 val_ap=0.9824 *best* [11.1s]
+[epoch  27/30] loss=0.7186 (mil=0.4546) val_pr_auc=0.9813 val_ap=0.9815 [11.5s]
+[epoch  28/30] loss=0.7411 (mil=0.4711) val_pr_auc=0.9823 val_ap=0.9825 *best* [16.0s]
+[epoch  29/30] loss=0.7190 (mil=0.4541) val_pr_auc=0.9828 val_ap=0.9830 *best* [13.9s]
+[epoch  30/30] loss=0.7105 (mil=0.4459) val_pr_auc=0.9828 val_ap=0.9830 [14.6s]
+[done] best epoch 29: val_ap=0.9830 val_pr_auc=0.9828
+[done] artifacts -> runs/2026-09-24_p2_audio_partial
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/aarf101/projtutore/safewatch/eval/runner.py", line 163, in <module>
+    raise SystemExit(main())
+                     ~~~~^^
+  File "/home/aarf101/projtutore/safewatch/eval/runner.py", line 140, in main
+    scores, _valid, multilogits = score_clips(args.ckpt, args.test_csv, device)
+                                  ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/aarf101/projtutore/.venv/lib/python3.14/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+  File "/home/aarf101/projtutore/safewatch/eval/runner.py", line 61, in score_clips
+    model, _cfg = load_model(ckpt_path, device)
+                  ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/home/aarf101/projtutore/safewatch/eval/runner.py", line 37, in load_model
+    model.load_state_dict(ckpt["model"])
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/home/aarf101/projtutore/.venv/lib/python3.14/site-packages/torch/nn/modules/module.py", line 2643, in load_state_dict
+    raise RuntimeError(
+    ...<3 lines>...
+    )
+RuntimeError: Error(s) in loading state_dict for MILModel:
+	size mismatch for encoder.net.0.weight: copying a param with shape torch.Size([512, 132, 1]) from checkpoint, the shape in current model is torch.Size([512, 768, 1]).

@@ -1,0 +1,14 @@
+[remedy] 2026-10-05T09:46:52+01:00 training p3vggish30ep_adaptive_relgate_s42 (fusion=adaptive seed=42 threads=4)
+[warn] val split (150 clips) has no abuse clip(s): model selection is blind to it
+[run] runs/2026-10-05_p3vggish30ep_adaptive_relgate_s42
+[cfg] fusion=adaptive params=1053514 reliability=7d dropout=0.15 train=3804 val=150 device=cpu
+[warn] missing audio quality stats for v=9eME1y6V-T4__#01-12-00_01-18-00_label_ -> zeros (run scripts/extract_audio_features.py)
+[epoch   1/30] loss=0.7417 val_ap=0.9840 val_abuse=n/a *best* [247.9s]
+[epoch   2/30] loss=0.4152 val_ap=0.9879 val_abuse=n/a *best* [237.1s]
+[epoch   3/30] loss=0.3707 val_ap=0.9873 val_abuse=n/a [189.0s]
+[epoch   4/30] loss=0.3424 val_ap=0.9730 val_abuse=n/a [188.7s]
+[epoch   5/30] loss=0.3042 val_ap=0.9828 val_abuse=n/a [204.8s]
+[epoch   6/30] loss=0.2825 val_ap=0.9688 val_abuse=n/a [406.3s]
+[epoch   7/30] loss=0.2775 val_ap=0.9754 val_abuse=n/a [297.8s]
+[epoch   8/30] loss=0.2628 val_ap=0.9788 val_abuse=n/a [250.5s]
+[epoch   9/30] loss=0.2401 val_ap=0.9890 val_abuse=n/a *best* [262.9s]

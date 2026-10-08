@@ -1,0 +1,29 @@
+P7 (Edge AI) - measured on this CPU-only mini-PC, no GPU
+==============================================================================
+
+1. Whole pipeline on real 4-minute clips (decode -> sample -> extractor -> head)
+   device: cpu/4 threads   extractor: MiniRGB width=24 (417,520 params)
+
+   video                                     dur_s  decode  extract    head   total    xRT
+   A.Beautiful.Mind.2001__#00-25-20_00-29-2  240.0   2.519    0.086  0.0104   2.660   90.2
+   A.Beautiful.Mind.2001__#00-40-52_00-42-0   69.0   0.402    0.024  0.0039   0.434  159.2
+   A.Beautiful.Mind.2001__#00-50-26_00-55-1  290.1   2.075    0.090  0.0102   2.182  132.9
+   A.Beautiful.Mind.2001__#01-14-30_01-16-5  149.0   1.044    0.055  0.0073   1.118  133.3
+
+   stage p50: decode 2.075s | extractor 0.086s | head 0.0102s  -> decode is 24x the extractor and 203x the head
+
+   extractor ONNX: fp32 1.595 MB, p50 0.175 ms/frame, parity 1.5e-08
+                   int8 0.41 MB, p50 1.138 ms/frame, parity 3.0e-04, accepted=True  -> 6.5x SLOWER
+
+2. Fidelity: can the extractor reproduce the I3D features it replaces?
+   80 clips (64 train / 16 holdout), 2031 train samples
+
+   predictor           raw cosine   centered
+   random init            +0.0027    -0.0551
+   constant (mean)        +0.8288    +0.0000
+   trained                +0.8334    +0.0747
+
+   trained raw 0.8334 vs constant 0.8288: 99.4% of the raw score is just the target's constant component.
+   Centered (the honest metric): trained +0.0747 vs constant 0.0 vs random -0.0551.
+
+   caveat: fitted on TEST-split video (it is the only split with videos here), so no detection AP is reported from these features; fidelity only

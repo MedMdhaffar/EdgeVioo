@@ -1,0 +1,13 @@
+[sd] 2026-09-29_p2vggish30ep_visual
+  ok -> runs/2026-09-29_p2vggish30ep_visual/test_metrics_source_disjoint.json
+[sd] 2026-09-29_p2vggish30ep_audio
+  ok -> runs/2026-09-29_p2vggish30ep_audio/test_metrics_source_disjoint.json
+[sd] 2026-09-29_p3vggish30ep_late
+  ok -> runs/2026-09-29_p3vggish30ep_late/test_metrics_source_disjoint.json
+[sd] 2026-09-29_p3vggish30ep_cross
+  ok -> runs/2026-09-29_p3vggish30ep_cross/test_metrics_source_disjoint.json
+[sd] 2026-09-30_p3vggish30ep_adaptive
+  ok -> runs/2026-09-30_p3vggish30ep_adaptive/test_metrics_source_disjoint.json
+[sd] 2026-09-30_p3vggish30ep_early
+  ok -> runs/2026-09-30_p3vggish30ep_early/test_metrics_source_disjoint.json
+[sd] done

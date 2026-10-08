@@ -1,0 +1,14 @@
+[edge] extractor weights <- export/onnx/minirgb_w24_distilled.pt
+[edge] device=cpu/4 threads | MiniRGB width=24 params=417,520 | 5 clips
+/home/aarf101/projtutore/scripts/edge_budget.py:90: DeprecationWarning: You are using the legacy TorchScript-based ONNX export. Starting in PyTorch 2.9, the new torch.export-based ONNX exporter has become the default. Learn more about the new export logic: https://docs.pytorch.org/docs/stable/onnx_export.html. For exporting control flow: https://pytorch.org/tutorials/beginner/onnx/export_control_flow_model_to_onnx_tutorial.html
+  torch.onnx.export(model, (dummy,), str(fp32_path), input_names=["frames"],
+video                                           dur  decode  extract    head   total    xRT
+-------------------------------------------------------------------------------------------
+A.Beautiful.Mind.2001__#00-25-20_00-29-20_la  240.0   1.374    0.081  0.0000   1.496  160.5
+A.Beautiful.Mind.2001__#00-40-52_00-42-01_la   69.0   0.386    0.036  0.0000   0.428  161.5
+A.Beautiful.Mind.2001__#00-50-26_00-55-16_la  290.1   1.537    0.091  0.0000   1.636  177.3
+A.Beautiful.Mind.2001__#01-14-30_01-16-59_la  149.0   0.839    0.067  0.0000   0.919  162.2
+About.Time.2013__#00-23-50_00-24-31_label_A.   41.0   0.167    0.021  0.0000   0.192  214.2
+[edge] stage p50: decode 0.839s | extractor 0.067s | head nans
+[edge] extractor fp32 1.595 MB, p50 0.18 ms/frame
+[edge] report -> export/onnx/edge_budget_report.json

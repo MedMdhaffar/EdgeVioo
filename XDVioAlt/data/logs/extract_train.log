@@ -1,0 +1,10 @@
+[extract] 1-1004 20:23:35
+[extract] 1005-2004 20:26:01
+data/raw/xd-violence/data/video/train_videos/NewAdd.NBA-2017.12.25_CLE@GSW__#01-08-34_01-40-09_label_A.mp4  bad CRC d06afe02  (should be 3662af79)
+data/raw/xd-violence/data/video/train_videos/Saving.Private.Ryan.1998__#02-29-31_02-30-55_label_B2-G-0.mp4  bad CRC 0e51c352  (should be 1f80d44c)
+  error:  invalid compressed data to inflate data/raw/xd-violence/data/video/train_videos/v=8cTqh9tMz_I__#1_label_A.mp4
+data/raw/xd-violence/data/video/train_videos/v=9eME1y6V-T4__#01-12-00_01-18-00_label_A.mp4  bad CRC 39fc9dc5  (should be a23ecf68)
+[extract] 2005-2804 20:28:06
+[extract] 2805-3319 20:29:44
+[extract] 3320-3954 20:32:44
+[extract] done 20:34:37 count=3954

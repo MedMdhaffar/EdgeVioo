@@ -1,0 +1,14 @@
+[diag] runs/2026-09-29_p3vggish30ep_late/ckpt_best.pt test=data/lists_official/test.csv device=cpu
+fighting       n=126 p(pos)=0.735 p(neg)=0.099 TP@.5=106 FP@.5=  34 tIoU=0.436
+   co-occur: {'fighting': 126, 'shooting': 18, 'car_accident': 2}
+shooting       n=104 p(pos)=0.622 p(neg)=0.107 TP@.5= 74 FP@.5=  68 tIoU=0.555
+   co-occur: {'fighting': 18, 'shooting': 104, 'abuse': 2, 'car_accident': 10, 'explosion': 16}
+riot           n=101 p(pos)=0.776 p(neg)=0.048 TP@.5= 82 FP@.5=  14 tIoU=0.223
+   co-occur: {'riot': 101, 'abuse': 1, 'explosion': 1}
+abuse          n= 11 p(pos)=0.069 p(neg)=0.028 TP@.5=  0 FP@.5=   0 tIoU=0.460
+   co-occur: {'shooting': 2, 'riot': 1, 'abuse': 11, 'car_accident': 1}
+car_accident   n=106 p(pos)=0.820 p(neg)=0.062 TP@.5= 84 FP@.5=  18 tIoU=0.343
+   co-occur: {'fighting': 2, 'shooting': 10, 'abuse': 1, 'car_accident': 106, 'explosion': 4}
+explosion      n=103 p(pos)=0.517 p(neg)=0.098 TP@.5= 56 FP@.5=  19 tIoU=0.411
+   co-occur: {'shooting': 16, 'riot': 1, 'car_accident': 4, 'explosion': 103}
+[diag] written -> runs/2026-09-29_p3vggish30ep_late/class_diagnostic.json

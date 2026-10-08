@@ -1,0 +1,84 @@
+[p1-official] start 2026-09-25T11:48:36+01:00
+[p1-official] official feature files: 19770 (5 crops x clips)
+[p1-official] train visual-only MIL baseline (30 epochs)
+[run] runs/2026-09-25_p1_official_rgb
+[cfg] modality=visual feature_set=i3d_official in_dim=1024 epochs=30 batch=32 lr=0.0001 k=5
+[data] train=3804 val=150 device=cpu threads=8
+[epoch   1/30] loss=1.1361 (mil=0.6477) val_pr_auc=0.8886 val_ap=0.8922 *best* [89.1s]
+[epoch   2/30] loss=0.7255 (mil=0.4284) val_pr_auc=0.9326 val_ap=0.9336 *best* [64.5s]
+[epoch   3/30] loss=0.5952 (mil=0.3506) val_pr_auc=0.9383 val_ap=0.9391 *best* [48.1s]
+[epoch   4/30] loss=0.5310 (mil=0.3139) val_pr_auc=0.9400 val_ap=0.9409 *best* [52.6s]
+[epoch   5/30] loss=0.5093 (mil=0.3036) val_pr_auc=0.9449 val_ap=0.9456 *best* [61.5s]
+[epoch   6/30] loss=0.4782 (mil=0.2840) val_pr_auc=0.9482 val_ap=0.9488 *best* [67.5s]
+[epoch   7/30] loss=0.4638 (mil=0.2766) val_pr_auc=0.9470 val_ap=0.9477 [61.7s]
+[epoch   8/30] loss=0.4433 (mil=0.2658) val_pr_auc=0.9519 val_ap=0.9524 *best* [54.6s]
+[epoch   9/30] loss=0.4252 (mil=0.2553) val_pr_auc=0.9559 val_ap=0.9564 *best* [47.9s]
+[epoch  10/30] loss=0.4244 (mil=0.2537) val_pr_auc=0.9570 val_ap=0.9574 *best* [67.3s]
+[epoch  11/30] loss=0.3910 (mil=0.2348) val_pr_auc=0.9585 val_ap=0.9589 *best* [46.3s]
+[epoch  12/30] loss=0.3831 (mil=0.2291) val_pr_auc=0.9590 val_ap=0.9594 *best* [60.8s]
+[epoch  13/30] loss=0.3744 (mil=0.2234) val_pr_auc=0.9598 val_ap=0.9602 *best* [76.7s]
+[epoch  14/30] loss=0.3798 (mil=0.2272) val_pr_auc=0.9600 val_ap=0.9604 *best* [56.4s]
+[epoch  15/30] loss=0.3692 (mil=0.2192) val_pr_auc=0.9601 val_ap=0.9605 *best* [48.8s]
+[epoch  16/30] loss=0.3694 (mil=0.2200) val_pr_auc=0.9604 val_ap=0.9608 *best* [48.6s]
+[epoch  17/30] loss=0.3733 (mil=0.2231) val_pr_auc=0.9603 val_ap=0.9607 [65.7s]
+[epoch  18/30] loss=0.3649 (mil=0.2167) val_pr_auc=0.9605 val_ap=0.9609 *best* [59.5s]
+[epoch  19/30] loss=0.3664 (mil=0.2183) val_pr_auc=0.9610 val_ap=0.9614 *best* [64.2s]
+[epoch  20/30] loss=0.3646 (mil=0.2172) val_pr_auc=0.9615 val_ap=0.9619 *best* [66.0s]
+[epoch  21/30] loss=0.3643 (mil=0.2176) val_pr_auc=0.9608 val_ap=0.9612 [73.6s]
+[epoch  22/30] loss=0.3564 (mil=0.2126) val_pr_auc=0.9618 val_ap=0.9621 *best* [71.0s]
+[epoch  23/30] loss=0.3578 (mil=0.2140) val_pr_auc=0.9622 val_ap=0.9626 *best* [80.7s]
+[epoch  24/30] loss=0.3624 (mil=0.2162) val_pr_auc=0.9634 val_ap=0.9638 *best* [117.5s]
+[epoch  25/30] loss=0.3569 (mil=0.2136) val_pr_auc=0.9626 val_ap=0.9630 [182.3s]
+[epoch  26/30] loss=0.3611 (mil=0.2164) val_pr_auc=0.9631 val_ap=0.9635 [150.0s]
+[epoch  27/30] loss=0.3561 (mil=0.2136) val_pr_auc=0.9630 val_ap=0.9634 [134.0s]
+[epoch  28/30] loss=0.3496 (mil=0.2097) val_pr_auc=0.9631 val_ap=0.9634 [117.5s]
+[epoch  29/30] loss=0.3488 (mil=0.2085) val_pr_auc=0.9638 val_ap=0.9642 *best* [33.8s]
+[epoch  30/30] loss=0.3512 (mil=0.2106) val_pr_auc=0.9650 val_ap=0.9653 *best* [33.4s]
+[done] best epoch 30: val_ap=0.9653 val_pr_auc=0.9650
+[done] artifacts -> runs/2026-09-25_p1_official_rgb
+[p1-official] score test split with runs/2026-09-25_p1_official_rgb/ckpt_best.pt
+[score] ckpt=runs/2026-09-25_p1_official_rgb/ckpt_best.pt kind=mil modality=visual test=data/lists_official/test.csv stride=16 frames/snippet
+{
+  "n_clips": 800,
+  "n_snippets": 145649,
+  "stride_frames": 16.0,
+  "segment_rule": {
+    "threshold": 0.5,
+    "min_length": 2,
+    "max_gap": 1
+  },
+  "ap": {
+    "global__pr_auc": 0.722319309746571,
+    "global__average_precision": 0.7223268360761874,
+    "per_video__pr_auc": 0.7062613398491533,
+    "per_video__average_precision": 0.7154628550599701
+  },
+  "prevalence": 0.2379419058561325,
+  "localization": {
+    "n_pred_segments": 1865,
+    "n_gt_segments": 1238,
+    "mean_best_iou": 0.21191777386177632,
+    "mean_detection_delay_snippets": 50.81664411366712,
+    "mean_detection_delay_frames": 813.0663058186739,
+    "mean_detection_delay_seconds": 33.877762742444745,
+    "precision@iou0.1": 0.38498659517426276,
+    "recall@iou0.1": 0.5799676898222941,
+    "f1@iou0.1": 0.4627779568159845,
+    "precision@iou0.2": 0.3254691689008043,
+    "recall@iou0.2": 0.4903069466882068,
+    "f1@iou0.2": 0.3912342893973574,
+    "precision@iou0.3": 0.26595174262734583,
+    "recall@iou0.3": 0.40064620355411956,
+    "f1@iou0.3": 0.31969062197873027,
+    "precision@iou0.4": 0.20482573726541556,
+    "recall@iou0.4": 0.308562197092084,
+    "f1@iou0.4": 0.24621334192716726,
+    "precision@iou0.5": 0.16300268096514745,
+    "recall@iou0.5": 0.2455573505654281,
+    "f1@iou0.5": 0.19593941347083466
+  },
+  "macro_per_class_ap": 0.539032375512354
+}
+per-class clip-level AP: {'fighting': 0.7375, 'shooting': 0.2879, 'riot': 0.6903, 'abuse': 0.1483, 'car_accident': 0.8664, 'explosion': 0.5037}
+[ok] predictions + metrics -> runs/2026-09-25_p1_official_rgb
+[p1-official] done 2026-09-25T12:25:34+01:00

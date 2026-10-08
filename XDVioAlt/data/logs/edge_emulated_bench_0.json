@@ -1,0 +1,131 @@
+{
+  "device": "host CPU, pinned if requested - NOT a Pi/Jetson measurement",
+  "cores": "0",
+  "pin": "0",
+  "clips": [
+    {
+      "video": "Jason.Bourne.2016__#0-50-20_0-50-30_label_G-0-0.mp4",
+      "frames": 241,
+      "snippets": 16,
+      "duration_s": 10.0,
+      "probe_s": 0.0035,
+      "decode_s": 0.4167,
+      "extractor_s": 0.0407,
+      "audio_features_s": 2.1521,
+      "saliency_s": 0.4912,
+      "head_s": 0.0091,
+      "aed_s": 0.0925,
+      "total_s": 3.2058,
+      "realtime_factor": 3.1
+    },
+    {
+      "video": "Black.Hawk.Down.2001__#00-06-44_00-07-39_label_A.mp4",
+      "frames": 1321,
+      "snippets": 83,
+      "duration_s": 55.0,
+      "probe_s": 0.005,
+      "decode_s": 1.9163,
+      "extractor_s": 0.2409,
+      "audio_features_s": 0.5703,
+      "saliency_s": 0.6818,
+      "head_s": 0.0101,
+      "aed_s": 0.1726,
+      "total_s": 3.597,
+      "realtime_factor": 15.3
+    },
+    {
+      "video": "Bullet.in.the.Head.1990__#00-17-20_00-18-55_label_B1-0-0.mp4",
+      "frames": 2281,
+      "snippets": 143,
+      "duration_s": 95.0,
+      "probe_s": 0.008,
+      "decode_s": 6.064,
+      "extractor_s": 0.3895,
+      "audio_features_s": 0.8988,
+      "saliency_s": 0.8338,
+      "head_s": 0.0168,
+      "aed_s": 0.4171,
+      "total_s": 8.628,
+      "realtime_factor": 11.0
+    },
+    {
+      "video": "Kingsman.The.Golden.Circle.2017__#00-41-22_00-41-32_label_B2-0-0.mp4",
+      "frames": 241,
+      "snippets": 16,
+      "duration_s": 10.0,
+      "probe_s": 0.006,
+      "decode_s": 0.3248,
+      "extractor_s": 0.0345,
+      "audio_features_s": 0.2247,
+      "saliency_s": 0.3909,
+      "head_s": 0.0085,
+      "aed_s": 0.0192,
+      "total_s": 1.0086,
+      "realtime_factor": 10.0
+    }
+  ],
+  "stages": {
+    "probe": {
+      "n": 4,
+      "mean": 0.0056,
+      "p50": 0.006,
+      "min": 0.0035,
+      "max": 0.008
+    },
+    "decode": {
+      "n": 4,
+      "mean": 2.1804,
+      "p50": 1.9163,
+      "min": 0.3248,
+      "max": 6.064
+    },
+    "extractor": {
+      "n": 4,
+      "mean": 0.1764,
+      "p50": 0.2409,
+      "min": 0.0345,
+      "max": 0.3895
+    },
+    "audio_features": {
+      "n": 4,
+      "mean": 0.9615,
+      "p50": 0.8988,
+      "min": 0.2247,
+      "max": 2.1521
+    },
+    "aed": {
+      "n": 4,
+      "mean": 0.1754,
+      "p50": 0.1726,
+      "min": 0.0192,
+      "max": 0.4171
+    },
+    "saliency": {
+      "n": 4,
+      "mean": 0.5994,
+      "p50": 0.6818,
+      "min": 0.3909,
+      "max": 0.8338
+    },
+    "head": {
+      "n": 4,
+      "mean": 0.0111,
+      "p50": 0.0101,
+      "min": 0.0085,
+      "max": 0.0168
+    }
+  },
+  "total": {
+    "n": 4,
+    "mean": 4.1098,
+    "p50": 3.597,
+    "min": 1.0086,
+    "max": 8.628
+  },
+  "realtime_factor_mean": 9.9,
+  "board_estimate": {
+    "note": "single-core x0.375 (1.5 GHz Cortex-A72/A57 vs host core) - pessimistic bound: 4 cores running the stages in parallel would be faster",
+    "est_total_s_mean": 10.96,
+    "est_realtime_factor": 3.9
+  }
+}
