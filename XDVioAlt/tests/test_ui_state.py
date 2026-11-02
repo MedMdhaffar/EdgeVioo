@@ -71,17 +71,12 @@ def test_timeline_segments_follow_the_seconds_rule_not_the_snippet_count():
                       min_seconds=5.333, max_gap_seconds=2.667)["segments"] == []
 
 
-def test_timeline_adaptive_and_causal_modes():
+def test_timeline_uses_one_binary_rule_and_preserves_causal_mode():
     short = np.zeros(60, dtype=np.float32)
     short[5:7] = 0.9
 
-    # Without adaptive: pruned
-    std = S.timeline("c", short, stride_frames=16.0, adaptive=False)
-    assert std["segments"] == []
-
-    # With adaptive and car_accident: caught
-    car = S.timeline("c", short, stride_frames=16.0, category="car_accident", adaptive=True)
-    assert len(car["segments"]) == 1
+    # The binary product uses one duration/threshold rule for every incident.
+    assert S.timeline("c", short, stride_frames=16.0)["segments"] == []
 
     # Causal mode flag is preserved
     causal_tl = S.timeline("c", short, stride_frames=16.0, causal=True)
@@ -322,6 +317,18 @@ def test_live_feature_support_flags_out_of_distribution_checkpoints():
     ok, problems = S.live_feature_support(
         {"modality": "visual", "feature_set": "i3d_official"})
     assert ok and problems == []
+
+    # Mean+std pooled multi-frame MiniRGB (2048-d) is supported via the live multi-frame extractor.
+    ok_multi, problems = S.live_feature_support(
+        {"modality": "visual", "feature_set": "i3d_official", "visual_dim": 2048})
+    assert ok_multi and problems == []
+
+    # Any other dimension (e.g. 512 or 768) must be flagged.
+    bad_dim, problems = S.live_feature_support(
+        {"modality": "visual", "feature_set": "i3d_official", "visual_dim": 512})
+    assert not bad_dim
+    assert any("visual width is 512" in p for p in problems)
+    assert any("2048" in problem for problem in problems)
 
 
 def test_analyze_video_reports_the_feature_space_it_used(tmp_path, trained_extractor):

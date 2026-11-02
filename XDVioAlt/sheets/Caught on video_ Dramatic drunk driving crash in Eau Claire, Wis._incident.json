@@ -1,89 +1,72 @@
 {
   "clip_id": "Caught on video_ Dramatic drunk driving crash in Eau Claire, Wis.",
-  "video": "data/raw/uploads/Caught on video_ Dramatic drunk driving crash in Eau Claire, Wis..mp4",
+  "video": "data/raw/normalized/Caught on video_ Dramatic drunk driving crash in Eau Claire, Wis.__24fps.mp4",
   "duration_s": null,
   "grid": {
-    "stride_frames": 64.0,
-    "fps": 29.97002997002997,
-    "stride_s": 2.135,
-    "n_snippets": 10
+    "stride_frames": 16.0,
+    "fps": 24.0,
+    "stride_s": 0.667,
+    "n_snippets": 34
   },
   "config": {
-    "threshold": 0.5,
-    "min_seconds": 5.333,
+    "threshold": 0.297,
+    "min_seconds": 1.5,
     "max_gap_seconds": 2.667,
     "language": "fr"
   },
-  "category": {
-    "available": true,
-    "label": "riot",
-    "probability": 0.2849,
-    "ranked": [
-      {
-        "category": "riot",
-        "probability": 0.2849
-      },
-      {
-        "category": "shooting",
-        "probability": 0.0865
-      },
-      {
-        "category": "fighting",
-        "probability": 0.05
-      }
-    ],
-    "all": {
-      "riot": 0.2849,
-      "shooting": 0.0865,
-      "fighting": 0.05,
-      "explosion": 0.0371,
-      "abuse": 0.0172,
-      "car_accident": 0.0015
-    },
-    "note": "raw sigmoid outputs of the multi-label head (uncalibrated), trained on weak clip labels; 'abuse' has only 8 test clips so its probability is the least reliable"
+  "classification": {
+    "task": "binary_violence_detection",
+    "label": "no_violence",
+    "display_label": "Aucune violence detectee",
+    "is_violence": false,
+    "score": 0.0656,
+    "threshold": 0.297,
+    "calibrated": false,
+    "score_type": "binary_clip_head",
+    "definition": "positive if any of fighting, shooting, riot, abuse, car_accident, explosion"
   },
   "segments": [],
   "visual_evidence": {
     "criterion": "ranked by snippet score, ties broken by temporal attention",
     "top_snippets": [
       {
-        "snippet": 0,
-        "second": 0.0,
-        "probability": 0.0529,
-        "attention": 0.07777
-      },
-      {
-        "snippet": 1,
-        "second": 2.14,
-        "probability": 0.0354,
-        "attention": 0.0694
+        "snippet": 26,
+        "second": 17.33,
+        "probability": 0.0492,
+        "attention": 0.05942
       },
       {
         "snippet": 9,
-        "second": 19.22,
-        "probability": 0.0195,
-        "attention": 0.18342
+        "second": 6.0,
+        "probability": 0.0479,
+        "attention": 0.0473
       },
       {
-        "snippet": 7,
-        "second": 14.95,
-        "probability": 0.019,
-        "attention": 0.11851
+        "snippet": 22,
+        "second": 14.67,
+        "probability": 0.0455,
+        "attention": 0.05236
       },
       {
-        "snippet": 8,
-        "second": 17.08,
-        "probability": 0.0184,
-        "attention": 0.25072
+        "snippet": 13,
+        "second": 8.67,
+        "probability": 0.0452,
+        "attention": 0.04042
+      },
+      {
+        "snippet": 29,
+        "second": 19.33,
+        "probability": 0.0438,
+        "attention": 0.04555
       }
     ],
     "peak_attention": {
-      "snippet": 8,
-      "second": 17.08,
-      "attention": 0.25072
+      "snippet": 26,
+      "second": 17.33,
+      "attention": 0.05942
     },
-    "attention_entropy": 2.1373,
-    "attention_entropy_normalised": 0.9282
+    "attention_entropy": 3.4332,
+    "attention_entropy_normalised": 0.9736
   },
   "audio_evidence": {
     "channels": [
@@ -94,30 +77,61 @@
       "clip_ratio"
     ],
     "available": true,
-    "segment_vs_background_db": 0.0,
-    "rms_db": {
-      "segment_mean": 0.0,
-      "clip_median": 0.0,
-      "segment_peak": 0.0
+    "acoustic_events": {
+      "available": true,
+      "tagger": "YAMNet (AudioSet-YouTube, 521 classes, frozen)",
+      "corroboration_only": true,
+      "incident_energy": {
+        "mean": 0.0,
+        "peak": 0.0001,
+        "peak_second": 1.33,
+        "classes": [
+          "Baby cry, infant cry",
+          "Car alarm",
+          "Cheering",
+          "Crowd",
+          "Crying, sobbing",
+          "Engine",
+          "Engine knocking",
+          "Explosion",
+          "Gunshot, gunfire",
+          "Machine gun",
+          "Screaming",
+          "Shatter",
+          "Shout",
+          "Skidding",
+          "Smash, crash",
+          "Vehicle horn, car horn, honking"
+        ]
+      }
     },
-    "spectral_flatness": 0.0,
-    "clipping_ratio_max": 0.0,
+    "signature_events": [
+      "screech_harmonic"
+    ],
+    "segment_vs_background_db": 1.86,
+    "rms_db": {
+      "segment_mean": 2.01,
+      "clip_median": 0.15,
+      "segment_peak": 2.01
+    },
+    "spectral_flatness": -0.4521,
+    "clipping_ratio_max": -0.10435,
     "descriptions": [
-      "spectre tonal (sirene, moteur, voix tenue) / tonal spectrum"
+      "crissement aigu ou alarme/sirene (freinage) / tire screech or siren"
     ]
   },
   "modality_contribution": {
     "available": true,
     "drop_one": {
       "audio": {
-        "mean_probability_intact": 0.0209,
-        "mean_probability_without": 0.7439,
-        "delta": -0.723
+        "mean_probability_intact": 0.032,
+        "mean_probability_without": 0.1542,
+        "delta": -0.1222
       },
       "visual": {
-        "mean_probability_intact": 0.0209,
-        "mean_probability_without": 0.0218,
-        "delta": -0.0009
+        "mean_probability_intact": 0.032,
+        "mean_probability_without": 0.0653,
+        "delta": -0.0333
       }
     },
     "type": "score without each modality",
@@ -127,50 +141,52 @@
     }
   },
   "confidence": {
-    "raw_clip_probability": 0.029,
-    "raw_alert_probability": 0.029,
+    "raw_clip_probability": 0.0463,
+    "raw_alert_probability": 0.0463,
     "top_k": 5,
     "calibrated": false,
-    "clip_probability": 0.029,
-    "alert_probability": 0.029,
+    "clip_probability": 0.0463,
+    "alert_probability": 0.0463,
     "note": "no calibration.json for this run: the numbers are raw sigmoid outputs and must not be read as probabilities - run scripts/fit_calibration.py"
   },
   "media": {
     "key_frames": [
       {
-        "second": 1.07,
-        "path": "sheets/frames/Caught on video_ Dramatic drunk driving crash in Eau Claire, Wis._00_0001.07s.jpg"
+        "second": 17.67,
+        "path": "sheets/frames/Caught on video_ Dramatic drunk driving crash in Eau Claire, Wis._00_0017.67s.jpg"
       },
       {
-        "second": 3.2,
-        "path": "sheets/frames/Caught on video_ Dramatic drunk driving crash in Eau Claire, Wis._01_0003.20s.jpg"
+        "second": 6.33,
+        "path": "sheets/frames/Caught on video_ Dramatic drunk driving crash in Eau Claire, Wis._01_0006.33s.jpg"
       },
       {
-        "second": 20.29,
-        "path": "sheets/frames/Caught on video_ Dramatic drunk driving crash in Eau Claire, Wis._02_0020.29s.jpg"
+        "second": 15.0,
+        "path": "sheets/frames/Caught on video_ Dramatic drunk driving crash in Eau Claire, Wis._02_0015.00s.jpg"
       },
       {
-        "second": 16.02,
-        "path": "sheets/frames/Caught on video_ Dramatic drunk driving crash in Eau Claire, Wis._03_0016.02s.jpg"
+        "second": 9.0,
+        "path": "sheets/frames/Caught on video_ Dramatic drunk driving crash in Eau Claire, Wis._03_0009.00s.jpg"
       },
       {
-        "second": 18.15,
-        "path": "sheets/frames/Caught on video_ Dramatic drunk driving crash in Eau Claire, Wis._04_0018.15s.jpg"
+        "second": 19.67,
+        "path": "sheets/frames/Caught on video_ Dramatic drunk driving crash in Eau Claire, Wis._04_0019.67s.jpg"
       }
     ]
   },
   "requires_human_verification": true,
   "caveats": [
     "weak supervision: clip-level labels during training, frame-level only for evaluation",
-    "temporal resolution is the snippet grid (2.14 s here)",
-    "category probabilities come from an uncalibrated multi-label head",
-    "audio channels are signal statistics, not an acoustic-event classifier"
+    "temporal resolution is the snippet grid (0.67 s here)",
+    "binary result means any of the six XD-Violence incident labels versus normal",
+    "named sound events come from a frozen out-of-domain tagger (YAMNet, AudioSet-YouTube): corroboration, not the reason for the alert"
   ],
   "provenance": {
-    "checkpoint": "runs/2026-09-29_p3full_cross/ckpt_best.pt",
+    "checkpoint": "runs/2026-10-31_binary_minirgb_joint_cctv_dashcam_caracc_k4_mstd_s43/ckpt_best.pt",
     "clip_id": "Caught on video_ Dramatic drunk driving crash in Eau Claire, Wis.",
-    "stride_frames": 64.0,
-    "fusion_mode": "cross"
+    "stride_frames": 16.0,
+    "fusion_mode": "cross",
+    "inference_mode": "full_clip",
+    "feature_extraction_before_scoring": true
   },
-  "text": "Aucun segment au-dessus du seuil 0.5 : clip considere comme normal. Categorie probable : riot (28%). Indices visuels : snippet le plus anormal a 00:00 (p=0.05). Indices audio : spectre tonal (sirene, moteur, voix tenue) / tonal spectrum. Contribution des modalites : score without each modality - visuel 0.50 vs audio 0.50. Confiance globale : 3% (non calibree - lire comme un score, pas une probabilite). Verification humaine recommandee avant toute action. Modele faiblement supervise : il localise une zone suspecte, il ne confirme pas l'evenement."
+  "text": "Aucun segment temporel ne respecte le seuil et la duree minimale. Resultat binaire : Aucune violence detectee (score 0.07, seuil 0.30). Indices visuels : snippet le plus anormal a 00:17 (p=0.05). Indices audio : crissement aigu ou alarme/sirene (freinage) / tire screech or siren. Contribution des modalites : score without each modality - visuel 0.50 vs audio 0.50. Confiance globale : 5% (non calibree - lire comme un score, pas une probabilite). Verification humaine recommandee avant toute action. Modele faiblement supervise : il localise une zone suspecte, il ne confirme pas l'evenement."
 }

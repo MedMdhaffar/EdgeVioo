@@ -50,9 +50,9 @@ class ExportWrapper(torch.nn.Module):
     unimodal MIL baseline takes ``(features, mask)``; unused inputs are pruned by the tracer, so the
     deployed graph exposes only what it really consumes.
 
-    ``snippet_logits`` drives the timeline and the alert segments, ``multi_logits`` the category.
-    Attention weights and the gate value ``alpha`` are deliberately excluded - they are explanation
-    artefacts produced by the PyTorch model, not by the deployed graph.
+    ``snippet_logits`` drives the timeline and ``clip_logits`` is the binary violence-vs-normal
+    classifier. The six auxiliary category logits are deliberately not exported. Attention weights
+    and the gate value ``alpha`` stay in the PyTorch explanation path.
     """
 
     def __init__(self, model: torch.nn.Module) -> None:
@@ -66,7 +66,7 @@ class ExportWrapper(torch.nn.Module):
             out = self.model(visual, audio, mask, reliability)
         else:                                   # MILModel: one visual stream, no audio branch
             out = self.model(visual, mask)
-        return out["snippet_logits"], out["multi_logits"]
+        return out["snippet_logits"], out["clip_logits"]
 
 
 def strip_attention_weights(model: torch.nn.Module) -> bool:
@@ -326,7 +326,7 @@ def main() -> int:
     # a dependency this CPU-only repo deliberately does not carry (see requirements.txt), and the
     # graph here is a plain feed-forward head with a dynamic time axis.
     torch.onnx.export(wrapper, inputs, str(fp32_path), input_names=names,
-                      output_names=["snippet_logits", "multi_logits"], dynamic_axes=dynamic_axes,
+                      output_names=["snippet_logits", "clip_logits"], dynamic_axes=dynamic_axes,
                       opset_version=17, do_constant_folding=True, dynamo=False)
     report: dict = {
         "checkpoint": str(args.ckpt),

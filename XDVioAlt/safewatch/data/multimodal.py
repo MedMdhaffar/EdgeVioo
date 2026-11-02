@@ -302,6 +302,15 @@ class MultimodalClipDataset(ClipDataset):
 
     def _audio(self, clip_id: str, n_snippets: int, index_map: np.ndarray) -> np.ndarray:
         path = self.audio_dir / f"{clip_id}.npy"
+        if not path.exists():
+            # Check nested subdirectories (e.g. data/features/mel/train/ or /val/)
+            nested_candidates = [self.audio_dir / "train" / f"{clip_id}.npy",
+                                 self.audio_dir / "val" / f"{clip_id}.npy",
+                                 self.audio_dir / "train_augmented_normal" / f"{clip_id}.npy"]
+            for cand in nested_candidates:
+                if cand.exists():
+                    path = cand
+                    break
         dim = int(self.audio_stats[0].shape[0]) if self.audio_stats is not None else AUDIO_DIM
         if not path.exists():
             if not self._warned_missing:
@@ -311,8 +320,11 @@ class MultimodalClipDataset(ClipDataset):
             pooled = np.zeros((n_snippets, dim), dtype=np.float32)
         else:
             features = np.load(path).astype(np.float32)
-            pooled = (align_audio_to_snippets(features, n_snippets) if self.audio_grid == "snippet"
-                      else pool_audio(features, n_snippets, self.patches_per_snippet))
+            if features.size == 0:
+                pooled = np.zeros((n_snippets, dim), dtype=np.float32)
+            else:
+                pooled = (align_audio_to_snippets(features, n_snippets) if self.audio_grid == "snippet"
+                          else pool_audio(features, n_snippets, self.patches_per_snippet))
         if self.audio_stats is not None and pooled.shape[1] == self.audio_stats[0].shape[0]:
             pooled = (pooled - self.audio_stats[0]) / np.maximum(self.audio_stats[1], 1e-6)
         if self.audio_norm == "clip":
@@ -325,8 +337,17 @@ class MultimodalClipDataset(ClipDataset):
         quality = None
         if self.quality_dir is not None:
             path = self.quality_dir / f"{clip_id}.npy"
+            if not path.exists():
+                nested_candidates = [self.quality_dir / "train" / f"{clip_id}.npy",
+                                     self.quality_dir / "val" / f"{clip_id}.npy"]
+                for cand in nested_candidates:
+                    if cand.exists():
+                        path = cand
+                        break
             if path.exists():
-                quality = np.asarray(np.load(path), dtype=np.float32)
+                loaded = np.asarray(np.load(path), dtype=np.float32)
+                if loaded.size > 0:
+                    quality = loaded
             elif not self._warned_quality:
                 print(f"[warn] missing audio quality stats for {clip_id[:40]} -> zeros "
                       f"(run scripts/extract_audio_features.py)")

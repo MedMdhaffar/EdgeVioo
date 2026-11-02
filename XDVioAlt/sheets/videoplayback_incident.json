@@ -1,0 +1,166 @@
+{
+  "clip_id": "videoplayback",
+  "video": "data/raw/uploads/videoplayback.mp4",
+  "duration_s": null,
+  "grid": {
+    "stride_frames": 16.0,
+    "fps": 24.0,
+    "stride_s": 0.667,
+    "n_snippets": 87
+  },
+  "config": {
+    "threshold": 0.5,
+    "min_seconds": 1.5,
+    "max_gap_seconds": 2.667,
+    "language": "fr"
+  },
+  "classification": {
+    "task": "binary_violence_detection",
+    "label": "no_violence",
+    "display_label": "Aucune violence detectee",
+    "is_violence": false,
+    "score": 0.1191,
+    "threshold": 0.5,
+    "calibrated": false,
+    "score_type": "binary_clip_head",
+    "definition": "positive if any of fighting, shooting, riot, abuse, car_accident, explosion"
+  },
+  "segments": [],
+  "visual_evidence": {
+    "criterion": "ranked by snippet score, ties broken by temporal attention",
+    "top_snippets": [
+      {
+        "snippet": 0,
+        "second": 0.0,
+        "probability": 0.135,
+        "attention": 0.01347
+      },
+      {
+        "snippet": 86,
+        "second": 57.33,
+        "probability": 0.0916,
+        "attention": 0.01676
+      },
+      {
+        "snippet": 50,
+        "second": 33.33,
+        "probability": 0.0879,
+        "attention": 0.01543
+      },
+      {
+        "snippet": 77,
+        "second": 51.33,
+        "probability": 0.0796,
+        "attention": 0.01326
+      },
+      {
+        "snippet": 53,
+        "second": 35.33,
+        "probability": 0.0762,
+        "attention": 0.011
+      }
+    ],
+    "peak_attention": {
+      "snippet": 36,
+      "second": 24.0,
+      "attention": 0.01905
+    },
+    "attention_entropy": 4.4362,
+    "attention_entropy_normalised": 0.9934
+  },
+  "audio_evidence": {
+    "channels": [
+      "rms",
+      "rms_db",
+      "flatness",
+      "zcr",
+      "clip_ratio"
+    ],
+    "available": true,
+    "acoustic_events": {
+      "available": false,
+      "note": "no acoustic-event tags for this clip (run scripts/extract_aed_tags.py, or the clip has no audio track)"
+    },
+    "signature_events": [],
+    "segment_vs_background_db": 0.0,
+    "rms_db": {
+      "segment_mean": 2.01,
+      "clip_median": 2.01,
+      "segment_peak": 2.01
+    },
+    "spectral_flatness": -0.4521,
+    "clipping_ratio_max": -0.10435,
+    "descriptions": [
+      "spectre tonal (sirene, moteur, voix tenue) / tonal spectrum"
+    ]
+  },
+  "modality_contribution": {
+    "available": true,
+    "drop_one": {
+      "audio": {
+        "mean_probability_intact": 0.0343,
+        "mean_probability_without": 0.0323,
+        "delta": 0.002
+      },
+      "visual": {
+        "mean_probability_intact": 0.0343,
+        "mean_probability_without": 0.8922,
+        "delta": -0.858
+      }
+    },
+    "type": "score without each modality",
+    "mean_probability": {
+      "visual": 0.0,
+      "audio": 1.0
+    }
+  },
+  "confidence": {
+    "raw_clip_probability": 0.0941,
+    "raw_alert_probability": 0.0941,
+    "top_k": 5,
+    "calibrated": false,
+    "clip_probability": 0.0941,
+    "alert_probability": 0.0941,
+    "note": "no calibration.json for this run: the numbers are raw sigmoid outputs and must not be read as probabilities - run scripts/fit_calibration.py"
+  },
+  "media": {
+    "key_frames": [
+      {
+        "second": 0.33,
+        "path": "sheets/frames/videoplayback_00_0000.33s.jpg"
+      },
+      {
+        "second": 57.67,
+        "path": "sheets/frames/videoplayback_01_0057.67s.jpg"
+      },
+      {
+        "second": 33.67,
+        "path": "sheets/frames/videoplayback_02_0033.67s.jpg"
+      },
+      {
+        "second": 51.67,
+        "path": "sheets/frames/videoplayback_03_0051.67s.jpg"
+      },
+      {
+        "second": 35.67,
+        "path": "sheets/frames/videoplayback_04_0035.67s.jpg"
+      }
+    ]
+  },
+  "requires_human_verification": true,
+  "caveats": [
+    "weak supervision: clip-level labels during training, frame-level only for evaluation",
+    "temporal resolution is the snippet grid (0.67 s here)",
+    "binary result means any of the six XD-Violence incident labels versus normal",
+    "no acoustic-event tagger output for this clip (signal statistics only)"
+  ],
+  "provenance": {
+    "checkpoint": "runs/2026-10-31_binary_minirgb_joint_cctv_dashcam_caracc_k4_mstd_s43/ckpt_best.pt",
+    "clip_id": "videoplayback",
+    "stride_frames": 16.0,
+    "fusion_mode": "cross",
+    "inference_mode": "full_clip",
+    "feature_extraction_before_scoring": true
+  },
+  "text": "Aucun segment temporel ne respecte le seuil et la duree minimale. Resultat binaire : Aucune violence detectee (score 0.12, seuil 0.50). Indices visuels : snippet le plus anormal a 00:00 (p=0.14). Indices audio : spectre tonal (sirene, moteur, voix tenue) / tonal spectrum. Contribution des modalites : score without each modality - visuel 0.00 vs audio 1.00. Confiance globale : 9% (non calibree - lire comme un score, pas une probabilite). Verification humaine recommandee avant toute action. Modele faiblement supervise : il localise une zone suspecte, il ne confirme pas l'evenement."
+}

@@ -139,7 +139,6 @@ def _fake_context(aed_tags=None, snippet_probability=None) -> object:
     return ClipContext(
         clip_id="fake", stride_frames=16.0, fps=24.0, n_snippets=n,
         snippet_probability=probability,
-        category_probability={"explosion": 0.8},
         aed_tags=aed_tags,
     )
 

@@ -1,0 +1,28 @@
+{
+  "checkpoint": "runs/2026-10-30_binary_minirgb_joint_cctv_k4_mstd_s43/ckpt_best.pt",
+  "kind": "fusion",
+  "device": "cpu/4 threads",
+  "shapes": {
+    "visual_dim": 2048,
+    "audio_dim": 132,
+    "reliability_dim": 7,
+    "time_steps": 100
+  },
+  "attention_weights_in_graph": false,
+  "pytorch_reference_taken": "before export (the legacy exporter mutates the model in place)",
+  "measurement_conditions": {
+    "loadavg_1m": 4.07,
+    "loadavg_5m": 5.24,
+    "loadavg_15m": 5.06
+  },
+  "fp32": {
+    "file": "2026-10-30_binary_minirgb_joint_cctv_k4_mstd_s43_fp32.onnx",
+    "size_mb": 6.089,
+    "max_abs_diff_vs_pytorch": 2.3245811462402344e-06,
+    "runs": 50,
+    "p50_ms": 1.929,
+    "p95_ms": 2.297,
+    "snippets_per_second": 51827.8
+  },
+  "fusion_mode": "cross"
+}

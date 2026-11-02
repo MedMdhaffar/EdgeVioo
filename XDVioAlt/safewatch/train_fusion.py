@@ -56,6 +56,8 @@ class FusionConfig:
     batch_size: int = 32
     lr: float = 1e-4
     max_snippets: int = 200
+    # 0 means score full clips one at a time for checkpoint selection, matching final evaluation.
+    validation_max_snippets: int = 200
     k: int = 5
     w_attn: float = 0.5
     w_multi: float = 0.3
@@ -73,17 +75,23 @@ class FusionConfig:
     gate_source: str = "embeddings"  # adaptive gate input: "embeddings" | "reliability"
     class_over_sample: str = "none"  # "none" | "auto": WeightedRandomSampler on rare-class clips
     max_row_weight: float = 10.0     # cap for the per-row exposure weight (class_over_sample)
-    abuse_hard_negative_weight: float = 1.0  # extra abuse-head penalty on fighting/shooting negatives
+    hard_fighting_source_terms: str = ""  # comma-separated *training* source names to boost
+    hard_fighting_weight: float = 1.0  # extra sampling multiplier for labeled fighting clips
+    abuse_hard_negative_weight: float = 1.0  # extra abuse penalty on fighting/shooting negatives
+    dashcam_normal_weight: float = 1.0  # extra sampling multiplier for normal dashcam driving clips
 
 
 
-def _dataset(cfg: FusionConfig, csv_path: Path, train: bool) -> MultimodalClipDataset:
+def _dataset(cfg: FusionConfig, csv_path: Path, train: bool,
+             max_snippets: int | None = -1) -> MultimodalClipDataset:
+    sequence_limit = cfg.max_snippets if max_snippets == -1 else max_snippets
     return MultimodalClipDataset(csv_path, cfg.audio_dir, modality="both",
                                  audio_stats=cfg.audio_stats, audio_norm=cfg.audio_norm,
                                  audio_grid=cfg.audio_grid,
                                  stride_frames=STRIDE_FRAMES.get(cfg.feature_set),
                                  quality_dir=cfg.quality_dir,
-                                 quality_stats=cfg.quality_stats, max_snippets=cfg.max_snippets,
+                                 quality_stats=cfg.quality_stats,
+                                 max_snippets=sequence_limit,
                                  crop="mean", train=train, seed=cfg.seed)
 
 
@@ -106,35 +114,78 @@ def _warn_val_blind_classes(rows: list[dict]) -> None:
               f"model selection is blind to {'them' if len(missing) > 1 else 'it'}")
 
 
+def hard_fighting_mask(rows: list[dict], source_terms: str) -> np.ndarray:
+    """Select known-hard, *training-only* fighting clips by exact video-source name.
+
+    The terms must name sources in the training CSV, never held-out clips.  This provides extra
+    random crops of visually similar martial-arts/action fights without putting Ip Man 3 or
+    Taken 3 (the clean-test false-negative sources) into the fitting data.
+    """
+    sources = {term.strip() for term in source_terms.split(",") if term.strip()}
+    return np.asarray([
+        row.get("clip_id", "").split("__#", 1)[0] in sources
+        and row.get("binary") in (1, "1", True)
+        and "fighting" in (row.get("labels") or "").split("|")
+        for row in rows
+    ], dtype=bool)
+
+
 def build_loaders(cfg: FusionConfig) -> tuple[DataLoader, DataLoader]:
     from torch.utils.data import WeightedRandomSampler
 
     train_ds = _dataset(cfg, Path(cfg.lists_dir) / "train.csv", True)
-    val_ds = _dataset(cfg, Path(cfg.lists_dir) / "val.csv", False)
+    val_limit = None if cfg.validation_max_snippets <= 0 else cfg.validation_max_snippets
+    val_ds = _dataset(cfg, Path(cfg.lists_dir) / "val.csv", False, max_snippets=val_limit)
     stride = STRIDE_FRAMES.get(cfg.feature_set, 64.0)
     for label, dataset in (("train", train_ds), ("validation", val_ds)):
         report_audio_preflight(
             audit_audio_rows(dataset.rows, cfg.audio_dir, cfg.audio_grid, cfg.audio_dim, stride,
                              quality_dir=cfg.quality_dir),
             label)
-    if cfg.class_over_sample == "auto":
-        # Rare-class exposure: abuse clips (50 / 3 804) are sampled ~10x more often than normal
-        # clips. This is NOT the Session-11 loss re-weighting (which trades ranking for recall):
-        # the loss is untouched, the clip simply gets more looks, each with a fresh random crop.
-        row_weights = auto_row_weight(train_ds.rows, max_weight=cfg.max_row_weight)
+    hard_mask = hard_fighting_mask(train_ds.rows, cfg.hard_fighting_source_terms)
+    if cfg.hard_fighting_weight < 1.0:
+        raise SystemExit("[cfg] hard_fighting_weight must be at least 1.0")
+    if cfg.hard_fighting_weight > 1.0 and not hard_mask.any():
+        raise SystemExit("[cfg] hard_fighting_weight was requested but no matching labeled "
+                         "fighting training clips were found")
+
+    dashcam_normal_mask = np.asarray([
+        (r.get("dataset") == "SmartDashcam" or "dashcam" in r.get("clip_id", ""))
+        and str(r.get("binary")) == "0"
+        for r in train_ds.rows
+    ], dtype=bool)
+
+    if cfg.class_over_sample == "auto" or cfg.hard_fighting_weight > 1.0 or cfg.dashcam_normal_weight > 1.0:
+        row_weights = (auto_row_weight(train_ds.rows, max_weight=cfg.max_row_weight)
+                       if cfg.class_over_sample == "auto"
+                       else np.ones(len(train_ds), dtype=np.float64))
+        row_weights[hard_mask] *= cfg.hard_fighting_weight
+        if cfg.dashcam_normal_weight > 1.0 and dashcam_normal_mask.any():
+            row_weights[dashcam_normal_mask] *= cfg.dashcam_normal_weight
+            print(f"[data] dashcam_normal_weight: {int(dashcam_normal_mask.sum())} normal driving clips "
+                  f"x{cfg.dashcam_normal_weight:g}")
         sampler = WeightedRandomSampler(row_weights, num_samples=len(train_ds),
                                         replacement=True,
                                         generator=torch.Generator().manual_seed(cfg.seed))
         train_loader = DataLoader(train_ds, batch_size=cfg.batch_size, sampler=sampler,
                                   num_workers=cfg.workers)
-        print(f"[data] class_over_sample=auto: "
-              f"{int((row_weights > 1.0).sum())} / {len(row_weights)} rows boosted "
-              f"(max weight {row_weights.max():.1f}, seed {cfg.seed})")
+        if cfg.class_over_sample == "auto":
+            print(f"[data] class_over_sample=auto: "
+                  f"{int((row_weights > 1.0).sum())} / {len(row_weights)} rows boosted "
+                  f"(max weight {row_weights.max():.1f}, seed {cfg.seed})")
+        if cfg.hard_fighting_weight > 1.0:
+            print(f"[data] hard_fighting: {int(hard_mask.sum())} labeled fighting training clips "
+                  f"from {cfg.hard_fighting_source_terms} x{cfg.hard_fighting_weight:g}")
     else:
         train_loader = DataLoader(train_ds, batch_size=cfg.batch_size, shuffle=True,
                                   num_workers=cfg.workers)
-    val_loader = DataLoader(val_ds, batch_size=cfg.batch_size, shuffle=False,
+    # Cross-attention is quadratic in sequence length.  Full clips can exceed 7,000 snippets, so
+    # validating them one at a time avoids padding a short clip to a neighbour's huge length.
+    val_batch_size = 1 if val_limit is None else cfg.batch_size
+    val_loader = DataLoader(val_ds, batch_size=val_batch_size, shuffle=False,
                             num_workers=cfg.workers)
+    if val_limit is None:
+        print("[data] validation: full-length clips, batch_size=1 (matches final evaluator)")
     return train_loader, val_loader
 
 

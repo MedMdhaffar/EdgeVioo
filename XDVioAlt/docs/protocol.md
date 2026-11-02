@@ -100,3 +100,19 @@ The 2020 paper reports a single **global frame-level PR-AUC** and no localisatio
 
 Rule: never place our number next to a published number without annotating the feature set, the
 temporal grid, the aggregation and the metric function.
+
+## 5. Operator classification output
+
+The deployed operator workflow has one classification: **violence** versus **no violence**. The
+positive class is the logical OR of the six XD-Violence labels (`fighting`, `shooting`, `riot`,
+`abuse`, `car_accident`, `explosion`); the normal label is negative. The alert card does not report a
+predicted violence type, and segment thresholds do not adapt by category.
+
+Existing checkpoints still contain six auxiliary category logits, and training/evaluation scripts
+may report per-category diagnostics. Those outputs are retained for compatibility and research; they
+do not determine the binary operator result. The result score uses the top-k mean of snippet
+probability from the model's binary clip head, trained directly against the weak any-incident label,
+with the configured threshold. The separate top-k snippet score continues to drive temporal
+localisation. This interface change does not require retraining existing checkpoints. Removing the
+auxiliary category head from the model itself would require a separate architecture change and new
+training run.

@@ -57,6 +57,25 @@ def frame_grid(frame_count: int, n_snippets: int, snippet_frames: int = SNIPPET_
     return np.clip(idx, 0, frame_count - 1).astype(np.int64)
 
 
+def multi_frame_grid(frame_count: int, n_snippets: int, frames_per_snippet: int,
+                     snippet_frames: int = SNIPPET_FRAMES) -> np.ndarray:
+    """Evenly spaced frame indices inside every official snippet window.
+
+    The result has shape ``(n_snippets, frames_per_snippet)``.  It is useful for an
+    *offline* temporal representation experiment: each MiniRGB embedding can be pooled
+    within its 16-frame window without changing the video-level split or the audio grid.
+    ``frames_per_snippet=1`` deliberately returns the ordinary :func:`frame_grid` values.
+    """
+    if frames_per_snippet <= 0:
+        raise ValueError("frames_per_snippet must be positive")
+    base = frame_grid(frame_count, n_snippets, snippet_frames=snippet_frames)
+    # The official window is 16 frames, but very short clips can have a smaller true stride.
+    # Do not sample past such a window merely to satisfy a requested number of samples.
+    window = min(snippet_frames, max(1, frame_count // n_snippets), frame_count)
+    offsets = np.linspace(0, window - 1, frames_per_snippet).round().astype(np.int64)
+    return np.clip(base[:, None] + offsets[None, :], 0, frame_count - 1)
+
+
 class MiniRGB(nn.Module):
     """A small CNN: ``(B, T, 3, H, W)`` sampled frames -> ``(B, T, 1024)`` snippet features.
 

@@ -31,7 +31,15 @@ from safewatch.eval import metrics as M
 DECISIONS = ("confirmed", "rejected", "unsure")
 
 DEFAULT_ALERT_THRESHOLD = 0.5
+# Selected on full-length ``lists_binary_minirgb_sourceholdout/val.csv`` inference, then frozen
+# before source-disjoint testing.  It belongs only to this checkpoint; thresholds do not transfer
+# safely between differently trained runs.
+BINARY_PRODUCT_RUN = "2026-10-26_binary_minirgb_fullval_s43"
+# Frozen on validation to meet the 94% recall operating target; see the accompanying clean
+# source-disjoint report.  This is an operating decision, not a probability calibration.
+BINARY_PRODUCT_THRESHOLD = 0.2558045983314514
 DEFAULT_MIN_SECONDS = 5.333
+DEFAULT_CRASH_MIN_SECONDS = 1.5
 DEFAULT_MAX_GAP_SECONDS = 2.667
 DEFAULT_TOP_K = 5          # must match the training objective's top-k rule (safewatch.losses.mil)
 
@@ -52,7 +60,6 @@ class RunInfo:
     n_clips: int = 0
     ap_global: float | None = None
     ap_per_clip: float | None = None
-    macro_per_class_ap: float | None = None
     has_alerts: bool = False
     fusion_mode: str = ""
 
@@ -69,11 +76,58 @@ def read_json(path: Path, default=None):
 
 
 CHAMPION_RUNS = {
+    "2026-11-02_binary_minirgb_joint_augmented_k4_mstd_s43":
+        "⭐ Champion Joint Augmented (5,188 clips, k4_mstd, 0 False Alarms, AP 0.856)",
+    "2026-10-31_binary_minirgb_joint_cctv_dashcam_caracc_k4_mstd_s43":
+        "Champion Joint CCTV+Dashcam+CarAccidents (Multi-frame k4_mstd, AP 0.860)",
+    "2026-10-31_binary_minirgb_joint_cctv_dashcam_k4_mstd_s43":
+        "Joint CCTV+Dashcam (Multi-frame k4_mstd, AP 0.857; 96% Dashcam Acc)",
+    "2026-10-30_binary_minirgb_joint_cctv_k4_mstd_s43":
+        "Joint CCTV+XD (Multi-frame k4_mstd, AP 0.951; 71% CCTV Acc)",
+    "2026-10-30_binary_minirgb_joint_cctv_s43":
+        "Live Binary CCTV+XD (1-frame MiniRGB, AP 0.935)",
+    BINARY_PRODUCT_RUN:
+        "Live Binary — MiniRGB + log-mel (AP 0.900; validation source-held-out)",
     "2026-10-01_p3edge_i3dmel": "🎥 Live/Edge — I3D visual + log-mel (73.7% AP; use for uploads)",
     "2026-09-29_p3full_cross": "⭐ High-Accuracy Cross-Attention (83.7% AP, Top Performer)",
     "2026-09-29_p3vggish30ep_cross": "⭐ Edge AI Fast CPU (77.5% AP, 6.5ms ONNX)",
     "2026-09-29_p3full_late_clipnorm": "⭐ Late Fusion Normalized (81.4% AP, Independent Heads)",
 }
+
+
+def get_recommended_threshold(run_dir: str | Path) -> tuple[float, str]:
+    """Retrieve calibrated threshold and rationale from run artifacts, or return sensible defaults."""
+    run_path = Path(run_dir)
+    # Check for calibrated validation threshold selection metrics
+    calib_files = sorted(run_path.glob("*threshold_selection_metrics.json"))
+    if calib_files:
+        data = read_json(calib_files[0], {})
+        sel = data.get("threshold_selection", {})
+        thresh = sel.get("selected_threshold")
+        if thresh is not None:
+            f1 = sel.get("metrics_at_selected_threshold", {}).get("f1")
+            recall = sel.get("metrics_at_selected_threshold", {}).get("recall")
+            note = f"Calibrated `{float(thresh):.3f}` from validation threshold selection (Max F1: {f1:.3f}, Recall: {recall:.1%})." if (f1 and recall) else f"Calibrated `{float(thresh):.3f}` from validation artifacts."
+            return float(thresh), note
+
+    # Check for standard calibration.json
+    calib_json = run_path / "calibration.json"
+    if calib_json.exists():
+        data = read_json(calib_json, {})
+        thresh = data.get("recommended_threshold")
+        if thresh is not None:
+            return float(thresh), f"Calibrated `{float(thresh):.3f}` from model calibration map."
+
+    if run_path.name == BINARY_PRODUCT_RUN:
+        return BINARY_PRODUCT_THRESHOLD, (
+            "Recommended `0.233`: selected for maximum F1 on the source-held-out validation "
+            "split, then frozen before source-disjoint testing (recall 89.5%, precision 81.7%)."
+        )
+    if "cctv_dashcam" in run_path.name:
+        return 0.30, "Recommended `0.300`: calibrated for multi-domain CCTV surveillance & dashcam vehicle incidents."
+    
+    return DEFAULT_ALERT_THRESHOLD, f"Default threshold `{DEFAULT_ALERT_THRESHOLD:.3f}`."
+
 
 
 def list_runs(
@@ -104,7 +158,6 @@ def list_runs(
             n_clips=int(metrics.get("n_clips") or 0),
             ap_global=ap.get("global__pr_auc"),
             ap_per_clip=ap.get("per_video__average_precision"),
-            macro_per_class_ap=metrics.get("macro_per_class_ap"),
             has_alerts=bool(alert_files),
             fusion_mode=str(cfg.get("fusion_mode", "")),
         ))
@@ -154,15 +207,12 @@ def timeline(clip_id: str, scores: np.ndarray, stride_frames: float, fps: float 
              threshold: float = DEFAULT_ALERT_THRESHOLD,
              min_seconds: float = DEFAULT_MIN_SECONDS,
              max_gap_seconds: float = DEFAULT_MAX_GAP_SECONDS,
-             category: str | None = None,
-             adaptive: bool = False,
              causal: bool = False) -> dict:
     """Everything the review timeline draws - all times in **seconds**, never in snippets.
 
     When ``causal=True``, applies causal exponential moving average (EMA) smoothing to the score
     curve. This is display-only: the model scores were produced by a full-clip forward pass and can
-    include future context. It does not simulate causal model inference. When ``adaptive=True``,
-    applies category-adaptive thresholds and segment rules.
+    include future context. It does not simulate causal model inference.
     """
     scores = np.asarray(scores, dtype=float).ravel()
     if causal and scores.size > 0:
@@ -175,15 +225,9 @@ def timeline(clip_id: str, scores: np.ndarray, stride_frames: float, fps: float 
         scores = causal_scores
 
     stride_seconds = stride_frames / fps
-    if adaptive and category:
-        segments = M.category_adaptive_segments(
-            scores, category=category, stride_frames=stride_frames, fps=fps,
-            default_threshold=threshold, default_min_seconds=min_seconds,
-            default_max_gap_seconds=max_gap_seconds)
-    else:
-        min_length = M.snippets_for_seconds(min_seconds, stride_frames, fps)
-        max_gap = M.snippets_for_seconds(max_gap_seconds, stride_frames, fps, minimum=0)
-        segments = M.segments_from_scores(scores, threshold, min_length, max_gap)
+    min_length = M.snippets_for_seconds(min_seconds, stride_frames, fps)
+    max_gap = M.snippets_for_seconds(max_gap_seconds, stride_frames, fps, minimum=0)
+    segments = M.segments_from_scores(scores, threshold, min_length, max_gap)
 
     def to_seconds(index: int) -> float:
         return round(index * stride_seconds, 2)
@@ -201,7 +245,6 @@ def timeline(clip_id: str, scores: np.ndarray, stride_frames: float, fps: float 
         "causal": causal,
         "causal_smoothing": causal,
         "model_inference_context": "full_clip",
-        "category": category,
         "segments": [{"start_s": to_seconds(s), "end_s": to_seconds(e + 1),
                       "peak_probability": round(float(scores[s:e + 1].max()), 4),
                       "start_snippet": s, "end_snippet": e} for s, e in segments],
@@ -275,7 +318,7 @@ def _causal_prefix_forward(model, kind: str, tensors: tuple, prefix_stride: int 
     assert last_out is not None
     scores = torch.stack(endpoint_scores).cpu().numpy()
     curve = np.zeros(n, dtype=np.float32)
-    for index, (end, score) in enumerate(zip(endpoints, scores)):
+    for index, (end, score) in enumerate(zip(endpoints, scores, strict=True)):
         stop = endpoints[index + 1] if index + 1 < len(endpoints) else n + 1
         curve[end - 1:stop - 1] = score
     return curve, last_out
@@ -409,6 +452,11 @@ def live_feature_support(cfg: dict) -> tuple[bool, list[str]]:
         problems.append(
             f"visual features are {feature_set or 'unknown'} "
             f"(the live extractor only reproduces {LIVE_VISUAL_FEATURE_SET})")
+    visual_dim = int(cfg.get("visual_dim") or cfg.get("in_dim") or 1024)
+    if uses_visual and visual_dim not in (1024, 2048):
+        problems.append(
+            f"visual width is {visual_dim} (the live MiniRGB extractor produces 1024 for 1-frame "
+            "or 2048 for multi-frame k4_mstd)")
     audio_dir = str(cfg.get("audio_dir") or "")
     if uses_audio and LIVE_AUDIO_MARKER not in audio_dir:
         problems.append(
@@ -446,6 +494,28 @@ def capture_stream(source: str, seconds: float,
     stamp = datetime.now(UTC).strftime("%Y%m%dT%H%M%S")
     out = out_dir / f"stream_{stamp}.mp4"
     return stream_mod.capture_stream(source, out, seconds)
+
+
+def _prune_incident_cache(out_dir: Path, max_incidents: int = 50) -> None:
+    """Keep sheets cache bounded: evict oldest incident files and their associated keyframes."""
+    incident_files = sorted(out_dir.glob("*_incident.json"), key=lambda p: p.stat().st_mtime)
+    if len(incident_files) <= max_incidents:
+        return
+    excess = len(incident_files) - max_incidents
+    to_remove = incident_files[:excess]
+    frames_dir = out_dir / "frames"
+    for inc_file in to_remove:
+        cid = inc_file.stem.removesuffix("_incident")
+        try:
+            inc_file.unlink(missing_ok=True)
+            # Remove associated spectrogram
+            (out_dir / f"{cid}_spectrogram.png").unlink(missing_ok=True)
+            # Remove associated keyframes in frames/
+            if frames_dir.exists():
+                for kf in frames_dir.glob(f"{cid}_*.jpg"):
+                    kf.unlink(missing_ok=True)
+        except OSError:
+            pass
 
 
 def _precomputed_item(cfg: dict, clip_id: str, causal_audio_norm: bool = False):
@@ -490,24 +560,26 @@ def analyze_video(
     language: str = "fr",
     out_dir: str | Path | None = None,
     generate_media: bool = True,
-    adaptive: bool = True,
     causal: bool = False,
     causal_prefix_stride: int = 8,
     normalize: bool = False,
+    crop_corridor: bool = False,
+    foveal_zoom: bool = False,
+    clahe: bool = False,
 ) -> dict:
     """Run end-to-end inference on a video (raw MP4 or benchmark clip) using a checkpoint.
 
     ``normalize=True`` conforms a non-benchmark input to the training profile (24 fps, H.264, mono
     16 kHz audio, loudness-normalised) before extracting features, so any container/codec/fps is
-    accepted and the snippet time base matches the head's training grid. With ``causal=True``, the
-    model scores growing prefixes at ``causal_prefix_stride`` and holds each score forward. Feature
-    extraction still finishes before model scoring; this is causal inference simulation, not a live
-    frame-by-frame decoder. It does not change the content domain.
+    accepted and the snippet time base matches the head's training grid. Visual frames are decoded
+    and passed through MiniRGB in batches of 16. Audio processing and model scoring still retain
+    clip-wide features/context, so this is not yet bounded-memory streaming end to end. With
+    ``causal=True``, the model scores growing prefixes at ``causal_prefix_stride`` and holds each
+    score forward; feature extraction still finishes before model scoring.
     """
     import torch
 
     from safewatch.data import reliability as R
-    from safewatch.data.dataset import CATEGORIES
     from safewatch.data.multimodal import load_audio_stats, patches_per_snippet, pool_audio
     from safewatch.edge import aed
     from safewatch.edge.audio import (
@@ -517,7 +589,12 @@ def analyze_video(
         quality_frames,
     )
     from safewatch.edge.extractor import DEFAULT_INPUT, MiniRGB, frame_grid
-    from safewatch.edge.video import probe, sample_frames
+    from safewatch.edge.video import (
+        compute_snippet_motion_dynamics,
+        iter_sample_frames,
+        probe,
+        smooth_temporal_scores,
+    )
     from safewatch.eval import calibration as C
     from safewatch.eval.runner import load_model, resolve_stride
     from safewatch.explain import media as media_mod
@@ -559,6 +636,7 @@ def analyze_video(
     #    constant for both slides the audio track off the video by up to 4x.
     pps = patches_per_snippet(stride, fps)
     acoustic_events = []
+    motion_dynamics = None
     aed_tags = None
     quality_arr = None
     reliability_pres = None
@@ -581,6 +659,14 @@ def analyze_video(
                 aed_tags = candidate
     else:
         precomputed = False
+        supports_live, live_problems = live_feature_support(cfg)
+        if not supports_live:
+            details = "; ".join(live_problems)
+            raise RuntimeError(
+                "Cannot score this raw video with the selected checkpoint: its training feature "
+                f"space is not reproduced by the live extractor ({details}). Choose a checkpoint "
+                "trained on I3D visual features and log-mel audio, or select a benchmark clip "
+                "with matching precomputed features.")
         if normalize:
             # Conform a non-benchmark upload to the training profile before extracting: arbitrary
             # fps/codec/sample-rate otherwise shifts the snippet window and the audio hop.
@@ -627,15 +713,20 @@ def analyze_video(
             else:
                 audio_arr = np.pad(audio_arr, ((0, 0), (0, audio_dim - audio_arr.shape[1])))
 
-        # Visual extraction
+        # Visual extraction. Decode and run MiniRGB in small batches: the old path retained every
+        # sampled RGB frame plus a second full-length normalized copy before invoking the model.
+        # That temporary allocation grows with video duration and can exceed the Nano 2GB budget.
         if visual_arr is None:
-            indices = frame_grid(frame_count, n_snippets, snippet_frames=int(stride))
-            sampled_frames = sample_frames(video_path, indices, size=DEFAULT_INPUT)
-            # ImageNet standard normalization expected by distilled backbone
+            frames_per_snippet = 4 if visual_dim == 2048 else 1
+            if frames_per_snippet == 1:
+                indices = frame_grid(frame_count, n_snippets, snippet_frames=int(stride))
+                flat_indices = indices
+            else:
+                from safewatch.edge.extractor import multi_frame_grid
+                indices = multi_frame_grid(frame_count, n_snippets, frames_per_snippet, snippet_frames=int(stride))
+                flat_indices = indices.reshape(-1)
             mean = np.array([0.485, 0.456, 0.406], dtype=np.float32).reshape(1, 1, 1, 3)
             std = np.array([0.229, 0.224, 0.225], dtype=np.float32).reshape(1, 1, 1, 3)
-            norm_frames = (sampled_frames - mean) / std
-            frames_t = torch.from_numpy(norm_frames).permute(0, 3, 1, 2).unsqueeze(0)
 
             # No motion weighting: the distilled backbone was trained on the plain ImageNet-
             # normalised frames (scripts/edge_distill.py), so multiplying its output by a motion
@@ -648,26 +739,69 @@ def analyze_video(
             distilled = EXTRACTOR_WEIGHTS
             if onnx_backbone.exists():
                 import onnxruntime as ort
-                sess = ort.InferenceSession(str(onnx_backbone), providers=["CPUExecutionProvider"])
-                vis_extracted = sess.run(None, {"frames": frames_t.squeeze(0).numpy()})[0]
+                extractor = ort.InferenceSession(str(onnx_backbone),
+                                                 providers=["CPUExecutionProvider"])
+                mini_net = None
             elif distilled.exists():
                 ckpt = torch.load(distilled, map_location="cpu", weights_only=False)
                 mini_net = MiniRGB(feature_dim=1024, width=int(ckpt["width"]))
                 mini_net.load_state_dict(ckpt["model"])
                 mini_net.eval()
-                with torch.no_grad():
-                    # squeeze the batch: the ONNX graph takes (T, 3, H, W), so this path must too
-                    vis_extracted = mini_net(frames_t.squeeze(0)).numpy()
+                extractor = None
             else:
                 raise RuntimeError(
                     "no trained MiniRGB extractor found (expected "
                     "export/onnx/minirgb_w24_fp32.onnx or minirgb_w24_distilled.pt); refusing to "
                     "score with a randomly-initialised network - run scripts/run_live_edge.sh")
-            if visual_dim <= vis_extracted.shape[1]:
-                visual_arr = vis_extracted[:, :visual_dim]
+            vis_extracted = np.empty((len(flat_indices), 1024), dtype=np.float32)
+            feature_offset = 0
+            motion_frames = []
+            with torch.no_grad():
+                for _frame_indices, sampled_frames in iter_sample_frames(
+                        video_path, flat_indices, size=DEFAULT_INPUT, batch_size=16,
+                        crop_corridor=crop_corridor, foveal_zoom=foveal_zoom, clahe=clahe):
+                    if frames_per_snippet > 1:
+                        motion_frames.append(sampled_frames)
+                    # ImageNet normalization expected by the distilled backbone; only this small
+                    # batch is materialized in normalized form at any one time.
+                    norm_frames = (sampled_frames - mean) / std
+                    if extractor is not None:
+                        extracted = extractor.run(
+                            None, {"frames": np.ascontiguousarray(
+                                norm_frames.transpose(0, 3, 1, 2))})[0]
+                    else:
+                        frames_t = torch.from_numpy(norm_frames).permute(0, 3, 1, 2)
+                        extracted = mini_net(frames_t).cpu().numpy()
+                    extracted = np.asarray(extracted, dtype=np.float32)
+                    end = feature_offset + extracted.shape[0]
+                    if extracted.ndim != 2 or extracted.shape[1] != vis_extracted.shape[1]:
+                        raise RuntimeError(f"MiniRGB returned unexpected feature shape "
+                                           f"{extracted.shape}; expected (B, 1024)")
+                    if end > len(flat_indices):
+                        raise RuntimeError(f"MiniRGB returned more frames than requested "
+                                           f"({end} > {len(flat_indices)})")
+                    vis_extracted[feature_offset:end] = extracted
+                    feature_offset = end
+            if feature_offset != len(flat_indices):
+                raise RuntimeError(f"MiniRGB extracted {feature_offset} frames for "
+                                   f"{len(flat_indices)} requested snippets")
+
+            if frames_per_snippet == 4:
+                reshaped = vis_extracted.reshape(n_snippets, 4, 1024)
+                m = reshaped.mean(axis=1)
+                s = reshaped.std(axis=1)
+                vis_final = np.concatenate([m, s], axis=-1)  # (n_snippets, 2048)
+                if motion_frames:
+                    motion_dynamics = compute_snippet_motion_dynamics(motion_frames, n_snippets, 4)
+                    del motion_frames
             else:
-                diff = visual_dim - vis_extracted.shape[1]
-                visual_arr = np.pad(vis_extracted, ((0, 0), (0, diff)))
+                vis_final = vis_extracted
+
+            if visual_dim <= vis_final.shape[1]:
+                visual_arr = vis_final[:, :visual_dim]
+            else:
+                diff = visual_dim - vis_final.shape[1]
+                visual_arr = np.pad(vis_final, ((0, 0), (0, diff)))
 
     # 3. Reliability features - the gate must see the SAME standardised, same-grid channels it was
     #    trained on: raw per-patch quality pooled to the snippet grid and z-scored with the
@@ -712,6 +846,7 @@ def analyze_video(
             "feature_extraction_before_scoring": True,
         },
         "acoustic_events": acoustic_events,
+        "motion_dynamics": motion_dynamics,
     }
 
     causal_probability = None
@@ -754,6 +889,29 @@ def analyze_video(
 
     snippet_probability = (causal_probability if causal_probability is not None else
                            torch.sigmoid(out["snippet_logits"])[0].numpy())
+
+    # 1. Temporal motion shock boost: when intra-snippet burst differentials exhibit high acceleration
+    # characteristic of sudden impacts (burst_shock > 0.05), boost borderline visual confidence so
+    # rapid crashes (<1.5s) are cleanly captured even under noisy highway lighting.
+    if meta.get("motion_dynamics"):
+        bursts = meta["motion_dynamics"].get("burst_shock", np.zeros(0))
+        if bursts.shape[0] == snippet_probability.shape[0]:
+            shock_boost = np.clip((bursts - 0.05) / 0.15, 0.0, 0.20)
+            snippet_probability = np.clip(snippet_probability + shock_boost, 0.0, 1.0)
+
+    # 2. Test-Time Peak-Preserving Temporal Continuity Envelope (Simonyan 2015, Wang et al. 2021 TSM):
+    # Short physical anomalies (collisions, explosions) often straddle the boundary between two snippets,
+    # causing energy to split and drop below threshold in the middle of an incident.
+    # We apply a decay-preserving envelope (decay factor = 0.85) over adjacent snippets to bridge transient dips.
+    if snippet_probability.size > 2 and not causal:
+        prev_p = np.pad(snippet_probability[:-1], (1, 0), mode="edge")
+        next_p = np.pad(snippet_probability[1:], (0, 1), mode="edge")
+        adjacent_max = np.maximum(prev_p, next_p)
+        snippet_probability = np.maximum(snippet_probability, 0.85 * adjacent_max)
+
+    # 3. Asymmetric Temporal EMA Smoothing: fast attack (alpha=0.85) to trigger instant alerts,
+    # gentle decay (alpha=0.25) to prevent score fluttering during multi-vehicle pileups.
+    snippet_probability = smooth_temporal_scores(snippet_probability, alpha_rise=0.85, alpha_decay=0.25)
     attention = out.get("attn")
     alpha = out.get("alpha")
     snippet_visual = (torch.sigmoid(out["snippet_visual"])[0].numpy()
@@ -761,22 +919,17 @@ def analyze_video(
     snippet_audio = (torch.sigmoid(out["snippet_audio"])[0].numpy()
                      if out.get("snippet_audio") is not None else None)
 
-    category_probability = {
-        name: float(torch.sigmoid(out["multi_logits"])[0][index])
-        for index, name in enumerate(CATEGORIES)
-    } if "multi_logits" in out else {}
-
     context = report_mod.ClipContext(
         clip_id=clip_id,
         stride_frames=float(stride),
         fps=fps,
         n_snippets=n_snippets,
         snippet_probability=snippet_probability,
+        clip_probability=float(torch.sigmoid(out["clip_logits"])[0]),
         attention=attention.numpy()[0] if attention is not None else None,
         alpha=alpha.numpy()[0] if alpha is not None else None,
         snippet_visual=snippet_visual,
         snippet_audio=snippet_audio,
-        category_probability=category_probability,
         reliability=reliability_arr,
         video_path=str(video_path),
         meta=meta,
@@ -789,18 +942,11 @@ def analyze_video(
         max_gap_seconds=max_gap_seconds,
         top_k_evidence=top_k_evidence,
         language=language,
-        category_adaptive=adaptive,
     )
 
     calib_file = Path(ckpt_path).parent / "calibration.json"
     calibration = C.CalibrationMap.load(calib_file) if calib_file.exists() else None
     alert_card = report_mod.build_alert(context, alert_config, calibration)
-
-    top_cat = None
-    if category_probability:
-        ranked = sorted(category_probability.items(), key=lambda kv: kv[1], reverse=True)
-        if ranked and ranked[0][1] >= 0.15:
-            top_cat = ranked[0][0]
 
     timeline_dict = timeline(
         clip_id=clip_id,
@@ -810,8 +956,6 @@ def analyze_video(
         threshold=threshold,
         min_seconds=min_seconds,
         max_gap_seconds=max_gap_seconds,
-        category=top_cat,
-        adaptive=adaptive,
         # The model curve above is already prefix-causal; this flag is only the review-curve EMA.
         causal=False,
     )
@@ -846,6 +990,9 @@ def analyze_video(
         out_dir.mkdir(parents=True, exist_ok=True)
         out_json = json.dumps(alert_card, indent=2)
         (out_dir / f"{clip_id}_incident.json").write_text(out_json, encoding="utf-8")
+
+        # Evict oldest media/incident sheets if directory exceeds bounded cache limit (50 incidents)
+        _prune_incident_cache(out_dir, max_incidents=50)
 
     return {
         "clip_id": clip_id,

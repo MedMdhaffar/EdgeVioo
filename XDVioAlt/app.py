@@ -6,7 +6,7 @@ Usage:
 
 What it is: the operator side of the pipeline. Per clip it shows the score curve on a **seconds**
 axis (whatever grid the run uses), the predicted incident segments, and - when an incident sheet
-exists - the model's category / confidence / modality evidence and its caveats. It then records the
+exists - the binary violence result, confidence, modality evidence and caveats. It then records the
 operator's verdict in an **append-only** JSONL log, so a rejected alert stays visible instead of
 vanishing.
 
@@ -91,7 +91,7 @@ def sidebar() -> dict:
     chosen_run = None
     if runs:
         names = [run.name for run in runs]
-        default = next((i for i, n in enumerate(names) if "p3full_late_clipnorm" in n), 0)
+        default = next((i for i, n in enumerate(names) if n == S.BINARY_PRODUCT_RUN), 0)
         chosen = st.sidebar.selectbox(
             "Run / Model", names, index=default,
             format_func=lambda n: f"{S.CHAMPION_RUNS.get(n, n)} [{n}]")
@@ -107,14 +107,20 @@ def sidebar() -> dict:
 
     st.sidebar.divider()
     st.sidebar.subheader("Alert Rules")
-    threshold = st.sidebar.slider("Probability Threshold", 0.05, 0.95, 0.5, 0.05)
+    if chosen_run:
+        recommended_threshold, threshold_caption = S.get_recommended_threshold(chosen_run.path)
+    else:
+        recommended_threshold = S.DEFAULT_ALERT_THRESHOLD
+        threshold_caption = f"Default threshold `{S.DEFAULT_ALERT_THRESHOLD:.3f}`."
+
+    threshold = st.sidebar.slider("Probability Threshold", 0.05, 0.95,
+                                  float(recommended_threshold), 0.001)
+    if threshold_caption:
+        st.sidebar.caption(threshold_caption)
     min_seconds = st.sidebar.number_input("Minimum Duration (s)", 0.5, 60.0,
-                                          float(S.DEFAULT_MIN_SECONDS), 0.5)
+                                          1.5, 0.5)
     max_gap_seconds = st.sidebar.number_input("Gap Fusion (s)", 0.0, 30.0,
                                               float(S.DEFAULT_MAX_GAP_SECONDS), 0.5)
-    adaptive = st.sidebar.toggle(
-        "Category-Adaptive Segmentation", value=True,
-        help="Adjusts minimum duration per category (e.g. 1.5s collision, 4s riot)")
     live_mode = mode == "Live Demo / Import Video"
     causal_label = ("Causal Prefix Scoring (Offline Simulation)" if live_mode
                     else "Causal EMA Smoothing (Display Only)")
@@ -126,6 +132,25 @@ def sidebar() -> dict:
         "Smooths cached full-clip predictions using only previous score values. This cannot make "
         "the original model inference causal.")
     causal = st.sidebar.toggle(causal_label, value=False, help=causal_help)
+    crop_corridor = False
+    foveal_zoom = False
+    clahe = False
+    if live_mode:
+        crop_corridor = st.sidebar.toggle(
+            "Forward Driving Corridor (Dashcam Glare Filter)",
+            value=True,
+            help="Crops the central 60% driving lane to filter out peripheral windshield glare, "
+                 "passing headlights, and road-shoulder reflections.")
+        foveal_zoom = st.sidebar.toggle(
+            "Foveal Horizon Zoom (Vanishing Point Focus)",
+            value=True,
+            help="Blends a 50% central zoom on the horizon/vanishing point with the wide corridor "
+                 "to detect distant vehicle hazards (>50m) early before impact.")
+        clahe = st.sidebar.toggle(
+            "Adaptive Contrast Normalization (CLAHE)",
+            value=False,
+            help="Equalizes local lightness contrast to suppress headlight flashes and glare "
+                 "under night-time dashcam conditions.")
     if causal:
         if live_mode:
             st.sidebar.warning(
@@ -149,21 +174,34 @@ def sidebar() -> dict:
 
     return {"mode": mode, "run": chosen_run, "threshold": threshold, "min_seconds": min_seconds,
             "max_gap_seconds": max_gap_seconds, "order": order, "show_gt": show_gt,
-            "adaptive": adaptive, "causal": causal, "champions_only": champions_only,
+            "causal": causal, "crop_corridor": crop_corridor,
+            "foveal_zoom": foveal_zoom, "clahe": clahe, "champions_only": champions_only,
             "sheets_dir": sheets_dir, "decisions_path": decisions_path,
             "runs_dir": runs_dir, "intervals_path": DEFAULT_INTERVALS}
 
 
 def render_alert(alert: dict) -> None:
     """The incident card, exactly as ``scripts/incident_sheet.py`` wrote it (no reinvention)."""
-    category = alert.get("category") or {}
     confidence = alert.get("confidence") or {}
     modality = alert.get("modality_contribution") or {}
+    classification = alert.get("classification") or {}
+    if not classification:
+        # Older saved incident sheets predate the binary result field. Reconstruct it from the
+        # same top-k score and threshold; never revive their six-way category guess.
+        score = confidence.get("raw_clip_probability", confidence.get("clip_probability"))
+        threshold = (alert.get("config") or {}).get("threshold", 0.5)
+        if score is not None:
+            positive = float(score) >= float(threshold)
+            classification = {
+                "display_label": "Violence detected" if positive else "No violence detected",
+                "score": score,
+                "threshold": threshold,
+            }
 
     top = st.columns(3)
-    top[0].metric("Category", category.get("label") or "n/a",
-                  None if category.get("probability") is None
-                  else f"p={category['probability']:.2f}")
+    top[0].metric("Binary result", classification.get("display_label", "n/a"),
+                  None if classification.get("score") is None
+                  else f"score={classification['score']:.2f}")
     alert_probability = confidence.get("alert_probability", confidence.get("raw_alert_probability"))
     top[1].metric("Alert Probability (top-k)",
                   "n/a" if alert_probability is None else f"{alert_probability:.3f}",
@@ -172,14 +210,13 @@ def render_alert(alert: dict) -> None:
     top[2].metric("Mean Contribution",
                   " / ".join(f"{k} {v:.2f}" for k, v in contribution.items()) or "n/a")
 
-    cat_fig = F.category_figure(category)
-    if cat_fig is not None:
-        st.plotly_chart(cat_fig, width="stretch")
-
     if alert.get("segments"):
         st.dataframe(alert["segments"], width="stretch", hide_index=True)
-    if alert.get("text"):
+    if alert.get("text") and alert.get("classification"):
         st.code(alert["text"], language=None)
+    elif alert.get("text"):
+        st.caption("Text from this older incident sheet is hidden because it contains a six-way "
+                   "category guess. Regenerate the sheet to see the binary-only explanation.")
 
     with st.expander("Evidence (Attention, Audio phrases, Reliability)"):
         st.json({"visual_evidence": alert.get("visual_evidence"),
@@ -272,9 +309,15 @@ def render_live_demo(options: dict) -> None:
 
     ckpt_names = [f"{p.parent.name}/{p.name}" for p in checkpoints]
     default_ckpt_idx = next(
-        (i for i, n in enumerate(ckpt_names) if "p3edge_i3dmel" in n and "best" in n),
-        next((i for i, n in enumerate(ckpt_names)
-              if "p3full_late_clipnorm" in n and "best" in n), 0))
+        (i for i, n in enumerate(ckpt_names)
+         if "binary_minirgb_joint_augmented_k4_mstd_s43" in n and "best" in n),
+        next(
+            (i for i, n in enumerate(ckpt_names)
+             if "binary_minirgb_joint_cctv_dashcam_caracc_k4_mstd_s43" in n and "best" in n),
+            next(
+                (i for i, n in enumerate(ckpt_names)
+                 if "binary_minirgb_sourceholdout_s43" in n and "best" in n),
+                0)))
     def _fmt_ckpt(name: str) -> str:
         run = name.split("/")[0]
         return f"{S.CHAMPION_RUNS.get(run, run)} [{run}]"
@@ -288,13 +331,14 @@ def render_live_demo(options: dict) -> None:
         S.read_json(ckpt_path.parent / "config.json", {}) or {})
     if supports_live:
         st.caption("✅ This checkpoint was trained on features the live extractor can reproduce "
-                   "(I3D visual + log-mel audio).")
+                   "(MiniRGB visual + log-mel audio).")
     else:
         st.warning(
             "⚠️ This checkpoint was trained on a **different feature space** than the live "
-            "extractor produces, so uploaded videos will score **near zero even on obvious "
-            "incidents** (the model never saw these inputs). " + " ".join(live_problems) + ". "
-            "For uploads, pick a *Live/Edge* model (I3D visual + log-mel audio).",
+            "extractor produces, so scores on uploaded videos would be unreliable. "
+            + " ".join(live_problems) + ". "
+            "Raw-video analysis is blocked for this checkpoint. Choose a live-compatible model, "
+            "or review a benchmark clip using its matching precomputed features.",
             icon="⚠️")
 
     tab_test, tab_upload, tab_stream = st.tabs(
@@ -360,9 +404,11 @@ def render_live_demo(options: dict) -> None:
                     max_gap_seconds=options["max_gap_seconds"],
                     out_dir=options["sheets_dir"],
                     generate_media=True,
-                    adaptive=options["adaptive"],
                     causal=options["causal"],
                     normalize=normalize,
+                    crop_corridor=options.get("crop_corridor", False),
+                    foveal_zoom=options.get("foveal_zoom", False),
+                    clahe=options.get("clahe", False),
                 )
                 st.session_state["live_result"] = res
             except Exception as e:
@@ -379,8 +425,11 @@ def render_live_demo(options: dict) -> None:
         m_cols[0].metric("Anomaly Score (top-k)", f"{result['clip_score']:.3f}")
         m_cols[1].metric("Analyzed Duration", f"{result['duration_s']:.1f} s")
         m_cols[2].metric("Detected Segments", len(result["segments"]))
-        top_cat = alert.get("category", {}).get("label") or "n/a"
-        m_cols[3].metric("Dominant Category", top_cat)
+        classification_label = alert.get("classification", {}).get("display_label", "n/a")
+        m_cols[3].metric("Violence classification", classification_label)
+        if alert.get("classification", {}).get("is_violence") and not result["segments"]:
+            st.info("Binary positive (1): no temporal segment met the duration rule. This does not "
+                    "change the binary result.", icon="ℹ️")
 
         left, right = st.columns([3, 2])
         with left:
@@ -437,16 +486,12 @@ def render_dataset_review(options: dict) -> None:
             format_func=lambda cid: (f"✔ {cid}" if cid in decided else cid))
 
         intervals = cached_intervals(options["intervals_path"]).get(clip_id, [])
-        alert_pre = S.load_alert(options["sheets_dir"], clip_id)
-        top_cat = alert_pre.get("category", {}).get("label") if alert_pre else None
         timeline = S.timeline(
             clip_id, scores[clip_id], run.stride_frames, fps=24.0,
             ground_truth=ground_truth.get(clip_id),
             gt_intervals=intervals if options["show_gt"] else None,
             threshold=options["threshold"], min_seconds=options["min_seconds"],
-            max_gap_seconds=options["max_gap_seconds"],
-            category=top_cat, adaptive=options["adaptive"],
-            causal=options["causal"])
+            max_gap_seconds=options["max_gap_seconds"], causal=options["causal"])
         st.plotly_chart(F.timeline_figure(timeline), width="stretch")
         st.caption(
             f"Clip score (mean top-{S.DEFAULT_TOP_K}) **{timeline['clip_score']:.3f}** · "

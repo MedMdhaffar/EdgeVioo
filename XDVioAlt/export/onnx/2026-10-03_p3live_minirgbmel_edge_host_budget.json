@@ -1,0 +1,88 @@
+{
+  "device": "cpu/4 threads",
+  "kind": "edge_pipeline_budget",
+  "video_glob": "data/raw/xd-violence/data/video/test_videos/*.mp4",
+  "extractor": {
+    "width": 24,
+    "input_size": 112,
+    "params": 417520,
+    "fp32": {
+      "file": "minirgb_w24_fp32.onnx",
+      "size_mb": 1.595,
+      "max_abs_diff_vs_pytorch": 8.940696716308594e-08,
+      "latency_ms": {
+        "n": 30,
+        "mean": 0.166,
+        "p50": 0.1679,
+        "min": 0.1556,
+        "max": 0.1804
+      }
+    }
+  },
+  "stages": {
+    "probe": {
+      "n": 3,
+      "mean": 0.031,
+      "p50": 0.0087,
+      "min": 0.0047,
+      "max": 0.0795
+    },
+    "decode": {
+      "n": 3,
+      "mean": 1.1405,
+      "p50": 1.424,
+      "min": 0.39,
+      "max": 1.6075
+    },
+    "extractor": {
+      "n": 3,
+      "mean": 0.0765,
+      "p50": 0.0916,
+      "min": 0.0298,
+      "max": 0.108
+    },
+    "head": {
+      "n": 3,
+      "mean": 0.0096,
+      "p50": 0.0105,
+      "min": 0.005,
+      "max": 0.0133
+    }
+  },
+  "clips": [
+    {
+      "video": "A.Beautiful.Mind.2001__#00-25-20_00-29-20_label_A.mp4",
+      "frames": 5761,
+      "snippets": 361,
+      "duration_s": 240.0,
+      "decode_s": 1.424,
+      "extractor_s": 0.092,
+      "head_s": 0.0133,
+      "total_s": 1.608,
+      "realtime_factor": 149.3
+    },
+    {
+      "video": "A.Beautiful.Mind.2001__#00-40-52_00-42-01_label_A.mp4",
+      "frames": 1657,
+      "snippets": 104,
+      "duration_s": 69.0,
+      "decode_s": 0.39,
+      "extractor_s": 0.03,
+      "head_s": 0.005,
+      "total_s": 0.429,
+      "realtime_factor": 160.8
+    },
+    {
+      "video": "A.Beautiful.Mind.2001__#00-50-26_00-55-16_label_A.mp4",
+      "frames": 6962,
+      "snippets": 436,
+      "duration_s": 290.1,
+      "decode_s": 1.608,
+      "extractor_s": 0.108,
+      "head_s": 0.0105,
+      "total_s": 1.735,
+      "realtime_factor": 167.2
+    }
+  ],
+  "note": "decode is seek-free (one sequential walk); the extractor/head are priced on the frames the deployed path would actually receive"
+}

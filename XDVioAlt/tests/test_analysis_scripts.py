@@ -29,11 +29,37 @@ import pytest
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 
 import class_diagnostic as CD  # noqa: E402
+import eval_binary_classifier as EBC  # noqa: E402
 import ladder_seed_check as LSC  # noqa: E402
 import per_class_localization as PCL  # noqa: E402
 import seed_margin as SM  # noqa: E402
 
 from safewatch.data.dataset import CATEGORIES  # noqa: E402
+
+
+def test_target_recall_selector_keeps_the_highest_qualifying_threshold():
+    """Target-recall calibration must not sacrifice precision more than required."""
+    y = np.array([1, 1, 1, 0])
+    p = np.array([0.9, 0.8, 0.3, 0.4])
+    threshold, metrics = EBC.threshold_for_target_recall(y, p, target_recall=2 / 3)
+    assert threshold == pytest.approx(0.8)
+    assert metrics["recall"] == pytest.approx(2 / 3)
+    with pytest.raises(ValueError):
+        EBC.threshold_for_target_recall(y, p, target_recall=0.0)
+
+
+def test_binary_evaluator_uses_the_checkpoint_visual_grid_for_audio(tmp_path: Path):
+    """A 16-frame MiniRGB checkpoint must not silently pool audio on the 64-frame default."""
+    csv_path = tmp_path / "split.csv"
+    csv_path.write_text("clip_id,split,path,T,binary,labels\nclip,train,x,10,1,fighting\n",
+                        encoding="utf-8")
+    dataset = EBC._dataset(
+        csv_path,
+        {"feature_set": "i3d_official", "audio_dir": str(tmp_path / "audio"),
+         "audio_grid": "patch", "audio_dim": 132},
+        "fusion",
+    )
+    assert dataset.patches_per_snippet == pytest.approx(16 / 24 / 0.96)
 
 
 def test_segment_rule_seconds_give_different_snippet_counts_per_grid():

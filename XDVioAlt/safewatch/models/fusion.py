@@ -41,8 +41,20 @@ class CrossModalAttention(nn.Module):
         if reliability is not None and reliability.shape[-1] >= 1:
             rel_scale = torch.sigmoid(reliability[:, :, :1]) if reliability.ndim == 3 else 1.0
             audio_in = audio * rel_scale
-        v2, w_va = self.v_from_a(visual, audio_in, audio_in, key_padding_mask=pad_mask,
-                                 need_weights=True)
+
+        # When audio is completely missing or silent (all zeros), bypass cross-attention to prevent
+        # uniform softmax noise from polluting the visual stream.
+        audio_is_silent = (audio.abs().sum(dim=-1, keepdim=True) < 1e-6)
+        if audio_is_silent.all():
+            v2 = torch.zeros_like(visual)
+            w_va = None
+        else:
+            v2, w_va = self.v_from_a(visual, audio_in, audio_in, key_padding_mask=pad_mask,
+                                     need_weights=True)
+            # Mask out silent timesteps if partially silent
+            if audio_is_silent.any():
+                v2 = torch.where(audio_is_silent, torch.zeros_like(v2), v2)
+
         a2, w_av = self.a_from_v(audio, visual, visual, key_padding_mask=pad_mask,
                                  need_weights=True)
         return self.norm_v(visual + v2), self.norm_a(audio + a2), w_va, w_av

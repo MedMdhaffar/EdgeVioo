@@ -4,16 +4,19 @@
 The subject accepts a deployment **"ou simulé" on a plateforme à ressources limitées**. This script
 is that simulation, with the rules stated up front so nobody can read more into it than it claims:
 
-* it times the **exact deployed artefacts** - the MiniRGB ONNX extractor, the fusion head ONNX,
-  and the full audio/explanation chain (ffmpeg decode, log-mel, quality channels, frozen YAMNet
-  AED, motion saliency) - not a PyTorch prototype;
+* it times the **exact deployed artefacts** - the MiniRGB ONNX extractor, the selected fusion-head
+  ONNX, and the full audio/explanation chain (ffmpeg decode, log-mel, quality channels, frozen
+  YAMNet AED, motion saliency) - not a PyTorch prototype;
 * it runs on this machine's cores, **pinned** (``taskset``) to emulate the core budget of a Pi 4 /
   Jetson Nano (single best core for the serial stages);
 * the single-core numbers are then scaled to the board's core frequency (stated ratio, no other
   modelling) and labelled *estimates*. A Pi 4 with 4 cores running the 4 stages in parallel would
   do better than these estimates; the estimate is deliberately the pessimistic bound.
 
-Nothing here claims the numbers are measured on a Pi or a Jetson.
+Nothing here claims the numbers are measured on a Pi or a Jetson.  In particular, a head whose
+attention graph was traced at 100 snippets is padded only for a *cost* measurement.  Splitting a
+long clip into those windows is not semantically equivalent to full-sequence attention, therefore
+this script never reports a detection-accuracy or deployment-readiness conclusion for windowing.
 
 Usage:
     .venv/bin/python scripts/edge_emulated_bench.py --clips 4            # pinned to 1 core
@@ -27,7 +30,6 @@ import csv
 import json
 import os
 import statistics
-import subprocess
 import sys
 import time
 from pathlib import Path
@@ -42,7 +44,8 @@ from safewatch.edge.video import probe, sample_frames  # noqa: E402
 from safewatch.explain import media as media_mod  # noqa: E402
 
 EXTRACTOR_ONNX = Path("export/onnx/minirgb_w24_fp32.onnx")
-HEAD_ONNX = Path("export/onnx/2026-09-29_p3vggish30ep_cross_fp32.onnx")
+HEAD_ONNX = Path("export/onnx/2026-10-03_p3live_minirgbmel_fp32.onnx")
+HEAD_CONFIG = Path("runs/2026-10-03_p3live_minirgbmel/config.json")
 SALIENCE_SECONDS = 5            # the console renders at most 5 evidence snippets
 IMAGE_MEAN = np.array([0.485, 0.456, 0.406], dtype=np.float32)
 IMAGE_STD = np.array([0.229, 0.224, 0.225], dtype=np.float32)
@@ -64,7 +67,7 @@ def active_cores() -> str:
 
 
 def relaunch_with_affinity(cores: str) -> None:
-    """Re-exec the same command pinned to ``cores`` - the measurement itself then runs constrained."""
+    """Re-exec the same command pinned to ``cores`` so the measurement is constrained."""
     cmd = ["taskset", "-c", cores, sys.executable, str(Path(__file__).resolve()), *sys.argv[1:]]
     os.execvp(cmd[0], cmd)
 
@@ -116,7 +119,45 @@ def pick_clips(n: int, splits=("test",)) -> list[Path]:
     return chosen[:n]
 
 
-def measure_clip(path: Path, extractor, head, head_inputs: list[str]) -> dict:
+def _read_config(path: Path) -> dict:
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise SystemExit(f"[bench] cannot read checkpoint config {path}: {exc}") from exc
+
+
+def _live_audio(path: Path, n_snippets: int, stride: float, fps: float, cfg: dict):
+    """Build the same live audio/reliability tensors as ``ui.state.analyze_video``.
+
+    Keeping this small reference here avoids a deceptively cheap benchmark that feeds zeros to a
+    multimodal head.  It deliberately retains the current whole-clip feature representation: that
+    limitation is reported below rather than hidden by the timing harness.
+    """
+    from safewatch.data import reliability as R
+    from safewatch.data.multimodal import load_audio_stats, patches_per_snippet, pool_audio
+
+    waveform = decode_audio(path)
+    raw_mel = mel_patch_stats(waveform)
+    quality = quality_frames(waveform)
+    audio_dim = int(cfg.get("audio_dim", 132))
+    if raw_mel.shape[0]:
+        audio = pool_audio(raw_mel, n_snippets, patches_per_snippet(stride, fps))
+        stats_file = cfg.get("audio_stats")
+        stats = load_audio_stats(stats_file) if stats_file else None
+        if stats is not None and audio.shape[1] == stats[0].shape[0]:
+            audio = (audio - stats[0]) / np.maximum(stats[1], 1e-6)
+        if cfg.get("audio_norm") == "clip" or stats is None:
+            audio = (audio - audio.mean(axis=0, keepdims=True)) / np.maximum(
+                audio.std(axis=0, keepdims=True), 1e-4)
+    else:
+        audio = np.zeros((n_snippets, audio_dim), dtype=np.float32)
+    if audio.shape[1] != audio_dim:
+        audio = (audio[:, :audio_dim] if audio.shape[1] > audio_dim else
+                 np.pad(audio, ((0, 0), (0, audio_dim - audio.shape[1]))))
+    return waveform, np.asarray(audio, dtype=np.float32), quality, R
+
+
+def measure_clip(path: Path, extractor, head, head_inputs: list[str], cfg: dict) -> dict:
     """Time every stage of the deployed chain on one clip."""
     stages: dict[str, float] = {}
 
@@ -134,8 +175,9 @@ def measure_clip(path: Path, extractor, head, head_inputs: list[str]) -> dict:
     stages["decode"] = time.perf_counter() - start
 
     start = time.perf_counter()
-    # sample_frames is HWC/uint8 like the deployed path; the ONNX graph is channel-first (T, 3, H, W)
-    normalised = ((frames / 255.0 - IMAGE_MEAN.reshape(1, 1, 1, 3))
+    # ``sample_frames`` already returns float RGB in [0, 1].  Dividing it by 255 here used to feed
+    # an almost-black representation that was unlike the live extractor's input.
+    normalised = ((frames - IMAGE_MEAN.reshape(1, 1, 1, 3))
                   / IMAGE_STD.reshape(1, 1, 1, 3))
     visual = extractor.run(None, {"frames": np.ascontiguousarray(
         normalised.transpose(0, 3, 1, 2).astype(np.float32))})[0]
@@ -143,9 +185,8 @@ def measure_clip(path: Path, extractor, head, head_inputs: list[str]) -> dict:
 
     # audio chain: the deployed edge path, including the AED and the saliency the card now carries
     start = time.perf_counter()
-    waveform = decode_audio(path)
-    mel = mel_patch_stats(waveform)
-    quality = quality_frames(waveform)
+    waveform, audio, quality, reliability_mod = _live_audio(
+        path, n_snippets, 16.0, fps, cfg)
     stages["audio_features"] = time.perf_counter() - start
 
     aed_s = 0.0
@@ -164,9 +205,9 @@ def measure_clip(path: Path, extractor, head, head_inputs: list[str]) -> dict:
     stages["saliency"] = time.perf_counter() - start
     del motion
 
-    # The exported cross-attention head has its time axis baked at 100 (export report:
-    # "time_steps": 100) - the deployed call pattern is "one 100-snippet window per head call",
-    # so the budget is priced in exactly those chunks (short clips are zero-padded up to 100).
+    # The historical export has its time axis baked at 100.  Long-window calls below are a runtime
+    # *cost* probe only, not an aggregation algorithm: cross-attention over a chunk differs from
+    # cross-attention over the clip.  The report makes that non-equivalence machine-readable.
     head_s = 0.0
     visual_c = visual.astype(np.float32)
     chunk = 100
@@ -177,9 +218,23 @@ def measure_clip(path: Path, extractor, head, head_inputs: list[str]) -> dict:
         if feed_visual.shape[0] < steps:
             pad = np.zeros((steps - feed_visual.shape[0], feed_visual.shape[1]), dtype=np.float32)
             feed_visual = np.concatenate([feed_visual, pad], axis=0)
-        head.run(None, {"visual": feed_visual[None],
-                        "audio": np.zeros((1, steps, 128), dtype=np.float32),
-                        "mask": np.ones((1, steps), dtype=bool)})
+        valid = min(chunk, n_snippets - offset)
+        feed_audio = audio[offset:offset + chunk]
+        if feed_audio.shape[0] < steps:
+            feed_audio = np.pad(feed_audio, ((0, steps - feed_audio.shape[0]), (0, 0)))
+        feeds = {"visual": feed_visual[None], "audio": feed_audio[None],
+                 "mask": np.arange(steps)[None] < valid}
+        if "reliability" in head_inputs:
+            # This checkpoint uses a seven-channel gate.  Build the same quality-derived channels
+            # as live inference; the visual feature stream is the ONNX output just measured.
+            rel = reliability_mod.reliability_channels(
+                quality, visual_c, n_snippets,
+                reliability_mod.load_quality_stats(cfg.get("quality_stats")), 16.0 / fps / 0.96)
+            rel = rel[offset:offset + chunk]
+            if rel.shape[0] < steps:
+                rel = np.pad(rel, ((0, steps - rel.shape[0]), (0, 0)))
+            feeds["reliability"] = rel[None].astype(np.float32)
+        head.run(None, feeds)
         head_s += time.perf_counter() - start
     stages["head"] = head_s
     del visual_c
@@ -193,6 +248,7 @@ def measure_clip(path: Path, extractor, head, head_inputs: list[str]) -> dict:
         **{f"{name}_s": round(value, 4) for name, value in stages.items()},
         "total_s": round(total, 4),
         "realtime_factor": round(duration / max(total, 1e-9), 1),
+        "head_windowing": "padded_100_snippet_cost_only" if n_snippets > 100 else "single_window",
     }
 
 
@@ -204,6 +260,10 @@ def main() -> int:
     parser.add_argument("--all-cores", action="store_true",
                         help="skip the pinning (host baseline)")
     parser.add_argument("--out", default=None, help="output JSON (default: data/logs/...)")
+    parser.add_argument("--head", type=Path, default=HEAD_ONNX,
+                        help="ONNX head trained on MiniRGB + log-mel features")
+    parser.add_argument("--config", type=Path, default=HEAD_CONFIG,
+                        help="config.json belonging to --head's checkpoint")
     args = parser.parse_args()
 
     if args.all_cores:
@@ -216,25 +276,33 @@ def main() -> int:
 
     import onnxruntime as ort
 
+    if not args.head.exists() or not EXTRACTOR_ONNX.exists():
+        raise SystemExit(
+            "[bench] selected ONNX artefact is missing; export the live checkpoint first")
     options = ort.SessionOptions()
     options.intra_op_num_threads = 1
     extractor = ort.InferenceSession(str(EXTRACTOR_ONNX), sess_options=options,
                                      providers=["CPUExecutionProvider"])
-    head = ort.InferenceSession(str(HEAD_ONNX), sess_options=options,
+    cfg = _read_config(args.config)
+    head = ort.InferenceSession(str(args.head), sess_options=options,
                                 providers=["CPUExecutionProvider"])
     head_inputs = [item.name for item in head.get_inputs()]
 
-    # warm-up: first calls price thread-pool start-up, not the model (the head chunk is fixed at 100)
+    # Warm-up prices thread-pool start-up separately from the model (head chunk is fixed at 100).
     dummy_frames = np.zeros((4, 3, 112, 112), dtype=np.float32)
     extractor.run(None, {"frames": dummy_frames})
-    head.run(None, {"visual": np.zeros((1, 100, 1024), dtype=np.float32),
-                    "audio": np.zeros((1, 100, 128), dtype=np.float32),
-                    "mask": np.ones((1, 100), dtype=bool)})
+    warm_feeds = {"visual": np.zeros((1, 100, 1024), dtype=np.float32),
+                  "audio": np.zeros((1, 100, int(cfg.get("audio_dim", 132))), dtype=np.float32),
+                  "mask": np.ones((1, 100), dtype=bool)}
+    if "reliability" in head_inputs:
+        warm_feeds["reliability"] = np.zeros(
+            (1, 100, int(cfg.get("n_reliability", 0))), dtype=np.float32)
+    head.run(None, warm_feeds)
 
     clips = pick_clips(args.clips)
     print(f"[bench] {len(clips)} clips, cores={active_cores()} "
           f"({'pinned' if pin != 'all' else 'all cores'})")
-    rows = [measure_clip(path, extractor, head, head_inputs) for path in clips]
+    rows = [measure_clip(path, extractor, head, head_inputs, cfg) for path in clips]
     for row in rows:
         print(f"  {row['video'][:48]:48s} {row['duration_s']:6.1f}s video "
               f"-> {row['total_s']:7.3f}s total  (x{row['realtime_factor']})")
@@ -247,6 +315,10 @@ def main() -> int:
     mean_duration = float(np.mean([row["duration_s"] for row in rows]))
     report = {
         "device": "host CPU, pinned if requested - NOT a Pi/Jetson measurement",
+        "head": str(args.head),
+        "config": str(args.config),
+        "feature_contract": "MiniRGB 1024-d visual + live log-mel 132-d audio",
+        "long_video_scoring": "UNVALIDATED: 100-snippet padded windows are timed only",
         "cores": active_cores(),
         "pin": pin,
         "clips": rows,
@@ -254,8 +326,9 @@ def main() -> int:
         "total": _percentiles(totals),
         "realtime_factor_mean": round(float(np.mean([row["realtime_factor"] for row in rows])), 1),
         "board_estimate": {
-            "note": (f"single-core x{BOARD_FREQUENCY_RATIO} (1.5 GHz Cortex-A72/A57 vs host core) "
-                     f"- pessimistic bound: 4 cores running the stages in parallel would be faster"),
+            "note": (f"single-core x{BOARD_FREQUENCY_RATIO} "
+                     "(1.5 GHz Cortex-A72/A57 vs host core) - pessimistic bound: "
+                     "4 cores running the stages in parallel would be faster"),
             "est_total_s_mean": round(mean_total / BOARD_FREQUENCY_RATIO, 2),
             "est_realtime_factor": round(mean_duration / (mean_total / BOARD_FREQUENCY_RATIO), 1),
         },

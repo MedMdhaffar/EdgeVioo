@@ -190,8 +190,9 @@ Trois verdicts, tous négatifs ou neutres :
 Cause racine : la mise à l'échelle par température minimise la NLL, **pas** l'ECE — d'où une ECE
 qui peut empirer *même sur la val* (`cross` : macro 0.0755 → 0.0774). Viser l'ECE demanderait une
 méthode dont c'est l'objectif (régression isotone / histogram binning), hors périmètre ici.
-Conclusion utilisable : **laisser la tête catégorielle non calibrée** et afficher la catégorie
-comme un *rang*, pas comme une probabilité — ce que fait la carte d'alerte.
+Conclusion de cette expérience catégorielle : **ne pas calibrer ces six sorties**. Elles restent des
+diagnostics internes de recherche. L'interface opérateur présente maintenant une seule décision
+binaire violence / absence de violence, basée sur la tête clip binaire, sans annoncer de type.
 
 ### 5.3 int8 : refusé trois fois (reproduit)
 Décalage de logits 0.13 > tolérance 0.05 **et** ralentissement ×0.41 sur ce graphe

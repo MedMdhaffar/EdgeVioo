@@ -10,80 +10,82 @@
   },
   "config": {
     "threshold": 0.5,
-    "min_seconds": 5.333,
+    "min_seconds": 1.5,
     "max_gap_seconds": 2.667,
     "language": "fr"
   },
-  "category": {
-    "available": true,
-    "label": "shooting",
-    "probability": 0.117,
-    "ranked": [
-      {
-        "category": "shooting",
-        "probability": 0.117
-      },
-      {
-        "category": "car_accident",
-        "probability": 0.0481
-      },
-      {
-        "category": "fighting",
-        "probability": 0.0391
-      }
-    ],
-    "all": {
-      "shooting": 0.117,
-      "car_accident": 0.0481,
-      "fighting": 0.0391,
-      "explosion": 0.0278,
-      "riot": 0.0067,
-      "abuse": 0.0043
-    },
-    "note": "raw sigmoid outputs of the multi-label head (uncalibrated), trained on weak clip labels; 'abuse' has only 8 test clips so its probability is the least reliable"
+  "classification": {
+    "task": "binary_violence_detection",
+    "label": "violence",
+    "display_label": "Violence detectee",
+    "is_violence": true,
+    "score": 0.963,
+    "threshold": 0.5,
+    "calibrated": false,
+    "score_type": "binary_clip_head",
+    "definition": "positive if any of fighting, shooting, riot, abuse, car_accident, explosion"
   },
-  "segments": [],
+  "segments": [
+    {
+      "start_s": 0.67,
+      "end_s": 18.0,
+      "duration_s": 17.33,
+      "n_snippets": 26,
+      "mean_probability": 0.7705,
+      "peak_probability": 0.9372,
+      "n_snippets_above_threshold": 26
+    },
+    {
+      "start_s": 20.67,
+      "end_s": 38.67,
+      "duration_s": 18.0,
+      "n_snippets": 27,
+      "mean_probability": 0.7794,
+      "peak_probability": 0.9464,
+      "n_snippets_above_threshold": 27
+    }
+  ],
   "visual_evidence": {
     "criterion": "ranked by snippet score, ties broken by temporal attention",
     "top_snippets": [
       {
-        "snippet": 37,
-        "second": 24.67,
-        "probability": 0.5607,
-        "attention": 0.13435
+        "snippet": 51,
+        "second": 34.0,
+        "probability": 0.9464,
+        "attention": 0.02145
+      },
+      {
+        "snippet": 5,
+        "second": 3.33,
+        "probability": 0.9372,
+        "attention": 0.02357
       },
       {
         "snippet": 6,
         "second": 4.0,
-        "probability": 0.4948,
-        "attention": 0.04473
+        "probability": 0.9355,
+        "attention": 0.03162
+      },
+      {
+        "snippet": 39,
+        "second": 26.0,
+        "probability": 0.931,
+        "attention": 0.04976
       },
       {
         "snippet": 9,
         "second": 6.0,
-        "probability": 0.431,
-        "attention": 0.05092
-      },
-      {
-        "snippet": 35,
-        "second": 23.33,
-        "probability": 0.3111,
-        "attention": 0.12362
-      },
-      {
-        "snippet": 10,
-        "second": 6.67,
-        "probability": 0.2971,
-        "attention": 0.04398
+        "probability": 0.9305,
+        "attention": 0.04803
       }
     ],
     "peak_attention": {
-      "snippet": 37,
-      "second": 24.67,
-      "attention": 0.13435
+      "snippet": 42,
+      "second": 28.0,
+      "attention": 0.08286
     },
-    "attention_entropy": 3.2632,
-    "attention_entropy_normalised": 0.8037
+    "attention_entropy": 3.7648,
+    "attention_entropy_normalised": 0.9272
   },
   "audio_evidence": {
     "channels": [
@@ -94,30 +96,94 @@
       "clip_ratio"
     ],
     "available": true,
-    "segment_vs_background_db": 1.84,
-    "rms_db": {
-      "segment_mean": 0.5,
-      "clip_median": -1.34,
-      "segment_peak": 0.5
+    "acoustic_events": {
+      "available": true,
+      "tagger": "YAMNet (AudioSet-YouTube, 521 classes, frozen)",
+      "corroboration_only": true,
+      "incident_energy": {
+        "mean": 0.0174,
+        "peak": 0.1064,
+        "peak_second": 32.0,
+        "classes": [
+          "Baby cry, infant cry",
+          "Car alarm",
+          "Cheering",
+          "Crowd",
+          "Crying, sobbing",
+          "Engine",
+          "Engine knocking",
+          "Explosion",
+          "Gunshot, gunfire",
+          "Machine gun",
+          "Screaming",
+          "Shatter",
+          "Shout",
+          "Skidding",
+          "Smash, crash",
+          "Vehicle horn, car horn, honking"
+        ]
+      },
+      "segments": [
+        {
+          "start_s": 0.67,
+          "end_s": 18.0,
+          "events": [],
+          "incident_energy": 0.0007
+        },
+        {
+          "start_s": 20.67,
+          "end_s": 38.67,
+          "events": [
+            {
+              "label": "Explosion",
+              "probability": 0.8552,
+              "at_second": 27.33
+            },
+            {
+              "label": "Gunshot, gunfire",
+              "probability": 0.7187,
+              "at_second": 32.0
+            },
+            {
+              "label": "Skidding",
+              "probability": 0.5882,
+              "at_second": 23.33
+            }
+          ],
+          "incident_energy": 0.0363
+        }
+      ]
     },
-    "spectral_flatness": -0.2117,
-    "clipping_ratio_max": -0.05367,
+    "signature_events": [
+      "impact_transient",
+      "screech_harmonic"
+    ],
+    "segment_vs_background_db": 0.34,
+    "rms_db": {
+      "segment_mean": 0.51,
+      "clip_median": 0.17,
+      "segment_peak": 2.01
+    },
+    "spectral_flatness": -0.343,
+    "clipping_ratio_max": -0.10435,
     "descriptions": [
-      "spectre tonal (sirene, moteur, voix tenue) / tonal spectrum"
+      "evenements sonores nommes (YAMNet) dans le segment 20.7-38.7s: Explosion (0.86 @ 27.3s), Gunshot, gunfire (0.72 @ 32.0s), Skidding (0.59 @ 23.3s); signature d'incident sur 4 % du segment / named sound events (YAMNet) in the 20.7-38.7s segment: Explosion (0.86 @ 27.3s), Gunshot, gunfire (0.72 @ 32.0s), Skidding (0.59 @ 23.3s); incident signature on 4 % of it",
+      "choc/impact acoustique soudain (collision) / sudden acoustic impact shock",
+      "crissement aigu ou alarme/sirene (freinage) / tire screech or siren"
     ]
   },
   "modality_contribution": {
     "available": true,
     "drop_one": {
       "audio": {
-        "mean_probability_intact": 0.0848,
-        "mean_probability_without": 0.1475,
-        "delta": -0.0627
+        "mean_probability_intact": 0.7374,
+        "mean_probability_without": 0.8728,
+        "delta": -0.1354
       },
       "visual": {
-        "mean_probability_intact": 0.0848,
-        "mean_probability_without": 0.0238,
-        "delta": 0.061
+        "mean_probability_intact": 0.7374,
+        "mean_probability_without": 0.2623,
+        "delta": 0.4751
       }
     },
     "type": "score without each modality",
@@ -127,50 +193,53 @@
     }
   },
   "confidence": {
-    "raw_clip_probability": 0.4189,
-    "raw_alert_probability": 0.4189,
+    "raw_clip_probability": 0.9361,
+    "raw_alert_probability": 0.7794,
     "top_k": 5,
     "calibrated": false,
-    "clip_probability": 0.4189,
-    "alert_probability": 0.4189,
+    "clip_probability": 0.9361,
+    "alert_probability": 0.7794,
     "note": "no calibration.json for this run: the numbers are raw sigmoid outputs and must not be read as probabilities - run scripts/fit_calibration.py"
   },
   "media": {
     "key_frames": [
       {
-        "second": 25.0,
-        "path": "sheets/frames/Ferrari (2023) Mille Miglia Crash Scene (Alfonso de Portago 1957)_00_0025.00s.jpg"
+        "second": 34.33,
+        "path": "sheets/frames/Ferrari (2023) Mille Miglia Crash Scene (Alfonso de Portago 1957)_00_0034.33s.jpg"
+      },
+      {
+        "second": 3.67,
+        "path": "sheets/frames/Ferrari (2023) Mille Miglia Crash Scene (Alfonso de Portago 1957)_01_0003.67s.jpg"
       },
       {
         "second": 4.33,
-        "path": "sheets/frames/Ferrari (2023) Mille Miglia Crash Scene (Alfonso de Portago 1957)_01_0004.33s.jpg"
+        "path": "sheets/frames/Ferrari (2023) Mille Miglia Crash Scene (Alfonso de Portago 1957)_02_0004.33s.jpg"
+      },
+      {
+        "second": 26.33,
+        "path": "sheets/frames/Ferrari (2023) Mille Miglia Crash Scene (Alfonso de Portago 1957)_03_0026.33s.jpg"
       },
       {
         "second": 6.33,
-        "path": "sheets/frames/Ferrari (2023) Mille Miglia Crash Scene (Alfonso de Portago 1957)_02_0006.33s.jpg"
-      },
-      {
-        "second": 23.67,
-        "path": "sheets/frames/Ferrari (2023) Mille Miglia Crash Scene (Alfonso de Portago 1957)_03_0023.67s.jpg"
-      },
-      {
-        "second": 7.0,
-        "path": "sheets/frames/Ferrari (2023) Mille Miglia Crash Scene (Alfonso de Portago 1957)_04_0007.00s.jpg"
+        "path": "sheets/frames/Ferrari (2023) Mille Miglia Crash Scene (Alfonso de Portago 1957)_04_0006.33s.jpg"
       }
-    ]
+    ],
+    "spectrogram": "sheets/Ferrari (2023) Mille Miglia Crash Scene (Alfonso de Portago 1957)_spectrogram.png"
   },
   "requires_human_verification": true,
   "caveats": [
     "weak supervision: clip-level labels during training, frame-level only for evaluation",
     "temporal resolution is the snippet grid (0.67 s here)",
-    "category probabilities come from an uncalibrated multi-label head",
-    "audio channels are signal statistics, not an acoustic-event classifier"
+    "binary result means any of the six XD-Violence incident labels versus normal",
+    "named sound events come from a frozen out-of-domain tagger (YAMNet, AudioSet-YouTube): corroboration, not the reason for the alert"
   ],
   "provenance": {
-    "checkpoint": "runs/2026-10-01_p3edge_i3dmel/ckpt_best.pt",
+    "checkpoint": "runs/2026-10-31_binary_minirgb_joint_cctv_dashcam_caracc_k4_mstd_s43/ckpt_best.pt",
     "clip_id": "Ferrari (2023) Mille Miglia Crash Scene (Alfonso de Portago 1957)",
     "stride_frames": 16.0,
-    "fusion_mode": "cross"
+    "fusion_mode": "cross",
+    "inference_mode": "full_clip",
+    "feature_extraction_before_scoring": true
   },
-  "text": "Aucun segment au-dessus du seuil 0.5 : clip considere comme normal. Categorie probable : shooting (12%). Indices visuels : snippet le plus anormal a 00:25 (p=0.56). Indices audio : spectre tonal (sirene, moteur, voix tenue) / tonal spectrum. Contribution des modalites : score without each modality - visuel 1.00 vs audio 0.00. Confiance globale : 42% (non calibree - lire comme un score, pas une probabilite). Verification humaine recommandee avant toute action. Modele faiblement supervise : il localise une zone suspecte, il ne confirme pas l'evenement."
+  "text": "Incident detecte entre 00:21 et 00:39. Resultat binaire : Violence detectee (score 0.96, seuil 0.50). Indices visuels : snippet le plus anormal a 00:34 (p=0.95). Indices audio : evenements sonores nommes (YAMNet) dans le segment 20.7-38.7s: Explosion (0.86 @ 27.3s), Gunshot, gunfire (0.72 @ 32.0s), Skidding (0.59 @ 23.3s); signature d'incident sur 4 % du segment / named sound events (YAMNet) in the 20.7-38.7s segment: Explosion (0.86 @ 27.3s), Gunshot, gunfire (0.72 @ 32.0s), Skidding (0.59 @ 23.3s); incident signature on 4 % of it; choc/impact acoustique soudain (collision) / sudden acoustic impact shock; crissement aigu ou alarme/sirene (freinage) / tire screech or siren. Contribution des modalites : score without each modality - visuel 1.00 vs audio 0.00. Confiance globale : 78% (non calibree - lire comme un score, pas une probabilite). Verification humaine recommandee avant toute action. Modele faiblement supervise : il localise une zone suspecte, il ne confirme pas l'evenement."
 }

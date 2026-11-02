@@ -1,0 +1,55 @@
+{
+  "checkpoint": "runs/2026-10-03_p3live_minirgbmel/ckpt_best.pt",
+  "kind": "fusion",
+  "device": "cpu/4 threads",
+  "shapes": {
+    "visual_dim": 1024,
+    "audio_dim": 132,
+    "reliability_dim": 7,
+    "time_steps": 100
+  },
+  "attention_weights_in_graph": false,
+  "pytorch_reference_taken": "before export (the legacy exporter mutates the model in place)",
+  "measurement_conditions": {
+    "loadavg_1m": 1.09,
+    "loadavg_5m": 1.66,
+    "loadavg_15m": 1.39
+  },
+  "fp32": {
+    "file": "2026-10-03_p3live_minirgbmel_fp32.onnx",
+    "size_mb": 4.089,
+    "max_abs_diff_vs_pytorch": 3.337860107421875e-06,
+    "runs": 100,
+    "p50_ms": 1.379,
+    "p95_ms": 1.604,
+    "snippets_per_second": 72523.7
+  },
+  "fusion_mode": "cross",
+  "int8": {
+    "file": "2026-10-03_p3live_minirgbmel_int8_pc.onnx",
+    "per_channel": true,
+    "size_mb": 1.409,
+    "max_abs_diff_vs_pytorch_logits": 0.06623077392578125,
+    "accepted": false,
+    "parity_tolerance": 0.05,
+    "runs": 100,
+    "p50_ms": 3.497,
+    "p95_ms": 9.327,
+    "snippets_per_second": 28596.9
+  },
+  "size_ratio_int8_over_fp32": 0.345,
+  "speedup_int8": 0.394,
+  "fp16": {
+    "file": "2026-10-03_p3live_minirgbmel_fp16.onnx",
+    "size_mb": 2.079,
+    "max_abs_diff_vs_pytorch_logits": 0.0029325485229492188,
+    "accepted": true,
+    "parity_tolerance": 0.05,
+    "runs": 100,
+    "p50_ms": 1.458,
+    "p95_ms": 1.824,
+    "snippets_per_second": 68601.3
+  },
+  "size_ratio_fp16_over_fp32": 0.508,
+  "speedup_fp16": 0.946
+}

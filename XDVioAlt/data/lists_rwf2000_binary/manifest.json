@@ -1,0 +1,17 @@
+{
+  "dataset": "RWF-2000",
+  "task": "binary violence (fight=1, non-fight=0)",
+  "source_root": "data/raw/cctv_datasets/rwf2000/RWF-2000",
+  "splits": {
+    "train": {
+      "clips": 1576,
+      "violent": 776,
+      "normal": 800
+    },
+    "val": {
+      "clips": 400,
+      "violent": 200,
+      "normal": 200
+    }
+  }
+}

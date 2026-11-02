@@ -1,5 +1,13 @@
 # SafeWatch Edge AI — Déploiement & Optimisation Edge (P7)
 
+> **Statut de livraison (2026-10-25) : prototype Edge validé sur hôte, pas encore déployé sur
+> Jetson/Raspberry Pi.** Les mesures ci-dessous sont utiles pour dimensionner la chaîne, mais ne
+> constituent pas une validation sur carte. Le modèle live compatible est
+> `2026-10-03_p3live_minirgbmel` (MiniRGB 1024-d + log-mel 132-d), pas les champions
+> VideoSwin/VGGish/CLIP. Les exports cross-attention actuels sont tracés à 100 snippets : les
+> fenêtres longues peuvent être chronométrées, mais leur agrégation n'est pas encore validée pour
+> la détection. La source de vérité de préparation est `docs/edge_readiness.md`.
+
 ## 1. Contexte & Architecture Edge
 
 Le cahier des charges impose une solution déployable sur une cible matérielle à ressources restreintes (CPU basse consommation, mini-PC, NVIDIA Jetson, Raspberry Pi) capable de traiter les flux en **temps quasi réel** tout en préservant la **confidentialité** (seules les alertes et métadonnées sont transmises).
@@ -89,16 +97,18 @@ Mesures (4 clips 10–95 s, p50 par étape, `data/logs/edge_emulated_bench_0.jso
 
 ### Profil 1 : Mini-PC / Caméra Intelligente x86 (AMD / Intel)
 - **Runtime** : ONNX Runtime CPU (`CPUExecutionProvider`).
-- **Charge CPU** : < 5 % en continu pour 1 flux 1080p temps réel.
+- **Charge CPU** : à mesurer sur le flux et la résolution de déploiement ; aucune mesure CPU
+  soutenue n'est encore disponible.
 - **Taille totale** : 5.7 MB RAM.
 
 ### Profil 2 : NVIDIA Jetson (Nano / Xavier / Orin)
 - **Runtime** : ONNX Runtime avec `TensorRTExecutionProvider` ou `CUDAExecutionProvider`.
-- **Accélération** : Inférence fusion en < 1 ms, décodage matériel NVDEC via GStreamer/OpenCV.
+- **Accélération** : hypothèse à vérifier sur la carte (TensorRT/NVDEC), pas une mesure du projet.
 
 ### Profil 3 : Raspberry Pi 4/5 (ARM Cortex-A76)
 - **Runtime** : ONNX Runtime ARM64.
-- **Performance estimée** : ~5× à 8× temps réel en FP32 grâce au stride de 16 frames (1 frame échantillonnée toutes les 0.67 s).
+- **Performance estimée** : le seul estimateur reproductible est le banc hôte mono-cœur ; il doit
+  être remplacé par une mesure ARM64 avant toute promesse de débit.
 
 ---
 
@@ -279,7 +289,6 @@ Ordre de grandeur à garder en tête : la dispersion de graine de `late` seul es
 **Coût Edge** : les membres partagent les features, donc à l'inférence on extrait **une fois** puis on
 exécute N petites têtes (6,5 ms chacune) ⇒ ≈ 33 ms au lieu de 6,5 ms, négligeable devant le décodage
 vidéo. Aucun nouveau modèle lourd, pas de GPU. `scripts/ensemble_scores.py`.
-
 
 
 

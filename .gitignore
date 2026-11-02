@@ -1,0 +1,26 @@
+# Environments & external caches
+venv_py312/
+.venv/
+.venv*/
+__pycache__/
+*.pyc
+*.pyo
+
+# External cloned repos & tar temp
+repo/
+*.part
+*.tar.gz
+
+# Generated frames & media caches
+XDVioAlt/sheets/frames/*.jpg
+sheets/frames/*.jpg
+
+# Model weights & checkpoint blobs (keep code, lists, and metrics)
+*.onnx
+*.pt
+
+# System & logs
+.pytest_cache/
+.ruff_cache/
+*.log
+:memory:.ses

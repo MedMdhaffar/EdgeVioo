@@ -1,0 +1,190 @@
+{
+  "clip_id": "A.Beautiful.Mind.2001__#00-25-20_00-29-20_label_A",
+  "video": "data/raw/xd-violence/data/video/test_videos/A.Beautiful.Mind.2001__#00-25-20_00-29-20_label_A.mp4",
+  "duration_s": null,
+  "grid": {
+    "stride_frames": 16.0,
+    "fps": 24.0,
+    "stride_s": 0.667,
+    "n_snippets": 360
+  },
+  "config": {
+    "threshold": 0.5,
+    "min_seconds": 5.333,
+    "max_gap_seconds": 2.667,
+    "language": "fr"
+  },
+  "classification": {
+    "task": "binary_violence_detection",
+    "label": "no_violence",
+    "display_label": "Aucune violence detectee",
+    "is_violence": false,
+    "score": 0.1548,
+    "threshold": 0.5,
+    "calibrated": false,
+    "score_type": "binary_clip_head",
+    "definition": "positive if any of fighting, shooting, riot, abuse, car_accident, explosion"
+  },
+  "segments": [],
+  "visual_evidence": {
+    "criterion": "ranked by snippet score, ties broken by temporal attention",
+    "top_snippets": [
+      {
+        "snippet": 85,
+        "second": 56.67,
+        "probability": 0.433,
+        "attention": 0.03452
+      },
+      {
+        "snippet": 84,
+        "second": 56.0,
+        "probability": 0.2841,
+        "attention": 0.01931
+      },
+      {
+        "snippet": 83,
+        "second": 55.33,
+        "probability": 0.1942,
+        "attention": 0.03236
+      },
+      {
+        "snippet": 126,
+        "second": 84.0,
+        "probability": 0.1239,
+        "attention": 0.01341
+      },
+      {
+        "snippet": 82,
+        "second": 54.67,
+        "probability": 0.1188,
+        "attention": 0.00481
+      }
+    ],
+    "peak_attention": {
+      "snippet": 85,
+      "second": 56.67,
+      "attention": 0.03452
+    },
+    "attention_entropy": 5.4412,
+    "attention_entropy_normalised": 0.9244
+  },
+  "audio_evidence": {
+    "channels": [
+      "rms",
+      "rms_db",
+      "flatness",
+      "zcr",
+      "clip_ratio"
+    ],
+    "available": true,
+    "acoustic_events": {
+      "available": true,
+      "tagger": "YAMNet (AudioSet-YouTube, 521 classes, frozen)",
+      "corroboration_only": true,
+      "incident_energy": {
+        "mean": 0.0002,
+        "peak": 0.0019,
+        "peak_second": 114.67,
+        "classes": [
+          "Baby cry, infant cry",
+          "Car alarm",
+          "Cheering",
+          "Crowd",
+          "Crying, sobbing",
+          "Engine",
+          "Engine knocking",
+          "Explosion",
+          "Gunshot, gunfire",
+          "Machine gun",
+          "Screaming",
+          "Shatter",
+          "Shout",
+          "Skidding",
+          "Smash, crash",
+          "Vehicle horn, car horn, honking"
+        ]
+      }
+    },
+    "signature_events": [],
+    "segment_vs_background_db": 2.49,
+    "rms_db": {
+      "segment_mean": 2.01,
+      "clip_median": -0.48,
+      "segment_peak": 2.01
+    },
+    "spectral_flatness": -0.4521,
+    "clipping_ratio_max": -0.10435,
+    "descriptions": [
+      "spectre tonal (sirene, moteur, voix tenue) / tonal spectrum"
+    ]
+  },
+  "modality_contribution": {
+    "available": true,
+    "drop_one": {
+      "audio": {
+        "mean_probability_intact": 0.0298,
+        "mean_probability_without": 0.2327,
+        "delta": -0.2029
+      },
+      "visual": {
+        "mean_probability_intact": 0.0298,
+        "mean_probability_without": 0.0603,
+        "delta": -0.0305
+      }
+    },
+    "type": "score without each modality",
+    "mean_probability": {
+      "visual": 0.5,
+      "audio": 0.5
+    }
+  },
+  "confidence": {
+    "raw_clip_probability": 0.2308,
+    "raw_alert_probability": 0.2308,
+    "top_k": 5,
+    "calibrated": false,
+    "clip_probability": 0.2308,
+    "alert_probability": 0.2308,
+    "note": "no calibration.json for this run: the numbers are raw sigmoid outputs and must not be read as probabilities - run scripts/fit_calibration.py"
+  },
+  "media": {
+    "key_frames": [
+      {
+        "second": 57.0,
+        "path": "sheets/frames/A.Beautiful.Mind.2001__#00-25-20_00-29-20_label_A_00_0057.00s.jpg"
+      },
+      {
+        "second": 56.33,
+        "path": "sheets/frames/A.Beautiful.Mind.2001__#00-25-20_00-29-20_label_A_01_0056.33s.jpg"
+      },
+      {
+        "second": 55.67,
+        "path": "sheets/frames/A.Beautiful.Mind.2001__#00-25-20_00-29-20_label_A_02_0055.67s.jpg"
+      },
+      {
+        "second": 84.33,
+        "path": "sheets/frames/A.Beautiful.Mind.2001__#00-25-20_00-29-20_label_A_03_0084.33s.jpg"
+      },
+      {
+        "second": 55.0,
+        "path": "sheets/frames/A.Beautiful.Mind.2001__#00-25-20_00-29-20_label_A_04_0055.00s.jpg"
+      }
+    ]
+  },
+  "requires_human_verification": true,
+  "caveats": [
+    "weak supervision: clip-level labels during training, frame-level only for evaluation",
+    "temporal resolution is the snippet grid (0.67 s here)",
+    "binary result means any of the six XD-Violence incident labels versus normal",
+    "named sound events come from a frozen out-of-domain tagger (YAMNet, AudioSet-YouTube): corroboration, not the reason for the alert"
+  ],
+  "provenance": {
+    "checkpoint": "runs/2026-10-30_binary_minirgb_joint_cctv_k4_mstd_s43/ckpt_best.pt",
+    "clip_id": "A.Beautiful.Mind.2001__#00-25-20_00-29-20_label_A",
+    "stride_frames": 16.0,
+    "fusion_mode": "cross",
+    "inference_mode": "full_clip",
+    "feature_extraction_before_scoring": true
+  },
+  "text": "Aucun segment temporel ne respecte le seuil et la duree minimale. Resultat binaire : Aucune violence detectee (score 0.15, seuil 0.50). Indices visuels : snippet le plus anormal a 00:57 (p=0.43). Indices audio : spectre tonal (sirene, moteur, voix tenue) / tonal spectrum. Contribution des modalites : score without each modality - visuel 0.50 vs audio 0.50. Confiance globale : 23% (non calibree - lire comme un score, pas une probabilite). Verification humaine recommandee avant toute action. Modele faiblement supervise : il localise une zone suspecte, il ne confirme pas l'evenement."
+}

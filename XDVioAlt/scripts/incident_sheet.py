@@ -3,7 +3,7 @@
 
 This is the bridge between the research pipeline and the operator console (P6). It writes, per clip:
 
-    <out>/<clip_id>_incident.json   the alert card (category, segments, evidence, contributions,
+    <out>/<clip_id>_incident.json   the alert card (binary result, segments, evidence, contributions,
                                     confidence, caveats, concise text) - exactly what the UI renders
     <out>/<clip_id>_spectrogram.png log-mel spectrogram of the strongest segment (--media)
     <out>/frames/<clip_id>_*.jpg    the frames of the top-attention snippets (--media)
@@ -34,7 +34,7 @@ import torch
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from safewatch.data import reliability as R  # noqa: E402
-from safewatch.data.dataset import CATEGORIES, load_rows  # noqa: E402
+from safewatch.data.dataset import load_rows  # noqa: E402
 from safewatch.data.multimodal import MultimodalClipDataset  # noqa: E402
 from safewatch.edge import aed  # noqa: E402
 from safewatch.eval import calibration as C  # noqa: E402
@@ -88,11 +88,6 @@ def build_context(model, cfg, kind, item, row, clip_id, stride, test_csv, qualit
     snippet_probability = torch.sigmoid(out["snippet_logits"])[0].numpy()
     attention = out.get("attn")
     alpha = out.get("alpha")
-    category_probability = {
-        name: float(torch.sigmoid(out["multi_logits"])[0][index])
-        for index, name in enumerate(CATEGORIES)
-    } if "multi_logits" in out else {}
-
     quality = None
     if quality_dir is not None:
         path = Path(quality_dir) / f"{clip_id}.npy"
@@ -115,6 +110,7 @@ def build_context(model, cfg, kind, item, row, clip_id, stride, test_csv, qualit
     return report_mod.ClipContext(
         clip_id=clip_id, stride_frames=float(stride), fps=float(cfg.get("fps", 24.0)),
         n_snippets=n_snippets, snippet_probability=snippet_probability,
+        clip_probability=float(torch.sigmoid(out["clip_logits"])[0]),
         attention=attention.numpy()[0] if attention is not None else None,
         alpha=alpha.numpy()[0] if alpha is not None else None,
         # the per-modality heads of the late-fusion branch emit *logits*: sigmoid them here, or the
@@ -123,7 +119,7 @@ def build_context(model, cfg, kind, item, row, clip_id, stride, test_csv, qualit
                         if out.get("snippet_visual") is not None else None),
         snippet_audio=(torch.sigmoid(out["snippet_audio"])[0].numpy()
                        if out.get("snippet_audio") is not None else None),
-        category_probability=category_probability, reliability=reliability,
+        reliability=reliability,
         video_path=str(media_mod.find_video(clip_id) or ""), meta=meta, aed_tags=aed_tags)
 
 

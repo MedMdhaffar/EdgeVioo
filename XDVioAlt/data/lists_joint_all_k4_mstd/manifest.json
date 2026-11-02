@@ -1,0 +1,24 @@
+{
+  "dataset": "Joint XD-Violence + RWF-2000 + SCFD + SmartDashcam + AccidentVideos (k4_mstd 2048-d)",
+  "splits": {
+    "train": {
+      "total": 4684,
+      "xd": 2688,
+      "rwf": 1576,
+      "scfd": 238,
+      "dashcam": 110,
+      "caracc": 72
+    },
+    "val": {
+      "total": 1174,
+      "xd": 668,
+      "rwf": 400,
+      "scfd": 62,
+      "dashcam": 26,
+      "caracc": 18
+    },
+    "test": {
+      "total": 799
+    }
+  }
+}

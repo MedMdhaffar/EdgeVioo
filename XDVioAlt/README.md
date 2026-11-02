@@ -1,7 +1,18 @@
 # SafeWatch Edge AI — détection multimodale, robuste et explicable d'incidents dans les flux audio-vidéo
 
-Weakly-supervised **audio-visual** incident detection on surveillance-style streams: detect, categorise,
-temporally localise, explain, and run on an Edge budget. Benchmark dataset: **XD-Violence** (ECCV 2020).
+Weakly-supervised **audio-visual** violence detection on surveillance-style streams: return one binary
+result (any of the six XD-Violence incident labels vs normal), localise suspect time ranges, explain
+the evidence, and run on an Edge budget. Benchmark dataset: **XD-Violence** (ECCV 2020).
+
+The operator interface reports only **Violence detected / No violence detected**. A positive result
+means the model detected violence; it never names or ranks an incident type for the operator.
+
+The recommended live binary checkpoint is `2026-10-26_binary_minirgb_fullval_s43`. Its operating
+threshold is **0.2558**, selected to meet a 94% recall target on full-length source-held-out
+validation clips and frozen before source-disjoint testing. On the clean test set it achieved AP
+**0.929**, ROC-AUC **0.881**, recall **97.1%** (6 missed violence clips), precision **75.5%**, and
+F1 **0.849**. This prioritises recall; use 0.5 only when false alerts are materially more costly
+than missed violence.
 
 ## Status
 
@@ -13,7 +24,7 @@ temporally localise, explain, and run on an Edge budget. Benchmark dataset: **XD
 | P1 | Feature grids verified: mirror 64 frames, **official 16 frames** · dataset, losses, models, train/score CLIs | ✅ done |
 | P1 | Visual-only MIL baseline, mirror features (800 test clips) | ✅ AP global **0.813** / per-clip 0.764 |
 | P1 | Visual-only MIL baseline, **official I3D features** (16-frame grid) | ✅ AP global **0.722** / per-clip 0.706 — weaker than the mirror's VideoSwin features, and under-tuned for the finer grid (`docs/journal.md`, Session 8) |
-| P4 | Per-category localisation (`scripts/per_class_localization.py`) | ✅ incidents are located per category, at a **wall-clock** segment rule. Category-adaptive thresholds and durations (`car_accident` 1.5s, `riot` 4s with lookback) integrated into metrics & UI. |
+| P4 | Binary temporal localisation | ✅ one score curve and one seconds-based threshold/duration rule for every alert. |
 | P1 | Source-disjoint audit | ✅ AP is **not** inflated by source overlap: unseen-source clips score **better** on every run (mirror late 0.864 vs 0.745 swin; official 0.787 vs 0.672; **30ep official-grid fusion `cross` 0.8452 vs 0.7435 global, 0.8258 vs 0.7817 per-clip** — 66.6 % of test clips share a source with train) — `test_metrics_source_disjoint.json` per run |
 | P2 | Audio features + audio-only baseline | ✅ mel 132-d **4 750 / 4 750** clips (the last missing test mp4, `Before.Sunset.2004__#01-14-30_01-16-51_label_A`, was recovered via direct LFS download — the Hub metadata size is stale — and mel extracted; `audio_stats.json` now full-train 3 516 clips / 231 509 snippets). VGGish 128-d: **official release bridged 4 754 / 4 754** (`vggish_snippet/` symlinks, 0 off-grid) + `vggish_stats.json` (official train 3 804 clips). **Official-grid baselines (correct snippet alignment): audio-only VGGish 0.619 global / 0.691 per-clip, visual-only I3D 0.671 / 0.703** |
 | P5 | Weak-class diagnostic (`scripts/class_diagnostic.py`) | ✅ **`abuse` is starved, not broken**: only **50 / 3 804** train clips (1.3 %; every other class has 367–463). Calibrated per-class operating threshold ($\theta_\text{abuse} = 0.10$) and percentile ranking integrated into reporting. |
@@ -31,7 +42,7 @@ temporally localise, explain, and run on an Edge budget. Benchmark dataset: **XD
 | P5 | Explanations, calibration, incident sheets | ✅ sheets done; calibration is a **measured dead end on the category head**: the single global temperature *hurts* it (`cross` macro ECE test **0.0738 → 0.1100**, `late` **0.0426 → 0.0676** — it was fitted on the clip-level anomaly score), and **per-class** temperatures (`--per-class`, 6 heads) do not rescue it: `cross` **0.0810** (worse than nothing, 4 heads of 5 aggravated), `late` **0.0425** (a 1e-4 tie). `abuse` is **uncalibratable**: the official val split has **0/150** `abuse` clips ⇒ no positive ⇒ T=1, flagged `unfitted` rather than hidden. Root cause stated: temperature scaling minimises NLL, **not** ECE, so ECE can worsen even on the fitting split (`cross` val macro 0.0755 → 0.0774). Practical rule adopted: leave the category head uncalibrated and show the category as a *rank* (`data/logs/perclass_calib_table.txt`) |
 | P5 | **Acoustic event recognition** (frozen AED, fills the subject's "reconnaissance d'événements acoustiques") | ✅ **YAMNet** (AudioSet-YouTube, 521 classes, 4.2 M params) as a frozen ONNX tagger on the existing audio: named events with measured probability + time on every alert — explosion clips read `Explosion (0.73 @ 00:12), Engine (0.23), Smash, crash (0.23)` and the named events land **inside the annotated GT intervals**; normal clips get **no named event** (the card says so out loud). Runs on the CPU at ~8 ms per 0.96 s frame (~1 s/clip total incl. ffmpeg) — real-time for the edge track. The tagger was **never trained on XD-Violence**, so the card presents it as *corroboration* (caveat + `corroboration_only` flag); a curated 16-class "incident signature" set gives the snippet-level indicator, audited against the GT snippets: **AP 0.6787 global / 0.6550 per-clip** on 500 annotated test clips (`data/features/aed/aed_stats.json`) - a correct corroboration signal, not an incident detector. Code: `safewatch/edge/aed.py`, `scripts/extract_aed_tags.py`, `scripts/check_vggish_space.py` (feature-space audit); 16 new tests |
 | P6 | Supervision UI (Streamlit Console & Live Demo) | ✅ done · Interactive review console + live video upload, on-the-fly extraction & inference, and append-only audit trail (`app.py`). Run Review's causal EMA is display-only; Live Demo can optionally score growing prefixes (stride 8) so each prediction uses only past/current snippets. The upload is still decoded and features are extracted before scoring, so this is an offline causal simulation rather than a live frame-by-frame pipeline. **Live uploads only work with a checkpoint trained on live-reproducible features** (I3D visual + log-mel audio, `runs/2026-10-01_p3edge_i3dmel`): the on-the-fly extractor (`MiniRGB`, distilled from I3D) and log-mel patch stats reproduce *that* space only, so a VideoSwin/VGGish champion receives out-of-distribution inputs and scores ~0 on obvious incidents — the console now detects and warns about this (`state.live_feature_support`), and benchmark clips are scored from their real precomputed features (parity with `predictions.npz`) |
-| P7 | Edge AI (ONNX fp32, latency/memory budget, Jetson/RPi export) | ✅ done · Complete pipeline benchmarked (**18× to 34× faster than real time**, total model footprint 5.67 MB, 6.5 ms fusion latency), deployment guide in `docs/edge_ai.md` |
+| P7 | Edge AI (ONNX fp32, latency/memory budget, Jetson/RPi export) | 🟡 host prototype · MiniRGB + live-compatible ONNX head are exported and benchmarked; target-device deployment remains blocked on bounded-memory streaming/window validation and ARM64/JetPack measurements. See `docs/edge_readiness.md` and `docs/jetson_nano_2gb_audit.md`. |
 | P8 | Robustness report | ✅ done · Consolidated synthesis and degradation tables in `docs/robustness_report.md` |
 
 ## Quality gates

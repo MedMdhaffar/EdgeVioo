@@ -1,0 +1,27 @@
+{
+  "annotation_source": "Official UCA UCF-Crime annotation repository",
+  "video_root": "data/raw/ucf_crime/Videos",
+  "output": "data/annotations/uca_intervals_review.csv",
+  "counts": {
+    "annotated_videos": 1854,
+    "matched_intervals": 708,
+    "no_keyword_candidate": 584,
+    "candidate_intervals": 124,
+    "no_local_video": 1806
+  },
+  "candidate_labels": [
+    "fighting",
+    "shooting",
+    "riot",
+    "abuse",
+    "car_accident",
+    "explosion"
+  ],
+  "label_policy": "Keyword matches are review candidates only. Blank review_label means excluded from supervised training. Set review_label to one of the six labels or 'ignore'. Unannotated time is unknown, never an automatic negative.",
+  "split_policy": "UCA train/val/test split is retained; use only train records for model fitting. Do not use UCA val/test as training. Preserve video-level split boundaries.",
+  "limitations": [
+    "UCA captions describe events and do not directly encode this project's six-label ontology.",
+    "This output does not manufacture negative intervals or claim all local Abuse-category videos are project-defined abuse.",
+    "The original UCF-Crime videos are separate from the UCA annotation repository; only locally available videos are matched."
+  ]
+}

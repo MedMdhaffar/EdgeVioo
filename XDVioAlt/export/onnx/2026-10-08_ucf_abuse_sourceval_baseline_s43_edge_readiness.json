@@ -1,0 +1,63 @@
+{
+  "checkpoint": "runs/2026-10-08_ucf_abuse_sourceval_baseline_s43/ckpt_best.pt",
+  "validation_csv": "data/lists_abuse_clip_sourceholdout_20261008_baseline/val.csv",
+  "threshold": 0.5,
+  "threshold_tuned_on_test": false,
+  "n_validation_clips": 672,
+  "input_window_snippets": 100,
+  "pt_reference": {
+    "accuracy_at_0_5": 0.9538690476190477,
+    "average_precision": 0.9880333996641629,
+    "roc_auc": 0.9913087570721987
+  },
+  "onnx_clip_head_parity_on_actual_validation_features": {
+    "fp32": {
+      "max_abs_probability_diff_vs_pytorch": 5.066394805908203e-07,
+      "mean_abs_probability_diff_vs_pytorch": 8.830429213243666e-09,
+      "threshold_decision_flips_vs_pytorch": 0,
+      "clips": 672,
+      "accuracy_at_fixed_0_5": 0.9538690476190477,
+      "average_precision": 0.9880333996641629,
+      "roc_auc": 0.9913087570721987,
+      "confusion_matrix": {
+        "tn": 343,
+        "fp": 15,
+        "fn": 16,
+        "tp": 298
+      }
+    },
+    "fp16": {
+      "max_abs_probability_diff_vs_pytorch": 0.0014919042587280273,
+      "mean_abs_probability_diff_vs_pytorch": 2.1961653407419678e-05,
+      "threshold_decision_flips_vs_pytorch": 0,
+      "clips": 672,
+      "accuracy_at_fixed_0_5": 0.9538690476190477,
+      "average_precision": 0.9880377394769195,
+      "roc_auc": 0.9913132049959079,
+      "confusion_matrix": {
+        "tn": 343,
+        "fp": 15,
+        "fn": 16,
+        "tp": 298
+      }
+    },
+    "int8": {
+      "max_abs_probability_diff_vs_pytorch": 0.10779568552970886,
+      "mean_abs_probability_diff_vs_pytorch": 0.0008126320737802184,
+      "threshold_decision_flips_vs_pytorch": 0,
+      "clips": 672,
+      "accuracy_at_fixed_0_5": 0.9538690476190477,
+      "average_precision": 0.9880393964945904,
+      "roc_auc": 0.9913221008433263,
+      "confusion_matrix": {
+        "tn": 343,
+        "fp": 15,
+        "fn": 16,
+        "tp": 298
+      }
+    }
+  },
+  "process_peak_rss_mb": 507.5859375,
+  "onnx_runtime": "CPUExecutionProvider, intra_op=4, inter_op=1",
+  "important_limit": "The graph supports fixed 100-snippet attention windows only despite dynamic-axis declarations; longer streams need windowed aggregation, which is not verified here. Also no compatible raw-video extractor is established for this checkpoint."
+}

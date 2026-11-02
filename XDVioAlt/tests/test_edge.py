@@ -16,7 +16,7 @@ import numpy as np
 import pytest
 import torch
 
-from safewatch.edge.extractor import FEATURE_DIM, MiniRGB, frame_grid
+from safewatch.edge.extractor import FEATURE_DIM, MiniRGB, frame_grid, multi_frame_grid
 
 cv2 = pytest.importorskip("cv2")
 
@@ -53,6 +53,18 @@ def test_frame_grid_handles_clips_shorter_than_the_snippet_count():
     idx = frame_grid(frame_count=5, n_snippets=40)
     assert idx.shape == (40,)
     assert idx.min() >= 0 and idx.max() <= 4
+
+
+def test_multi_frame_grid_stays_inside_each_official_window():
+    """Offline multi-frame pooling must enrich a snippet, not leak frames from the next one."""
+    grid = multi_frame_grid(frame_count=5760, n_snippets=360, frames_per_snippet=4)
+    assert grid.shape == (360, 4)
+    assert np.array_equal(grid[:, 0], frame_grid(5760, 360))
+    assert np.all(np.diff(grid, axis=1) >= 0)
+    assert np.all(grid[:, -1] - grid[:, 0] <= 15)
+    assert grid.max() < 5760
+    with pytest.raises(ValueError):
+        multi_frame_grid(100, 5, 0)
 
 
 # --------------------------------------------------------------------------- #
@@ -122,6 +134,35 @@ def test_sample_frames_returns_the_frames_that_were_asked_for(tmp_path):
         # MJPG is lossy, so compare within a tolerance rather than exactly
         assert frames[position].mean() == pytest.approx(expected, abs=0.05), (
             f"position {position} should hold frame {index}")
+
+
+def test_sample_frames_supports_foveal_zoom_and_clahe(tmp_path):
+    """Foveal zoom and CLAHE pre-processing produce valid, bounded float32 frames."""
+    from safewatch.edge.video import sample_frames
+
+    video = tmp_path / "gradient.avi"
+    _write_gradient_video(video, n_frames=20)
+    indices = [0, 5, 10]
+    frames_foveal = sample_frames(video, indices, size=32, foveal_zoom=True)
+    assert frames_foveal.shape == (3, 32, 32, 3)
+    assert frames_foveal.min() >= 0.0 and frames_foveal.max() <= 1.0
+
+    frames_clahe = sample_frames(video, indices, size=32, clahe=True)
+    assert frames_clahe.shape == (3, 32, 32, 3)
+    assert frames_clahe.min() >= 0.0 and frames_clahe.max() <= 1.0
+
+
+def test_smooth_temporal_scores():
+    """Asymmetric temporal filter rises rapidly and decays smoothly."""
+    from safewatch.edge.video import smooth_temporal_scores
+
+    scores = np.array([0.1, 0.9, 0.1, 0.1], dtype=np.float32)
+    smoothed = smooth_temporal_scores(scores, alpha_rise=0.85, alpha_decay=0.25)
+    assert smoothed.shape == (4,)
+    # Fast rise: jumps quickly towards 0.9
+    assert smoothed[1] > 0.75
+    # Smooth decay: doesn't immediately drop back to 0.1
+    assert smoothed[2] > 0.50
 
 
 def test_sample_frames_validates_its_arguments(tmp_path):
@@ -285,5 +326,4 @@ def test_extract_minirgb_returns_one_feature_per_snippet(tmp_path):
     features = module.extract_clip(model, video, 6)
     assert features.shape == (6, 1024)
     assert np.isfinite(features).all()
-
 

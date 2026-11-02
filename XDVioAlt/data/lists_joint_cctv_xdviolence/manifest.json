@@ -1,0 +1,27 @@
+{
+  "dataset": "Joint XD-Violence + RWF-2000 + SCFD",
+  "splits": {
+    "train": {
+      "total": 4522,
+      "xd_violence": 2708,
+      "rwf_2000": 1576,
+      "scfd": 238,
+      "violent": 2183,
+      "normal": 2339
+    },
+    "val": {
+      "total": 1134,
+      "xd_violence": 672,
+      "rwf_2000": 400,
+      "scfd": 62,
+      "violent": 550,
+      "normal": 584
+    },
+    "test": {
+      "total": 799,
+      "xd_violence": 799,
+      "violent": 500,
+      "normal": 299
+    }
+  }
+}

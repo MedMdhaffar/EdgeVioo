@@ -1,0 +1,14 @@
+{
+  "dataset": "SCFD",
+  "total_clips": 300,
+  "train": {
+    "clips": 238,
+    "violent": 114,
+    "normal": 124
+  },
+  "val": {
+    "clips": 62,
+    "violent": 36,
+    "normal": 26
+  }
+}

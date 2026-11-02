@@ -48,18 +48,3 @@ def timeline_figure(timeline: dict, title: str | None = None, height: int = 330)
         yaxis={"range": [0, 1.02]}, showlegend=False,
         hovermode="x unified")
     return figure
-
-
-def category_figure(category: dict, height: int = 260) -> go.Figure | None:
-    """Horizontal bars of the ranked category probabilities, or ``None`` when unavailable."""
-    ranked = (category or {}).get("ranked") or []
-    if not ranked:
-        return None
-    labels = [row["category"] for row in reversed(ranked)]
-    values = [row["probability"] for row in reversed(ranked)]
-    figure = go.Figure(go.Bar(x=values, y=labels, orientation="h",
-                              marker={"color": PROBABILITY_COLOUR}))
-    figure.update_layout(height=height, margin={"l": 10, "r": 20, "t": 30, "b": 30},
-                         xaxis={"range": [0, 1], "title": "Probability (uncalibrated head)"},
-                         yaxis_title=None, showlegend=False)
-    return figure

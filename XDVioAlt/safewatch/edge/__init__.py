@@ -16,8 +16,9 @@ from safewatch.edge.extractor import (
     SNIPPET_FRAMES,
     MiniRGB,
     frame_grid,
+    multi_frame_grid,
 )
-from safewatch.edge.video import probe, sample_frames
+from safewatch.edge.video import probe, sample_frames, smooth_temporal_scores
 
 __all__ = [
     "DEFAULT_INPUT",
@@ -28,9 +29,10 @@ __all__ = [
     "decode_audio",
     "detect_acoustic_events",
     "frame_grid",
+    "multi_frame_grid",
     "mel_patch_stats",
     "probe",
     "quality_frames",
     "sample_frames",
+    "smooth_temporal_scores",
 ]
-

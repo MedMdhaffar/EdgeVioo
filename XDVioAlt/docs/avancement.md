@@ -6,8 +6,8 @@
 
 ## 1. Le sujet, en une phrase
 
-Détecter, catégoriser, localiser et **expliquer** des incidents dans un flux audio-vidéo, en
-apprentissage faiblement supervisé (annotations au niveau clip), et tenir sur une plateforme Edge.
+Détecter si l'un des six incidents XD-Violence est présent ou non, localiser et **expliquer** les
+segments suspects dans un flux audio-vidéo, en apprentissage faiblement supervisé, et tenir sur Edge.
 Benchmark : **XD-Violence** (4 754 vidéos, 217 h, 6 catégories).
 
 ## 2. Chaîne technique actuelle (ce qui tourne)
@@ -16,8 +16,8 @@ Benchmark : **XD-Violence** (4 754 vidéos, 217 h, 6 catégories).
 vidéo ──► features visuelles gelées (VideoSwin 768-d / I3D officiel 1024-d, grille 64 ou 16 frames)
       └► audio ──► ffmpeg mono 16 kHz ──► log-mel patch stats (132-d) + qualité du signal (5-d)
                                              │
-      encodeur temporel ──► attention temporelle (MIL top-k) ──► score par snippet + score clip
-                                             │                     + 6 logits de catégorie
+      encodeur temporel ──► attention temporelle (MIL top-k) ──► score par snippet + logit binaire
+                                             │                     + 6 logits auxiliaires (diagnostic)
       fusion : early | late | cross-attention | adaptive (portail α(t) piloté par 7 canaux
                                                        de fiabilité : 5 audio + 2 visuels)
                                              │
@@ -164,8 +164,8 @@ Table complète et à jour : `.venv/bin/python scripts/fusion_table.py`.
 | 1 | **P6 : interface de supervision** | ✅ console Streamlit (`app.py`, `safewatch/ui/`) : état, figures, revue d'incidents, décision opérateur append-only ; 11 tests UI. Reste : la vidéo de démonstration |
 | 2 | **P4 : mode en ligne causal** | ✅ localisation par catégorie + **scoring causal/streaming** (`--causal-prefix-stride`, §4.5 du rapport). **Contrôlé sur 3 seeds** : le coût en AP est robuste (AP −0.072/−0.090, même signe partout) mais l'effet sur la **localisation s'inverse selon la seed** ⇒ non revendicable, et c'est une correction d'une conclusion initiale |
 | 3 | **Rapport final + démonstration vidéo** | 🔄 `docs/report/rapport.md` complet (chiffres audités, §4.5 causal, figures reproductibles) ; reste la relecture + la vidéo |
-| 4 | P5 : calibration par classe | ✅ **fait — résultat négatif/neutre** : la T globale *dégrade* la tête catégorielle (cross 0.0738→0.1100), la calibration par classe ne la sauve pas (cross 0.0810 ; late 0.0425 = égalité), `abuse` incalibrable (0/150 en val). Décision : tête non calibrée, catégorie affichée comme un rang |
-| 5 | P7 : Edge — **extracteur léger** (ONNX) | tête exportée et mesurée (4.08 MB, 6.7 ms / 100 snippets, parité 3.8e-06) ; int8 refusé (3e fois) ; le goulot est l'extraction |
+| 4 | P5 : calibration par classe | ✅ **fait — résultat négatif/neutre** : la T globale *dégrade* la tête catégorielle (cross 0.0738→0.1100), la calibration par classe ne la sauve pas (cross 0.0810 ; late 0.0425 = égalité), `abuse` incalibrable (0/150 en val). Ces six logits restent des diagnostics internes ; l'interface opérateur rend désormais seulement la décision binaire. |
+| 5 | P7 : Edge — **déploiement cible** | 🟡 extracteur MiniRGB et tête ONNX disponibles ; banc hôte désormais aligné sur MiniRGB + log-mel réel. Reste : audio/attention bornés en mémoire, agrégation de fenêtres validée, environnement ARM64/JetPack et mesure sur carte (`docs/jetson_nano_2gb_audit.md`). |
 | 6 | `abuse` : données, pas d'algorithme | la famine est prouvée (50/3 804) et la pondération a échoué ⇒ il faut relabelliser/sur-échantillonner ou fusionner la classe |
 | 7 | Répliquer le gain du portail (2 seeds supplémentaires) | ✅ **fait, et le résultat est négatif** : 2 seeds positifs sur 3, moyenne +0.015 — mais la dispersion de seed du `adaptive` propre vaut 0.096, soit 6× l'effet ⇒ **le gain du portail n'est pas démontré**. À écrire comme tel, et à retirer des arguments du rapport |
 | 8 | Marge de seed des autres variantes | ✅ **fait pour la revendication principale** : marge +0.0433 contre une dispersion de 0.0065 ⇒ **tenue** (3 seeds). Restent non répliqués les rangs intermédiaires (`late`, `early`) |

@@ -5,7 +5,7 @@ derived from something already computed rather than invented:
 
 | subject requirement | field | where it comes from |
 |---|---|---|
-| detected category | ``category`` (+ all 6) | the multi-label head, calibrated |
+| binary violence result | ``classification`` | binary clip head |
 | temporal segment | ``segments`` | snippet curve + threshold/merge rule **in s** |
 | significant images/zones | ``visual_evidence`` + ``media`` | attention + frames + motion zones |
 | sound events | ``audio_evidence.acoustic_events`` | YAMNet named tags + channels |
@@ -29,7 +29,6 @@ from dataclasses import dataclass, field
 
 import numpy as np
 
-from safewatch.data.dataset import CATEGORIES
 from safewatch.eval import metrics as M
 
 UNKNOWN = "unknown"
@@ -44,7 +43,6 @@ class AlertConfig:
     max_gap_seconds: float = 2.5
     top_k_evidence: int = 5
     language: str = "fr"
-    category_adaptive: bool = False
 
 
 @dataclass
@@ -56,11 +54,11 @@ class ClipContext:
     fps: float
     n_snippets: int
     snippet_probability: np.ndarray
+    clip_probability: float | None = None
     attention: np.ndarray | None = None
     alpha: np.ndarray | None = None
     snippet_visual: np.ndarray | None = None
     snippet_audio: np.ndarray | None = None
-    category_probability: dict = field(default_factory=dict)
     reliability: np.ndarray | None = None
     duration_s: float | None = None
     video_path: str | None = None
@@ -76,22 +74,12 @@ class ClipContext:
 
 
 def segment_bounds(context: ClipContext, config: AlertConfig) -> list[tuple[int, int]]:
-    """Alert segments as inclusive snippet ranges, with the rule expressed in seconds."""
-    top_cat = None
-    if getattr(config, "category_adaptive", False) and context.category_probability:
-        ranked = sorted(context.category_probability.items(), key=lambda kv: kv[1], reverse=True)
-        if ranked and ranked[0][1] >= 0.15:
-            top_cat = ranked[0][0]
-
-    return M.category_adaptive_segments(
-        context.snippet_probability,
-        category=top_cat if getattr(config, "category_adaptive", False) else None,
-        stride_frames=context.stride_frames,
-        fps=context.fps,
-        default_threshold=config.threshold,
-        default_min_seconds=config.min_seconds,
-        default_max_gap_seconds=config.max_gap_seconds,
-    )
+    """Alert segments as inclusive snippet ranges, using one category-agnostic rule."""
+    min_length = M.snippets_for_seconds(config.min_seconds, context.stride_frames, context.fps)
+    max_gap = M.snippets_for_seconds(config.max_gap_seconds, context.stride_frames, context.fps,
+                                     minimum=0)
+    return M.segments_from_scores(
+        context.snippet_probability, config.threshold, min_length, max_gap)
 
 
 def _snippet_to_seconds(context: ClipContext, index: int) -> float:
@@ -450,36 +438,45 @@ def confidence_block(context: ClipContext, config: AlertConfig, calibration=None
     return block
 
 
-def category_block(context: ClipContext, top_k: int = 3) -> dict:
-    """Detected category (top-1) plus the ranked alternatives.
+def classification_block(context: ClipContext, confidence: dict, threshold: float,
+                         language: str = "fr", calibration=None) -> dict:
+    """One binary result: violence versus no violence.
 
-    The temperature is **not** applied here: it was fitted on the anomaly score, and pretending it
-    calibrates a 6-class head would be false precision. The values are raw sigmoid outputs and the
-    note says so.
+    Prefer the model's binary ``clip_logits`` head, trained directly against the any-incident label.
+    Older contexts can fall back to the top-k snippet mean.
     """
-    if not context.category_probability:
-        return {"available": False,
-                "note": "this checkpoint has no category head output for the clip"}
-    items = sorted(context.category_probability.items(), key=lambda kv: kv[1], reverse=True)
-    block = {
-        "available": True,
-        "label": items[0][0],
-        "probability": round(float(items[0][1]), 4),
-        "ranked": [{"category": name, "probability": round(float(value), 4)}
-                   for name, value in items[:top_k]],
-        "all": {name: round(float(value), 4) for name, value in items},
-        "note": "raw sigmoid outputs of the multi-label head (uncalibrated), trained on weak clip "
-                "labels; 'abuse' has only 8 test clips so its probability is the least reliable",
+    score_type = "binary_clip_head" if context.clip_probability is not None else "legacy_top_k_mean"
+    raw_score = (float(context.clip_probability) if context.clip_probability is not None
+                 else float(confidence["raw_clip_probability"]))
+    calibrated = calibration is not None and not calibration.is_identity
+    score = (float(calibration.probability(np.array([raw_score]))[0])
+             if calibration is not None else raw_score)
+    is_violence = score >= threshold
+    if language == "en":
+        display = "Violence detected" if is_violence else "No violence detected"
+    else:
+        display = "Violence detectee" if is_violence else "Aucune violence detectee"
+    return {
+        "task": "binary_violence_detection",
+        "label": "violence" if is_violence else "no_violence",
+        "display_label": display,
+        "is_violence": is_violence,
+        "score": round(score, 4),
+        "threshold": float(threshold),
+        "calibrated": calibrated,
+        "score_type": score_type,
+        "definition": "positive if any of fighting, shooting, riot, abuse, car_accident, explosion",
     }
-    return block
 
 
 
 TEXT_TEMPLATES = {
     "fr": {
         "header": "Incident detecte entre {start} et {end}.",
-        "no_segment": "Aucun segment au-dessus du seuil {threshold} : clip considere comme normal.",
-        "category": "Categorie probable : {label} ({probability:.0%}).",
+        "no_segment": "Aucun segment temporel ne respecte le seuil et la duree minimale.",
+        "no_segment_positive": ("Le clip est classe violent, mais aucun segment temporel n'est "
+                                "assez long pour etre localise."),
+        "classification": "Resultat binaire : {label} (score {score:.2f}, seuil {threshold:.2f}).",
         "visual": "Indices visuels : {detail}.",
         "audio": "Indices audio : {detail}.",
         "contribution": "Contribution des modalites : {detail}.",
@@ -492,8 +489,10 @@ TEXT_TEMPLATES = {
     },
     "en": {
         "header": "Incident detected between {start} and {end}.",
-        "no_segment": "No segment above threshold {threshold}: clip treated as normal.",
-        "category": "Likely category: {label} ({probability:.0%}).",
+        "no_segment": "No temporal segment meets the threshold and minimum duration.",
+        "no_segment_positive": ("The clip is classified as violent, but no temporal segment is "
+                                "long enough to localise."),
+        "classification": "Binary result: {label} (score {score:.2f}, threshold {threshold:.2f}).",
         "visual": "Visual evidence: {detail}.",
         "audio": "Audio evidence: {detail}.",
         "contribution": "Modality contribution: {detail}.",
@@ -518,16 +517,18 @@ def render_text(alert: dict, language: str = "fr") -> str:
     template = TEXT_TEMPLATES.get(language, TEXT_TEMPLATES["fr"])
     lines: list[str] = []
     segments = alert.get("segments", [])
+    classification = alert.get("classification", {})
     if not segments:
-        lines.append(template["no_segment"].format(threshold=alert["config"]["threshold"]))
+        no_segment = "no_segment_positive" if classification.get("is_violence") else "no_segment"
+        lines.append(template[no_segment].format(threshold=alert["config"]["threshold"]))
     else:
         strongest = max(segments, key=lambda s: s["peak_probability"])
         lines.append(template["header"].format(start=_clock(strongest["start_s"]),
                                               end=_clock(strongest["end_s"])))
-    category = alert.get("category", {})
-    if category.get("available"):
-        lines.append(template["category"].format(label=category["label"],
-                                                 probability=category["probability"]))
+    if classification:
+        lines.append(template["classification"].format(
+            label=classification["display_label"],
+            score=classification["score"], threshold=classification["threshold"]))
     visual = alert.get("visual_evidence", {}).get("top_snippets", [])
     if visual:
         top = visual[0]
@@ -574,6 +575,9 @@ def build_alert(context: ClipContext, config: AlertConfig | None = None, calibra
     """
     config = config or AlertConfig()
     segments = segment_bounds(context, config)
+    confidence = confidence_block(context, config, calibration)
+    classification = classification_block(context, confidence, config.threshold,
+                                          config.language, calibration)
     alert = {
         "clip_id": context.clip_id,
         "video": context.video_path,
@@ -583,18 +587,18 @@ def build_alert(context: ClipContext, config: AlertConfig | None = None, calibra
         "config": {"threshold": config.threshold, "min_seconds": config.min_seconds,
                    "max_gap_seconds": config.max_gap_seconds,
                    "language": config.language},
-        "category": category_block(context),
+        "classification": classification,
         "segments": describe_segments(context, segments, config.threshold),
         "visual_evidence": visual_evidence(context, config.top_k_evidence),
         "audio_evidence": audio_evidence(context, segments),
         "modality_contribution": modality_contribution(context),
-        "confidence": confidence_block(context, config, calibration),
+        "confidence": confidence,
         "media": media or {},
         "requires_human_verification": True,
         "caveats": [
             "weak supervision: clip-level labels during training, frame-level only for evaluation",
             f"temporal resolution is the snippet grid ({context.stride_seconds:.2f} s here)",
-            "category probabilities come from an uncalibrated multi-label head",
+            "binary result means any of the six XD-Violence incident labels versus normal",
             ("named sound events come from a frozen out-of-domain tagger (YAMNet, "
              "AudioSet-YouTube): corroboration, not the reason for the alert"
              if context.aed_tags is not None
@@ -618,11 +622,11 @@ def summarise(alert: dict, max_segments: int = 3) -> str:
             lines.append(window + quality)
     else:
         lines.append("  no segment above threshold")
-    category = alert.get("category", {})
-    if category.get("available"):
-        lines.append(f"  category: {category['label']} ({category['probability']:.2f}) "
-                     f"| confidence: {alert['confidence']['alert_probability']:.2f}"
-                     f"{'' if alert['confidence']['calibrated'] else ' (uncalibrated)'}")
+    classification = alert.get("classification", {})
+    if classification:
+        lines.append(f"  result: {classification['display_label']} "
+                     f"(score={classification['score']:.2f}, "
+                     f"threshold={classification['threshold']:.2f})")
     for phrase in alert.get("audio_evidence", {}).get("descriptions", [])[:2]:
         lines.append(f"  audio: {phrase}")
     acoustic = alert.get("audio_evidence", {}).get("acoustic_events", {})
@@ -639,9 +643,3 @@ def summarise(alert: dict, max_segments: int = 3) -> str:
         if alert.get("media", {}).get(key):
             lines.append(f"  {key} -> {alert['media'][key]}")
     return "\n".join(lines)
-
-
-def category_names() -> tuple[str, ...]:
-    """Exposed so the UI and tests iterate the same class order the model was trained with."""
-    return CATEGORIES
-

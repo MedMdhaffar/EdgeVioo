@@ -165,8 +165,6 @@ def _context(**overrides) -> R.ClipContext:
         clip_id="clip_demo", stride_frames=64.0, fps=24.0, n_snippets=20,
         snippet_probability=probability,
         attention=np.array([0.01] * 6 + [0.2, 0.35, 0.15] + [0.04] * 11),
-        category_probability={"fighting": 0.8, "shooting": 0.2, "riot": 0.1, "abuse": 0.01,
-                              "car_accident": 0.05, "explosion": 0.3},
         reliability=reliability,
         snippet_visual=np.clip(probability + 0.02, 0, 1),
         snippet_audio=np.clip(probability - 0.3, 0, 1),
@@ -181,12 +179,13 @@ def test_alert_has_every_field_the_subject_requires():
     card = R.build_alert(_context(), R.AlertConfig(language="fr"),
                          C.CalibrationMap(temperature=2.0))
 
-    for field in ("clip_id", "category", "segments", "visual_evidence", "audio_evidence",
+    for field in ("clip_id", "classification", "segments", "visual_evidence", "audio_evidence",
                   "modality_contribution", "confidence", "text", "caveats"):
         assert field in card, f"missing {field}"
 
     assert card["requires_human_verification"] is True
-    assert card["category"]["label"] == "fighting"
+    assert card["classification"]["label"] == "violence"
+    assert card["classification"]["is_violence"] is True
     assert len(card["segments"]) == 1
     assert card["confidence"]["calibrated"] is True
 
@@ -260,7 +259,9 @@ def test_text_contains_the_alerts_facts_in_both_languages():
                              C.CalibrationMap(temperature=2.0))
         text = card["text"]
         assert "00:16" in text                                     # segment start (snippet 6)
-        assert "fighting" in text and "80%" in text
+        expected = "Violence detectee" if language == "fr" else "Violence detected"
+        assert expected in text and "score" in text
+        assert "fighting" not in text
         assert card["config"]["language"] == language
     assert "Human verification" in R.build_alert(
         context, R.AlertConfig(language="en"), C.CalibrationMap(temperature=2.0))["text"]
@@ -271,6 +272,14 @@ def test_no_segment_means_normal_clip_and_still_explains():
     card = R.build_alert(flat, R.AlertConfig(threshold=0.5))
     assert card["segments"] == []
     assert "threshold" in card["text"].lower() or "seuil" in card["text"].lower()
+
+
+def test_binary_positive_without_a_segment_is_explicitly_not_a_negative_result():
+    context = _context(snippet_probability=np.full(20, 0.02), clip_probability=0.3)
+    card = R.build_alert(context, R.AlertConfig(threshold=0.233))
+    assert card["classification"]["is_violence"] is True
+    assert card["segments"] == []
+    assert "classe" in card["text"].lower()
 
 
 def test_summarise_is_console_ready():
@@ -342,7 +351,7 @@ def test_apply_isotonic_clips_the_ends_and_stays_bounded():
 
 
 def test_per_class_isotonic_keeps_the_absent_class_unfitted():
-    """Same contract as the temperature variant: a class with one label stays identity, not hidden."""
+    """A class with one label stays identity rather than being silently hidden."""
     rng = np.random.default_rng(1)
     n, n_cat = 300, 6
     probs = rng.uniform(0.05, 0.95, size=(n, n_cat))

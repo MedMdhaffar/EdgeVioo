@@ -1,0 +1,21 @@
+{
+  "purpose": "binary violence head trained with live-compatible MiniRGB and log-mel features",
+  "source_lists": "data/lists_abuse_clip_sourceholdout_20261008_baseline",
+  "test_lists": "data/lists_minirgb",
+  "visual_representation": "MiniRGB distilled from I3D, 1024-d, one frame per 16-frame snippet",
+  "cached_features_reused": {
+    "train": 2708,
+    "val": 670
+  },
+  "missing_features_extracted": 2,
+  "train_abuse_clips": 34,
+  "validation_abuse_clips": 10,
+  "test_clips": 799,
+  "test_abuse_clips": 11,
+  "limitations": [
+    "UCF-Crime Abuse augmentation is excluded because its weak abuse category is not individually verified.",
+    "The XD validation split contains only 10 abuse clips; it cannot establish abuse reliability.",
+    "The official XD test set has been used in prior experiments and is not a pristine untouched test.",
+    "A matching feature space enables live inference but does not establish Jetson Nano runtime or accuracy."
+  ]
+}

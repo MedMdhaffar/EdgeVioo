@@ -1,0 +1,14 @@
+{
+  "dataset": "SmartDashcam",
+  "total": 136,
+  "train": {
+    "clips": 110,
+    "accidents": 55,
+    "normal": 55
+  },
+  "val": {
+    "clips": 26,
+    "accidents": 13,
+    "normal": 13
+  }
+}

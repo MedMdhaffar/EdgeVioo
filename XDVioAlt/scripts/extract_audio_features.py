@@ -135,9 +135,9 @@ def embed(waveform: np.ndarray) -> np.ndarray:
 
 
 def process_clip(video: Path, out_dir: Path, out_quality: Path, backend: str = "mel",
-                 overwrite: bool = False) -> dict:
+                 overwrite: bool = False, clip_id: str | None = None) -> dict:
     """Extract one clip's audio features; returns a status dict (never raises for data problems)."""
-    clip_id = video.stem
+    clip_id = clip_id or video.stem
     feature_path = out_dir / f"{clip_id}.npy"
     quality_path = out_quality / f"{clip_id}.npy"
     if feature_path.exists() and quality_path.exists() and not overwrite:
@@ -178,21 +178,27 @@ def process_clip(video: Path, out_dir: Path, out_quality: Path, backend: str = "
 
 
 def index_videos(video_root: Path) -> dict[str, Path]:
-    """stem -> mp4 path for every video under the root (train chunks + test folder)."""
-    return {p.stem: p for p in sorted(video_root.rglob("*.mp4"))}
+    """stem -> video path for every supported video under the root."""
+    return {p.stem: p for suffix in ("*.mp4", "*.avi")
+            for p in sorted(video_root.rglob(suffix))}
 
 
-def resolve_videos(args) -> list[Path]:
+def resolve_videos(args) -> list[tuple[str, Path]]:
     if args.videos:
-        return sorted(Path(args.videos).glob("*.mp4"))
+        root = Path(args.videos)
+        return [(video.stem, video) for video in
+                sorted([*root.glob("*.mp4"), *root.glob("*.avi")])]
     index = index_videos(Path(args.video_root))
-    stems = [row["clip_id"] for row in
-             csv.DictReader(open(args.list, newline="", encoding="utf-8"))]
-    missing = [s for s in stems if s not in index]
+    rows = list(csv.DictReader(open(args.list, newline="", encoding="utf-8")))
+    explicit = {row["clip_id"]: Path(row["video_path"])
+                for row in rows if row.get("video_path")}
+    stems = [row["clip_id"] for row in rows]
+    missing = [s for s in stems if s not in explicit and s not in index]
     if missing:
         print(f"[warn] {len(missing)} clips from {args.list} have no video locally "
               f"(e.g. {missing[0][:40]})")
-    return [index[s] for s in stems if s in index]
+    return [(s, explicit[s] if s in explicit else index[s]) for s in stems
+            if s in explicit or s in index]
 
 
 def main() -> int:
@@ -226,8 +232,9 @@ def main() -> int:
     counts: dict[str, int] = {}
     log_handle = open(args.log, "a", encoding="utf-8") if args.log else None
     try:
-        for i, video in enumerate(videos, 1):
-            status = process_clip(video, out_features, out_quality, args.backend, args.overwrite)
+        for i, (clip_id, video) in enumerate(videos, 1):
+            status = process_clip(video, out_features, out_quality, args.backend,
+                                  args.overwrite, clip_id=clip_id)
             counts[status["status"]] = counts.get(status["status"], 0) + 1
             if log_handle:
                 import json
