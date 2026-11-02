@@ -24,3 +24,6 @@ sheets/frames/*.jpg
 .ruff_cache/
 *.log
 :memory:.ses
+
+# Teammate's folder lives on GitHub; ignore locally to avoid dirty status
+XDVioOriginalModel/

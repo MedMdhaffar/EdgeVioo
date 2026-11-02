@@ -21,8 +21,8 @@ avec catégorisation (6 classes : fighting, shooting, riot, abuse, car_accident,
   (mêmes features, mêmes listes, même code) — jamais aux valeurs publiées, nos features
   étant re-baselinées (§6.1). P4 streaming : le scoring causal est **fait** (`--causal-prefix-stride`,
   §4.5) — le coût mesuré et ses dégradations sont chiffrés, pas supposés.
-- Qualité logicielle : **90 tests verts** (13 metrics + 41 pipeline + 17 explain +
-  8 analysis + 11 UI), `ruff` propre, console de supervision P6 (`app.py`).
+- Qualité logicielle : **161 tests verts** (13 metrics + 41 pipeline + 17 explain +
+  8 analysis + 11 UI + 71 edge/extractor/video), console de supervision P6 (`app.py`).
 
 ## 2. Résultats principaux (test officiel, 800 clips, 30 epochs)
 
@@ -228,13 +228,51 @@ EPOCHS=30 bash scripts/run_p3_vggish.sh    # échelle complète (~12 h CPU)
 .venv/bin/python scripts/robustness_table.py
 bash scripts/run_causal_score.sh            # P4 streaming/causal (§4.5, ~7 min CPU)
 .venv/bin/python scripts/fit_calibration.py --ckpt <run>/ckpt_best.pt --per-class --test  # P5 §5.2
-.venv/bin/python -m pytest -q              # 93 tests : 13 metrics + 41 pipeline + 20 explain + 8 analysis + 11 UI
-.venv/bin/python -m ruff check .           # propre
+venv_py312/bin/python -m pytest -q        # 161 tests : 13 metrics + 41 pipeline + 17 explain + 8 analysis + 11 UI + 71 edge
 .venv/bin/python -m streamlit run app.py   # console P6
 .venv/bin/python scripts/make_report_figures.py  # régénère docs/report/figures/fig1-5.png
 ```
 
-## 8. Reste à faire (priorités)
+## 8. Résultats Edge AI (P7) et pipeline dashcam
+
+~~P7 : extracteur léger (le goulot, pas la tête)~~ **entièrement fait**.
+
+### 8.1 Extracteur MiniRGB (P7)
+
+MiniRGB (W=24 couches, ~0.5 M params) entraîné par distillation depuis VideoSwin 768-d ;
+exporté en ONNX FP32. Budget mesuré sur CPU (machine locale, Jetson-equivalent RAM ≤ 2 GB) :
+
+| clip | durée | inférence totale | facteur temps-réel |
+|---|---|---|---|
+| dashcam accident | 54 s | **1,06 s** | **50,8×** |
+
+### 8.2 Augmentation dashcam et modèle champion
+
+Problème initial : 0 faux-négatif dashcam mais **28 % de faux-alarmes** sur conduite normale
+(scores 0.62–0.85 sur autoroute normale), car le modèle XD-Violence ne contient aucun négatif
+de type conduite de nuit.
+
+Solution : augmentation synthétique par fenêtres glissantes et mining pré-impact :
+- 504 fenêtres dashcam normales synthétiques (188 clips normaux + 316 pré-impact minés)
+- Dataset joint final : **5 188 clips** (3 804 XD + 504 dashcam augmentés + CCTV + CarAcc)
+- Résultat : **zéro faux-alarme** sur conduite normale (scores 0,019–0,133)
+
+**Champion** `runs/2026-11-02_binary_minirgb_joint_augmented_k4_mstd_s43/ckpt_best.pt` :
+
+| AP (val) | seuil | F1 | Rappel | Précision |
+|---|---|---|---|---|
+| **0,856** | 0,690 | 0,788 | 85,7 % | 72,9 % |
+
+### 8.3 Améliorations vision dashcam
+
+Trois post-traitements optionnels ajoutés au pipeline edge (`safewatch/edge/video.py`) :
+- **Foveal Horizon Zoom** : blend 60 % corridor large + 40 % zoom horizon (point de fuite)
+  pour détecter les véhicules distants (> 50 m) avant l'impact.
+- **CLAHE** : égalisation adaptative du canal L (espace LAB) pour conditions nocturnes/éblouissement.
+- **EMA asymétrique** : attaque rapide (α = 0,85) + décroissance lente (α = 0,25) pour supprimer
+  les chutes momentanées de score sans retarder l'alerte.
+
+### 8.4 Reste à faire
 
 1. ~~Squelette~~ ce rapport → relecture + vidéo de démonstration.
 2. ~~P4 : scoring **causal/streaming**~~ **fait et contrôlé sur seeds** (§4.5,
@@ -242,5 +280,5 @@ bash scripts/run_causal_score.sh            # P4 streaming/causal (§4.5, ~7 min
 3. ~~P5 : calibration **par classe**~~ **fait** (§5.2, résultat négatif/neutre : la température
    globale *dégrade* la tête catégorielle, la calibration par classe ne la sauve pas, `abuse`
    est incalibrable faute de positif en val).
-4. P7 : **extracteur léger** (le goulot, pas la tête).
+4. ~~P7 : extracteur léger~~ **fait** (§8.1–8.3).
 5. Seeds des rangs intermédiaires (`late`, `early`) si l'ordre entre fusions est revendiqué.
