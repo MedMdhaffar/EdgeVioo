@@ -63,8 +63,10 @@ class TrainConfig:
     workers: int = 4
     seed: int = 42
     threads: int = 8
-    lr_milestones: tuple = (10,)
+    lr_milestones: tuple = (20, 27)
     lr_gamma: float = 0.1
+    use_ms_tcn: bool = False        # True = multi-scale dilated TCN (d∈{1,2,4}); new runs only
+    w_contrastive: float = 0.0      # > 0 activates intra-clip contrastive sharpening loss
 
     @property
     def feature_key(self) -> str:
@@ -153,7 +155,8 @@ def train(cfg: TrainConfig) -> dict:
     (run_dir / "config.json").write_text(json.dumps(cfg.to_dict(), indent=2), encoding="utf-8")
 
     train_loader, val_loader = build_loaders(cfg)
-    model = MILModel(in_dim=cfg.in_dim, hidden=cfg.hidden, emb=cfg.emb, dropout=cfg.dropout)
+    model = MILModel(in_dim=cfg.in_dim, hidden=cfg.hidden, emb=cfg.emb, dropout=cfg.dropout,
+                     use_ms_tcn=cfg.use_ms_tcn)
     model.to(device)
     optimizer = torch.optim.Adam(model.parameters(), lr=cfg.lr, weight_decay=cfg.weight_decay)
     scheduler = torch.optim.lr_scheduler.MultiStepLR(
@@ -180,7 +183,7 @@ def train(cfg: TrainConfig) -> dict:
             targets = {key: batch[key].to(device) for key in ("mask", "binary", "multi")}
             out = model(batch[cfg.feature_key].to(device), batch["mask"].to(device))
             loss, parts = total_loss(out, targets, k=cfg.k, w_attn=cfg.w_attn,
-                                     w_multi=cfg.w_multi)
+                                     w_multi=cfg.w_multi, w_contrastive=cfg.w_contrastive)
             optimizer.zero_grad()
             loss.backward()
             optimizer.step()

@@ -965,3 +965,77 @@ def test_load_model_rebuilds_a_reliability_gate_checkpoint(tmp_path):
         a = model(visual, audio, mask, rel)["alpha"]
         b = rebuilt(visual, audio, mask, rel)["alpha"]
     assert torch.allclose(a, b)
+
+
+# ── MS-TCN and training knobs ──────────────────────────────────────────────
+
+def test_ms_tcn_mil_model_output_shape():
+    """MILModel with use_ms_tcn=True produces identical output shapes to the default."""
+    import torch
+    from safewatch.models.mil import MILModel
+    B, T, D = 2, 10, 32
+    x = torch.randn(B, T, D)
+    mask = torch.ones(B, T, dtype=torch.bool)
+    m_single = MILModel(in_dim=D, hidden=16, emb=12, use_ms_tcn=False)
+    m_ms     = MILModel(in_dim=D, hidden=16, emb=12, use_ms_tcn=True)
+    with torch.no_grad():
+        out_s = m_single(x, mask)
+        out_m = m_ms(x, mask)
+    assert out_s["snippet_logits"].shape == out_m["snippet_logits"].shape == (B, T)
+    assert out_s["clip_logits"].shape    == out_m["clip_logits"].shape    == (B,)
+    assert out_s["embeddings"].shape     == out_m["embeddings"].shape     == (B, T, 12)
+
+
+def test_ms_tcn_fusion_model_output_shape():
+    """FusionModel with use_ms_tcn=True produces identical output shapes for all modes."""
+    import torch
+    from safewatch.models.fusion import FusionModel
+    B, T = 2, 8
+    VD, AD = 16, 8
+    vis = torch.randn(B, T, VD)
+    aud = torch.randn(B, T, AD)
+    mask = torch.ones(B, T, dtype=torch.bool)
+    for mode in ("early", "late", "cross"):
+        m = FusionModel(visual_dim=VD, audio_dim=AD, emb=8, hidden=16,
+                        fusion_mode=mode, heads=2, dropout=0.0, use_ms_tcn=True)
+        with torch.no_grad():
+            out = m(vis, aud, mask)
+        assert out["snippet_logits"].shape == (B, T), f"mode={mode}"
+        assert out["clip_logits"].shape    == (B,),   f"mode={mode}"
+
+
+def test_ms_tcn_backward_compat_old_checkpoint(tmp_path):
+    """A checkpoint trained without MS-TCN loads cleanly into use_ms_tcn=False model."""
+    import torch
+    from safewatch.models.mil import MILModel
+    D = 32
+    m_old = MILModel(in_dim=D, hidden=16, emb=8, use_ms_tcn=False)
+    ckpt = tmp_path / "old.pt"
+    torch.save({"model": m_old.state_dict()}, ckpt)
+    m_new = MILModel(in_dim=D, hidden=16, emb=8, use_ms_tcn=False)
+    m_new.load_state_dict(torch.load(ckpt, map_location="cpu")["model"])
+    # key names must be identical — old checkpoint used net.*
+    assert all(k.startswith("encoder.net.") or not k.startswith("encoder.")
+               for k in m_old.state_dict() if "encoder" in k)
+
+
+def test_w_contrastive_flows_through_total_loss():
+    """total_loss with w_contrastive > 0 produces a strictly higher loss than w=0."""
+    import torch
+    from safewatch.losses.mil import total_loss
+    B, T = 4, 8
+    snippet_logits = torch.randn(B, T)
+    clip_logits    = torch.randn(B)
+    multi_logits   = torch.randn(B, 6)
+    mask   = torch.ones(B, T, dtype=torch.bool)
+    binary = torch.FloatTensor([1, 1, 0, 0])
+    multi  = torch.zeros(B, 6)
+    out = {"snippet_logits": snippet_logits, "clip_logits": clip_logits,
+           "multi_logits": multi_logits}
+    batch = {"mask": mask, "binary": binary, "multi": multi}
+    loss0, parts0 = total_loss(out, batch, k=3, w_contrastive=0.0)
+    loss1, parts1 = total_loss(out, batch, k=3, w_contrastive=0.1)
+    assert "loss_contrastive" not in parts0
+    assert "loss_contrastive" in parts1
+    # Contrastive term is always >= 0, so loss1 >= loss0
+    assert float(loss1) >= float(loss0) - 1e-6

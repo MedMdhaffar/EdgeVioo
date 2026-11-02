@@ -112,7 +112,7 @@ class FusionModel(nn.Module):
     def __init__(self, visual_dim: int = 768, audio_dim: int = 132, emb: int = 128,
                  hidden: int = 512, n_categories: int = 6, dropout: float = 0.6,
                  fusion_mode: str = "cross", heads: int = 4, n_reliability: int = 0,
-                 gate_source: str = "embeddings") -> None:
+                 gate_source: str = "embeddings", use_ms_tcn: bool = False) -> None:
         super().__init__()
         if fusion_mode not in FUSION_MODES:
             raise ValueError(f"unknown fusion_mode {fusion_mode!r}; expected {FUSION_MODES}")
@@ -121,10 +121,13 @@ class FusionModel(nn.Module):
         self.gate_source = gate_source
 
         if fusion_mode == "early":
-            self.encoder = TemporalEncoder(visual_dim + audio_dim, hidden, emb, dropout)
+            self.encoder = TemporalEncoder(visual_dim + audio_dim, hidden, emb, dropout,
+                                           use_ms_tcn=use_ms_tcn)
         else:
-            self.visual_encoder = TemporalEncoder(visual_dim, hidden, emb, dropout)
-            self.audio_encoder = TemporalEncoder(audio_dim, hidden, emb, dropout)
+            self.visual_encoder = TemporalEncoder(visual_dim, hidden, emb, dropout,
+                                                  use_ms_tcn=use_ms_tcn)
+            self.audio_encoder = TemporalEncoder(audio_dim, hidden, emb, dropout,
+                                                 use_ms_tcn=use_ms_tcn)
             if fusion_mode in ("cross", "adaptive"):
                 self.cross = CrossModalAttention(emb, heads, dropout=dropout)
                 self.merge = nn.Linear(2 * emb, emb)

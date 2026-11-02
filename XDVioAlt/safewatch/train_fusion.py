@@ -68,7 +68,7 @@ class FusionConfig:
     workers: int = 4
     threads: int = 8
     seed: int = 42
-    lr_milestones: tuple = (10,)
+    lr_milestones: tuple = (20, 27)
     lr_gamma: float = 0.1
     modality_dropout: float = 0.15  # zero one modality (and flag it in the reliability vector)
     multi_pos_weight: str = "none"  # "none" | "auto" (n_neg/n_pos) | "sqrt" (damped) per category
@@ -79,6 +79,8 @@ class FusionConfig:
     hard_fighting_weight: float = 1.0  # extra sampling multiplier for labeled fighting clips
     abuse_hard_negative_weight: float = 1.0  # extra abuse penalty on fighting/shooting negatives
     dashcam_normal_weight: float = 1.0  # extra sampling multiplier for normal dashcam driving clips
+    use_ms_tcn: bool = False        # True = multi-scale dilated TCN (d∈{1,2,4}); new runs only
+    w_contrastive: float = 0.0      # > 0 activates intra-clip contrastive sharpening loss
 
 
 
@@ -261,7 +263,8 @@ def train(cfg: FusionConfig) -> dict:
                         hidden=cfg.hidden, n_categories=N_CATEGORIES, dropout=cfg.dropout,
                         fusion_mode=cfg.fusion_mode, heads=cfg.heads,
                         n_reliability=cfg.n_reliability,
-                        gate_source=cfg.gate_source).to(device)
+                        gate_source=cfg.gate_source,
+                        use_ms_tcn=cfg.use_ms_tcn).to(device)
     optimizer = torch.optim.Adam(model.parameters(), lr=cfg.lr)
     scheduler = torch.optim.lr_scheduler.MultiStepLR(optimizer, list(cfg.lr_milestones),
                                                      cfg.lr_gamma)
@@ -300,6 +303,7 @@ def train(cfg: FusionConfig) -> dict:
             targets = {key: batch[key].to(device) for key in ("mask", "binary", "multi")}
             loss, _parts = total_loss(out, targets, k=cfg.k, w_attn=cfg.w_attn,
                                       w_multi=cfg.w_multi, multi_pos_weight=pos_weight,
+                                      w_contrastive=cfg.w_contrastive,
                                       abuse_hard_negative_weight=cfg.abuse_hard_negative_weight)
             optimizer.zero_grad()
             loss.backward()
