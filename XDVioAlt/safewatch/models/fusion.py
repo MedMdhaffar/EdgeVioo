@@ -177,8 +177,8 @@ class FusionModel(nn.Module):
 
         pooled, weights, attn_logits = self.pool(fused, mask)
         snippet_logits = self.snippet_head(fused.permute(0, 2, 1)).squeeze(1)
-        if self.mode == "late":       # late fusion: combine the two unimodal score curves
-            snippet_logits = 0.5 * (snippet_logits + 0.5 * (snippet_visual + snippet_audio))
+        if self.mode == "late":       # late fusion: average the three per-snippet score streams
+            snippet_logits = (snippet_logits + snippet_visual + snippet_audio) / 3.0
 
         return {
             "snippet_logits": snippet_logits,

@@ -190,7 +190,7 @@ def smooth_temporal_scores(scores: np.ndarray, alpha_rise: float = 0.85,
     without lagging initial detections.
     """
     if scores.ndim == 0 or scores.size <= 1:
-        return scores
+        return scores.astype(np.float32, copy=False)
     smoothed = np.empty_like(scores, dtype=np.float32)
     current = float(scores[0])
     smoothed[0] = current

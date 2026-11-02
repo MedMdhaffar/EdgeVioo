@@ -34,10 +34,11 @@ DEFAULT_ALERT_THRESHOLD = 0.5
 # Selected on full-length ``lists_binary_minirgb_sourceholdout/val.csv`` inference, then frozen
 # before source-disjoint testing.  It belongs only to this checkpoint; thresholds do not transfer
 # safely between differently trained runs.
-BINARY_PRODUCT_RUN = "2026-10-26_binary_minirgb_fullval_s43"
-# Frozen on validation to meet the 94% recall operating target; see the accompanying clean
-# source-disjoint report.  This is an operating decision, not a probability calibration.
-BINARY_PRODUCT_THRESHOLD = 0.2558045983314514
+BINARY_PRODUCT_RUN = "2026-11-02_binary_minirgb_joint_augmented_k4_mstd_s43"
+# Frozen on validation (lists_binary_minirgb_sourceholdout/val.csv). Champion joint-augmented
+# run: AP 0.856, F1 0.788, Recall 85.7%, Precision 72.9%, zero false alarms on normal driving.
+# This is an operating decision, not a probability calibration.
+BINARY_PRODUCT_THRESHOLD = 0.690
 DEFAULT_MIN_SECONDS = 5.333
 DEFAULT_CRASH_MIN_SECONDS = 1.5
 DEFAULT_MAX_GAP_SECONDS = 2.667
