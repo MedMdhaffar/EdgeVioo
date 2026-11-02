@@ -1,0 +1,36 @@
+conv1d1.weight
+conv1d1.bias
+conv1d2.weight
+conv1d2.bias
+conv1d3.weight
+conv1d3.bias
+conv1d4.weight
+conv1d4.bias
+gc1.weight
+gc1.residual.weight
+gc1.residual.bias
+gc2.weight
+gc3.weight
+gc3.residual.weight
+gc3.residual.bias
+gc4.weight
+gc5.weight
+gc5.residual.weight
+gc5.residual.bias
+gc6.weight
+simAdj.weight0
+simAdj.weight1
+disAdj.sigma
+classifier.weight
+classifier.bias
+approximator.0.weight
+approximator.0.bias
+approximator.2.weight
+approximator.2.bias
+conv1d_approximator.weight
+conv1d_approximator.bias
+Random initalization: offline pr_auc:0.2731; online pr_auc:0.2098
+/home/mohamed/miniconda3/envs/video_features/lib/python3.11/site-packages/torch/optim/lr_scheduler.py:136: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  warnings.warn("Detected call of `lr_scheduler.step()` before `optimizer.step()`. "
+
+Epoch 0/5: loss:2.784; offline pr_auc:0.4141; online pr_auc:0.3473; time:222.3s
