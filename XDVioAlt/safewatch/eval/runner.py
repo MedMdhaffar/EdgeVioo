@@ -58,11 +58,13 @@ def checkpoint_config(ckpt_path: str | Path) -> dict:
 def infer_in_dim(state: dict) -> int | None:
     """Recover the model input width from the weights, instead of trusting a name lookup table.
 
-    Handles ``MILModel`` (``encoder.net.0.weight``), the non-early fusion variants
+    Handles ``MILModel`` (``encoder.net.0.weight`` for use_ms_tcn=False, or
+    ``encoder.front.0.weight`` for use_ms_tcn=True), the non-early fusion variants
     (``visual_encoder`` / ``audio_encoder``) and early fusion (concatenated input width).
     """
-    for name in ("encoder.net.0.weight", "visual_encoder.net.0.weight",
-                 "audio_encoder.net.0.weight"):
+    for name in ("encoder.net.0.weight", "encoder.front.0.weight",
+                 "visual_encoder.net.0.weight", "visual_encoder.front.0.weight",
+                 "audio_encoder.net.0.weight", "audio_encoder.front.0.weight"):
         tensor = state.get(name)
         if tensor is not None and tensor.ndim >= 2:
             return int(tensor.shape[1])
@@ -78,18 +80,20 @@ def load_model(ckpt_path: str | Path, device: torch.device) -> tuple[torch.nn.Mo
     common = {"emb": int(cfg.get("emb", 128)), "hidden": int(cfg.get("hidden", 512)),
               "dropout": float(cfg.get("dropout", 0.6))}
 
+    use_ms_tcn = bool(cfg.get("use_ms_tcn", False))
     if kind == "fusion":
         model: torch.nn.Module = FusionModel(
             visual_dim=int(cfg.get("visual_dim", 768)),
             audio_dim=int(cfg.get("audio_dim", AUDIO_DIM)), n_categories=N_CATEGORIES,
             fusion_mode=str(cfg["fusion_mode"]), heads=int(cfg.get("heads", 4)),
             n_reliability=int(cfg.get("n_reliability", 0)),
-            gate_source=str(cfg.get("gate_source", "embeddings")), **common)
+            gate_source=str(cfg.get("gate_source", "embeddings")),
+            use_ms_tcn=use_ms_tcn, **common)
     else:
         in_dim = int(cfg.get("in_dim") or 0) or infer_in_dim(state) or (
             AUDIO_DIM if cfg.get("modality") == "audio"
             else IN_DIMS.get(cfg.get("feature_set", "swin_rgb"), 768))
-        model = MILModel(in_dim=in_dim, **common)
+        model = MILModel(in_dim=in_dim, use_ms_tcn=use_ms_tcn, **common)
     model.load_state_dict(state)
     model.to(device)
     model.eval()

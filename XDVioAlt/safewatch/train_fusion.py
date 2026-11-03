@@ -344,7 +344,11 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     for name, default in asdict(FusionConfig()).items():
         cli = f"--{name.replace('_', '-')}"
-        if isinstance(default, tuple):
+        if isinstance(default, bool):
+            # argparse type=bool treats any non-empty string as True; use an explicit converter
+            parser.add_argument(cli, type=lambda x: x.lower() in ("1", "true", "yes"),
+                                default=default, metavar="BOOL")
+        elif isinstance(default, tuple):
             parser.add_argument(cli, type=int, nargs="+", default=list(default))
         else:
             parser.add_argument(cli, type=type(default), default=default)

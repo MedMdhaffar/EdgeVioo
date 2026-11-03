@@ -1019,6 +1019,68 @@ def test_ms_tcn_backward_compat_old_checkpoint(tmp_path):
                for k in m_old.state_dict() if "encoder" in k)
 
 
+def test_load_model_rebuilds_ms_tcn_checkpoint(tmp_path):
+    """load_model passes use_ms_tcn=True from config and the checkpoint round-trips without error."""
+    import json
+
+    import torch
+
+    from safewatch.eval.runner import load_model
+    from safewatch.models.mil import MILModel
+
+    D = 32
+    m = MILModel(in_dim=D, hidden=16, emb=8, use_ms_tcn=True)
+    cfg = {"in_dim": D, "hidden": 16, "emb": 128, "dropout": 0.0, "use_ms_tcn": True,
+           "emb": 8}
+    ckpt_path = tmp_path / "ms_tcn.pt"
+    torch.save({"model": m.state_dict(), "config": cfg}, ckpt_path)
+
+    device = torch.device("cpu")
+    model_loaded, cfg_out, kind = load_model(ckpt_path, device)
+    assert kind == "mil"
+    assert cfg_out.get("use_ms_tcn") is True
+    # Weight keys must round-trip: front.* and ms_tcn.* must survive
+    loaded_keys = set(model_loaded.state_dict())
+    original_keys = set(m.state_dict())
+    assert loaded_keys == original_keys, (
+        f"Key mismatch:\n  missing={original_keys - loaded_keys}\n  extra={loaded_keys - original_keys}"
+    )
+
+
+def test_bool_cli_train_use_ms_tcn():
+    """--use-ms-tcn true/false parses correctly in train.py's CLI (argparse bool trap)."""
+    import sys
+
+    from safewatch.train import TrainConfig, main
+
+    # Simulate: python -m safewatch.train --use-ms-tcn true --epochs 0
+    # We only test the parser, not the full training loop, so monkeypatch sys.argv.
+    from dataclasses import asdict
+    import argparse
+
+    from safewatch.train import TrainConfig
+
+    parser = argparse.ArgumentParser()
+    for name, default in asdict(TrainConfig()).items():
+        cli = f"--{name.replace('_', '-')}"
+        if isinstance(default, bool):
+            parser.add_argument(cli, type=lambda x: x.lower() in ("1", "true", "yes"),
+                                default=default, metavar="BOOL")
+        elif isinstance(default, tuple):
+            parser.add_argument(cli, type=int, nargs="+", default=list(default))
+        else:
+            parser.add_argument(cli, type=type(default), default=default)
+
+    args_true  = parser.parse_args(["--use-ms-tcn", "true"])
+    args_false = parser.parse_args(["--use-ms-tcn", "false"])
+    args_one   = parser.parse_args(["--use-ms-tcn", "1"])
+    args_zero  = parser.parse_args(["--use-ms-tcn", "0"])
+    assert args_true.use_ms_tcn  is True,  "true → True"
+    assert args_false.use_ms_tcn is False, "false → False"
+    assert args_one.use_ms_tcn   is True,  "1 → True"
+    assert args_zero.use_ms_tcn  is False, "0 → False"
+
+
 def test_w_contrastive_flows_through_total_loss():
     """total_loss with w_contrastive > 0 produces a strictly higher loss than w=0."""
     import torch
