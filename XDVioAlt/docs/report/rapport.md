@@ -21,8 +21,8 @@ avec catégorisation (6 classes : fighting, shooting, riot, abuse, car_accident,
   (mêmes features, mêmes listes, même code) — jamais aux valeurs publiées, nos features
   étant re-baselinées (§6.1). P4 streaming : le scoring causal est **fait** (`--causal-prefix-stride`,
   §4.5) — le coût mesuré et ses dégradations sont chiffrés, pas supposés.
-- Qualité logicielle : **161 tests verts** (13 metrics + 41 pipeline + 17 explain +
-  8 analysis + 11 UI + 71 edge/extractor/video), console de supervision P6 (`app.py`).
+- Qualité logicielle : **167 tests verts** (13 metrics + 43 pipeline + 17 explain +
+  8 analysis + 11 UI + 71 edge/extractor/video + 4 stream), console de supervision P6 (`app.py`).
 
 ## 2. Résultats principaux (test officiel, 800 clips, 30 epochs)
 
@@ -228,7 +228,7 @@ EPOCHS=30 bash scripts/run_p3_vggish.sh    # échelle complète (~12 h CPU)
 .venv/bin/python scripts/robustness_table.py
 bash scripts/run_causal_score.sh            # P4 streaming/causal (§4.5, ~7 min CPU)
 .venv/bin/python scripts/fit_calibration.py --ckpt <run>/ckpt_best.pt --per-class --test  # P5 §5.2
-venv_py312/bin/python -m pytest -q        # 161 tests : 13 metrics + 41 pipeline + 17 explain + 8 analysis + 11 UI + 71 edge
+venv_py312/bin/python -m pytest -q        # 167 tests : 13 metrics + 43 pipeline + 17 explain + 8 analysis + 11 UI + 71 edge + 4 stream
 .venv/bin/python -m streamlit run app.py   # console P6
 .venv/bin/python scripts/make_report_figures.py  # régénère docs/report/figures/fig1-5.png
 ```

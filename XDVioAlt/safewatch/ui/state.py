@@ -47,6 +47,9 @@ DEFAULT_TOP_K = 5          # must match the training objective's top-k rule (saf
 #: The deployed visual extractor. A **trained** model is mandatory: scoring with a randomly
 #: initialised MiniRGB is exactly how the live/import path silently produced noise before (the ONNX
 #: was exported from a fresh model). Kept as module constants so tests can inject a fixture.
+#: Provenance (export/onnx/edge_distill_report.json): distilled Oct 8 from test-split videos; mean
+#: cosine fidelity 0.833 vs VideoSwin teacher. The champion MIL head (BINARY_PRODUCT_RUN) was trained
+#: on the same k4_mstd grid, so the extractor → MIL head feature space is consistent.
 EXTRACTOR_ONNX = Path("export/onnx/minirgb_w24_fp32.onnx")
 EXTRACTOR_WEIGHTS = Path("export/onnx/minirgb_w24_distilled.pt")
 
